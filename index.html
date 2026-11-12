@@ -1,147 +1,267 @@
 <!doctype html>
 <html lang="fr"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="apple-mobile-web-app-capable" content="yes"><link rel="manifest" href="manifest.json">
-<title>Casting</title>
+<meta name="theme-color" content="#0b0b10"><meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.json"><title>Casting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#120a0c;--card:#1d1114;--line:#3a2328;--fg:#f4ead8;--mut:#a8968a;--gold:#d8ad4f;--bord:#7a1f2e;
---C:#9a9a9a;--U:#5fae6a;--R:#4a90d9;--E:#a05fd0;--L:#e8a13a;--M:#e0384f}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.4 system-ui,-apple-system,sans-serif;
-padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
-h1,h2{font-family:Georgia,serif;font-weight:700;margin:0}
-button{font:inherit;cursor:pointer;border:0;border-radius:10px;padding:10px 16px;background:var(--bord);color:var(--fg)}
-button.gold{background:var(--gold);color:#241505;font-weight:700}button:disabled{opacity:.4}
-input,select{font:inherit;background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:10px;padding:10px;width:100%}
-.wrap{max-width:900px;margin:0 auto;padding:12px 16px 80px}
-header{flex-wrap:wrap;display:flex;justify-content:space-between;align-items:center;padding:10px 0;gap:8px}
-header h1{font-size:26px;color:var(--gold);letter-spacing:.05em}
-.pop{background:var(--card);border:1px solid var(--line);padding:6px 12px;border-radius:99px;font-weight:700}
-nav{display:flex;gap:6px;margin:6px 0 14px}nav button{flex:1;background:var(--card);border:1px solid var(--line)}nav button.on{background:var(--bord)}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
-.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.row>*{flex:1;min-width:120px}
-.bar{height:10px;background:#000;border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--bord),var(--gold))}
-.mut{color:var(--mut);font-size:13px}
-.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px}
-.cd{position:relative;aspect-ratio:2/3;border-radius:10px;overflow:hidden;background:#000;border:2px solid var(--rc,#444);cursor:pointer}
-.cd img{width:100%;height:100%;object-fit:cover;display:block}
-.cd .cap{position:absolute;left:0;right:0;bottom:0;padding:18px 5px 4px;background:linear-gradient(transparent,#000d);font-size:11px;line-height:1.15}
-.cd .cap b{display:block;font-size:12px}
-.cd .no{position:absolute;top:3px;left:4px;font-size:10px;background:#000a;padding:1px 5px;border-radius:6px}
-.cd .q{position:absolute;top:3px;right:4px;font-size:11px;background:var(--gold);color:#241505;padding:1px 6px;border-radius:6px;font-weight:700}
-.cd.miss img{filter:grayscale(1) brightness(.25)}.cd.miss .cap{display:none}
-.r-C{--rc:var(--C)}.r-U{--rc:var(--U)}.r-R{--rc:var(--R)}.r-E{--rc:var(--E)}
-.r-L{--rc:var(--L);box-shadow:0 0 12px var(--L)}.r-M{--rc:var(--M);box-shadow:0 0 18px var(--M)}
-.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:10px}
-.chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.chip{padding:5px 10px;border-radius:99px;font-size:12px;background:var(--card);border:1px solid var(--line)}
-.chip.on{border-color:var(--gold);color:var(--gold)}
-.modal{position:fixed;inset:0;background:#000d;display:flex;align-items:center;justify-content:center;z-index:20;padding:16px}
-.modal>div{background:var(--card);border-radius:18px;padding:16px;max-width:360px;width:100%;max-height:92vh;overflow:auto}
-.big{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:12px;border:3px solid var(--rc)}
-.stats{display:flex;gap:8px;margin:8px 0}.stats span{flex:1;background:#0006;border-radius:8px;padding:6px;text-align:center}
-.stage{position:fixed;inset:0;background:radial-gradient(#3a1018,#0a0506);z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:16px}
-.hand{width:100%;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;max-width:620px}
-.flip{width:calc(min(19vw,112px));aspect-ratio:2/3;perspective:600px;cursor:pointer}
-.flip>div{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
-.flip.open>div{transform:rotateY(180deg)}
-.flip .f,.flip .b{position:absolute;inset:0;backface-visibility:hidden;border-radius:10px;overflow:hidden}
-.flip .b{background:repeating-linear-gradient(45deg,var(--bord),var(--bord) 8px,#5c1522 8px,#5c1522 16px);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:28px}
-.flip .f{transform:rotateY(180deg)}.flip .f .cd{height:100%;aspect-ratio:auto}
-.flip.open.hi>div{animation:pulse 1s 2}@keyframes pulse{50%{filter:brightness(1.6)}}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--gold);color:#241505;padding:10px 16px;border-radius:12px;z-index:50;font-weight:700}
-footer{text-align:center;color:var(--mut);font-size:11px;margin-top:30px}
-@media(max-width:480px){.flip{width:30%}}
-</style></head><body><div class="wrap" id="app"></div>
+:root{--bg:#0b0b10;--panel:#14141c;--panel2:#1a1a24;--line:#262632;--fg:#f4f2ef;--mut:#8b8b99;--acc:#ff4b2b;--yel:#f7c61b;--grn:#3ddc84;
+--C:#7b7f8c;--U:#37c26e;--R:#3b82f6;--E:#a855f7;--L:#f7c61b}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.4 Inter,system-ui,sans-serif;padding-bottom:100px}
+h1,h2,h3,.disp{font-family:'Bricolage Grotesque',Inter,system-ui,sans-serif;font-weight:800;margin:0;letter-spacing:-.01em}
+.mono{font-family:'JetBrains Mono',monospace}
+button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
+.wrap{max-width:560px;margin:0 auto;padding:0 16px}
+/* barre du haut */
+.top{position:sticky;top:0;z-index:10;background:rgba(11,11,16,.92);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);padding:calc(10px + env(safe-area-inset-top)) 0 10px}
+.top .wrap{display:flex;align-items:center;gap:10px}
+.logo{width:40px;height:40px;border-radius:12px;background:var(--acc);display:grid;place-items:center;font-size:22px;border:2px solid #ff8a6f}
+.sp{flex:1}
+.pill{display:flex;flex-direction:column;gap:4px;background:var(--panel);border:1px solid var(--line);border-radius:99px;padding:6px 14px;font-size:13px;min-width:96px}
+.pill .row{display:flex;gap:8px;align-items:center;justify-content:space-between}
+.bar{height:3px;background:#000;border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:var(--acc)}
+.pop{background:var(--panel);border:1px solid var(--line);border-radius:99px;padding:10px 14px;font-weight:700;font-size:14px}
+.avatar{width:42px;height:42px;border-radius:50%;border:2px solid var(--acc);display:grid;place-items:center;font-weight:800;color:var(--acc);background:var(--panel)}
+/* nav du bas */
+.nav{position:fixed;bottom:0;left:0;right:0;z-index:15;background:rgba(14,14,20,.96);backdrop-filter:blur(10px);border-top:1px solid var(--line);padding:8px 0 calc(8px + env(safe-area-inset-bottom))}
+.nav .wrap{display:grid;grid-template-columns:1fr 1fr 90px 1fr 1fr;align-items:end;text-align:center}
+.nav button{display:flex;flex-direction:column;align-items:center;gap:2px;font-size:11px;color:var(--mut);padding:4px}
+.nav button b{font-size:22px;font-family:'Bricolage Grotesque',Inter,system-ui,sans-serif}
+.nav button.on{color:var(--acc)}
+.open-btn{position:relative;width:68px;height:68px;margin:-30px auto 0;border-radius:50%;background:var(--acc)!important;border:4px solid var(--bg)!important;display:grid!important;place-items:center;color:#fff!important;font-size:28px;box-shadow:0 0 0 2px #ff4b2b66,0 8px 24px #ff4b2b55}
+.open-btn .bd{position:absolute;top:-4px;right:-4px;background:#fff;color:#111;font-size:12px;font-weight:800;border-radius:99px;min-width:22px;height:22px;display:grid;place-items:center}
+.open-lbl{font-size:11px;color:var(--mut);margin-top:2px}
+/* accueil */
+.hero{margin:16px 0;border-radius:22px;border:1px solid #4a3d12;background:radial-gradient(120% 90% at 50% 0,#3a2d08 0,#14141c 60%);padding:18px 18px 20px;text-align:left;overflow:hidden}
+.fan{height:215px;position:relative;margin:4px 0 14px}
+.fan .card{position:absolute;width:112px;left:50%;top:14px}
+.fan .card:nth-child(1){transform:translateX(-135%) rotate(-9deg)}.fan .card:nth-child(2){transform:translateX(-50%) translateY(-8px);z-index:2}.fan .card:nth-child(3){transform:translateX(35%) rotate(9deg)}
+.eyebrow{font:700 11px 'JetBrains Mono',ui-monospace,Menlo,monospace;letter-spacing:.12em;color:var(--yel);text-transform:uppercase}
+.hero h2{font-size:32px;margin:4px 0}.mut{color:var(--mut)}
+.btn{display:block;width:100%;border-radius:99px;padding:16px;font-weight:800;font-size:16px;text-align:center;font-family:'Bricolage Grotesque',Inter,system-ui,sans-serif}
+.btn.y{background:var(--yel);color:#1a1300}.btn.a{background:var(--acc);color:#fff}.btn.g{background:var(--panel);border:1px solid var(--line)}
+.btn:disabled{opacity:.45}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.tile{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 6px;text-align:center}
+.tile.hot{border-color:#7a2a1e;background:#1d1210}
+.tile b{display:block;font:800 20px 'Bricolage Grotesque',Inter,system-ui,sans-serif}.tile small{color:var(--mut);font-size:11px}.tile .t{font:700 11px 'JetBrains Mono',ui-monospace,Menlo,monospace;color:var(--acc)}
+.sec{margin:26px 0 10px}.sec .eyebrow{color:var(--acc)}.sec h2{font-size:26px}
+.scroll{display:flex;gap:10px;overflow-x:auto;padding-bottom:8px;scrollbar-width:none}.scroll .card{flex:0 0 110px}
+/* carte */
+.card{position:relative;border-radius:14px;padding:3px;background:var(--fr);cursor:pointer;box-shadow:var(--gl,none)}
+.card .in{background:var(--bgc,#15151d);border-radius:11px;padding:6px;display:flex;flex-direction:column;gap:5px;height:100%}
+.card .hd{display:flex;align-items:center;gap:4px;justify-content:space-between}
+.card .nm{font:800 12px 'Bricolage Grotesque',Inter,system-ui,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .rb{flex:0 0 auto;width:17px;height:17px;border-radius:50%;background:var(--rc);color:#10101a;font:800 10px 'JetBrains Mono',ui-monospace,Menlo,monospace;display:grid;place-items:center}
+.card .art{position:relative;aspect-ratio:4/5;border-radius:8px;overflow:hidden;background:#000}
+.card .art img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
+.card .no{position:absolute;left:5px;bottom:4px;font:700 8px 'JetBrains Mono',ui-monospace,Menlo,monospace;color:#fff;text-shadow:0 1px 3px #000}
+.card .sh{font-size:9px;color:#c9c9d6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.card .st{display:flex;justify-content:space-between;background:#0007;border-radius:6px;padding:3px 6px;font:700 8px 'JetBrains Mono',ui-monospace,Menlo,monospace}
+.card .q{position:absolute;top:-6px;right:-4px;background:var(--yel);color:#1a1300;font:800 10px 'JetBrains Mono',ui-monospace,Menlo,monospace;border-radius:99px;padding:2px 6px;z-index:3}
+.card.miss{opacity:.5;filter:grayscale(1)}
+.r-C{--rc:var(--C);--fr:#555a66}.r-U{--rc:var(--U);--fr:linear-gradient(160deg,#37c26e,#1f7a45)}
+.r-R{--rc:var(--R);--fr:linear-gradient(160deg,#5b9bff,#2556b8)}
+.r-E{--rc:var(--E);--fr:linear-gradient(160deg,#c084fc,#7a33c8);--bgc:#1c1330}
+.r-L{--rc:var(--L);--fr:linear-gradient(160deg,#ffe066,#c99a0a);--bgc:#2a210a;--gl:0 0 14px #f7c61b55}
+.r-M{--rc:#ff5c8a;--fr:linear-gradient(135deg,#ff3d81,#ff9a3d 45%,#3d8bff);--bgc:#241018;--gl:0 0 18px #ff3d8166}
+.card.big{width:min(76vw,300px)}.card.big .nm{font-size:18px}.card.big .rb{width:26px;height:26px;font-size:14px}.card.big .sh{font-size:13px}.card.big .st{font-size:12px;padding:6px 10px}.card.big .no{font-size:12px}.card.big .in{padding:10px;gap:8px}
+/* collection */
+.srch{display:flex;gap:8px;margin:14px 0}
+.srch input{flex:1;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:13px 14px;color:var(--fg);font:inherit}
+.ib{width:50px;border-radius:14px;background:var(--panel);border:1px solid var(--line);font-size:20px;position:relative}
+.ib .bg{position:absolute;top:-6px;right:-4px;background:var(--grn);color:#02210f;font:800 10px 'JetBrains Mono',ui-monospace,Menlo,monospace;border-radius:99px;padding:2px 6px}
+.chips{display:flex;gap:6px;overflow-x:auto;scrollbar-width:none;margin-bottom:10px}
+.chip{flex:0 0 auto;padding:7px 12px;border-radius:99px;background:var(--panel);border:1px solid var(--line);font-size:13px}.chip.on{border-color:var(--acc);color:var(--acc)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}.grid>*{min-width:0}
+.gc{display:flex;flex-direction:column;gap:6px}
+.gc .val{font:700 11px 'JetBrains Mono',ui-monospace,Menlo,monospace;color:var(--mut);text-align:center}
+.sel{width:100%;background:var(--panel);border:1px solid var(--line);color:var(--fg);border-radius:12px;padding:11px;font:inherit;margin-bottom:8px}
+/* feuilles */
+.shade{position:fixed;inset:0;background:#000b;z-index:30;display:flex;align-items:flex-end;justify-content:center}
+.sheet{background:var(--bg);border-radius:22px 22px 0 0;border:1px solid var(--line);width:100%;max-width:560px;max-height:90vh;overflow:auto;padding:16px 16px calc(24px + env(safe-area-inset-bottom))}
+.sheet .hdr{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}.sheet h2{font-size:26px}
+.x{width:40px;height:40px;border-radius:50%;background:var(--panel);border:1px solid var(--line);font-size:18px}
+.tabs{display:grid;grid-template-columns:1fr 1fr;background:var(--panel);border-radius:99px;padding:4px;margin-bottom:14px;border:1px solid var(--line)}
+.tabs button{padding:12px;border-radius:99px;font-weight:700}.tabs button.on{background:var(--acc);color:#fff}
+.bo{display:flex;gap:12px;align-items:center;background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:10px;margin-bottom:8px;text-align:left;width:100%}
+.bo.sel1{border-color:#7a6212;background:#1a1608;display:block}
+.pack{width:46px;height:64px;border-radius:6px;display:grid;place-items:center;font-size:22px;background:linear-gradient(160deg,var(--pc1,#f7c61b),var(--pc2,#9a6b00));border:1px solid #ffffff55;flex:0 0 auto;box-shadow:inset 0 0 12px #0006}
+.bo .t{flex:1;min-width:0}.bo h3{font-size:18px}.bo .ok{color:var(--grn);font:700 12px 'JetBrains Mono',ui-monospace,Menlo,monospace}
+.facts{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:12px 0}.fact{background:#0006;border:1px solid var(--line);border-radius:12px;padding:10px 12px}.fact b{display:block;font:800 22px 'Bricolage Grotesque',Inter,system-ui,sans-serif}.fact small{color:var(--mut);font-size:12px}
+.odds{margin:12px 0}.odds .o{display:flex;align-items:center;gap:10px;margin:7px 0;font-size:13px}.odds .o span{width:84px;color:var(--c);font-weight:600}.odds .o i{height:7px;border-radius:9px;background:var(--c);display:block;box-shadow:0 0 8px var(--c)}.odds .o em{margin-left:auto;white-space:nowrap;font:700 12px 'JetBrains Mono',ui-monospace,Menlo,monospace;font-style:normal}
+/* ouverture */
+.stage{position:fixed;inset:0;z-index:40;background:radial-gradient(90% 70% at 50% 35%,#3a1218,#0b0b10 70%);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;padding:16px;text-align:center}
+.pk{width:150px;height:210px;border-radius:14px;display:grid;place-items:center;font-size:64px;background:linear-gradient(160deg,var(--pc1,#f7c61b),var(--pc2,#9a6b00));border:2px solid #ffffff77;box-shadow:0 0 40px var(--pc1,#f7c61b);animation:fl 2s ease-in-out infinite}
+@keyframes fl{50%{transform:translateY(-10px) rotate(2deg)}}
+.reveal{animation:pop .5s cubic-bezier(.2,1.4,.4,1)}@keyframes pop{from{transform:scale(.4) rotate(-6deg);opacity:0}}
+.flash{position:fixed;inset:0;pointer-events:none;z-index:41;background:radial-gradient(circle,var(--fc) 0,transparent 65%);animation:fo .8s forwards}@keyframes fo{from{opacity:.9}to{opacity:0}}
+.new{display:inline-block;background:var(--grn);color:#02210f;font:800 12px 'JetBrains Mono',ui-monospace,Menlo,monospace;border-radius:99px;padding:3px 10px}
+.mini{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;width:100%;max-width:420px}.mini>*{min-width:0}
+.toast{position:fixed;bottom:110px;left:50%;transform:translateX(-50%);background:var(--fg);color:#111;padding:11px 18px;border-radius:99px;z-index:60;font-weight:700}
+.center{text-align:center;padding:50px 10px;color:var(--mut)}
+footer{text-align:center;color:var(--mut);font-size:11px;margin:30px 0}
+.auth{padding-top:70px}.auth input{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px;color:var(--fg);font:inherit;margin-bottom:10px}
+</style></head><body>
+<div id="app"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script src="config.js"></script>
 <script>
-const $=s=>document.querySelector(s);
-const RN={C:'Commune',U:'Peu commune',R:'Rare',E:'Épique',L:'Légendaire',M:'Mythique'};
-let ST=null,CFG=null,CARDS=[],view='home',F={q:'',r:'',g:'',own:'all',show:''};
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const RN={C:'Commune',U:'Peu commune',R:'Rare',E:'Épique',L:'Légendaire',M:'Mythique'},ORD='CURELM';
+const RC={C:'#7b7f8c',U:'#37c26e',R:'#3b82f6',E:'#a855f7',L:'#f7c61b',M:'#ff5c8a'};
+const GFR={'Drama':'Drame','Crime':'Crime','Comedy':'Comédie','Action':'Action','Science-Fiction':'Science-fiction','Thriller':'Thriller','Mystery':'Mystère','Adventure':'Aventure','Fantasy':'Fantastique','Family':'Famille','Romance':'Romance','Supernatural':'Surnaturel','Horror':'Horreur','History':'Histoire','Medical':'Médical','Espionage':'Espionnage','Legal':'Judiciaire','War':'Guerre','Western':'Western','Sports':'Sport','Music':'Musique','Children':'Enfants','Food':'Cuisine'};
+const GICO={'Drama':'🎭','Crime':'🔪','Comedy':'😂','Action':'💥','Science-Fiction':'🚀','Thriller':'😰','Mystery':'🔍','Adventure':'🧭','Fantasy':'🐉','Family':'🏠','Romance':'💘','Supernatural':'👻','Horror':'🩸','History':'🏰','Medical':'🩺','Espionage':'🕶️','Legal':'⚖️','War':'🎖️','Western':'🤠'};
+const GCOL=['#f7c61b','#ff7a3d','#3dc5ff','#c084fc','#37c26e','#ff5c8a','#5b9bff','#ffb703'];
+const fr=g=>GFR[g]||g, col=(g,i)=>GCOL[(i||0)%GCOL.length];
+let ST=null,CARDS=[],view='home',F={q:'',r:'',g:'',own:'all',show:''},tickT=null;
 const sb=supabase.createClient(window.SUPABASE_URL,window.SUPABASE_KEY);
 const mail=n=>n.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'@casting-game.app';
 async function rpc(f,a){const {data,error}=await sb.rpc(f,a||{});if(error)throw new Error(error.message);return data}
-async function api(p,b){
- if(p=='config'){const {data}=await sb.from('config').select('k,v');const c={};data.forEach(x=>c[x.k]=x.v);
-  const cards=await (await fetch('cards.json')).json();window._cards=cards;
-  return {price:c.price,gprice:c.gprice,pity:c.pity,genres:[...new Set(cards.flatMap(x=>x.g))].sort()}}
- if(p=='cards')return window._cards;
- if(p=='me'){const {data:{session}}=await sb.auth.getSession();if(!session)return null;return await rpc('my_state')}
- if(p=='register'){if(b.name.trim().length<2||b.pw.length<6)throw new Error('Pseudo 2 caractères min, mot de passe 6 min');
-  const {data,error}=await sb.auth.signUp({email:mail(b.name),password:b.pw,options:{data:{name:b.name.trim()}}});
-  if(error)throw new Error(error.message.includes('registered')?'Ce pseudo existe déjà':error.message);
-  if(!data.session)throw new Error('Désactive "Confirm email" dans Supabase (voir étapes)');return {ok:1}}
- if(p=='login'){const {error}=await sb.auth.signInWithPassword({email:mail(b.name),password:b.pw});if(error)throw new Error('Pseudo ou mot de passe incorrect');return {ok:1}}
- if(p=='logout'){await sb.auth.signOut();return {ok:1}}
- if(p=='open'){const r=await rpc('open_booster',{kind:b.kind,genre:b.genre||null});
-  return {cards:r.cards.map(x=>({...CARDS[x.n-1],new:x.new})),pity_hit:r.pity_hit,state:r.state}}
- if(p=='recycle'){return b.all?await rpc('recycle'):await rpc('recycle',{n_card:b.n,k:b.count||1})}
-}
-function toast(t){const e=document.createElement('div');e.className='toast';e.textContent=t;document.body.append(e);setTimeout(()=>e.remove(),2500)}
-function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
-function card(c,qty,miss){return `<div class="cd r-${c.r} ${miss?'miss':''}" data-n="${c.n}"><img loading="lazy" referrerpolicy="no-referrer" src="${esc(c.img)}" alt=""><span class="no">#${c.n}</span>${qty>1?`<span class="q">x${qty}</span>`:''}<div class="cap"><b>${esc(c.name)}</b>${esc(c.show)}</div></div>`}
-async function init(){CFG=await api('config');CARDS=window._cards;ST=await api('me');render()}
+function toast(t){const e=document.createElement('div');e.className='toast';e.textContent=t;document.body.append(e);setTimeout(()=>e.remove(),2600)}
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const pad=n=>String(n).padStart(4,'0');
+const fmt=s=>{s=Math.max(0,s|0);return [s/3600|0,(s%3600)/60|0,s%60].map(x=>String(x).padStart(2,'0')).join(':')};
+function card(c,o={}){const q=o.q||0;
+ return `<div class="card r-${c.r} ${o.miss?'miss':''} ${o.big?'big':''}" data-n="${c.n}">${q>1?`<span class="q">x${q}</span>`:''}<div class="in">
+ <div class="hd"><span class="nm">${esc(c.name)}</span><span class="rb">${c.r}</span></div>
+ <div class="art"><img loading="lazy" referrerpolicy="no-referrer" src="${esc(c.img)}" alt=""><span class="no">#${pad(c.n)}/${CARDS.length}</span></div>
+ <div class="sh">${esc(c.show)}</div><div class="st"><span>POW ${c.pow}</span><span>AURA ${c.aura}</span></div></div></div>`}
+async function init(){
+ const {data}=await sb.from('config').select('k,v');window.CFG={};(data||[]).forEach(x=>CFG[x.k]=x.v);
+ CARDS=await (await fetch('cards.json')).json();
+ await refresh();render()}
+async function refresh(){const {data:{session}}=await sb.auth.getSession();ST=session?await rpc('my_state'):null}
+/* ---------- connexion ---------- */
 function authView(){
- $('#app').innerHTML=`<header><h1>CASTING</h1></header><div class="panel"><h2>Bienvenue au casting</h2><p class="mut">Collectionne les personnages de tes séries préférées.</p>
- <div class="row" style="flex-direction:column;align-items:stretch"><input id="nm" placeholder="Pseudo" autocomplete="username"><input id="pw" type="password" placeholder="Mot de passe" autocomplete="current-password">
- <div class="row"><button class="gold" id="li">Se connecter</button><button id="rg">Créer mon compte</button></div></div></div>
- <footer>This product uses the TMDB API but is not endorsed or certified by TMDB.</footer>`;
- const go=k=>async()=>{try{await api(k,{name:$('#nm').value,pw:$('#pw').value});ST=await api('me');render()}catch(e){toast(e.message)}};
- $('#li').onclick=go('login');$('#rg').onclick=go('register')}
+ $('#app').innerHTML=`<div class="wrap auth"><div class="logo" style="width:64px;height:64px;font-size:34px;border-radius:18px;margin-bottom:16px">🍿</div><h1 style="font-size:44px">CASTING</h1><p class="mut">Collectionne les personnages de tes séries préférées.</p><br>
+ <input id="nm" placeholder="Pseudo" autocomplete="username"><input id="pw" type="password" placeholder="Mot de passe (6 caractères min.)" autocomplete="current-password">
+ <button class="btn y" id="li">Se connecter</button><br><button class="btn g" id="rg">Créer mon compte</button>
+ <footer>This product uses the TMDB API but is not endorsed or certified by TMDB.</footer></div>`;
+ $('#li').onclick=async()=>{try{const {error}=await sb.auth.signInWithPassword({email:mail($('#nm').value),password:$('#pw').value});if(error)throw new Error('Pseudo ou mot de passe incorrect');await refresh();render()}catch(e){toast(e.message)}};
+ $('#rg').onclick=async()=>{try{const n=$('#nm').value,p=$('#pw').value;if(n.trim().length<2||p.length<6)throw new Error('Pseudo 2 caractères min, mot de passe 6 min');
+  const {data,error}=await sb.auth.signUp({email:mail(n),password:p,options:{data:{name:n.trim()}}});
+  if(error)throw new Error(error.message.includes('registered')?'Ce pseudo existe déjà':error.message);
+  if(!data.session)throw new Error('Désactive "Confirm email" dans Supabase');await refresh();render()}catch(e){toast(e.message)}}}
+/* ---------- structure ---------- */
 function render(){
+ clearInterval(tickT);
  if(!ST)return authView();
- const nav=[['home','Accueil'],['coll','Collection']].map(([k,l])=>`<button class="${view==k?'on':''}" data-v="${k}">${l}</button>`).join('');
- $('#app').innerHTML=`<header><h1>CASTING</h1><div class="row" style="flex:0"><span class="pop">🍿 ${ST.popcorns}</span><button id="lo" style="padding:6px 10px">${esc(ST.name)} ⏻</button></div></header><nav>${nav}</nav><div id="v"></div>
- <footer>This product uses the TMDB API but is not endorsed or certified by TMDB.</footer>`;
- document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{view=b.dataset.v;render()});
- $('#lo').onclick=async()=>{await api('logout',{});ST=null;render()};
- view=='home'?home():coll()}
+ const nav=(k,i,l)=>`<button class="${view==k?'on':''}" data-v="${k}"><b>${i}</b>${l}</button>`;
+ $('#app').innerHTML=`<div class="top"><div class="wrap"><div class="logo">🍿</div><div class="sp"></div>
+ <div class="pill"><div class="row"><span class="mono" id="fs">${ST.free}/${ST.free_max}</span></div><div class="bar"><i style="width:${ST.free/ST.free_max*100}%"></i></div></div>
+ <div class="pop">🍿 ${ST.popcorns}</div><button class="avatar" id="av">${esc(ST.name[0].toUpperCase())}</button></div></div>
+ <div class="wrap" id="v"></div>
+ <div class="nav"><div class="wrap">${nav('home','家','Accueil')}${nav('coll','集','Collection')}
+ <div><button class="open-btn" id="ob">🍿${ST.free+(ST.daily_ready?1:0)>0?`<span class="bd">${ST.free+(ST.daily_ready?1:0)}</span>`:''}</button><div class="open-lbl">Ouvrir</div></div>
+ ${nav('mkt','市','Marché')}${nav('more','他','Plus')}</div></div>`;
+ $$('.nav button[data-v]').forEach(b=>b.onclick=()=>{view=b.dataset.v;render();scrollTo(0,0)});
+ $('#ob').onclick=()=>openSheet('free');$('#av').onclick=()=>{view='more';render()};
+ ({home,coll,mkt,more})[view]();
+ tickT=setInterval(tick,1000)}
+let tickBase=0;
+function tick(){if(ST&&ST.free_next!=null){ST.free_next--;const e=$('#nx');if(e)e.textContent=fmt(ST.free_next);if(ST.free_next<=0){refresh().then(render)}}}
+/* ---------- accueil ---------- */
+function themePack(g){const l=CARDS.filter(c=>c.g.includes(g)&&'ELM'.includes(c.r));return [l[2]||l[0],l[0],l[4]||l[1]].filter(Boolean)}
 function home(){
- const owned=Object.keys(ST.inv).length,tot=CARDS.length;
- $('#v').innerHTML=`<div class="panel"><h2>Pack quotidien</h2><p class="mut">Un booster gratuit par jour.</p><button class="gold" id="dl" ${ST.daily_ready?'':'disabled'}>${ST.daily_ready?'Ouvrir mon pack du jour':'Reviens demain'}</button></div>
- <div class="panel"><h2>Boosters</h2><div class="row" style="margin-top:10px"><button class="gold" id="bs" ${ST.popcorns<CFG.price?'disabled':''}>Booster standard<br>🍿 ${CFG.price}</button>
- <div><select id="gs">${CFG.genres.map(g=>`<option>${g}</option>`).join('')}</select><button id="bg" style="width:100%;margin-top:6px" ${ST.popcorns<CFG.gprice?'disabled':''}>Booster de genre · 🍿 ${CFG.gprice}</button></div></div>
- <p class="mut" style="margin-top:12px">Garantie : au moins une carte Rare ou mieux par booster.</p>
- <div class="bar"><i style="width:${ST.pity/CFG.pity*100}%"></i></div><p class="mut">Pity : ${ST.pity}/${CFG.pity} boosters sans Mythique (un Mythique est garanti au ${CFG.pity}e)</p></div>
- <div class="panel"><h2>Ma collection</h2><p>${owned} / ${tot} cartes (${(owned/tot*100).toFixed(1)} %)</p><div class="bar"><i style="width:${owned/tot*100}%"></i></div>
- <div class="chips">${Object.keys(RN).reverse().map(r=>{const t=CARDS.filter(c=>c.r==r),o=t.filter(c=>ST.inv[c.n]).length;return `<span class="chip" style="border-color:var(--${r})">${RN[r]} ${o}/${t.length}</span>`}).join('')}</div>
- <p class="mut">${ST.boosters} boosters ouverts</p></div>`;
- $('#dl').onclick=()=>buy({kind:'daily'});$('#bs').onclick=()=>buy({kind:'standard'});$('#bg').onclick=()=>buy({kind:'genre',genre:$('#gs').value})}
-async function buy(b){try{const r=await api('open',b);ST=r.state;stage(r)}catch(e){toast(e.message)}}
-function stage(r){
- const d=document.createElement('div');d.className='stage';
- d.innerHTML=`<h2 style="color:var(--gold)">${r.pity_hit?'Pity ! Mythique garanti':'Touche les cartes'}</h2><div class="hand">${r.cards.map((c,i)=>`<div class="flip ${'LM'.includes(c.r)?'hi':''}" data-i="${i}"><div><div class="b">🍿</div><div class="f">${card(c,0)}${c.new?'<span class="q" style="position:absolute;bottom:30px;left:4px;background:#3c9;color:#012;padding:1px 6px;border-radius:6px;font-size:10px;font-weight:700">NEW</span>':''}</div></div></div>`).join('')}</div>
- <div class="row" style="flex:0"><button id="all">Tout retourner</button><button class="gold" id="ok">Continuer</button></div>`;
- document.body.append(d);
- d.querySelectorAll('.flip').forEach(f=>f.onclick=()=>f.classList.add('open'));
- $('#all').onclick=()=>d.querySelectorAll('.flip').forEach((f,i)=>setTimeout(()=>f.classList.add('open'),i*250));
- $('#ok').onclick=()=>{d.remove();render()}}
+ const inv=ST.inv,own=Object.keys(inv).length,dups=Object.values(inv).reduce((a,q)=>a+Math.max(0,q-1),0);
+ const cnt=r=>CARDS.filter(c=>c.r==r&&inv[c.n]).length;
+ const dt=ST.daily_theme,fan=themePack(dt);
+ const best=CARDS.filter(c=>inv[c.n]).slice(0,10);
+ $('#v').innerHTML=`<div class="hero"><div class="fan">${fan.map(c=>card(c)).join('')}</div>
+ <div class="eyebrow">Pack du jour · gratuit</div><h2>${GICO[dt]||''} ${fr(dt)}</h2><p class="mut">Un booster offert chaque jour, thème différent, Épique garantie.</p>
+ <button class="btn y" id="dl" ${ST.daily_ready?'':'disabled'}>${ST.daily_ready?'Ouvrir le pack du jour':'Reviens demain'}</button></div>
+ <div class="tiles"><div class="tile hot"><b>${ST.free}/${ST.free_max}</b><small>gratuits</small><div class="t" id="nx">${ST.free_next==null?'complet':fmt(ST.free_next)}</div></div>
+ <div class="tile"><b>${own}</b><small>/ ${CARDS.length} cartes</small></div><div class="tile"><b>${dups}</b><small>doublons</small></div>
+ <div class="tile"><b style="color:${RC.E}">${cnt('E')}</b><small>Épiques</small></div><div class="tile"><b style="color:${RC.L}">${cnt('L')}</b><small>Légendaires</small></div><div class="tile"><b style="color:${RC.M}">${cnt('M')}</b><small>Mythiques</small></div></div>
+ <br><button class="btn g" id="rc">♻ Recycler mes doublons${dups?' · +'+recVal()+' 🍿':''}</button>
+ ${best.length?`<div class="sec"><div class="eyebrow">Ta vitrine</div><h2>Tes plus belles cartes</h2></div><div class="scroll">${best.map(c=>card(c,{q:inv[c.n]})).join('')}</div>`:''}
+ <footer>This product uses the TMDB API but is not endorsed or certified by TMDB.</footer>`;
+ $('#dl').onclick=()=>buy('daily',null);$('#rc').onclick=recycleAll;bindCards()}
+const REC={C:1,U:1,R:3,E:10,L:40,M:150};
+function recVal(){return CARDS.reduce((a,c)=>a+Math.max(0,(ST.inv[c.n]||0)-1)*REC[c.r],0)}
+async function recycleAll(){try{const x=await rpc('recycle');ST=x.state;toast('+'+x.gain+' 🍿');render()}catch(e){toast(e.message)}}
+/* ---------- feuille Ouvrir ---------- */
+let sheetTab='free',sheetSel='mix';
+function odds(){const o=ST.odds,t=10000,p=k=>o[k]/t,n=5;
+ const ge=x=>1-Math.pow(1-x,n),eplus=p('E')+p('L')+p('M');
+ return {M:ge(p('M')),L:ge(p('L')),E:ge(p('E')),R:1-(Math.pow(1-p('R'),n)-Math.pow(1-p('R')-eplus,n))}}
+function openSheet(tab){
+ sheetTab=tab||sheetTab;const d=document.createElement('div');d.className='shade';d.id='sh';
+ d.onclick=e=>{if(e.target==d)d.remove()};document.body.append(d);drawSheet()}
+function drawSheet(){
+ const d=$('#sh');if(!d)return;const free=sheetTab=='free',od=odds();
+ const th=[null,...ST.themes];const price=g=>g?ST.gprice:ST.price;
+ const ok=g=>free?ST.free>0:ST.popcorns>=price(g);
+ const sub=g=>free?(ST.free>0?`<span class="ok">Gratuit · ${ST.free} restant${ST.free>1?'s':''}</span>`:`<span class="mut">Prochain dans <span class="mono" id="nx2">${ST.free_next==null?'':fmt(ST.free_next)}</span></span>`):`<span class="mono" style="color:var(--yel)">🍿 ${price(g)}</span>`;
+ d.innerHTML=`<div class="sheet"><div class="hdr"><h2>Ouvrir</h2><button class="x" id="cx">✕</button></div>
+ <div class="tabs"><button class="${free?'on':''}" data-t="free">Gratuits</button><button class="${free?'':'on'}" data-t="paid">Boutique</button></div>
+ ${th.map((g,i)=>{const id=g||'mix',sel=sheetSel==id,c1=g?col(g,i):'#f7c61b';
+  const head=`<div class="pack" style="--pc1:${c1};--pc2:#0008">${g?GICO[g]||'🎬':'🍿'}</div><div class="t"><h3>${g?fr(g):'Casting Mix'}</h3><div class="mut" style="font-size:13px">${g?'Persos '+fr(g).toLowerCase():'Tous les persos'}</div>${sub(g)}</div>`;
+  if(!sel)return `<button class="bo" data-g="${id}">${head}</button>`;
+  return `<div class="bo sel1" style="border-color:${c1}88"><div style="display:flex;gap:12px;align-items:center">${head}</div>
+   <div class="facts"><div class="fact"><b>5</b><small>cartes par booster</small></div><div class="fact"><b style="color:${RC.R}">Rare</b><small>ou mieux, garantie</small></div>
+   <div class="fact"><b style="color:${RC.M}">${Math.max(0,ST.pity_max-ST.pity)}</b><small>avant Mythique sûre</small></div><div class="fact"><b>${g?'~'+CARDS.filter(c=>c.g.includes(g)).length:CARDS.length}</b><small>persos possibles</small></div></div>
+   <div class="mut mono" style="font-size:11px;letter-spacing:.1em">CHANCE PAR BOOSTER</div><div class="odds">${['R','E','L','M'].map(r=>`<div class="o" style="--c:${RC[r]}"><span>${RN[r]}</span><i style="width:${Math.max(2,od[r]*100*.7)}%"></i><em>${(od[r]*100).toFixed(od[r]<.05?2:1).replace('.',',')} %</em></div>`).join('')}</div>
+   <button class="btn a" data-go="${id}" ${ok(g)?'':'disabled'}>${ok(g)?'Ouvrir':(free?'Plus de gratuit':'Pas assez de Popcorns')}</button></div>`}).join('')}</div>`;
+ $('#cx').onclick=()=>d.remove();
+ $$('.tabs button').forEach(b=>b.onclick=()=>{sheetTab=b.dataset.t;drawSheet()});
+ $$('.bo[data-g]').forEach(b=>b.onclick=()=>{sheetSel=b.dataset.g;drawSheet()});
+ const go=$('[data-go]');if(go)go.onclick=()=>{const g=go.dataset.go=='mix'?null:go.dataset.go;d.remove();buy(sheetTab=='free'?'free':'paid',g)}}
+/* ---------- tirage ---------- */
+async function buy(kind,genre){
+ try{const r=await rpc('open_booster',{kind,genre});ST=r.state;stage(r,kind,genre)}catch(e){toast(e.message)}}
+function stage(r,kind,genre){
+ const cards=r.cards.map(x=>({...CARDS[x.n-1],new:x.new})),c1=genre?col(genre,ST.themes.indexOf(genre)):'#f7c61b';
+ const d=document.createElement('div');d.className='stage';d.style.setProperty('--pc1',c1);document.body.append(d);let i=-1;
+ const start=()=>{d.innerHTML=`<div class="eyebrow">${kind=='daily'?'Pack du jour':'Booster'}${genre?' · '+fr(genre):''}</div><div class="pk">${genre?GICO[genre]||'🎬':'🍿'}</div><p class="mut">Touche pour ouvrir</p>`;d.onclick=next};
+ const next=()=>{i++;
+  if(i>=cards.length)return recap();
+  const c=cards[i],hi='LM'.includes(c.r)||c.r=='E';
+  if(hi){const f=document.createElement('div');f.className='flash';f.style.setProperty('--fc',RC[c.r]);document.body.append(f);setTimeout(()=>f.remove(),900)}
+  d.innerHTML=`<div class="mut mono">${i+1} / ${cards.length}</div><div class="reveal">${card(c,{big:1})}</div><div>${c.new?'<span class="new">NOUVEAU</span> ':''}<b style="color:${RC[c.r]}">${RN[c.r]}</b></div><p class="mut">${i<cards.length-1?'Touche pour la suivante':'Touche pour le récap'}</p>`};
+ const recap=()=>{d.onclick=null;d.innerHTML=`<h2>${r.pity_hit?'Mythique garanti !':'Ton tirage'}</h2><div class="mini">${cards.map(c=>card(c)).join('')}</div>
+  <div style="width:100%;max-width:400px;display:grid;gap:8px"><button class="btn y" id="ag">Ouvrir un autre booster</button><button class="btn g" id="cl">Continuer</button></div>`;
+  $('#ag').onclick=()=>{d.remove();openSheet(ST.free>0?'free':'paid')};$('#cl').onclick=()=>{d.remove();render()};
+  $$('.mini .card').forEach(e=>e.onclick=()=>detail(+e.dataset.n))};
+ start()}
+/* ---------- collection ---------- */
 function coll(){
  const shows=[...new Set(CARDS.map(c=>c.show))].sort((a,b)=>a.localeCompare(b));
- $('#v').innerHTML=`<div class="filters"><input id="q" placeholder="Rechercher" value="${esc(F.q)}">
- <select id="fs"><option value="">Toutes les séries</option>${shows.map(s=>`<option ${F.show==s?'selected':''}>${esc(s)}</option>`).join('')}</select>
- <select id="fg"><option value="">Tous les genres</option>${CFG.genres.map(g=>`<option ${F.g==g?'selected':''}>${g}</option>`).join('')}</select>
- <select id="fo"><option value="all">Toutes</option><option value="own" ${F.own=='own'?'selected':''}>Possédées</option><option value="miss" ${F.own=='miss'?'selected':''}>Manquantes</option><option value="dup" ${F.own=='dup'?'selected':''}>Doublons</option></select></div>
- <div class="chips">${Object.keys(RN).reverse().map(r=>`<span class="chip ${F.r==r?'on':''}" data-r="${r}">${RN[r]}</span>`).join('')}</div>
- <div class="row" style="margin-bottom:10px"><span class="mut" id="cnt"></span><button id="rall" style="flex:0 1 auto">Recycler tous les doublons</button></div><div class="grid" id="gr"></div>`;
- $('#q').oninput=e=>{F.q=e.target.value;list()};$('#fs').onchange=e=>{F.show=e.target.value;list()};$('#fg').onchange=e=>{F.g=e.target.value;list()};$('#fo').onchange=e=>{F.own=e.target.value;list()};
- document.querySelectorAll('.chip[data-r]').forEach(c=>c.onclick=()=>{F.r=F.r==c.dataset.r?'':c.dataset.r;coll()});
- $('#rall').onclick=async()=>{try{const x=await api('recycle',{all:1});ST=x.state;toast('+'+x.gain+' 🍿');render()}catch(e){toast(e.message)}};
- list()}
+ $('#v').innerHTML=`<div class="srch"><input id="q" placeholder="Rechercher un perso ou une série…" value="${esc(F.q)}"><button class="ib" id="rcb">♻${recVal()?`<span class="bg">+${recVal()}</span>`:''}</button></div>
+ <div class="chips">${['C','U','R','E','L','M'].reverse().map(r=>`<span class="chip ${F.r==r?'on':''}" data-r="${r}" ${F.r==r?`style="color:${RC[r]};border-color:${RC[r]}"`:''}>${RN[r]}</span>`).join('')}</div>
+ <div class="chips">${[['all','Toutes'],['own','Possédées'],['miss','Manquantes'],['dup','Doublons']].map(([k,l])=>`<span class="chip ${F.own==k?'on':''}" data-o="${k}">${l}</span>`).join('')}</div>
+ <select class="sel" id="fs2"><option value="">Toutes les séries</option>${shows.map(s=>`<option ${F.show==s?'selected':''}>${esc(s)}</option>`).join('')}</select>
+ <select class="sel" id="fg"><option value="">Tous les genres</option>${ST.themes.map(g=>`<option value="${g}" ${F.g==g?'selected':''}>${fr(g)}</option>`).join('')}</select>
+ <div class="mut" id="cnt" style="margin:6px 0 12px"></div><div class="grid" id="gr"></div>`;
+ $('#q').oninput=e=>{F.q=e.target.value;list()};$('#fs2').onchange=e=>{F.show=e.target.value;list()};$('#fg').onchange=e=>{F.g=e.target.value;list()};
+ $$('.chip[data-r]').forEach(c=>c.onclick=()=>{F.r=F.r==c.dataset.r?'':c.dataset.r;coll()});$$('.chip[data-o]').forEach(c=>c.onclick=()=>{F.own=c.dataset.o;coll()});
+ $('#rcb').onclick=recycleAll;list()}
 function list(){
- const q=F.q.toLowerCase();let L=CARDS.filter(c=>(!F.r||c.r==F.r)&&(!F.show||c.show==F.show)&&(!F.g||c.g.includes(F.g))&&(!q||(c.name+' '+c.show).toLowerCase().includes(q)));
- const o=c=>ST.inv[c.n]||0;
+ const q=F.q.toLowerCase(),o=c=>ST.inv[c.n]||0;
+ let L=CARDS.filter(c=>(!F.r||c.r==F.r)&&(!F.show||c.show==F.show)&&(!F.g||c.g.includes(F.g))&&(!q||(c.name+' '+c.show).toLowerCase().includes(q)));
  if(F.own=='own')L=L.filter(c=>o(c));if(F.own=='miss')L=L.filter(c=>!o(c));if(F.own=='dup')L=L.filter(c=>o(c)>1);
- $('#cnt').textContent=L.length+' cartes';
- $('#gr').innerHTML=L.slice(0,300).map(c=>card(c,o(c),!o(c))).join('')+(L.length>300?`<p class="mut" style="grid-column:1/-1">Affine les filtres pour voir les ${L.length-300} autres.</p>`:'');
- $('#gr').onclick=e=>{const t=e.target.closest('.cd');if(t)detail(+t.dataset.n)}}
+ $('#cnt').textContent=L.length.toLocaleString('fr')+' cartes';
+ $('#gr').innerHTML=L.slice(0,150).map(c=>`<div class="gc">${card(c,{q:o(c),miss:!o(c)})}${o(c)>1?`<div class="val">+${(o(c)-1)*REC[c.r]} 🍿 recyclables</div>`:''}</div>`).join('')+(L.length>150?`<p class="mut" style="grid-column:1/-1;text-align:center">Affine la recherche pour voir les ${L.length-150} autres.</p>`:'');
+ bindCards()}
+function bindCards(){$$('.card[data-n]').forEach(e=>{if(e.closest('.fan')||e.closest('.stage'))return;e.onclick=()=>detail(+e.dataset.n)})}
 function detail(n){
- const c=CARDS[n-1],q=ST.inv[n]||0,m=document.createElement('div');m.className='modal';
- m.innerHTML=`<div class="r-${c.r}"><img class="big" referrerpolicy="no-referrer" src="${esc(c.img)}" style="${q?'':'filter:grayscale(1) brightness(.4)'}"><h2 style="margin-top:8px">${esc(c.name)}</h2><div class="mut">${esc(c.show)}${c.act?' · '+esc(c.act):''}</div>
- <div class="chips"><span class="chip" style="border-color:var(--${c.r})">${RN[c.r]}</span><span class="chip">#${c.n}</span>${c.g.slice(0,3).map(g=>`<span class="chip">${g}</span>`).join('')}</div>
- <div class="stats"><span>POW<br><b>${c.pow}</b></span><span>AURA<br><b>${c.aura}</b></span><span>Possédées<br><b>${q}</b></span></div>
- ${q>1?`<button class="gold" id="rc" style="width:100%">Recycler ${q-1} doublon${q>2?'s':''} · +${(q-1)*c.rec} 🍿</button>`:`<p class="mut">${q?'Pas de doublon à recycler (1 exemplaire gardé)':'Pas encore obtenue'}</p>`}
- <button id="cl" style="width:100%;margin-top:8px">Fermer</button></div>`;
- document.body.append(m);m.onclick=e=>{if(e.target==m)m.remove()};$('#cl').onclick=()=>m.remove();
- if($('#rc'))$('#rc').onclick=async()=>{try{const x=await api('recycle',{n,count:q-1});ST=x.state;m.remove();toast('+'+x.gain+' 🍿');render()}catch(e){toast(e.message)}}}
+ const c=CARDS[n-1],q=ST.inv[n]||0,d=document.createElement('div');d.className='shade';d.style.alignItems='center';d.onclick=e=>{if(e.target==d)d.remove()};
+ d.innerHTML=`<div class="sheet" style="border-radius:22px;max-width:380px;text-align:center"><div style="display:flex;justify-content:center">${card(c,{big:1,miss:!q})}</div>
+ <p class="mut">${esc(c.act)}${c.act?' · ':''}${c.g.slice(0,3).map(fr).join(', ')}</p><p><b style="color:${RC[c.r]}">${RN[c.r]}</b> · Possédée ${q} fois</p>
+ ${q>1?`<button class="btn y" id="rc1">Recycler ${q-1} doublon${q>2?'s':''} · +${(q-1)*REC[c.r]} 🍿</button><br>`:''}<button class="btn g" id="cl2">Fermer</button></div>`;
+ document.body.append(d);$('#cl2').onclick=()=>d.remove();
+ if($('#rc1'))$('#rc1').onclick=async()=>{try{const x=await rpc('recycle',{n_card:n,k:q-1});ST=x.state;d.remove();toast('+'+x.gain+' 🍿');render()}catch(e){toast(e.message)}}}
+/* ---------- autres onglets ---------- */
+function mkt(){$('#v').innerHTML=`<div class="center"><div style="font-size:54px">市</div><h2>Marché</h2><p>Vente et échange de cartes entre joueurs : bientôt.</p></div>`}
+function more(){
+ $('#v').innerHTML=`<div class="sec"><div class="eyebrow">Compte</div><h2>${esc(ST.name)}</h2></div>
+ <div class="tiles"><div class="tile"><b>${ST.boosters}</b><small>boosters ouverts</small></div><div class="tile"><b>${ST.pity}/${ST.pity_max}</b><small>pity Mythique</small></div><div class="tile"><b>${ST.popcorns}</b><small>Popcorns</small></div></div>
+ <div class="sec"><div class="eyebrow">Règles</div><h2>Comment ça marche</h2></div>
+ <p class="mut">Un booster gratuit se recharge toutes les ${CFG.free_hours} h (jusqu'à ${ST.free_max} en stock). Le pack du jour est offert chaque jour avec une Épique garantie. Chaque booster contient 5 cartes dont au moins une Rare ou mieux. Un Mythique est garanti au ${ST.pity_max}ᵉ booster sans Mythique. Les doublons se recyclent en Popcorns : ${Object.entries(REC).map(([r,v])=>RN[r]+' '+v).join(', ')}.</p><br>
+ <button class="btn g" id="lo">Se déconnecter</button><footer>This product uses the TMDB API but is not endorsed or certified by TMDB.</footer>`;
+ $('#lo').onclick=async()=>{await sb.auth.signOut();ST=null;render()}}
 init();
 </script></body></html>
