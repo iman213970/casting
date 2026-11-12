@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes"><link rel="manifest" href="manifest.json">
+<title>Casting</title>
+<style>
+:root{--bg:#120a0c;--card:#1d1114;--line:#3a2328;--fg:#f4ead8;--mut:#a8968a;--gold:#d8ad4f;--bord:#7a1f2e;
+--C:#9a9a9a;--U:#5fae6a;--R:#4a90d9;--E:#a05fd0;--L:#e8a13a;--M:#e0384f}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.4 system-ui,-apple-system,sans-serif;
+padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+h1,h2{font-family:Georgia,serif;font-weight:700;margin:0}
+button{font:inherit;cursor:pointer;border:0;border-radius:10px;padding:10px 16px;background:var(--bord);color:var(--fg)}
+button.gold{background:var(--gold);color:#241505;font-weight:700}button:disabled{opacity:.4}
+input,select{font:inherit;background:var(--card);color:var(--fg);border:1px solid var(--line);border-radius:10px;padding:10px;width:100%}
+.wrap{max-width:900px;margin:0 auto;padding:12px 16px 80px}
+header{flex-wrap:wrap;display:flex;justify-content:space-between;align-items:center;padding:10px 0;gap:8px}
+header h1{font-size:26px;color:var(--gold);letter-spacing:.05em}
+.pop{background:var(--card);border:1px solid var(--line);padding:6px 12px;border-radius:99px;font-weight:700}
+nav{display:flex;gap:6px;margin:6px 0 14px}nav button{flex:1;background:var(--card);border:1px solid var(--line)}nav button.on{background:var(--bord)}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-bottom:14px}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}.row>*{flex:1;min-width:120px}
+.bar{height:10px;background:#000;border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--bord),var(--gold))}
+.mut{color:var(--mut);font-size:13px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px}
+.cd{position:relative;aspect-ratio:2/3;border-radius:10px;overflow:hidden;background:#000;border:2px solid var(--rc,#444);cursor:pointer}
+.cd img{width:100%;height:100%;object-fit:cover;display:block}
+.cd .cap{position:absolute;left:0;right:0;bottom:0;padding:18px 5px 4px;background:linear-gradient(transparent,#000d);font-size:11px;line-height:1.15}
+.cd .cap b{display:block;font-size:12px}
+.cd .no{position:absolute;top:3px;left:4px;font-size:10px;background:#000a;padding:1px 5px;border-radius:6px}
+.cd .q{position:absolute;top:3px;right:4px;font-size:11px;background:var(--gold);color:#241505;padding:1px 6px;border-radius:6px;font-weight:700}
+.cd.miss img{filter:grayscale(1) brightness(.25)}.cd.miss .cap{display:none}
+.r-C{--rc:var(--C)}.r-U{--rc:var(--U)}.r-R{--rc:var(--R)}.r-E{--rc:var(--E)}
+.r-L{--rc:var(--L);box-shadow:0 0 12px var(--L)}.r-M{--rc:var(--M);box-shadow:0 0 18px var(--M)}
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:8px;margin-bottom:10px}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.chip{padding:5px 10px;border-radius:99px;font-size:12px;background:var(--card);border:1px solid var(--line)}
+.chip.on{border-color:var(--gold);color:var(--gold)}
+.modal{position:fixed;inset:0;background:#000d;display:flex;align-items:center;justify-content:center;z-index:20;padding:16px}
+.modal>div{background:var(--card);border-radius:18px;padding:16px;max-width:360px;width:100%;max-height:92vh;overflow:auto}
+.big{width:100%;aspect-ratio:2/3;object-fit:cover;border-radius:12px;border:3px solid var(--rc)}
+.stats{display:flex;gap:8px;margin:8px 0}.stats span{flex:1;background:#0006;border-radius:8px;padding:6px;text-align:center}
+.stage{position:fixed;inset:0;background:radial-gradient(#3a1018,#0a0506);z-index:30;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;padding:16px}
+.hand{width:100%;display:flex;gap:8px;flex-wrap:wrap;justify-content:center;max-width:620px}
+.flip{width:calc(min(19vw,112px));aspect-ratio:2/3;perspective:600px;cursor:pointer}
+.flip>div{position:relative;width:100%;height:100%;transition:transform .6s;transform-style:preserve-3d}
+.flip.open>div{transform:rotateY(180deg)}
+.flip .f,.flip .b{position:absolute;inset:0;backface-visibility:hidden;border-radius:10px;overflow:hidden}
+.flip .b{background:repeating-linear-gradient(45deg,var(--bord),var(--bord) 8px,#5c1522 8px,#5c1522 16px);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:28px}
+.flip .f{transform:rotateY(180deg)}.flip .f .cd{height:100%;aspect-ratio:auto}
+.flip.open.hi>div{animation:pulse 1s 2}@keyframes pulse{50%{filter:brightness(1.6)}}
+.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:var(--gold);color:#241505;padding:10px 16px;border-radius:12px;z-index:50;font-weight:700}
+footer{text-align:center;color:var(--mut);font-size:11px;margin-top:30px}
+@media(max-width:480px){.flip{width:30%}}
+</style></head><body><div class="wrap" id="app"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="config.js"></script>
+<script>
+const $=s=>document.querySelector(s);
+const RN={C:'Commune',U:'Peu commune',R:'Rare',E:'Épique',L:'Légendaire',M:'Mythique'};
+let ST=null,CFG=null,CARDS=[],view='home',F={q:'',r:'',g:'',own:'all',show:''};
+const sb=supabase.createClient(window.SUPABASE_URL,window.SUPABASE_KEY);
+const mail=n=>n.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'@casting-game.app';
+async function rpc(f,a){const {data,error}=await sb.rpc(f,a||{});if(error)throw new Error(error.message);return data}
+async function api(p,b){
+ if(p=='config'){const {data}=await sb.from('config').select('k,v');const c={};data.forEach(x=>c[x.k]=x.v);
+  const cards=await (await fetch('cards.json')).json();window._cards=cards;
+  return {price:c.price,gprice:c.gprice,pity:c.pity,genres:[...new Set(cards.flatMap(x=>x.g))].sort()}}
+ if(p=='cards')return window._cards;
+ if(p=='me'){const {data:{session}}=await sb.auth.getSession();if(!session)return null;return await rpc('my_state')}
+ if(p=='register'){if(b.name.trim().length<2||b.pw.length<6)throw new Error('Pseudo 2 caractères min, mot de passe 6 min');
+  const {data,error}=await sb.auth.signUp({email:mail(b.name),password:b.pw,options:{data:{name:b.name.trim()}}});
+  if(error)throw new Error(error.message.includes('registered')?'Ce pseudo existe déjà':error.message);
+  if(!data.session)throw new Error('Désactive "Confirm email" dans Supabase (voir étapes)');return {ok:1}}
+ if(p=='login'){const {error}=await sb.auth.signInWithPassword({email:mail(b.name),password:b.pw});if(error)throw new Error('Pseudo ou mot de passe incorrect');return {ok:1}}
+ if(p=='logout'){await sb.auth.signOut();return {ok:1}}
+ if(p=='open'){const r=await rpc('open_booster',{kind:b.kind,genre:b.genre||null});
+  return {cards:r.cards.map(x=>({...CARDS[x.n-1],new:x.new})),pity_hit:r.pity_hit,state:r.state}}
+ if(p=='recycle'){return b.all?await rpc('recycle'):await rpc('recycle',{n_card:b.n,k:b.count||1})}
+}
+function toast(t){const e=document.createElement('div');e.className='toast';e.textContent=t;document.body.append(e);setTimeout(()=>e.remove(),2500)}
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]))}
+function card(c,qty,miss){return `<div class="cd r-${c.r} ${miss?'miss':''}" data-n="${c.n}"><img loading="lazy" referrerpolicy="no-referrer" src="${esc(c.img)}" alt=""><span class="no">#${c.n}</span>${qty>1?`<span class="q">x${qty}</span>`:''}<div class="cap"><b>${esc(c.name)}</b>${esc(c.show)}</div></div>`}
+async function init(){CFG=await api('config');CARDS=window._cards;ST=await api('me');render()}
+function authView(){
+ $('#app').innerHTML=`<header><h1>CASTING</h1></header><div class="panel"><h2>Bienvenue au casting</h2><p class="mut">Collectionne les personnages de tes séries préférées.</p>
+ <div class="row" style="flex-direction:column;align-items:stretch"><input id="nm" placeholder="Pseudo" autocomplete="username"><input id="pw" type="password" placeholder="Mot de passe" autocomplete="current-password">
+ <div class="row"><button class="gold" id="li">Se connecter</button><button id="rg">Créer mon compte</button></div></div></div>
+ <footer>This product uses the TMDB API but is not endorsed or certified by TMDB.</footer>`;
+ const go=k=>async()=>{try{await api(k,{name:$('#nm').value,pw:$('#pw').value});ST=await api('me');render()}catch(e){toast(e.message)}};
+ $('#li').onclick=go('login');$('#rg').onclick=go('register')}
+function render(){
+ if(!ST)return authView();
+ const nav=[['home','Accueil'],['coll','Collection']].map(([k,l])=>`<button class="${view==k?'on':''}" data-v="${k}">${l}</button>`).join('');
+ $('#app').innerHTML=`<header><h1>CASTING</h1><div class="row" style="flex:0"><span class="pop">🍿 ${ST.popcorns}</span><button id="lo" style="padding:6px 10px">${esc(ST.name)} ⏻</button></div></header><nav>${nav}</nav><div id="v"></div>
+ <footer>This product uses the TMDB API but is not endorsed or certified by TMDB.</footer>`;
+ document.querySelectorAll('nav button').forEach(b=>b.onclick=()=>{view=b.dataset.v;render()});
+ $('#lo').onclick=async()=>{await api('logout',{});ST=null;render()};
+ view=='home'?home():coll()}
+function home(){
+ const owned=Object.keys(ST.inv).length,tot=CARDS.length;
+ $('#v').innerHTML=`<div class="panel"><h2>Pack quotidien</h2><p class="mut">Un booster gratuit par jour.</p><button class="gold" id="dl" ${ST.daily_ready?'':'disabled'}>${ST.daily_ready?'Ouvrir mon pack du jour':'Reviens demain'}</button></div>
+ <div class="panel"><h2>Boosters</h2><div class="row" style="margin-top:10px"><button class="gold" id="bs" ${ST.popcorns<CFG.price?'disabled':''}>Booster standard<br>🍿 ${CFG.price}</button>
+ <div><select id="gs">${CFG.genres.map(g=>`<option>${g}</option>`).join('')}</select><button id="bg" style="width:100%;margin-top:6px" ${ST.popcorns<CFG.gprice?'disabled':''}>Booster de genre · 🍿 ${CFG.gprice}</button></div></div>
+ <p class="mut" style="margin-top:12px">Garantie : au moins une carte Rare ou mieux par booster.</p>
+ <div class="bar"><i style="width:${ST.pity/CFG.pity*100}%"></i></div><p class="mut">Pity : ${ST.pity}/${CFG.pity} boosters sans Mythique (un Mythique est garanti au ${CFG.pity}e)</p></div>
+ <div class="panel"><h2>Ma collection</h2><p>${owned} / ${tot} cartes (${(owned/tot*100).toFixed(1)} %)</p><div class="bar"><i style="width:${owned/tot*100}%"></i></div>
+ <div class="chips">${Object.keys(RN).reverse().map(r=>{const t=CARDS.filter(c=>c.r==r),o=t.filter(c=>ST.inv[c.n]).length;return `<span class="chip" style="border-color:var(--${r})">${RN[r]} ${o}/${t.length}</span>`}).join('')}</div>
+ <p class="mut">${ST.boosters} boosters ouverts</p></div>`;
+ $('#dl').onclick=()=>buy({kind:'daily'});$('#bs').onclick=()=>buy({kind:'standard'});$('#bg').onclick=()=>buy({kind:'genre',genre:$('#gs').value})}
+async function buy(b){try{const r=await api('open',b);ST=r.state;stage(r)}catch(e){toast(e.message)}}
+function stage(r){
+ const d=document.createElement('div');d.className='stage';
+ d.innerHTML=`<h2 style="color:var(--gold)">${r.pity_hit?'Pity ! Mythique garanti':'Touche les cartes'}</h2><div class="hand">${r.cards.map((c,i)=>`<div class="flip ${'LM'.includes(c.r)?'hi':''}" data-i="${i}"><div><div class="b">🍿</div><div class="f">${card(c,0)}${c.new?'<span class="q" style="position:absolute;bottom:30px;left:4px;background:#3c9;color:#012;padding:1px 6px;border-radius:6px;font-size:10px;font-weight:700">NEW</span>':''}</div></div></div>`).join('')}</div>
+ <div class="row" style="flex:0"><button id="all">Tout retourner</button><button class="gold" id="ok">Continuer</button></div>`;
+ document.body.append(d);
+ d.querySelectorAll('.flip').forEach(f=>f.onclick=()=>f.classList.add('open'));
+ $('#all').onclick=()=>d.querySelectorAll('.flip').forEach((f,i)=>setTimeout(()=>f.classList.add('open'),i*250));
+ $('#ok').onclick=()=>{d.remove();render()}}
+function coll(){
+ const shows=[...new Set(CARDS.map(c=>c.show))].sort((a,b)=>a.localeCompare(b));
+ $('#v').innerHTML=`<div class="filters"><input id="q" placeholder="Rechercher" value="${esc(F.q)}">
+ <select id="fs"><option value="">Toutes les séries</option>${shows.map(s=>`<option ${F.show==s?'selected':''}>${esc(s)}</option>`).join('')}</select>
+ <select id="fg"><option value="">Tous les genres</option>${CFG.genres.map(g=>`<option ${F.g==g?'selected':''}>${g}</option>`).join('')}</select>
+ <select id="fo"><option value="all">Toutes</option><option value="own" ${F.own=='own'?'selected':''}>Possédées</option><option value="miss" ${F.own=='miss'?'selected':''}>Manquantes</option><option value="dup" ${F.own=='dup'?'selected':''}>Doublons</option></select></div>
+ <div class="chips">${Object.keys(RN).reverse().map(r=>`<span class="chip ${F.r==r?'on':''}" data-r="${r}">${RN[r]}</span>`).join('')}</div>
+ <div class="row" style="margin-bottom:10px"><span class="mut" id="cnt"></span><button id="rall" style="flex:0 1 auto">Recycler tous les doublons</button></div><div class="grid" id="gr"></div>`;
+ $('#q').oninput=e=>{F.q=e.target.value;list()};$('#fs').onchange=e=>{F.show=e.target.value;list()};$('#fg').onchange=e=>{F.g=e.target.value;list()};$('#fo').onchange=e=>{F.own=e.target.value;list()};
+ document.querySelectorAll('.chip[data-r]').forEach(c=>c.onclick=()=>{F.r=F.r==c.dataset.r?'':c.dataset.r;coll()});
+ $('#rall').onclick=async()=>{try{const x=await api('recycle',{all:1});ST=x.state;toast('+'+x.gain+' 🍿');render()}catch(e){toast(e.message)}};
+ list()}
+function list(){
+ const q=F.q.toLowerCase();let L=CARDS.filter(c=>(!F.r||c.r==F.r)&&(!F.show||c.show==F.show)&&(!F.g||c.g.includes(F.g))&&(!q||(c.name+' '+c.show).toLowerCase().includes(q)));
+ const o=c=>ST.inv[c.n]||0;
+ if(F.own=='own')L=L.filter(c=>o(c));if(F.own=='miss')L=L.filter(c=>!o(c));if(F.own=='dup')L=L.filter(c=>o(c)>1);
+ $('#cnt').textContent=L.length+' cartes';
+ $('#gr').innerHTML=L.slice(0,300).map(c=>card(c,o(c),!o(c))).join('')+(L.length>300?`<p class="mut" style="grid-column:1/-1">Affine les filtres pour voir les ${L.length-300} autres.</p>`:'');
+ $('#gr').onclick=e=>{const t=e.target.closest('.cd');if(t)detail(+t.dataset.n)}}
+function detail(n){
+ const c=CARDS[n-1],q=ST.inv[n]||0,m=document.createElement('div');m.className='modal';
+ m.innerHTML=`<div class="r-${c.r}"><img class="big" referrerpolicy="no-referrer" src="${esc(c.img)}" style="${q?'':'filter:grayscale(1) brightness(.4)'}"><h2 style="margin-top:8px">${esc(c.name)}</h2><div class="mut">${esc(c.show)}${c.act?' · '+esc(c.act):''}</div>
+ <div class="chips"><span class="chip" style="border-color:var(--${c.r})">${RN[c.r]}</span><span class="chip">#${c.n}</span>${c.g.slice(0,3).map(g=>`<span class="chip">${g}</span>`).join('')}</div>
+ <div class="stats"><span>POW<br><b>${c.pow}</b></span><span>AURA<br><b>${c.aura}</b></span><span>Possédées<br><b>${q}</b></span></div>
+ ${q>1?`<button class="gold" id="rc" style="width:100%">Recycler ${q-1} doublon${q>2?'s':''} · +${(q-1)*c.rec} 🍿</button>`:`<p class="mut">${q?'Pas de doublon à recycler (1 exemplaire gardé)':'Pas encore obtenue'}</p>`}
+ <button id="cl" style="width:100%;margin-top:8px">Fermer</button></div>`;
+ document.body.append(m);m.onclick=e=>{if(e.target==m)m.remove()};$('#cl').onclick=()=>m.remove();
+ if($('#rc'))$('#rc').onclick=async()=>{try{const x=await api('recycle',{n,count:q-1});ST=x.state;m.remove();toast('+'+x.gain+' 🍿');render()}catch(e){toast(e.message)}}}
+init();
+</script></body></html>
