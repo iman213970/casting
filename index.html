@@ -253,7 +253,7 @@ document.addEventListener('visibilitychange',()=>document.documentElement.classL
 const P1='https://static.tvmaze.com/uploads/images/original_untouched/',P2='https://image.tmdb.org/t/p/';
 const full=u=>u[0]=='~'?P1+u.slice(1):u[0]=='^'?P2+u.slice(1):u;
 const imgUrl=c=>{if(c.i)return 'img/'+c.n+'.webp';const u=full(c.u);if(u.includes('wikia.nocookie.net'))return u.replace(/\/revision\/.*$/,'')+'/revision/latest/scale-to-width-down/420';return 'https://wsrv.nl/?url='+encodeURIComponent(u)+'&w=400&we&output=webp&q=82'+(c.tr?'&trim=12':'')};
-function pic(c){return `<img src="${imgUrl(c)}" ${c.fp?`style="object-position:${c.fp}" `:''}loading="lazy" decoding="async" referrerpolicy="no-referrer" alt="" draggable="false" ${c.i?'':`data-m="${esc(c.m)}" ${c.wh?'crossorigin="anonymous" data-wh="1" onload="wcut(this)" ':''}onerror="imgfb(this)"`}>`}
+function pic(c){return `<img src="${imgUrl(c)}" ${c.fp?`style="object-position:${c.fp}${c.fz?`;transform-origin:${c.fp};transform:translate(${50-parseFloat(c.fp)}%,${50-parseFloat(c.fp.split(' ')[1])}%) scale(${c.fz})`:''}" `:''}loading="lazy" decoding="async" referrerpolicy="no-referrer" alt="" draggable="false" ${c.i?'':`data-m="${esc(c.m)}" ${c.wh?'crossorigin="anonymous" data-wh="1" onload="wcut(this)" ':''}onerror="imgfb(this)"`}>`}
 function imgfb(el){if(el.dataset.f)return;el.dataset.f=1;el.removeAttribute('crossorigin');el.dataset.wh='';el.src=el.dataset.m}
 /* images sans version hébergée et à fond blanc : détourage dans le navigateur (le blanc relié aux bords devient transparent) */
 function wcut(el){if(!el.dataset.wh||el.dataset.cut)return;el.dataset.cut=1;
