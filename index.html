@@ -217,6 +217,22 @@ html.hid *,html.hid *::before,html.hid *::after{animation-play-state:paused!impo
 .toast{position:fixed;bottom:110px;left:50%;transform:translateX(-50%);background:var(--fg);color:#111;padding:11px 18px;border-radius:99px;z-index:60;font-weight:700}
 .center{text-align:center;padding:50px 10px;color:var(--mut)}
 footer{text-align:center;color:var(--mut);font-size:11px;margin:30px 0}
+.strip{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 8px}
+.sc{display:flex;flex-direction:column;align-items:flex-start;gap:2px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:10px 12px;text-align:left}
+.sc b{font:800 19px 'Bricolage Grotesque',Inter,system-ui,sans-serif}.sc small{color:var(--mut);font-size:11px;line-height:1.25}
+.sc.hot{border-color:#7a6212;background:#1a1608}
+.mbtn{position:relative}.mbtn .bdg{position:absolute;top:-5px;right:-5px;background:var(--acc);color:#fff;font:800 11px 'JetBrains Mono',monospace;border-radius:99px;min-width:19px;height:19px;display:grid;place-items:center;padding:0 5px}
+.qs{display:flex;align-items:center;gap:12px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px;margin-bottom:8px}
+.qs.done{opacity:.55}.qs.bonus{border-style:dashed}
+.qs .qt{flex:1;min-width:0;display:flex;flex-direction:column;gap:5px}.qs .qt b{font-size:14px}.qs .qt small{font-size:11px;color:var(--mut)}
+.qb{height:5px;background:#000;border-radius:9px;overflow:hidden}.qb i{display:block;height:100%;background:var(--yel)}
+.qs .btn{width:auto;padding:9px 14px;font-size:13px;white-space:nowrap}.qs .ok{color:var(--grn);font-size:12px;white-space:nowrap}
+.strk{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;margin-bottom:10px}
+.strk div{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:8px 2px;text-align:center;font-size:11px;color:var(--mut)}
+.strk div b{display:block;font:800 13px 'JetBrains Mono',monospace;color:var(--fg)}.strk .got{background:#132a1c;border-color:#2c6b45}.strk .got b{color:var(--grn)}
+.strk .cur{border-color:var(--yel);box-shadow:0 0 12px #f7c61b55}.strk .d7{background:#1a1608}
+.packwrap.gold{filter:drop-shadow(0 0 22px #f7c61b)}
+.tagg{display:inline-block;background:var(--yel);color:#1a1300;font:800 12px 'JetBrains Mono',monospace;border-radius:99px;padding:3px 10px}
 .auth{padding-top:70px}.auth input{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px;color:var(--fg);font:inherit;margin-bottom:10px}
 </style></head><body>
 <div id="app"></div>
@@ -244,6 +260,8 @@ const REC={C:1,U:1,R:3,E:10,L:40,M:150};
 const BON={L:50,M:150};
 const bonusN=()=>ST&&ST.bonus||0;
 const freeTot=()=>ST.free+bonusN();
+const goldIn=()=>Math.max(0,ST.golden_in??10);
+const QS=()=>ST.quests||{};
 /* ---------- animations : réglage + pause quand l'onglet est caché ---------- */
 const lsget=k=>{try{return localStorage.getItem(k)}catch(e){return null}},lsset=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
 const MO=()=>lsget('mo')=='1';
@@ -303,14 +321,14 @@ function render(){
  const nav=(k,i,l)=>`<button class="${view==k?'on':''}" data-v="${k}"><b>${i}</b>${l}</button>`,nb=freeTot()+(ST.daily_ready?1:0);
  $('#app').innerHTML=`<div class="top"><div class="wrap"><div class="logo">🍿</div><div class="sp"></div>
  <div class="pill"><div class="row"><span class="mono" id="fs">${ST.free}/${ST.free_max}${bonusN()?` <span style="color:var(--yel)">+${bonusN()}</span>`:''}</span></div><div class="bar"><i style="width:${ST.free/ST.free_max*100}%"></i></div></div>
- <div class="pop">🍿 ${ST.popcorns}</div><button class="avatar" id="av">${esc(ST.name[0].toUpperCase())}</button></div></div>
+ <button class="pop mbtn" id="msb">🎯 Missions${QS().claimable?`<span class="bdg">${QS().claimable}</span>`:''}</button><div class="pop">🍿 ${ST.popcorns}</div><button class="avatar" id="av">${esc(ST.name[0].toUpperCase())}</button></div></div>
  <div class="wrap" id="v"></div>
  <div class="nav"><div class="wrap">${nav('home','🏠','Accueil')}${nav('coll','🗂️','Collection')}
  <div><button class="open-btn" id="ob">🍿${nb>0?`<span class="bd">${nb}</span>`:''}</button><div class="open-lbl">Ouvrir</div></div>
  ${nav('mkt','🏷️','Marché')}${nav('more','⋯','Plus')}</div></div>`;
  $$('.nav button[data-v]').forEach(b=>b.onclick=()=>{view=b.dataset.v;render();scrollTo(0,0)});
- $('#ob').onclick=()=>openSheet(freeTot()>0?'free':'paid');$('#av').onclick=()=>{view='more';render()};
- ({home,coll,mkt,more})[view]();
+ $('#msb').onclick=()=>{view='miss';render();scrollTo(0,0)};$('#ob').onclick=()=>openSheet(freeTot()>0?'free':'paid');$('#av').onclick=()=>{view='more';render()};
+ ({home,coll,mkt,more,miss})[view]();
  tickT=setInterval(tick,1000)}
 function tick(){if(ST&&ST.free_next!=null){ST.free_next--;['#nx','#nx2'].forEach(s=>{const e=$(s);if(e)e.textContent=fmt(ST.free_next)});if(ST.free_next<=0){refresh().then(()=>{if(!$('.stage')){render();if($('#sh'))drawSheet()}})}}}
 /* ---------- accueil ---------- */
@@ -323,13 +341,18 @@ function home(){
  $('#v').innerHTML=`<div class="hero"><div class="fan">${fan.map(c=>card(c)).join('')}</div>
  <div class="eyebrow">Pack du jour · gratuit</div><h2>${GICO[dt]||''} ${fr(dt)}</h2><p class="mut">Un booster offert chaque jour, thème différent, Épique garantie.</p>
  <button class="btn y" id="dl" ${ST.daily_ready?'':'disabled'}>${ST.daily_ready?'Ouvrir le pack du jour':'Reviens demain'}</button></div>
- <div class="tiles"><div class="tile hot"><b>${ST.free}/${ST.free_max}</b><small>gratuits${bonusN()?' · +'+bonusN()+' bonus':''}</small><div class="t" id="nx">${ST.free_next==null?'complet':fmt(ST.free_next)}</div></div>
+ ${strip()}<div class="tiles"><div class="tile hot"><b>${ST.free}/${ST.free_max}</b><small>gratuits${bonusN()?' · +'+bonusN()+' bonus':''}</small><div class="t" id="nx">${ST.free_next==null?'complet':fmt(ST.free_next)}</div></div>
  <div class="tile"><b>${own}</b><small>/ ${CARDS.length} cartes</small></div><div class="tile"><b>${dups}</b><small>doublons</small></div>
  <div class="tile"><b style="color:${RC.E}">${cnt('E')}</b><small>Épiques</small></div><div class="tile"><b style="color:${RC.L}">${cnt('L')}</b><small>Légendaires</small></div><div class="tile"><b style="color:${RC.M}">${cnt('M')}</b><small>Mythiques</small></div></div>
  <br><button class="btn g" id="rc">♻ Recycler mes doublons${dups?' · +'+recVal()+' 🍿':''}</button>
  ${best.length?`<div class="sec"><div class="eyebrow">Ta vitrine</div><h2>Tes plus belles cartes</h2></div><div class="scroll">${best.map(c=>card(c,{q:inv[c.n]})).join('')}</div>`:''}
  <footer>Projet fan non officiel. This product uses the TMDB API but is not endorsed or certified by TMDB.</footer>`;
- $('#dl').onclick=()=>packScreen('daily',null);$('#rc').onclick=recycleAll;bindCards()}
+ $('#dl').onclick=()=>packScreen('daily',null);$('#rc').onclick=recycleAll;$$('[data-gom]').forEach(b=>b.onclick=()=>{view='miss';render();scrollTo(0,0)});bindCards()}
+function strip(){const q=QS(),gi=goldIn();
+ return `<div class="strip"><button class="sc" data-gom><b>${q.daily_done??0}/${q.daily_total??3}</b><small>missions du jour</small></button>
+ <button class="sc ${q.streak_ready?'hot':''}" data-gom><b>J${q.streak_day||0}/7</b><small>série de connexion${q.streak_ready?' · à récupérer':''}</small></button>
+ <div class="sc ${gi?'':'hot'}"><b style="color:var(--yel)">${gi||'✦'}</b><small>${gi?'avant le booster doré':'ton prochain booster est doré'}</small></div>
+ <div class="sc"><b style="color:${RC.M}">${Math.max(0,ST.pity_max-ST.pity)}</b><small>avant Mythique sûre</small></div></div>`}
 function recVal(){return CARDS.reduce((a,c)=>a+Math.max(0,(ST.inv[c.n]||0)-1)*REC[c.r],0)}
 async function recycleAll(){try{const x=await rpc('recycle');ST=x.state;toast('+'+x.gain+' 🍿');render()}catch(e){toast(e.message)}}
 /* ---------- paquets : pochette (genres), enveloppe (pack du jour) ---------- */
@@ -339,7 +362,11 @@ function packArt(kind,g){const c=gcol(g),sym=g?GICO[g]||'🎬':'🍿',nm=g?fr(g)
  return `<div class="pkw pochette" style="--c1:${c};--c2:${shade(c,.38)}"><div class="foil2"></div><i class="cr t"></i><i class="cr b"></i><i class="pf l"></i><i class="pf r"></i><div class="pt">CASTING</div><div class="md">${sym}</div><div class="pn">${esc(nm)}</div><div class="pc">5 cartes</div></div>`}
 /* ---------- feuille Ouvrir ---------- */
 let sheetTab='free',sheetSel='mix';
-function odds(minE){const o=ST.odds,t=10000,p=k=>o[k]/t,n=5;
+const SLOTS={norm:'CCCUR',daily:'CCURE',gold:'CCURE'};
+function odds(minE){const o=ST.odds,sl=minE?SLOTS.daily:SLOTS.norm,res={};
+ for(const r of 'RELM'){let none=1;for(const f of sl){const al=ORD.slice(ORD.indexOf(f));if(!al.includes(r))continue;const tot=[...al].reduce((a,k)=>a+o[k],0);none*=1-o[r]/tot}res[r]=1-none}
+ return res}
+function oddsOld(minE){const o=ST.odds,t=10000,p=k=>o[k]/t,n=5;
  const eplus=p('E')+p('L')+p('M'),q=1-eplus,qn=Math.pow(q,n);
  if(minE){const s=eplus;return {M:1-(Math.pow(1-p('M'),n)-qn*p('M')/s),L:1-(Math.pow(1-p('L'),n)-qn*p('L')/s),E:1-(Math.pow(1-p('E'),n)-qn*p('E')/s),R:1-Math.pow(1-p('R'),n)}}
  const ge=x=>1-Math.pow(1-x,n);
@@ -364,8 +391,8 @@ function drawSheet(){
   if(!sel)return `<button class="bo" data-g="${id}">${head}</button>`;
   const okb=daily?ST.daily_ready:free?freeTot()>0:ST.popcorns>=price(g);
   return `<div class="bo sel1" style="border-color:${c1}88"><div style="display:flex;gap:12px;align-items:center">${head}</div>
-   <div class="facts"><div class="fact"><b>5</b><small>cartes par booster</small></div><div class="fact"><b style="color:${daily?RC.E:RC.R}">${daily?'Épique':'Rare'}</b><small>ou mieux, garantie</small></div>
-   <div class="fact"><b style="color:${RC.M}">${Math.max(0,ST.pity_max-ST.pity)}</b><small>avant Mythique sûre</small></div><div class="fact"><b>${cnt.toLocaleString('fr')}</b><small>persos possibles</small></div></div>
+   <div class="facts"><div class="fact"><b>5</b><small>cartes par booster</small></div><div class="fact"><b class="mono" style="font-size:17px;color:${daily?RC.E:RC.R}">${daily?'C C U R E':'C C C U R'}</b><small>rareté minimale de chaque carte</small></div>
+   <div class="fact"><b style="color:${RC.M}">${Math.max(0,ST.pity_max-ST.pity)}</b><small>avant Mythique sûre</small></div><div class="fact"><b>${cnt.toLocaleString('fr')}</b><small>persos possibles</small></div>${daily?'':`<div class="fact" style="grid-column:1/-1"><b style="color:var(--yel)">${goldIn()||'Maintenant'}</b><small>${goldIn()?'boosters avant le booster doré (C C U R E)':'ton prochain booster est doré : C C U R E'}</small></div>`}</div>
    <div class="mut mono" style="font-size:11px;letter-spacing:.1em">CHANCE PAR BOOSTER</div><div class="odds">${['R','E','L','M'].map(r=>`<div class="o" style="--c:${RC[r]}"><span>${RN[r]}</span><i style="width:${Math.max(2,od[r]*100*.7)}%"></i><em>${(od[r]*100).toFixed(od[r]<.05?2:1).replace('.',',')} %</em></div>`).join('')}</div>
    <button class="btn g" data-pool="${id}" style="margin-bottom:8px">Voir les ${cnt.toLocaleString('fr')} persos</button><button class="btn a" data-go="${id}" ${okb?'':'disabled'}>${okb?'Choisir ce booster':(daily?'Reviens demain':free?'Pas de booster gratuit':'Pas assez de Popcorns')}</button></div>`}).join('')}</div>`;
  $('#cx').onclick=()=>d.remove();
@@ -403,9 +430,9 @@ function packScreen(kind,genre){
  const W=Math.min(230,innerWidth*.56),env=kind=='daily',zz=[];for(let i=0;i<=14;i++)zz.push([i/14*100,i%2?15.6:13.4]);
  const pstrip=`polygon(0 0,100% 0,${zz.slice().reverse().map(p=>p[0]+'% '+p[1]+'%').join(',')})`,pbody=`polygon(${zz.map(p=>p[0]+'% '+p[1]+'%').join(',')},100% 100%,0 100%)`;
  const sparks=Array.from({length:14},(_,i)=>{const a=-Math.PI*(.1+.8*i/13)+(Math.random()-.5)*.3,r2=110+Math.random()*120;return `<i class="spark" style="--dx:${Math.cos(a)*r2|0}px;--dy:${Math.sin(a)*r2|0}px;animation-delay:${i*18}ms"></i>`}).join('');
- const art=packArt(kind=='daily'?'daily':'pochette',g);
- d.innerHTML=`<button class="skip" id="cl0">✕</button><div class="eyebrow">${kind=='daily'?'Pack du jour':kind=='free'?'Booster gratuit':'Booster'}${g?' · '+fr(g):' · Mix'}</div>
-  <div class="packwrap ${env?'envp':''}" id="pw" style="--w:${W}px">${env?`<div class="lay body">${art}</div>`:`<div class="lay body" style="clip-path:${pbody}">${art}</div><div class="beam"></div><div class="lay strip" id="stp" style="clip-path:${pstrip}">${art}</div><div class="tear" id="tr"></div>`}${sparks}</div>
+ const art=packArt(kind=='daily'?'daily':'pochette',g),gold=kind!='daily'&&goldIn()==0;
+ d.innerHTML=`<button class="skip" id="cl0">✕</button><div class="eyebrow">${gold?'✦ Booster doré · ':''}${kind=='daily'?'Pack du jour':kind=='free'?'Booster gratuit':'Booster'}${g?' · '+fr(g):' · Mix'}</div>
+  <div class="packwrap ${env?'envp':''} ${gold?'gold':''}" id="pw" style="--w:${W}px">${env?`<div class="lay body">${art}</div>`:`<div class="lay body" style="clip-path:${pbody}">${art}</div><div class="beam"></div><div class="lay strip" id="stp" style="clip-path:${pstrip}">${art}</div><div class="tear" id="tr"></div>`}${sparks}</div>
   <div class="qrow" id="qr"></div><div class="mut mono" id="cost"></div>
   <p class="mut" style="margin:0">${env?'Touche l’enveloppe pour l’ouvrir':'Glisse le long du haut pour déchirer'}</p><button class="lnk" id="chg">Changer de booster</button>`;
  $('#cl0').onclick=close;$('#chg').onclick=()=>{document.removeEventListener('keydown',kh);d.remove();openSheet(kind=='daily'?'daily':kind=='free'?'free':'paid')};
@@ -427,7 +454,7 @@ function packScreen(kind,genre){
  let sy=0}
 /* ---------- révélation : pile face cachée, on touche pour retourner ---------- */
 function reveal(d,r,kind,g,qty){
- const c1=gcol(g),bs=r.boosters.map(b=>({pity:b.pity_hit,cards:b.cards.map(x=>({...CARDS[x.n-1],new:x.new,bonus:x.bonus}))})),all=bs.flatMap(b=>b.cards);let bi=-1;
+ const c1=gcol(g),bs=r.boosters.map(b=>({pity:b.pity_hit,golden:b.golden,god:b.god,cards:b.cards.map(x=>({...CARDS[x.n-1],new:x.new,bonus:x.bonus}))})),all=bs.flatMap(b=>b.cards);let bi=-1;
  const flash=col=>{const f=document.createElement('div');f.className='flash';f.style.setProperty('--fc',col);document.body.append(f);setTimeout(()=>f.remove(),900)};
  const note=c=>`${c.new?'<span class="new">NOUVEAU</span>':`<span class="dup">Doublon · +${REC[c.r]} 🍿 si recyclé</span>`}${c.bonus?` <span class="new" style="background:var(--yel);color:#1a1300">+${c.bonus} 🍿 bonus</span>`:''}`;
  const kh=e=>{if(e.code=='Space'||e.key==' '){e.preventDefault();d._tap&&d._tap()}};
@@ -436,9 +463,9 @@ function reveal(d,r,kind,g,qty){
  const nextB=()=>{bi++;if(bi>=bs.length)return recap();stack(bs[bi])};
  const stack=b=>{const cs=b.cards,top=cs.reduce((a,c)=>rankOf(c)>rankOf(a)?c:a),n=cs.length;let i=0,lock=false;
   d.innerHTML=`<button class="skip" id="sk">${bs.length>1?'Passer au récap':'Passer'}</button><div class="mut mono ct" id="ct"></div>
-   <div class="deck ${rankOf(top)>=2?'glow':''} ${top.r=='M'?'rbw':''}" id="dk" style="--glow:${RC[top.r]}">${cs.map((c,k)=>`<div class="dk" style="--o:${k}"><div class="f3"><div class="fa">${cardBack(c1)}</div><div class="fb">${card(c)}</div></div></div>`).join('')}</div>
+   <div class="deck ${rankOf(top)>=2?'glow':''} ${top.r=='M'?'rbw':''}" id="dk" style="--glow:${RC[top.r]}">${cs.map((c,k)=>`<div class="dk" style="--o:${k}"><div class="f3"><div class="fa">${cardBack(b.golden||b.god?'#f7c61b':c1)}</div><div class="fb">${card(c)}</div></div></div>`).join('')}</div>
    <div class="info" id="in"></div><p class="mut" id="hn" style="margin:0">Touche la pile pour retourner la première carte</p><button class="btn g sm" id="ra">Tout révéler</button>`;
-  const dks=$$('.dk'),ct=()=>{$('#ct').textContent=(bs.length>1?`Booster ${bi+1}/${bs.length} · `:'')+`Carte ${Math.min(i+1,n)}/${n}`};ct();
+  const dks=$$('.dk'),bl=b.god?'GOD PACK · ':b.golden?'✦ Booster doré · ':'',ct=()=>{$('#ct').textContent=bl+(bs.length>1?`Booster ${bi+1}/${bs.length} · `:'')+`Carte ${Math.min(i+1,n)}/${n}`};ct();
   const tap=()=>{if(lock||i>=n)return;const e=dks[i],c=cs[i];
    if(!e.classList.contains('fl')){e.classList.add('fl');lock=true;setTimeout(()=>lock=false,350);if(rankOf(c)>=3)flash(c.r=='M'?'#ff5c8a':RC[c.r]);if(c.r=='M'||c.r=='L'){$('#dk').classList.remove('shake');void $('#dk').offsetWidth;$('#dk').classList.add('shake')}navigator.vibrate&&rankOf(c)>=2&&navigator.vibrate(20);
     $('#in').innerHTML=`${note(c)} <b style="color:${RC[c.r]}">${RN[c.r]}</b>`;$('#hn').textContent=i<n-1?'Touche pour la suivante':'Touche pour continuer'}
@@ -448,15 +475,15 @@ function reveal(d,r,kind,g,qty){
   d._tap=tap;$('#dk').onclick=tap;
   $('#ra').onclick=()=>{d._tap=null;const nw=cs.filter(c=>c.new).length;if(rankOf(top)>=3)flash(top.r=='M'?'#ff5c8a':RC[top.r]);
    d.innerHTML=`<button class="skip" id="sk">${bs.length>1?'Passer au récap':'Passer'}</button><div class="mut mono ct">${bs.length>1?`Booster ${bi+1}/${bs.length}`:'Ton tirage'}</div><div class="mini five">${cs.map((c,k)=>`<div class="rise" style="animation-delay:${k*90}ms">${card(c)}</div>`).join('')}</div>
-    <div class="sum">${nw?`<span class="new">${nw} nouvelle${nw>1?'s':''}</span>`:''}${b.pity?'<span class="new" style="background:var(--acc);color:#fff">Mythique sûre !</span>':''}${cs.reduce((a,c)=>a+(c.bonus||0),0)?`<span class="new" style="background:var(--yel);color:#1a1300">+${cs.reduce((a,c)=>a+(c.bonus||0),0)} 🍿 bonus</span>`:''}</div>
+    <div class="sum">${nw?`<span class="new">${nw} nouvelle${nw>1?'s':''}</span>`:''}${b.pity?'<span class="new" style="background:var(--acc);color:#fff">Mythique sûre !</span>':''}${b.god?'<span class="tagg">GOD PACK</span>':b.golden?'<span class="tagg">✦ Booster doré</span>':''}${cs.reduce((a,c)=>a+(c.bonus||0),0)?`<span class="new" style="background:var(--yel);color:#1a1300">+${cs.reduce((a,c)=>a+(c.bonus||0),0)} 🍿 bonus</span>`:''}</div>
     <button class="btn y sm" id="nx3">${bi<bs.length-1?'Booster suivant':'Voir le récap'}</button>`;
    $('#nx3').onclick=nextB;d._tap=nextB;$('#sk').onclick=recap};
   $('#sk').onclick=recap};
  const recap=()=>{end();
   const best=all.reduce((a,c)=>rankOf(c)>rankOf(a)||(rankOf(c)==rankOf(a)&&c.new&&!a.new)?c:a),cnt={};all.forEach(c=>cnt[c.n]=(cnt[c.n]||0)+1);
   const uniq=Object.keys(cnt).map(n=>CARDS[n-1]).sort((a,b)=>rankOf(b)-rankOf(a)||a.n-b.n),nw=all.filter(c=>c.new).length;
-  d.innerHTML=`<div class="recap"><div class="eyebrow">${bs.some(b=>b.pity)?'Mythique garantie !':'Ton tirage'}</div><div class="best"><div class="mut mono" style="font-size:11px;letter-spacing:.1em">MEILLEURE CARTE</div>${card(best)}</div>
-  <div class="sum">${nw?`<span class="new">${nw} nouvelle${nw>1?'s':''}</span>`:''}${r.gain?`<span class="new" style="background:var(--yel);color:#1a1300">+${r.gain} 🍿 de bonus</span>`:''}<span class="dup">${all.length} cartes</span></div>
+  d.innerHTML=`<div class="recap"><div class="eyebrow">${bs.some(b=>b.god)?'God pack !':bs.some(b=>b.pity)?'Mythique garantie !':bs.some(b=>b.golden)?'✦ Booster doré':'Ton tirage'}</div><div class="best"><div class="mut mono" style="font-size:11px;letter-spacing:.1em">MEILLEURE CARTE</div>${card(best)}</div>
+  <div class="sum">${nw?`<span class="new">${nw} nouvelle${nw>1?'s':''}</span>`:''}${r.gain?`<span class="new" style="background:var(--yel);color:#1a1300">+${r.gain} 🍿 de bonus</span>`:''}<span class="dup">${all.length} cartes</span>${all.length-nw?`<span class="dup">${all.length-nw} doublon${all.length-nw>1?'s':''} · +${all.filter(c=>!c.new).reduce((a,c)=>a+REC[c.r],0)} 🍿 si recyclés</span>`:''}</div>
   ${all.length>1?`<div class="mini">${uniq.map(c=>card(c,{q:cnt[c.n]})).join('')}</div>`:''}
   <div style="width:100%;display:grid;gap:8px"><button class="btn y" id="ag">Ouvrir un autre booster</button><button class="btn g" id="vc">Voir la collection</button><button class="btn g" id="cl">Continuer</button></div></div>`;
   $('#ag').onclick=()=>{d.remove();render();openSheet(freeTot()>0?'free':'paid')};$('#cl').onclick=()=>{d.remove();render()};$('#vc').onclick=()=>{d.remove();view='coll';render()};
@@ -489,7 +516,7 @@ function backFace(c,q){return `<div class="cw"><div class="bkd r-${c.r}"><div cl
  <div class="bx"><div><b>${q}</b><small>chez toi</small></div><div><b id="own">–</b><small>joueurs l'ont</small></div><div><b>${REC[c.r]}</b><small>🍿 recyclée</small></div></div></div></div>`}
 function detail(n){
  const c=CARDS[n-1],q=ST.inv[n]||0,d=document.createElement('div');d.className='shade';d.style.alignItems='center';d.style.zIndex=50;d.style.background='#000e';d.onclick=e=>{if(e.target==d)d.remove()};
- const od=cardOdds(c);
+ const od=cardOdds(c);if(!window._vw){window._vw=1;rpc('quest_event',{e:'view'}).catch(()=>{})}
  d.innerHTML=`<div class="dv"><div class="tw" id="tw"><div class="flip" id="fl"><div class="face">${card(c,{unk:!q})}</div><div class="face bk">${backFace(c,q)}</div></div></div>
  <p class="hint">${q?`${esc(c.act)}${c.act?' · ':''}${c.g.slice(0,3).map(fr).join(', ')}`:`Tu ne l'as pas encore · environ 1 chance sur ${od.toLocaleString('fr')} par booster Mix`}<br>Bouge le doigt pour l'incliner · touche la carte pour la retourner</p>
  <div class="acts">${q>1?`<button class="btn y" id="rc1">Recycler ${q-1} doublon${q>2?'s':''} · +${(q-1)*REC[c.r]} 🍿</button>`:''}<button class="btn g" id="cl2">Fermer</button></div></div>`;
@@ -503,6 +530,27 @@ function detail(n){
  tw.onpointerup=()=>{if(mv<8)flip=flip?0:180;end()};tw.onpointerleave=end;tw.onpointercancel=end;
  rpc('card_owners',{card:n}).then(v=>{const e=$('#own');if(e)e.textContent=v}).catch(()=>{});
  if($('#rc1'))$('#rc1').onclick=async()=>{try{const x=await rpc('recycle',{n_card:n,k:q-1});ST=x.state;d.remove();toast('+'+x.gain+' 🍿');render()}catch(e){toast(e.message)}}}
+/* ---------- missions ---------- */
+async function miss(){
+ $('#v').innerHTML='<div class="center">Chargement des missions…</div>';
+ let Q;try{Q=await rpc('my_quests')}catch(e){$('#v').innerHTML=`<div class="center">${esc(e.message)}</div>`;return}
+ if(view!='miss')return;
+ const by=k=>Q.quests.filter(q=>q.kind==k),s=Q.streak,hm=x=>{x=Math.max(0,x|0);const d=x/86400|0,h=(x%86400)/3600|0,m=(x%3600)/60|0;return (d?d+' j ':'')+h+' h '+String(m).padStart(2,'0')};
+ const row=q=>`<div class="qs ${q.claimed?'done':''}"><div class="qt"><b>${esc(q.label)}</b>${q.desc?`<small>${esc(q.desc)}</small>`:''}<div class="qb"><i style="width:${q.progress/q.target*100}%"></i></div><small class="mono">${q.progress.toLocaleString('fr')} / ${q.target.toLocaleString('fr')}</small></div>
+  ${q.claimed?'<span class="ok mono">✓ Récupéré</span>':q.done?`<button class="btn y" data-cq="${q.id}">+${q.pop} 🍿</button>`:`<span class="mono mut" style="white-space:nowrap">+${q.pop} 🍿</span>`}</div>`;
+ const bon=(k,l)=>{const b=Q.bonus[k],n=Q.bonus_rewards[k];return `<div class="qs bonus ${b.claimed?'done':''}"><div class="qt"><b>${l}</b><small>+${n} booster${n>1?'s':''} gratuit${n>1?'s':''} bonus</small></div>${b.claimed?'<span class="ok mono">✓ Récupéré</span>':b.all?`<button class="btn y" data-cq="bonus_${k}">Récupérer</button>`:'<span class="mono mut">🔒</span>'}</div>`};
+ const gotTo=s.claimed_today?s.day:(s.next||1)-1;
+ const ach=by('ach').sort((a,b)=>(b.done&&!b.claimed)-(a.done&&!a.claimed)||a.claimed-b.claimed);
+ $('#v').innerHTML=`<div class="sec"><div class="eyebrow">Chaque jour</div><h2>Série de connexion</h2></div>
+ <div class="strk">${s.rewards.map((r,i)=>{const d=i+1;return `<div class="${d<=gotTo?'got':''} ${!s.claimed_today&&d==s.next?'cur':''} ${d==7?'d7':''}">J${d}<b>${r}</b>🍿${d==7?'<br>+ doré':''}</div>`}).join('')}</div>
+ <button class="btn ${s.claimed_today?'g':'y'}" data-cq="streak" ${s.claimed_today?'disabled':''}>${s.claimed_today?'Reviens demain pour le jour '+(s.day>=7?1:s.day+1):'Récupérer le jour '+s.next+' · +'+s.rewards[s.next-1]+' 🍿'}</button>
+ <p class="mut" style="font-size:12px;margin:6px 0 0">Un jour de grâce : si tu rates un jour, la série tient encore.</p>
+ ${!Q.bonus.welcome.claimed?`<div class="sec"><div class="eyebrow">Pour bien commencer</div><h2>Bienvenue</h2></div>${by('welcome').map(row).join('')}${bon('welcome','Toutes les missions de bienvenue')}`:''}
+ <div class="sec"><div class="eyebrow">Nouvelles dans ${hm(Q.next_daily)}</div><h2>Du jour</h2></div>${by('daily').map(row).join('')}${bon('daily','Les 3 missions du jour')}
+ <div class="sec"><div class="eyebrow">Nouvelles dans ${hm(Q.next_weekly)}</div><h2>De la semaine</h2></div>${by('weekly').map(row).join('')}${bon('weekly','Les 3 missions de la semaine')}
+ <div class="sec"><div class="eyebrow">${ach.filter(a=>a.claimed).length} / ${ach.length} débloqués</div><h2>Succès</h2></div>${ach.map(row).join('')}`;
+ $$('[data-cq]').forEach(b=>b.onclick=async()=>{b.disabled=true;try{const x=await rpc('claim_quest',{qid:b.dataset.cq});ST=x.state;
+  toast(x.boosters?`+${x.boosters} booster${x.boosters>1?'s':''} bonus`:`+${x.popcorns} 🍿${x.golden?' · prochain booster doré !':''}`);const y=scrollY;render();scrollTo(0,y)}catch(e){toast(e.message);b.disabled=false}})}
 /* ---------- autres onglets ---------- */
 function mkt(){$('#v').innerHTML=`<div class="center"><div style="font-size:54px">🏷️</div><h2>Marché</h2><p>Vente et échange de cartes entre joueurs : bientôt.</p></div>`}
 function more(){
@@ -510,7 +558,7 @@ function more(){
  <div class="tiles"><div class="tile"><b>${ST.boosters}</b><small>boosters ouverts</small></div><div class="tile"><b>${Math.max(0,ST.pity_max-ST.pity)}</b><small>avant Mythique sûre</small></div><div class="tile"><b>${ST.popcorns}</b><small>Popcorns</small></div></div>
  <div class="sec"><div class="eyebrow">Réglages</div></div><button class="btn g" id="mo">Animations : ${MO()?'désactivées':'activées'}</button>
  <div class="sec"><div class="eyebrow">Règles</div><h2>Comment ça marche</h2></div>
- <p class="mut">Un booster gratuit se recharge toutes les ${CFG.free_minutes} minutes (jusqu'à ${ST.free_max} en stock). Le pack du jour est offert chaque jour avec une Épique garantie. Chaque booster contient 5 cartes dont au moins une Rare ou mieux. Une Mythique est garantie après ${ST.pity_max} boosters sans Mythique. À chaque Légendaire ou Mythique obtenue, même en double, tu gagnes ${BON.L} ou ${BON.M} 🍿. Les doublons se recyclent en Popcorns : ${Object.entries(REC).map(([r,v])=>RN[r]+' '+v).join(', ')}.</p><br>
+ <p class="mut">Un booster gratuit se recharge toutes les ${CFG.free_minutes} minutes (jusqu'à ${ST.free_max} en stock). Le pack du jour est offert chaque jour avec une Épique garantie. Chaque booster contient 5 cartes : 3 Communes ou mieux, 1 Peu commune ou mieux et 1 Rare ou mieux (C C C U R). Après ${ST.golden_every||10} boosters, le suivant est doré (C C U R E). Très rarement, un god pack donne 4 Épiques et 1 Mythique. Une Mythique est garantie après ${ST.pity_max} boosters sans Mythique. À chaque Légendaire ou Mythique obtenue, même en double, tu gagnes ${BON.L} ou ${BON.M} 🍿. Les doublons se recyclent en Popcorns : ${Object.entries(REC).map(([r,v])=>RN[r]+' '+v).join(', ')}.</p><br>
  <button class="btn g" id="lo">Se déconnecter</button><footer>Projet fan non officiel. This product uses the TMDB API but is not endorsed or certified by TMDB.</footer>`;
  $('#mo').onclick=()=>{lsset('mo',MO()?'0':'1');document.documentElement.classList.toggle('mo',MO());more()};
  $('#lo').onclick=async()=>{await sb.auth.signOut();ST=null;render()}}
