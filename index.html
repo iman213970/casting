@@ -163,11 +163,25 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 @keyframes pulse{50%{opacity:.3;transform:scale(1.06)}}
 .deck.rbw::before{background:conic-gradient(from var(--spin),#ff3d81,#ffb13d,#3dff9a,#3dc5ff,#a43dff,#ff3d81);filter:blur(22px);animation:mspin 3s linear infinite,pulse 1.8s ease-in-out infinite;border-radius:50%}
 .dk{position:absolute;inset:0;transition:transform .45s cubic-bezier(.2,.9,.3,1),opacity .35s;transform:translateY(calc(var(--o)*-9px)) scale(calc(1 - var(--o)*.035));z-index:calc(20 - var(--o));perspective:900px}
-.dk .f3{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.3,1.1,.4,1)}
-.dk.fl .f3{transform:rotateY(180deg)}
+.dk .f3{position:absolute;inset:0;transform-style:preserve-3d}
+.dk.fl .f3{transform:rotateY(180deg);animation:flipPop .62s cubic-bezier(.25,1.3,.4,1)}
+@keyframes flipPop{0%{transform:rotateY(0) scale(1)}45%{transform:rotateY(100deg) scale(1.14) translateY(-12px)}100%{transform:rotateY(180deg) scale(1)}}
+.deck.emerge{animation:emerge .6s cubic-bezier(.2,1.2,.4,1) both}
+@keyframes emerge{from{transform:translateY(80px) scale(.8);opacity:0}}
+.dk.charge .f3{animation:trem .09s linear infinite}
+@keyframes trem{0%{transform:translate(0,0) rotate(0)}25%{transform:translate(-2px,1px) rotate(-.7deg)}50%{transform:translate(2px,-1px) rotate(.7deg)}75%{transform:translate(-1px,-2px) rotate(-.3deg)}}
+.dk.charge::after{content:"";position:absolute;inset:-8%;border-radius:12%;background:radial-gradient(circle,var(--cg) 0,transparent 70%);animation:chg var(--cd,.7s) ease-in forwards;z-index:-1;pointer-events:none}
+@keyframes chg{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1.2)}}
+.rays{position:absolute;left:50%;top:50%;width:270%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:repeating-conic-gradient(var(--c,#fff) 0 5deg,transparent 5deg 16deg);-webkit-mask:radial-gradient(circle,#000 8%,transparent 64%);mask:radial-gradient(circle,#000 8%,transparent 64%);opacity:0;pointer-events:none;z-index:0}
+.rays.rbw{background:repeating-conic-gradient(#ff3d81 0 5deg,transparent 5deg 12deg,#ffb13d 12deg 17deg,transparent 17deg 24deg,#3dc5ff 24deg 29deg,transparent 29deg 36deg)}
+.rays.on{animation:rays 2.8s ease-out forwards}
+@keyframes rays{0%{opacity:0;transform:translate(-50%,-50%) rotate(0) scale(.5)}15%{opacity:.8}100%{opacity:0;transform:translate(-50%,-50%) rotate(80deg) scale(1.1)}}
+.burst{position:absolute;inset:0;pointer-events:none;z-index:40}
+.burst i{position:absolute;left:50%;top:50%;width:9px;height:9px;margin:-4px;border-radius:50%;background:var(--c);box-shadow:0 0 12px 2px var(--c);animation:burst .9s cubic-bezier(.1,.7,.3,1) forwards}
+@keyframes burst{0%{transform:translate(0,0) scale(1.3);opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}}
 .dk .fa,.dk .fb{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .dk .fb{transform:rotateY(180deg)}
-.dk.out{transform:translateX(130%) rotate(16deg);opacity:0;z-index:30}
+.dk.out{transform:translateX(-140%) translateY(-20px) rotate(-14deg);opacity:0;z-index:30;transition:transform .42s cubic-bezier(.5,0,.8,.4),opacity .42s}
 .deck.shake{animation:shk .5s}@keyframes shk{20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
 .flash{position:fixed;inset:0;pointer-events:none;z-index:41;background:radial-gradient(circle,var(--fc) 0,transparent 65%);animation:fo .8s forwards}@keyframes fo{from{opacity:.9}to{opacity:0}}
 .rise{animation:rise .5s cubic-bezier(.2,1.2,.4,1) both}@keyframes rise{from{transform:translateY(18px) scale(.7);opacity:0}}
@@ -265,6 +279,28 @@ const QS=()=>ST.quests||{};
 /* ---------- animations : réglage + pause quand l'onglet est caché ---------- */
 const lsget=k=>{try{return localStorage.getItem(k)}catch(e){return null}},lsset=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
 const MO=()=>lsget('mo')=='1';
+/* ---------- sons (synthétisés, aucun fichier) ---------- */
+const SND=()=>lsget('snd')!='0';let AC=null,LDR=0;
+function ac(){if(!SND())return null;if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){return null}}if(AC.state=='suspended')AC.resume();return AC}
+function noise(d,f0,f1,vol,t){const a=ac();if(!a)return;const t0=a.currentTime+(t||0),n=Math.max(1,a.sampleRate*d|0),b=a.createBuffer(1,n,a.sampleRate),x=b.getChannelData(0);for(let i=0;i<n;i++)x[i]=(Math.random()*2-1)*Math.pow(1-i/n,1.5);
+ const s=a.createBufferSource();s.buffer=b;const f=a.createBiquadFilter();f.type='bandpass';f.Q.value=.9;f.frequency.setValueAtTime(f0,t0);f.frequency.exponentialRampToValueAtTime(f1,t0+d);const g=a.createGain();g.gain.value=vol;s.connect(f).connect(g).connect(a.destination);s.start(t0)}
+function tone(fr,t,d,vol,type,fr2){const a=ac();if(!a)return;const o=a.createOscillator(),g=a.createGain(),t0=a.currentTime+t;o.type=type||'sine';o.frequency.setValueAtTime(fr,t0);if(fr2)o.frequency.exponentialRampToValueAtTime(fr2,t0+d);
+ g.gain.setValueAtTime(0,t0);g.gain.linearRampToValueAtTime(vol,t0+.012);g.gain.exponentialRampToValueAtTime(.0001,t0+d);o.connect(g).connect(a.destination);o.start(t0);o.stop(t0+d+.05)}
+const NOTES=[523.3,659.3,784,1046.5,1318.5,1568];
+const SFX={
+ drag:()=>{const t=Date.now();if(t-LDR<70)return;LDR=t;noise(.06,2600,1800,.07)},
+ tear:()=>{noise(.32,3500,500,.55);noise(.18,1200,300,.3,.05)},
+ whoosh:()=>noise(.4,300,2600,.22),
+ flip:()=>noise(.09,5200,1400,.28),
+ slide:()=>noise(.2,1800,400,.14),
+ charge:(k,d)=>{tone(160,0,d,.12,'sawtooth',k>=5?900:600);tone(240,0,d,.06,'triangle',k>=5?1400:900)},
+ rar:r=>{const k=ORD.indexOf(r);
+  if(k==0){tone(660,0,.12,.07,'triangle');return}
+  for(let j=0;j<=Math.min(k,5);j++)tone(NOTES[j],j*.07,.35+k*.05,.09+k*.012,k>=4?'triangle':'sine');
+  if(k>=3)for(let j=0;j<6+k*2;j++)tone(2000+Math.random()*2500,.25+j*.045,.18,.025,'sine');
+  if(k>=4){tone(110,0,.9,.22,'sine',55);noise(.6,800,120,.2)}
+  if(k==5){[0,4,7,12].forEach((st,j)=>tone(523.3*Math.pow(2,st/12),.55+j*.09,.9,.08,'triangle'))}},
+ tick:r=>tone(NOTES[Math.min(5,ORD.indexOf(r))],0,.12,.06,'triangle')};
 document.documentElement.classList.toggle('mo',MO());
 document.addEventListener('visibilitychange',()=>document.documentElement.classList.toggle('hid',document.hidden));
 /* ---------- photos auto-hébergées (img/N.webp), repli sur l'ancienne source ---------- */
@@ -442,19 +478,19 @@ function packScreen(kind,genre){
   $$('#qr button').forEach(b=>b.onclick=()=>{qty=+b.dataset.q;drawQ()})};
  drawQ();
  const pw=$('#pw'),stp=$('#stp'),tr=$('#tr'),flash=col=>{const f=document.createElement('div');f.className='flash';f.style.setProperty('--fc',col);document.body.append(f);setTimeout(()=>f.remove(),900)};
- const go=()=>{if(done)return;done=true;if(tr){tr.style.width='100%';tr.style.opacity=1}pw.classList.add('go');navigator.vibrate&&navigator.vibrate(30);flash('#ffffff');
+ const go=()=>{if(done)return;done=true;SFX.tear();setTimeout(SFX.whoosh,220);if(tr){tr.style.width='100%';tr.style.opacity=1}pw.classList.add('go');navigator.vibrate&&navigator.vibrate(30);flash('#ffffff');
   $('#qr').style.visibility=$('#cost').style.visibility=$('#chg').style.visibility='hidden';
   const t0=Date.now(),req=rpc('open_boosters',{kind,genre:kind=='daily'?null:genre,qty:kind=='daily'?1:qty}).then(async r=>{ST=r.state;const cs=r.boosters.flatMap(b=>b.cards.map(x=>CARDS[x.n-1]));await preload(cs);return r});
   req.then(r=>setTimeout(()=>{pw.style.visibility='hidden';document.removeEventListener('keydown',kh);reveal(d,r,kind,g,kind=='daily'?1:qty)},Math.max(0,900-(Date.now()-t0))),
    e=>{toast(e.message);close()})};
  const setP=v=>{p=Math.max(0,Math.min(1,v));if(!stp)return;stp.style.transform=`translate(${p*5}px,${-p*9}px) rotate(${-p*7}deg)`;tr.style.width=(p*100)+'%';tr.style.opacity=p>0?1:0};
  pw.onpointerdown=e=>{sx=e.clientX;sy=e.clientY;moved=0;pw.setPointerCapture(e.pointerId);if(stp)stp.style.transition='none'};
- pw.onpointermove=e=>{if(sx==null||done)return;moved=Math.max(moved,Math.abs(e.clientX-sx)+Math.abs(e.clientY-sy));if(!env){setP((e.clientX-sx)/(W*.78));if(p>=.92)go()}else if(sy-e.clientY>40)go()};
+ pw.onpointermove=e=>{if(sx==null||done)return;moved=Math.max(moved,Math.abs(e.clientX-sx)+Math.abs(e.clientY-sy));if(!env){if(e.clientX-sx>4)SFX.drag();setP((e.clientX-sx)/(W*.78));if(p>=.92)go()}else if(sy-e.clientY>40)go()};
  pw.onpointerup=()=>{if(done)return;if(stp)stp.style.transition='';if(moved<10)go();else if(!env)setP(0);sx=null};
  let sy=0}
 /* ---------- révélation : pile face cachée, on touche pour retourner ---------- */
 function reveal(d,r,kind,g,qty){
- const c1=gcol(g),bs=r.boosters.map(b=>({pity:b.pity_hit,golden:b.golden,god:b.god,cards:b.cards.map(x=>({...CARDS[x.n-1],new:x.new,bonus:x.bonus}))})),all=bs.flatMap(b=>b.cards);let bi=-1;
+ const c1=gcol(g),bs=r.boosters.map(b=>({pity:b.pity_hit,golden:b.golden,god:b.god,cards:b.cards.map(x=>({...CARDS[x.n-1],new:x.new,bonus:x.bonus})).sort((p,q)=>rankOf(p)-rankOf(q))})),all=bs.flatMap(b=>b.cards);let bi=-1;
  const flash=col=>{const f=document.createElement('div');f.className='flash';f.style.setProperty('--fc',col);document.body.append(f);setTimeout(()=>f.remove(),900)};
  const note=c=>`${c.new?'<span class="new">NOUVEAU</span>':`<span class="dup">Doublon · +${REC[c.r]} 🍿 si recyclé</span>`}${c.bonus?` <span class="new" style="background:var(--yel);color:#1a1300">+${c.bonus} 🍿 bonus</span>`:''}`;
  const kh=e=>{if(e.code=='Space'||e.key==' '){e.preventDefault();d._tap&&d._tap()}};
@@ -463,25 +499,33 @@ function reveal(d,r,kind,g,qty){
  const nextB=()=>{bi++;if(bi>=bs.length)return recap();stack(bs[bi])};
  const stack=b=>{const cs=b.cards,top=cs.reduce((a,c)=>rankOf(c)>rankOf(a)?c:a),n=cs.length;let i=0,lock=false;
   d.innerHTML=`<button class="skip" id="sk">${bs.length>1?'Passer au récap':'Passer'}</button><div class="mut mono ct" id="ct"></div>
-   <div class="deck ${rankOf(top)>=2?'glow':''} ${top.r=='M'?'rbw':''}" id="dk" style="--glow:${RC[top.r]}">${cs.map((c,k)=>`<div class="dk" style="--o:${k}"><div class="f3"><div class="fa">${cardBack(b.golden||b.god?'#f7c61b':c1)}</div><div class="fb">${card(c)}</div></div></div>`).join('')}</div>
-   <div class="info" id="in"></div><p class="mut" id="hn" style="margin:0">Touche la pile pour retourner la première carte</p><button class="btn g sm" id="ra">Tout révéler</button>`;
+   <div class="deck emerge" id="dk"><div class="rays" id="ry"></div><div class="burst" id="bu"></div>${cs.map((c,k)=>`<div class="dk" style="--o:${k}"><div class="f3"><div class="fa">${cardBack(b.golden||b.god?'#f7c61b':c1)}</div><div class="fb">${card(c)}</div></div></div>`).join('')}</div>
+   <div class="info" id="in"></div><p class="mut" id="hn" style="margin:0">Touche la pile pour retourner la première carte · de la plus commune à la plus rare</p><button class="btn g sm" id="ra">Tout révéler</button>`;
   const dks=$$('.dk'),bl=b.god?'GOD PACK · ':b.golden?'✦ Booster doré · ':'',ct=()=>{$('#ct').textContent=bl+(bs.length>1?`Booster ${bi+1}/${bs.length} · `:'')+`Carte ${Math.min(i+1,n)}/${n}`};ct();
-  const tap=()=>{if(lock||i>=n)return;const e=dks[i],c=cs[i];
-   if(!e.classList.contains('fl')){e.classList.add('fl');lock=true;setTimeout(()=>lock=false,350);if(rankOf(c)>=3)flash(c.r=='M'?'#ff5c8a':RC[c.r]);if(c.r=='M'||c.r=='L'){$('#dk').classList.remove('shake');void $('#dk').offsetWidth;$('#dk').classList.add('shake')}navigator.vibrate&&rankOf(c)>=2&&navigator.vibrate(20);
-    $('#in').innerHTML=`${note(c)} <b style="color:${RC[c.r]}">${RN[c.r]}</b>`;$('#hn').textContent=i<n-1?'Touche pour la suivante':'Touche pour continuer'}
-   else{e.classList.add('out');i++;lock=true;setTimeout(()=>lock=false,250);$('#in').innerHTML='';
-    if(i>=n){$('#dk').classList.remove('glow','rbw');setTimeout(nextB,380);return}
-    dks.forEach((x,k)=>x.style.setProperty('--o',Math.max(0,k-i)));ct();$('#hn').textContent='Touche la pile pour retourner la carte'}};
+  const burst=c=>{const b=$('#bu');if(!b)return;const k=rankOf(c),N=6+k*6;b.innerHTML=Array.from({length:N},(_,j)=>{const a=j/N*6.283+Math.random()*.5,rr=80+Math.random()*90+k*22;return `<i style="--c:${c.r=='M'?['#ff3d81','#ffb13d','#3dff9a','#3dc5ff','#a43dff'][j%5]:RC[c.r]};--dx:${Math.cos(a)*rr|0}px;--dy:${Math.sin(a)*rr|0}px;animation-delay:${Math.random()*90|0}ms"></i>`}).join('')};
+  const rays=c=>{const y=$('#ry');if(!y)return;y.style.setProperty('--c',RC[c.r]);y.classList.toggle('rbw',c.r=='M');y.classList.remove('on');void y.offsetWidth;y.classList.add('on')};
+  if(navigator.vibrate)navigator.vibrate(10);
+  const tap=()=>{if(lock||i>=n)return;const e=dks[i],c=cs[i],k=rankOf(c);
+   if(!e.classList.contains('fl')){lock=true;
+    const flipNow=()=>{e.classList.remove('charge');e.classList.add('fl');SFX.flip();
+     setTimeout(()=>{SFX.rar(c.r);if(k>=2)burst(c);if(k>=4)rays(c);if(k>=3)flash(c.r=='M'?'#ff5c8a':RC[c.r]);
+      if(k>=4){$('#dk').classList.remove('shake');void $('#dk').offsetWidth;$('#dk').classList.add('shake')}navigator.vibrate&&k>=2&&navigator.vibrate(k>=4?[30,40,60]:20);
+      $('#in').innerHTML=`${note(c)} <b style="color:${RC[c.r]}">${RN[c.r]}</b>`;$('#hn').textContent=i<n-1?'Touche pour la suivante':'Touche pour continuer';lock=false},280)};
+    if(k>=3&&!MO()){const dur=k>=5?1300:k>=4?1000:650;e.style.setProperty('--cg',c.r=='M'?'#ff5c8a':RC[c.r]);e.style.setProperty('--cd',dur+'ms');e.classList.add('charge');SFX.charge(k,dur/1000);$('#hn').textContent='…';setTimeout(flipNow,dur)}else flipNow()}
+   else{e.classList.add('out');SFX.slide();i++;lock=true;setTimeout(()=>lock=false,260);$('#in').innerHTML='';
+    if(i>=n){setTimeout(nextB,420);return}
+    dks.forEach((x,kk)=>x.style.setProperty('--o',Math.max(0,kk-i)));ct();$('#hn').textContent='Touche la pile pour retourner la carte'}};
   d._tap=tap;$('#dk').onclick=tap;
   $('#ra').onclick=()=>{d._tap=null;const nw=cs.filter(c=>c.new).length;if(rankOf(top)>=3)flash(top.r=='M'?'#ff5c8a':RC[top.r]);
    d.innerHTML=`<button class="skip" id="sk">${bs.length>1?'Passer au récap':'Passer'}</button><div class="mut mono ct">${bs.length>1?`Booster ${bi+1}/${bs.length}`:'Ton tirage'}</div><div class="mini five">${cs.map((c,k)=>`<div class="rise" style="animation-delay:${k*90}ms">${card(c)}</div>`).join('')}</div>
     <div class="sum">${nw?`<span class="new">${nw} nouvelle${nw>1?'s':''}</span>`:''}${b.pity?'<span class="new" style="background:var(--acc);color:#fff">Mythique sûre !</span>':''}${b.god?'<span class="tagg">GOD PACK</span>':b.golden?'<span class="tagg">✦ Booster doré</span>':''}${cs.reduce((a,c)=>a+(c.bonus||0),0)?`<span class="new" style="background:var(--yel);color:#1a1300">+${cs.reduce((a,c)=>a+(c.bonus||0),0)} 🍿 bonus</span>`:''}</div>
     <button class="btn y sm" id="nx3">${bi<bs.length-1?'Booster suivant':'Voir le récap'}</button>`;
+   cs.forEach((c,k)=>setTimeout(()=>SFX.tick(c.r),k*90));setTimeout(()=>SFX.rar(top.r),cs.length*90+120);
    $('#nx3').onclick=nextB;d._tap=nextB;$('#sk').onclick=recap};
   $('#sk').onclick=recap};
  const recap=()=>{end();
   const best=all.reduce((a,c)=>rankOf(c)>rankOf(a)||(rankOf(c)==rankOf(a)&&c.new&&!a.new)?c:a),cnt={};all.forEach(c=>cnt[c.n]=(cnt[c.n]||0)+1);
-  const uniq=Object.keys(cnt).map(n=>CARDS[n-1]).sort((a,b)=>rankOf(b)-rankOf(a)||a.n-b.n),nw=all.filter(c=>c.new).length;
+  const uniq=Object.keys(cnt).map(n=>CARDS[n-1]).sort((a,b)=>rankOf(a)-rankOf(b)||a.n-b.n),nw=all.filter(c=>c.new).length;
   d.innerHTML=`<div class="recap"><div class="eyebrow">${bs.some(b=>b.god)?'God pack !':bs.some(b=>b.pity)?'Mythique garantie !':bs.some(b=>b.golden)?'✦ Booster doré':'Ton tirage'}</div><div class="best"><div class="mut mono" style="font-size:11px;letter-spacing:.1em">MEILLEURE CARTE</div>${card(best)}</div>
   <div class="sum">${nw?`<span class="new">${nw} nouvelle${nw>1?'s':''}</span>`:''}${r.gain?`<span class="new" style="background:var(--yel);color:#1a1300">+${r.gain} 🍿 de bonus</span>`:''}<span class="dup">${all.length} cartes</span>${all.length-nw?`<span class="dup">${all.length-nw} doublon${all.length-nw>1?'s':''} · +${all.filter(c=>!c.new).reduce((a,c)=>a+REC[c.r],0)} 🍿 si recyclés</span>`:''}</div>
   ${all.length>1?`<div class="mini">${uniq.map(c=>card(c,{q:cnt[c.n]})).join('')}</div>`:''}
@@ -556,11 +600,11 @@ function mkt(){$('#v').innerHTML=`<div class="center"><div style="font-size:54px
 function more(){
  $('#v').innerHTML=`<div class="sec"><div class="eyebrow">Compte</div><h2>${esc(ST.name)}</h2></div>
  <div class="tiles"><div class="tile"><b>${ST.boosters}</b><small>boosters ouverts</small></div><div class="tile"><b>${Math.max(0,ST.pity_max-ST.pity)}</b><small>avant Mythique sûre</small></div><div class="tile"><b>${ST.popcorns}</b><small>Popcorns</small></div></div>
- <div class="sec"><div class="eyebrow">Réglages</div></div><button class="btn g" id="mo">Animations : ${MO()?'désactivées':'activées'}</button>
+ <div class="sec"><div class="eyebrow">Réglages</div></div><button class="btn g" id="mo">Animations : ${MO()?'désactivées':'activées'}</button><br><button class="btn g" id="snd">Son : ${SND()?'activé':'coupé'}</button>
  <div class="sec"><div class="eyebrow">Règles</div><h2>Comment ça marche</h2></div>
  <p class="mut">Un booster gratuit se recharge toutes les ${CFG.free_minutes} minutes (jusqu'à ${ST.free_max} en stock). Le pack du jour est offert chaque jour avec une Épique garantie. Chaque booster contient 5 cartes : 3 Communes ou mieux, 1 Peu commune ou mieux et 1 Rare ou mieux (C C C U R). Après ${ST.golden_every||10} boosters, le suivant est doré (C C U R E). Très rarement, un god pack donne 4 Épiques et 1 Mythique. Une Mythique est garantie après ${ST.pity_max} boosters sans Mythique. À chaque Légendaire ou Mythique obtenue, même en double, tu gagnes ${BON.L} ou ${BON.M} 🍿. Les doublons se recyclent en Popcorns : ${Object.entries(REC).map(([r,v])=>RN[r]+' '+v).join(', ')}.</p><br>
  <button class="btn g" id="lo">Se déconnecter</button><footer>Projet fan non officiel. This product uses the TMDB API but is not endorsed or certified by TMDB.</footer>`;
- $('#mo').onclick=()=>{lsset('mo',MO()?'0':'1');document.documentElement.classList.toggle('mo',MO());more()};
+ $('#snd').onclick=()=>{lsset('snd',SND()?'0':'1');if(SND())SFX.rar('E');more()};$('#mo').onclick=()=>{lsset('mo',MO()?'0':'1');document.documentElement.classList.toggle('mo',MO());more()};
  $('#lo').onclick=async()=>{await sb.auth.signOut();ST=null;render()}}
 init();
 </script></body></html>
