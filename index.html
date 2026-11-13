@@ -163,11 +163,25 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 @keyframes pulse{50%{opacity:.3;transform:scale(1.06)}}
 .deck.rbw::before{background:conic-gradient(from var(--spin),#ff3d81,#ffb13d,#3dff9a,#3dc5ff,#a43dff,#ff3d81);filter:blur(22px);animation:mspin 3s linear infinite,pulse 1.8s ease-in-out infinite;border-radius:50%}
 .dk{position:absolute;inset:0;transition:transform .45s cubic-bezier(.2,.9,.3,1),opacity .35s;transform:translateY(calc(var(--o)*-9px)) scale(calc(1 - var(--o)*.035));z-index:calc(20 - var(--o));perspective:900px}
-.dk .f3{position:absolute;inset:0;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.3,1.1,.4,1)}
-.dk.fl .f3{transform:rotateY(180deg)}
+.dk .f3{position:absolute;inset:0;transform-style:preserve-3d}
+.dk.fl .f3{transform:rotateY(180deg);animation:flipPop .62s cubic-bezier(.25,1.3,.4,1)}
+@keyframes flipPop{0%{transform:rotateY(0) scale(1)}45%{transform:rotateY(100deg) scale(1.14) translateY(-12px)}100%{transform:rotateY(180deg) scale(1)}}
+.deck.emerge{animation:emerge .6s cubic-bezier(.2,1.2,.4,1) both}
+@keyframes emerge{from{transform:translateY(80px) scale(.8);opacity:0}}
+.dk.charge .f3{animation:trem .09s linear infinite}
+@keyframes trem{0%{transform:translate(0,0) rotate(0)}25%{transform:translate(-2px,1px) rotate(-.7deg)}50%{transform:translate(2px,-1px) rotate(.7deg)}75%{transform:translate(-1px,-2px) rotate(-.3deg)}}
+.dk.charge::after{content:"";position:absolute;inset:-8%;border-radius:12%;background:radial-gradient(circle,var(--cg) 0,transparent 70%);animation:chg var(--cd,.7s) ease-in forwards;z-index:-1;pointer-events:none}
+@keyframes chg{from{opacity:0;transform:scale(.8)}to{opacity:1;transform:scale(1.2)}}
+.rays{position:absolute;left:50%;top:50%;width:270%;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;background:repeating-conic-gradient(var(--c,#fff) 0 5deg,transparent 5deg 16deg);-webkit-mask:radial-gradient(circle,#000 8%,transparent 64%);mask:radial-gradient(circle,#000 8%,transparent 64%);opacity:0;pointer-events:none;z-index:0}
+.rays.rbw{background:repeating-conic-gradient(#ff3d81 0 5deg,transparent 5deg 12deg,#ffb13d 12deg 17deg,transparent 17deg 24deg,#3dc5ff 24deg 29deg,transparent 29deg 36deg)}
+.rays.on{animation:rays 2.8s ease-out forwards}
+@keyframes rays{0%{opacity:0;transform:translate(-50%,-50%) rotate(0) scale(.5)}15%{opacity:.8}100%{opacity:0;transform:translate(-50%,-50%) rotate(80deg) scale(1.1)}}
+.burst{position:absolute;inset:0;pointer-events:none;z-index:40}
+.burst i{position:absolute;left:50%;top:50%;width:9px;height:9px;margin:-4px;border-radius:50%;background:var(--c);box-shadow:0 0 12px 2px var(--c);animation:burst .9s cubic-bezier(.1,.7,.3,1) forwards}
+@keyframes burst{0%{transform:translate(0,0) scale(1.3);opacity:1}100%{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}}
 .dk .fa,.dk .fb{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden}
 .dk .fb{transform:rotateY(180deg)}
-.dk.out{transform:translateX(130%) rotate(16deg);opacity:0;z-index:30}
+.dk.out{transform:translateX(-140%) translateY(-20px) rotate(-14deg);opacity:0;z-index:30;transition:transform .42s cubic-bezier(.5,0,.8,.4),opacity .42s}
 .deck.shake{animation:shk .5s}@keyframes shk{20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
 .flash{position:fixed;inset:0;pointer-events:none;z-index:41;background:radial-gradient(circle,var(--fc) 0,transparent 65%);animation:fo .8s forwards}@keyframes fo{from{opacity:.9}to{opacity:0}}
 .rise{animation:rise .5s cubic-bezier(.2,1.2,.4,1) both}@keyframes rise{from{transform:translateY(18px) scale(.7);opacity:0}}
@@ -233,6 +247,86 @@ footer{text-align:center;color:var(--mut);font-size:11px;margin:30px 0}
 .strk .cur{border-color:var(--yel);box-shadow:0 0 12px #f7c61b55}.strk .d7{background:#1a1608}
 .packwrap.gold{filter:drop-shadow(0 0 22px #f7c61b)}
 .tagg{display:inline-block;background:var(--yel);color:#1a1300;font:800 12px 'JetBrains Mono',monospace;border-radius:99px;padding:3px 10px}
+/* ===== lot 1b : mise en page ordi + téléphone, page Boosters, inclinaison, pile, éventail ===== */
+.dnav{display:none}
+.fan{height:250px}.fan .cw{width:132px}
+.scroll .cw{flex:0 0 132px}
+.bhead{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px;margin:18px 0 16px}
+.bhead h1{font-size:30px}
+.bhead .tabs{margin:0;flex:0 1 420px}
+.bgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:18px 14px;margin-bottom:24px}
+.bcell{display:flex;flex-direction:column;align-items:center;gap:8px;padding:0;animation:bfl 4.5s ease-in-out infinite;animation-delay:var(--dl,0s)}
+@keyframes bfl{50%{transform:translateY(-5px)}}
+.bcell .tilt{width:100%}
+.bpr{font:700 13px 'JetBrains Mono',ui-monospace,monospace;color:var(--acc)}.bpr.ok{color:var(--fg)}.bpr.y{color:var(--yel)}
+.tilt{position:relative;transform:perspective(700px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) scale(var(--ts,1));transition:transform .55s cubic-bezier(.2,.8,.2,1);will-change:transform}
+.tilt.live{transition:transform .08s linear;--ts:1.04}
+.glare{position:absolute;inset:0;border-radius:4cqi;pointer-events:none;z-index:6;background:radial-gradient(circle at var(--gx,50%) var(--gy,25%),#ffffffa0,#ffffff20 25%,transparent 50%);mix-blend-mode:overlay;opacity:0;transition:opacity .35s}
+.tilt.live .glare,.packwrap.live .glare{opacity:1}
+.pochette .tx{inset:0;border-radius:4cqi;pointer-events:none;mix-blend-mode:overlay;opacity:.9}
+.tx0{background:repeating-conic-gradient(from 0deg at 50% 46%,#ffffff2e 0 3deg,transparent 3deg 11deg)}
+.tx1{background:radial-gradient(#ffffff40 1cqi,transparent 1.3cqi) 0 0/7cqi 7cqi}
+.tx2{background:linear-gradient(#ffffff2a .4cqi,transparent .4cqi) 0 0/8cqi 8cqi,linear-gradient(90deg,#ffffff2a .4cqi,transparent .4cqi) 0 0/8cqi 8cqi}
+.tx3{background:repeating-radial-gradient(circle at 50% 46%,#ffffff2e 0 .7cqi,transparent .7cqi 5.5cqi)}
+.tx4{background:repeating-linear-gradient(45deg,#ffffff24 0 .9cqi,transparent .9cqi 5cqi),repeating-linear-gradient(-45deg,#00000026 0 .9cqi,transparent .9cqi 5cqi)}
+.tx5{background:repeating-linear-gradient(0deg,#00000030 0 2.2cqi,transparent 2.2cqi 9cqi),linear-gradient(90deg,#ffffff18,transparent 30%,transparent 70%,#ffffff18)}
+.pochette .edge{inset:0;border-radius:4cqi;pointer-events:none;box-shadow:inset 0 0 0 .6cqi #ffffff55,inset 1.6cqi 0 2cqi -1cqi #ffffff30,inset -1.6cqi 0 2cqi -1cqi #00000060}
+.slt{display:inline-flex;gap:4px;vertical-align:middle}.slt i{width:22px;height:22px;border-radius:50%;background:var(--c);color:#14101a;font:800 11px/22px 'JetBrains Mono',monospace;text-align:center;font-style:normal;box-shadow:0 0 8px color-mix(in srgb,var(--c) 60%,transparent)}
+.pkfloat{position:relative;animation:fl 2.4s ease-in-out infinite}
+.pkfloat::before{content:"";position:absolute;inset:-28% -45%;background:radial-gradient(closest-side,color-mix(in srgb,var(--pc1,#f7c61b) 55%,transparent),transparent);filter:blur(12px);z-index:-1;animation:pulse 3.2s ease-in-out infinite;pointer-events:none;transition:opacity .4s}
+.pkfloat.go{animation:none}.pkfloat.go::before{opacity:0}
+.packwrap{animation:none;transform:perspective(800px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .5s cubic-bezier(.2,.8,.2,1)}
+.packwrap.live{transition:transform .08s linear}
+.packwrap .glare{border-radius:6%}
+.motes{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.motes i{position:absolute;bottom:-10px;width:4px;height:4px;border-radius:50%;background:var(--pc1,#f7c61b);box-shadow:0 0 8px var(--pc1,#f7c61b);opacity:0;animation:mote var(--md,9s) linear infinite;animation-delay:var(--dl,0s)}
+@keyframes mote{0%{opacity:0;transform:translateY(0)}10%{opacity:.7}90%{opacity:.5}100%{opacity:0;transform:translateY(-105vh) translateX(var(--mx,20px))}}
+:where(.stage>*:not(.motes):not(.flash):not(.skip):not(.ct):not(.sndb)){position:relative;z-index:1}
+.stage>.skip,.stage>.ct,.stage>.sndb{position:absolute;z-index:5}
+.sndb{left:16px;bottom:calc(16px + env(safe-area-inset-bottom));width:42px;height:42px;border-radius:50%;background:#ffffff14;font-size:18px}
+.gar{font-size:12px;margin:0}
+.deck{width:min(66vw,270px,calc((100vh - 270px)/1.4))}
+.deck .hal{position:absolute;inset:-22%;border-radius:50%;background:radial-gradient(closest-side,color-mix(in srgb,var(--pc1,#f7c61b) 45%,transparent),transparent);filter:blur(10px);z-index:-1;pointer-events:none;animation:pulse 3s ease-in-out infinite}
+.dk.deal{animation:deal .55s cubic-bezier(.2,1.1,.35,1) backwards;animation-delay:var(--dd,0ms)}
+@keyframes deal{from{transform:translate(-60vw,30px) rotate(-25deg);opacity:0}}
+.pslots{display:flex;gap:7px;justify-content:center}
+.pslots i{width:30px;height:40px;border-radius:7px;border:2px solid #ffffff26;background:#ffffff08;transition:all .35s}
+.pslots i.cur{border-color:#ffffff88;box-shadow:0 0 10px #ffffff40}
+.pslots i.on{background:var(--c);border-color:var(--c);box-shadow:0 0 12px color-mix(in srgb,var(--c) 70%,transparent)}
+.kbd{font-size:11px;margin:0;opacity:.7}
+.rfan{position:relative;width:100%;flex:0 0 auto;height:calc(var(--fw)*1.4 + 70px);margin-top:10px}
+.rfan .fc{position:absolute;left:50%;top:34px;width:var(--fw);margin-left:calc(var(--fw)/-2);transform:translateX(calc(var(--k)*var(--fw)*.62)) translateY(calc(var(--a)*16px)) rotate(calc(var(--k)*7deg)) scale(calc(1 - var(--a)*.07));z-index:calc(20 - var(--a));animation:fanin .6s cubic-bezier(.2,1.2,.35,1) backwards;animation-delay:var(--dd,0ms);transition:transform .25s}
+.rfan .fc.top{transform:scale(1.12);z-index:30}
+.rfan .fc:hover{z-index:31}
+@keyframes fanin{from{transform:translateY(60px) scale(.6);opacity:0}}
+.rfan .bl{position:absolute;left:50%;top:-28px;transform:translateX(-50%);white-space:nowrap;background:var(--R);color:#fff;font:800 12px 'Bricolage Grotesque',Inter,sans-serif;border-radius:99px;padding:4px 12px;z-index:5;box-shadow:0 0 14px #3b82f6aa}
+.recap{max-width:min(960px,100%)}
+.recap .acts2{display:grid;gap:8px;width:100%;max-width:420px}
+.recap .all{width:100%}
+.recap .all .mini{max-width:none;grid-template-columns:repeat(auto-fill,minmax(96px,1fr))}
+@media (min-width:600px){.grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}.wrap{max-width:860px}}
+@media (min-width:900px){
+ body{padding-bottom:0}
+ .wrap{max-width:1240px;padding:0 28px}
+ .nav{display:none}
+ .dnav{display:flex;gap:2px;margin-left:14px}
+ .dnav button{position:relative;padding:10px 14px;border-radius:99px;color:var(--mut);font-weight:700;font-size:14px;font-family:'Bricolage Grotesque',Inter,sans-serif}
+ .dnav button:hover{color:var(--fg)}
+ .dnav button.on{color:var(--fg);background:var(--panel2);box-shadow:inset 0 0 0 1px var(--line)}
+ .dnav .bdg{position:absolute;top:0;right:0;background:var(--acc);color:#fff;font:800 10px 'JetBrains Mono',monospace;border-radius:99px;min-width:17px;height:17px;display:grid;place-items:center;padding:0 4px}
+ .homeg{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:22px;align-items:start;margin-top:18px}
+ .homeg .hero{margin:0}
+ .fan{height:300px}.fan .cw{width:165px}
+ .scroll .cw{flex:0 0 175px}
+ .grid{grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:14px}
+ .bgrid{grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:26px 20px}
+ .bhead h1{font-size:40px}
+ .shade{align-items:center}.sheet{border-radius:22px;max-height:88vh}
+ .toast{bottom:40px}
+ .recap .all .mini{grid-template-columns:repeat(auto-fill,minmax(130px,1fr))}
+}
+.bscroll{padding:8px 4px 12px}.bscroll .bcell{flex:0 0 128px}
+@media (min-width:900px){.bscroll .bcell{flex:0 0 168px}}
 .auth{padding-top:70px}.auth input{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:15px;color:var(--fg);font:inherit;margin-bottom:10px}
 </style></head><body>
 <div id="app"></div>
@@ -265,6 +359,28 @@ const QS=()=>ST.quests||{};
 /* ---------- animations : réglage + pause quand l'onglet est caché ---------- */
 const lsget=k=>{try{return localStorage.getItem(k)}catch(e){return null}},lsset=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
 const MO=()=>lsget('mo')=='1';
+/* ---------- sons (synthétisés, aucun fichier) ---------- */
+const SND=()=>lsget('snd')!='0';let AC=null,LDR=0;
+function ac(){if(!SND())return null;if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){return null}}if(AC.state=='suspended')AC.resume();return AC}
+function noise(d,f0,f1,vol,t){const a=ac();if(!a)return;const t0=a.currentTime+(t||0),n=Math.max(1,a.sampleRate*d|0),b=a.createBuffer(1,n,a.sampleRate),x=b.getChannelData(0);for(let i=0;i<n;i++)x[i]=(Math.random()*2-1)*Math.pow(1-i/n,1.5);
+ const s=a.createBufferSource();s.buffer=b;const f=a.createBiquadFilter();f.type='bandpass';f.Q.value=.9;f.frequency.setValueAtTime(f0,t0);f.frequency.exponentialRampToValueAtTime(f1,t0+d);const g=a.createGain();g.gain.value=vol;s.connect(f).connect(g).connect(a.destination);s.start(t0)}
+function tone(fr,t,d,vol,type,fr2){const a=ac();if(!a)return;const o=a.createOscillator(),g=a.createGain(),t0=a.currentTime+t;o.type=type||'sine';o.frequency.setValueAtTime(fr,t0);if(fr2)o.frequency.exponentialRampToValueAtTime(fr2,t0+d);
+ g.gain.setValueAtTime(0,t0);g.gain.linearRampToValueAtTime(vol,t0+.012);g.gain.exponentialRampToValueAtTime(.0001,t0+d);o.connect(g).connect(a.destination);o.start(t0);o.stop(t0+d+.05)}
+const NOTES=[523.3,659.3,784,1046.5,1318.5,1568];
+const SFX={
+ drag:()=>{const t=Date.now();if(t-LDR<70)return;LDR=t;noise(.06,2600,1800,.07)},
+ tear:()=>{noise(.32,3500,500,.55);noise(.18,1200,300,.3,.05)},
+ whoosh:()=>noise(.4,300,2600,.22),
+ flip:()=>noise(.09,5200,1400,.28),
+ slide:()=>noise(.2,1800,400,.14),
+ charge:(k,d)=>{tone(160,0,d,.12,'sawtooth',k>=5?900:600);tone(240,0,d,.06,'triangle',k>=5?1400:900)},
+ rar:r=>{const k=ORD.indexOf(r);
+  if(k==0){tone(660,0,.12,.07,'triangle');return}
+  for(let j=0;j<=Math.min(k,5);j++)tone(NOTES[j],j*.07,.35+k*.05,.09+k*.012,k>=4?'triangle':'sine');
+  if(k>=3)for(let j=0;j<6+k*2;j++)tone(2000+Math.random()*2500,.25+j*.045,.18,.025,'sine');
+  if(k>=4){tone(110,0,.9,.22,'sine',55);noise(.6,800,120,.2)}
+  if(k==5){[0,4,7,12].forEach((st,j)=>tone(523.3*Math.pow(2,st/12),.55+j*.09,.9,.08,'triangle'))}},
+ tick:r=>tone(NOTES[Math.min(5,ORD.indexOf(r))],0,.12,.06,'triangle')};
 document.documentElement.classList.toggle('mo',MO());
 document.addEventListener('visibilitychange',()=>document.documentElement.classList.toggle('hid',document.hidden));
 /* ---------- photos auto-hébergées (img/N.webp), repli sur l'ancienne source ---------- */
@@ -293,7 +409,7 @@ function card(c,o={}){
  const q=o.q||0,unk=o.unk,fx=c.r=='M'||c.r=='L'||c.r=='R'||c.r=='E'||o.foil;
  return `<div class="cw ${o.foil?'foil':''}" data-n="${c.n}" ${o.st||''}><div class="tcg r-${c.r} ${unk?'unk':''}">
  <div class="im">${pic(c)}${unk?'<span class="qm">?</span>':''}</div>
- <div class="nm">${unk?'???':esc(c.name)}</div><span class="rp">${c.r}</span>
+ <div class="nm"${!unk&&c.name.length>13?` style="font-size:${Math.max(4.4,136/c.name.length).toFixed(2)}cqi"`:''}>${unk?'???':esc(c.name)}</div><span class="rp">${c.r}</span>
  ${unk?'':`<div class="sw">${esc(c.show)}</div>`}
  <div class="bt">${unk?`<span class="no">#${pad(c.n)}</span><span>${RN[c.r]}</span>`:`<span>POW ${c.pow}</span><span>AURA ${c.aura}</span>`}</div>
  ${fx?'<i class="fx"></i>':''}</div>${q>1?`<span class="q">×${q}</span>`:''}${o.lock?'<span class="lk">🔒</span>':''}</div>`}
@@ -319,18 +435,19 @@ function render(){
  clearInterval(tickT);
  if(!ST)return authView();
  const nav=(k,i,l)=>`<button class="${view==k?'on':''}" data-v="${k}"><b>${i}</b>${l}</button>`,nb=freeTot()+(ST.daily_ready?1:0);
- $('#app').innerHTML=`<div class="top"><div class="wrap"><div class="logo">🍿</div><div class="sp"></div>
+ const dn=(k,l,b)=>`<button class="${view==k?'on':''}" data-v="${k}">${l}${b?`<span class="bdg">${b}</span>`:''}</button>`;
+ $('#app').innerHTML=`<div class="top"><div class="wrap"><div class="logo">🍿</div><div class="dnav">${dn('home','Accueil')}${dn('boost','Boosters',nb)}${dn('coll','Collection')}${dn('mkt','Marché')}${dn('more','Plus')}</div><div class="sp"></div>
  <div class="pill"><div class="row"><span class="mono" id="fs">${ST.free}/${ST.free_max}${bonusN()?` <span style="color:var(--yel)">+${bonusN()}</span>`:''}</span></div><div class="bar"><i style="width:${ST.free/ST.free_max*100}%"></i></div></div>
  <button class="pop mbtn" id="msb">🎯 Missions${QS().claimable?`<span class="bdg">${QS().claimable}</span>`:''}</button><div class="pop">🍿 ${ST.popcorns}</div><button class="avatar" id="av">${esc(ST.name[0].toUpperCase())}</button></div></div>
  <div class="wrap" id="v"></div>
  <div class="nav"><div class="wrap">${nav('home','🏠','Accueil')}${nav('coll','🗂️','Collection')}
  <div><button class="open-btn" id="ob">🍿${nb>0?`<span class="bd">${nb}</span>`:''}</button><div class="open-lbl">Ouvrir</div></div>
  ${nav('mkt','🏷️','Marché')}${nav('more','⋯','Plus')}</div></div>`;
- $$('.nav button[data-v]').forEach(b=>b.onclick=()=>{view=b.dataset.v;render();scrollTo(0,0)});
- $('#msb').onclick=()=>{view='miss';render();scrollTo(0,0)};$('#ob').onclick=()=>openSheet(freeTot()>0?'free':'paid');$('#av').onclick=()=>{view='more';render()};
- ({home,coll,mkt,more,miss})[view]();
+ $$('.nav button[data-v],.dnav button[data-v]').forEach(b=>b.onclick=()=>{view=b.dataset.v;render();scrollTo(0,0)});
+ $('#msb').onclick=()=>{view='miss';render();scrollTo(0,0)};$('#ob').onclick=()=>openSheet(freeTot()>0?'free':ST.daily_ready?'daily':'paid');$('#av').onclick=()=>{view='more';render()};
+ ({home,coll,mkt,more,miss,boost})[view]();
  tickT=setInterval(tick,1000)}
-function tick(){if(ST&&ST.free_next!=null){ST.free_next--;['#nx','#nx2'].forEach(s=>{const e=$(s);if(e)e.textContent=fmt(ST.free_next)});if(ST.free_next<=0){refresh().then(()=>{if(!$('.stage')){render();if($('#sh'))drawSheet()}})}}}
+function tick(){if(ST&&ST.free_next!=null){ST.free_next--;['#nx','#nx2'].forEach(s=>{const e=$(s);if(e)e.textContent=fmt(ST.free_next)});$$('[data-nx]').forEach(e=>e.textContent='Dans '+fmt(ST.free_next));if(ST.free_next<=0){refresh().then(()=>{if(!$('.stage')&&!$('.shade'))render()})}}}
 /* ---------- accueil ---------- */
 function themePack(g){const l=CARDS.filter(c=>c.g.includes(g)&&'ELM'.includes(c.r));return [l[2]||l[0],l[0],l[4]||l[1]].filter(Boolean)}
 function home(){
@@ -338,16 +455,18 @@ function home(){
  const cnt=r=>CARDS.filter(c=>c.r==r&&inv[c.n]).length;
  const dt=ST.daily_theme,fan=themePack(dt);
  const best=CARDS.filter(c=>inv[c.n]).sort((a,b)=>ORD.indexOf(b.r)-ORD.indexOf(a.r)||a.n-b.n).slice(0,10);
- $('#v').innerHTML=`<div class="hero"><div class="fan">${fan.map(c=>card(c)).join('')}</div>
+ $('#v').innerHTML=`<div class="homeg"><div class="hero"><div class="fan">${fan.map(c=>card(c)).join('')}</div>
  <div class="eyebrow">Pack du jour · gratuit</div><h2>${GICO[dt]||''} ${fr(dt)}</h2><p class="mut">Un booster offert chaque jour, thème différent, Épique garantie.</p>
  <button class="btn y" id="dl" ${ST.daily_ready?'':'disabled'}>${ST.daily_ready?'Ouvrir le pack du jour':'Reviens demain'}</button></div>
- ${strip()}<div class="tiles"><div class="tile hot"><b>${ST.free}/${ST.free_max}</b><small>gratuits${bonusN()?' · +'+bonusN()+' bonus':''}</small><div class="t" id="nx">${ST.free_next==null?'complet':fmt(ST.free_next)}</div></div>
+ <div>${strip()}<div class="tiles"><div class="tile hot"><b>${ST.free}/${ST.free_max}</b><small>gratuits${bonusN()?' · +'+bonusN()+' bonus':''}</small><div class="t" id="nx">${ST.free_next==null?'complet':fmt(ST.free_next)}</div></div>
  <div class="tile"><b>${own}</b><small>/ ${CARDS.length} cartes</small></div><div class="tile"><b>${dups}</b><small>doublons</small></div>
  <div class="tile"><b style="color:${RC.E}">${cnt('E')}</b><small>Épiques</small></div><div class="tile"><b style="color:${RC.L}">${cnt('L')}</b><small>Légendaires</small></div><div class="tile"><b style="color:${RC.M}">${cnt('M')}</b><small>Mythiques</small></div></div>
- <br><button class="btn g" id="rc">♻ Recycler mes doublons${dups?' · +'+recVal()+' 🍿':''}</button>
+ <br><button class="btn g" id="rc">♻ Recycler mes doublons${dups?' · +'+recVal()+' 🍿':''}</button></div></div>
+ <div class="sec" style="display:flex;justify-content:space-between;align-items:flex-end;gap:10px"><div><div class="eyebrow">${freeTot()>0?freeTot()+' gratuit'+(freeTot()>1?'s':'')+' à ouvrir':'Boosters'}</div><h2>Choisis ton booster</h2></div><button class="lnk" id="allb">Tout voir</button></div>
+ <div class="scroll bscroll">${[null,...ST.themes].slice(0,8).map(g=>bcell(freeTot()>0?'free':'paid',g)).join('')}</div>
  ${best.length?`<div class="sec"><div class="eyebrow">Ta vitrine</div><h2>Tes plus belles cartes</h2></div><div class="scroll">${best.map(c=>card(c,{q:inv[c.n]})).join('')}</div>`:''}
  <footer>Projet fan non officiel. This product uses the TMDB API but is not endorsed or certified by TMDB.</footer>`;
- $('#dl').onclick=()=>packScreen('daily',null);$('#rc').onclick=recycleAll;$$('[data-gom]').forEach(b=>b.onclick=()=>{view='miss';render();scrollTo(0,0)});bindCards()}
+ $('#dl').onclick=()=>packScreen('daily',null);$('#rc').onclick=recycleAll;$('#allb').onclick=()=>openSheet();bindPacks();$$('[data-gom]').forEach(b=>b.onclick=()=>{view='miss';render();scrollTo(0,0)});bindCards()}
 function strip(){const q=QS(),gi=goldIn();
  return `<div class="strip"><button class="sc" data-gom><b>${q.daily_done??0}/${q.daily_total??3}</b><small>missions du jour</small></button>
  <button class="sc ${q.streak_ready?'hot':''}" data-gom><b>J${q.streak_day||0}/7</b><small>série de connexion${q.streak_ready?' · à récupérer':''}</small></button>
@@ -359,8 +478,41 @@ async function recycleAll(){try{const x=await rpc('recycle');ST=x.state;toast('+
 function packArt(kind,g){const c=gcol(g),sym=g?GICO[g]||'🎬':'🍿',nm=g?fr(g):'Mix';
  if(kind=='daily'){const d=new Date(),mo=d.toLocaleDateString('fr-FR',{month:'short'}).replace('.','').toUpperCase();
   return `<div class="pkw env" style="--c1:${c}"><div class="paper"></div><div class="pt">PACK DU JOUR</div><div class="pn">${esc(nm)}</div><div class="pc">5 cartes · Épique ou mieux</div><div class="flap"></div><div class="wax"><div><b>${d.getDate()}</b><small>${mo}</small></div></div></div>`}
- return `<div class="pkw pochette" style="--c1:${c};--c2:${shade(c,.38)}"><div class="foil2"></div><i class="cr t"></i><i class="cr b"></i><i class="pf l"></i><i class="pf r"></i><div class="pt">CASTING</div><div class="md">${sym}</div><div class="pn">${esc(nm)}</div><div class="pc">5 cartes</div></div>`}
-/* ---------- feuille Ouvrir ---------- */
+ return `<div class="pkw pochette" style="--c1:${c};--c2:${shade(c,.38)}"><div class="foil2"></div><i class="tx tx${texOf(g)}"></i><i class="edge"></i><i class="cr t"></i><i class="cr b"></i><i class="pf l"></i><i class="pf r"></i><div class="pt">CASTING</div><div class="md">${sym}</div><div class="pn">${esc(nm)}</div><div class="pc">5 cartes</div></div>`}
+const TEX={'Drama':5,'Science-Fiction':2,'Comedy':1,'Fantasy':3,'Crime':4,'Thriller':4,'Horror':4,'Mystery':3,'Supernatural':3,'Family':1,'Romance':1,'Action':0,'Adventure':0,'History':5,'Western':5,'War':5,'Legal':2,'Medical':2,'Espionage':2};
+function texOf(g){if(!g)return 0;if(TEX[g]!=null)return TEX[g];let h=0;for(const ch of g)h=(h*31+ch.charCodeAt(0))%6;return h}
+const slotsHtml=sl=>`<span class="slt">${[...sl].map(r=>`<i style="--c:${RC[r]}">${r}</i>`).join('')}</span>`;
+/* ---------- inclinaison 3D + reflet (boosters, cartes) ---------- */
+function tiltable(el,host){host=host||el;if(MO())return;let live=false;
+ const aim=e=>{const r=host.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;el.style.setProperty('--rx',(-y*22)+'deg');el.style.setProperty('--ry',(x*26)+'deg');el.style.setProperty('--gx',(x+.5)*100+'%');el.style.setProperty('--gy',(y+.5)*100+'%');if(!live){live=true;el.classList.add('live')}};
+ const off=()=>{live=false;el.classList.remove('live');el.style.setProperty('--rx','0deg');el.style.setProperty('--ry','0deg')};
+ host.addEventListener('pointermove',aim);host.addEventListener('pointerdown',aim);host.addEventListener('pointerleave',off);host.addEventListener('pointercancel',off);host.addEventListener('pointerup',e=>{if(e.pointerType!='mouse')off()});return off}
+/* ---------- page Boosters ---------- */
+function bcell(kind,g){const daily=kind=='daily',price=g?ST.gprice:ST.price;
+ const lab=daily?(ST.daily_ready?'<span class="bpr ok">Gratuit</span>':'<span class="bpr">Demain</span>'):kind=='free'?(freeTot()>0?'<span class="bpr ok">Gratuit</span>':`<span class="bpr" data-nx>Dans ${ST.free_next==null?'':fmt(ST.free_next)}</span>`):`<span class="bpr y">🍿 ${price}</span>`;
+ return `<button class="bcell" data-k="${kind}" data-g="${g||''}" style="--dl:${-Math.random()*4|0}s"><div class="tilt">${packArt(daily?'daily':'pochette',g)}<i class="glare"></i></div>${lab}</button>`}
+function bindPacks(){$$('.bcell').forEach(b=>{tiltable(b.querySelector('.tilt'),b);b.onclick=()=>packInfo(b.dataset.k,b.dataset.g||null)})}
+function boost(){
+ const daily=sheetTab=='daily',items=daily?[ST.daily_theme]:[null,...ST.themes];
+ $('#v').innerHTML=`<div class="bhead"><h1>Choisis ton booster</h1><div class="tabs">${[['free','Gratuits'],['daily','Du jour & limités'],['paid','Boutique']].map(([k,l])=>`<button class="${sheetTab==k?'on':''}" data-t="${k}">${l}</button>`).join('')}</div></div>
+ <p class="mut" style="margin:-6px 0 18px">${daily?'Un booster offert chaque jour, thème différent, Épique garantie.':sheetTab=='free'?(freeTot()>0?`Tu as ${freeTot()} booster${freeTot()>1?'s':''} gratuit${freeTot()>1?'s':''}. Un nouveau toutes les ${CFG.free_minutes} minutes.`:`Prochain booster gratuit dans <span class="mono" id="nx2">${ST.free_next==null?'':fmt(ST.free_next)}</span>.`):`Tu as 🍿 ${ST.popcorns} Popcorns.`}</p>
+ <div class="bgrid">${items.map(g=>bcell(daily?'daily':sheetTab,daily?null:g)).join('')}</div>`;
+ $$('.bhead .tabs button').forEach(b=>b.onclick=()=>{sheetTab=b.dataset.t;boost()});bindPacks()}
+/* ---------- fiche d'un booster ---------- */
+function packInfo(kind,g){
+ const daily=kind=='daily',free=kind=='free',gg=daily?ST.daily_theme:g,price=gg&&!daily?ST.gprice:ST.price,c1=gcol(gg),od=odds(daily),cnt=gg?CARDS.filter(c=>c.g.includes(gg)).length:CARDS.length;
+ const title=daily?'Pack du jour · '+fr(gg):gg?fr(gg):'Casting Mix',desc=daily?'Un thème par jour, Épique ou mieux garantie':gg?'Persos '+fr(gg).toLowerCase():'Tous les persos';
+ const okb=daily?ST.daily_ready:free?freeTot()>0:ST.popcorns>=price;
+ const sub=daily?(ST.daily_ready?'Gratuit':'Revient demain'):free?(freeTot()>0?`Gratuit · ${freeTot()} restant${freeTot()>1?'s':''}`:`Prochain gratuit dans ${ST.free_next==null?'':fmt(ST.free_next)}`):`🍿 ${price}`;
+ const d=document.createElement('div');d.className='shade';d.id='sh';d.onclick=e=>{if(e.target==d)d.remove()};
+ d.innerHTML=`<div class="sheet"><div class="hdr"><div style="display:flex;gap:12px;align-items:center"><div class="pkrow">${packArt(daily?'daily':'pochette',gg)}</div><div><h2 style="font-size:24px">${esc(title)}</h2><div class="mut" style="font-size:13px">${esc(desc)}</div></div></div><button class="x" id="cx">✕</button></div>
+  <div class="facts"><div class="fact"><b>5</b><small>cartes par booster</small></div><div class="fact"><b style="color:${daily?RC.E:RC.R}">${daily?'Épique':'Rare'}</b><small>ou mieux, garantie</small></div>
+  <div class="fact"><b style="color:${RC.M}">${Math.max(0,ST.pity_max-ST.pity)}</b><small>avant Mythique sûre</small></div><div class="fact"><b>${cnt.toLocaleString('fr')}</b><small>persos possibles</small></div>${daily?'':`<div class="fact" style="grid-column:1/-1"><b style="color:var(--yel)">${goldIn()||'Maintenant'}</b><small>${goldIn()?'avant le booster doré (Épique garantie)':'ton prochain booster est doré : Épique garantie'}</small></div>`}</div>
+  <div class="mut mono" style="font-size:11px;letter-spacing:.1em">CHANCE PAR BOOSTER</div><div class="odds">${['R','E','L','M'].map(r=>`<div class="o" style="--c:${RC[r]}"><span>${RN[r]}</span><i style="width:${Math.max(2,od[r]*100*.7)}%"></i><em>${(od[r]*100).toFixed(od[r]<.05?2:1).replace('.',',')} %</em></div>`).join('')}</div>
+  <button class="btn g" id="pl" style="margin-bottom:8px">Voir les ${cnt.toLocaleString('fr')} persos</button><button class="btn a" id="go" ${okb?'':'disabled'}>${okb?'Ouvrir · '+sub:(daily?'Reviens demain':free?sub:'Pas assez de Popcorns')}</button></div>`;
+ document.body.append(d);
+ $('#cx').onclick=()=>d.remove();$('#pl').onclick=()=>poolSheet(gg);$('#go').onclick=()=>{d.remove();packScreen(kind,daily?null:g)}}
+/* ---------- feuille Ouvrir (remplacée par la page Boosters) ---------- */
 let sheetTab='free',sheetSel='mix';
 const SLOTS={norm:'CCCUR',daily:'CCURE',gold:'CCURE'};
 function odds(minE){const o=ST.odds,sl=minE?SLOTS.daily:SLOTS.norm,res={};
@@ -371,35 +523,7 @@ function oddsOld(minE){const o=ST.odds,t=10000,p=k=>o[k]/t,n=5;
  if(minE){const s=eplus;return {M:1-(Math.pow(1-p('M'),n)-qn*p('M')/s),L:1-(Math.pow(1-p('L'),n)-qn*p('L')/s),E:1-(Math.pow(1-p('E'),n)-qn*p('E')/s),R:1-Math.pow(1-p('R'),n)}}
  const ge=x=>1-Math.pow(1-x,n);
  return {M:ge(p('M')),L:ge(p('L')),E:ge(p('E')),R:1-(Math.pow(1-p('R'),n)-Math.pow(1-p('R')-eplus,n))}}
-function openSheet(tab){
- sheetTab=tab||sheetTab;const d=document.createElement('div');d.className='shade';d.id='sh';
- d.onclick=e=>{if(e.target==d)d.remove()};document.body.append(d);drawSheet()}
-function drawSheet(){
- const d=$('#sh');if(!d)return;const free=sheetTab=='free',daily=sheetTab=='daily';
- const items=daily?[ST.daily_theme]:[null,...ST.themes];
- const price=g=>g?ST.gprice:ST.price;
- const sub=g=>daily?(ST.daily_ready?`<span class="ok">Gratuit · Épique ou mieux</span>`:`<span class="mut">Revient demain</span>`)
-  :free?(freeTot()>0?`<span class="ok">Gratuit · ${freeTot()} restant${freeTot()>1?'s':''}</span>`:`<span class="mut">Prochain dans <span class="mono" id="nx2">${ST.free_next==null?'':fmt(ST.free_next)}</span></span>`)
-  :`<span class="mono" style="color:var(--yel)">🍿 ${price(g)}</span>`;
- const sk=g=>daily?'daily':(g||'mix');
- if(!items.some(g=>sk(g)==sheetSel))sheetSel=sk(items[0]);
- d.innerHTML=`<div class="sheet"><div class="hdr"><h2>Ouvrir</h2><button class="x" id="cx">✕</button></div>
- <div class="tabs">${[['free','Gratuits'],['daily','Du jour & limités'],['paid','Boutique']].map(([k,l])=>`<button class="${sheetTab==k?'on':''}" data-t="${k}">${l}</button>`).join('')}</div>
- ${items.map(g=>{const id=sk(g),sel=sheetSel==id,c1=gcol(g),od=odds(daily),cnt=g?CARDS.filter(c=>c.g.includes(g)).length:CARDS.length;
-  const title=daily?'Pack du jour · '+fr(g):g?fr(g):'Casting Mix',desc=daily?'Un thème par jour, Épique ou mieux garantie':g?'Persos '+fr(g).toLowerCase():'Tous les persos';
-  const head=`<div class="pkrow">${packArt(daily?'daily':'pochette',g)}</div><div class="t"><h3>${esc(title)}</h3><div class="mut" style="font-size:13px">${esc(desc)}</div>${sub(g)}</div>`;
-  if(!sel)return `<button class="bo" data-g="${id}">${head}</button>`;
-  const okb=daily?ST.daily_ready:free?freeTot()>0:ST.popcorns>=price(g);
-  return `<div class="bo sel1" style="border-color:${c1}88"><div style="display:flex;gap:12px;align-items:center">${head}</div>
-   <div class="facts"><div class="fact"><b>5</b><small>cartes par booster</small></div><div class="fact"><b class="mono" style="font-size:17px;color:${daily?RC.E:RC.R}">${daily?'C C U R E':'C C C U R'}</b><small>rareté minimale de chaque carte</small></div>
-   <div class="fact"><b style="color:${RC.M}">${Math.max(0,ST.pity_max-ST.pity)}</b><small>avant Mythique sûre</small></div><div class="fact"><b>${cnt.toLocaleString('fr')}</b><small>persos possibles</small></div>${daily?'':`<div class="fact" style="grid-column:1/-1"><b style="color:var(--yel)">${goldIn()||'Maintenant'}</b><small>${goldIn()?'boosters avant le booster doré (C C U R E)':'ton prochain booster est doré : C C U R E'}</small></div>`}</div>
-   <div class="mut mono" style="font-size:11px;letter-spacing:.1em">CHANCE PAR BOOSTER</div><div class="odds">${['R','E','L','M'].map(r=>`<div class="o" style="--c:${RC[r]}"><span>${RN[r]}</span><i style="width:${Math.max(2,od[r]*100*.7)}%"></i><em>${(od[r]*100).toFixed(od[r]<.05?2:1).replace('.',',')} %</em></div>`).join('')}</div>
-   <button class="btn g" data-pool="${id}" style="margin-bottom:8px">Voir les ${cnt.toLocaleString('fr')} persos</button><button class="btn a" data-go="${id}" ${okb?'':'disabled'}>${okb?'Choisir ce booster':(daily?'Reviens demain':free?'Pas de booster gratuit':'Pas assez de Popcorns')}</button></div>`}).join('')}</div>`;
- $('#cx').onclick=()=>d.remove();
- $$('.tabs button').forEach(b=>b.onclick=()=>{sheetTab=b.dataset.t;sheetSel='';drawSheet()});
- $$('.bo[data-g]').forEach(b=>b.onclick=()=>{sheetSel=b.dataset.g;drawSheet()});
- const pl2=$('[data-pool]');if(pl2)pl2.onclick=()=>poolSheet(pl2.dataset.pool=='mix'||pl2.dataset.pool=='daily'?(pl2.dataset.pool=='daily'?ST.daily_theme:null):pl2.dataset.pool);
- const go=$('[data-go]');if(go)go.onclick=()=>{const id=go.dataset.go,g=id=='mix'?null:id=='daily'?ST.daily_theme:id;d.remove();packScreen(daily?'daily':free?'free':'paid',daily?null:g)}}
+function openSheet(tab){sheetTab=tab||sheetTab;view='boost';render();scrollTo(0,0)}
 /* ---------- persos d'un booster ---------- */
 let PQ={q:'',r:'',n:90};
 function poolSheet(g){
@@ -427,14 +551,17 @@ function packScreen(kind,genre){
  const kh=e=>{if(e.code=='Space'||e.key==' '){e.preventDefault();d._tap&&d._tap()}else if(e.key=='Escape'&&!done)close()};
  document.addEventListener('keydown',kh);
  const close=()=>{document.removeEventListener('keydown',kh);d.remove();render()};
- const W=Math.min(230,innerWidth*.56),env=kind=='daily',zz=[];for(let i=0;i<=14;i++)zz.push([i/14*100,i%2?15.6:13.4]);
+ const W=Math.max(170,Math.min(290,innerWidth*.66,(innerHeight-300)/1.4)),env=kind=='daily',zz=[];for(let i=0;i<=14;i++)zz.push([i/14*100,i%2?15.6:13.4]);
  const pstrip=`polygon(0 0,100% 0,${zz.slice().reverse().map(p=>p[0]+'% '+p[1]+'%').join(',')})`,pbody=`polygon(${zz.map(p=>p[0]+'% '+p[1]+'%').join(',')},100% 100%,0 100%)`;
  const sparks=Array.from({length:14},(_,i)=>{const a=-Math.PI*(.1+.8*i/13)+(Math.random()-.5)*.3,r2=110+Math.random()*120;return `<i class="spark" style="--dx:${Math.cos(a)*r2|0}px;--dy:${Math.sin(a)*r2|0}px;animation-delay:${i*18}ms"></i>`}).join('');
  const art=packArt(kind=='daily'?'daily':'pochette',g),gold=kind!='daily'&&goldIn()==0;
- d.innerHTML=`<button class="skip" id="cl0">✕</button><div class="eyebrow">${gold?'✦ Booster doré · ':''}${kind=='daily'?'Pack du jour':kind=='free'?'Booster gratuit':'Booster'}${g?' · '+fr(g):' · Mix'}</div>
-  <div class="packwrap ${env?'envp':''} ${gold?'gold':''}" id="pw" style="--w:${W}px">${env?`<div class="lay body">${art}</div>`:`<div class="lay body" style="clip-path:${pbody}">${art}</div><div class="beam"></div><div class="lay strip" id="stp" style="clip-path:${pstrip}">${art}</div><div class="tear" id="tr"></div>`}${sparks}</div>
+ const motes=`<div class="motes">${Array.from({length:22},()=>`<i style="left:${Math.random()*100}%;--md:${7+Math.random()*7}s;--dl:${-Math.random()*12}s;--mx:${(Math.random()-.5)*80|0}px"></i>`).join('')}</div>`;
+ d.innerHTML=`${motes}<button class="skip" id="cl0">✕</button><button class="sndb" id="sdb">${SND()?'🔊':'🔇'}</button><div class="eyebrow">${gold?'✦ Booster doré · ':''}${kind=='daily'?'Pack du jour':kind=='free'?'Booster gratuit':'Booster'}${g?' · '+fr(g):' · Mix'}</div>
+  <div class="pkfloat" id="pf"><div class="packwrap ${env?'envp':''} ${gold?'gold':''}" id="pw" style="--w:${W}px">${env?`<div class="lay body">${art}</div>`:`<div class="lay body" style="clip-path:${pbody}">${art}</div><div class="beam"></div><div class="lay strip" id="stp" style="clip-path:${pstrip}">${art}</div><div class="tear" id="tr"></div>`}${sparks}<i class="glare"></i></div></div>
   <div class="qrow" id="qr"></div><div class="mut mono" id="cost"></div>
-  <p class="mut" style="margin:0">${env?'Touche l’enveloppe pour l’ouvrir':'Glisse le long du haut pour déchirer'}</p><button class="lnk" id="chg">Changer de booster</button>`;
+  <p class="mut" style="margin:0" id="hn0">${env?'Touche l’enveloppe pour l’ouvrir':matchMedia('(hover:hover)').matches?'Glisse la souris le long du haut pour déchirer (ou clique)':'Glisse le doigt le long du haut pour déchirer'}</p>
+  <p class="mut mono gar">Mythique garantie dans ${Math.max(1,ST.pity_max-ST.pity)} booster${ST.pity_max-ST.pity>1?'s':''} au plus</p><button class="lnk" id="chg">Changer de booster</button>`;
+ $('#sdb').onclick=e=>{e.stopPropagation();lsset('snd',SND()?'0':'1');e.target.textContent=SND()?'🔊':'🔇';if(SND())SFX.flip()};
  $('#cl0').onclick=close;$('#chg').onclick=()=>{document.removeEventListener('keydown',kh);d.remove();openSheet(kind=='daily'?'daily':kind=='free'?'free':'paid')};
  const drawQ=()=>{const mq=maxQ();qty=Math.min(qty,Math.max(1,mq));
   $('#qr').innerHTML=kind=='daily'?'':[1,5,10].map(n=>`<button data-q="${n}" class="${qty==n?'on':''}" ${mq<n?'disabled':''}>×${n}</button>`).join('');
@@ -442,51 +569,75 @@ function packScreen(kind,genre){
   $$('#qr button').forEach(b=>b.onclick=()=>{qty=+b.dataset.q;drawQ()})};
  drawQ();
  const pw=$('#pw'),stp=$('#stp'),tr=$('#tr'),flash=col=>{const f=document.createElement('div');f.className='flash';f.style.setProperty('--fc',col);document.body.append(f);setTimeout(()=>f.remove(),900)};
- const go=()=>{if(done)return;done=true;if(tr){tr.style.width='100%';tr.style.opacity=1}pw.classList.add('go');navigator.vibrate&&navigator.vibrate(30);flash('#ffffff');
-  $('#qr').style.visibility=$('#cost').style.visibility=$('#chg').style.visibility='hidden';
+ const go=()=>{if(done)return;done=true;$('#pf').classList.add('go');pw.classList.remove('live');pw.style.setProperty('--rx','0deg');pw.style.setProperty('--ry','0deg');SFX.tear();setTimeout(SFX.whoosh,220);if(tr){tr.style.width='100%';tr.style.opacity=1}pw.classList.add('go');navigator.vibrate&&navigator.vibrate(30);flash('#ffffff');
+  ['#qr','#cost','#chg','#hn0','.gar'].forEach(q=>{const e=$(q);if(e)e.style.visibility='hidden'});
   const t0=Date.now(),req=rpc('open_boosters',{kind,genre:kind=='daily'?null:genre,qty:kind=='daily'?1:qty}).then(async r=>{ST=r.state;const cs=r.boosters.flatMap(b=>b.cards.map(x=>CARDS[x.n-1]));await preload(cs);return r});
   req.then(r=>setTimeout(()=>{pw.style.visibility='hidden';document.removeEventListener('keydown',kh);reveal(d,r,kind,g,kind=='daily'?1:qty)},Math.max(0,900-(Date.now()-t0))),
    e=>{toast(e.message);close()})};
  const setP=v=>{p=Math.max(0,Math.min(1,v));if(!stp)return;stp.style.transform=`translate(${p*5}px,${-p*9}px) rotate(${-p*7}deg)`;tr.style.width=(p*100)+'%';tr.style.opacity=p>0?1:0};
- pw.onpointerdown=e=>{sx=e.clientX;sy=e.clientY;moved=0;pw.setPointerCapture(e.pointerId);if(stp)stp.style.transition='none'};
- pw.onpointermove=e=>{if(sx==null||done)return;moved=Math.max(moved,Math.abs(e.clientX-sx)+Math.abs(e.clientY-sy));if(!env){setP((e.clientX-sx)/(W*.78));if(p>=.92)go()}else if(sy-e.clientY>40)go()};
- pw.onpointerup=()=>{if(done)return;if(stp)stp.style.transition='';if(moved<10)go();else if(!env)setP(0);sx=null};
+ let tearing=false;
+ const tilt=e=>{if(MO()||done)return;const r=pw.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;pw.classList.add('live');pw.style.setProperty('--rx',(-Math.max(-.6,Math.min(.6,y))*20)+'deg');pw.style.setProperty('--ry',(Math.max(-.6,Math.min(.6,x))*24)+'deg');pw.style.setProperty('--gx',(x+.5)*100+'%');pw.style.setProperty('--gy',(y+.5)*100+'%')};
+ const untilt=()=>{pw.classList.remove('live');pw.style.setProperty('--rx','0deg');pw.style.setProperty('--ry','0deg')};
+ pw.onpointerdown=e=>{sx=e.clientX;sy=e.clientY;moved=0;pw.setPointerCapture(e.pointerId);const r=pw.getBoundingClientRect();tearing=!env&&(e.clientY-r.top)/r.height<.34;if(tearing){untilt();if(stp)stp.style.transition='none'}else tilt(e)};
+ pw.onpointermove=e=>{if(done)return;if(sx==null){if(e.pointerType=='mouse')tilt(e);return}moved=Math.max(moved,Math.abs(e.clientX-sx)+Math.abs(e.clientY-sy));
+  if(tearing){if(e.clientX-sx>4)SFX.drag();setP((e.clientX-sx)/(W*.78));if(p>=.92)go()}else{tilt(e);if(env&&sy-e.clientY>40)go()}};
+ pw.onpointerup=e=>{if(done)return;if(stp)stp.style.transition='';if(moved<10)go();else if(tearing)setP(0);sx=null;tearing=false;if(e.pointerType!='mouse')untilt()};
+ pw.onpointerleave=()=>{if(sx==null)untilt()};
  let sy=0}
 /* ---------- révélation : pile face cachée, on touche pour retourner ---------- */
 function reveal(d,r,kind,g,qty){
- const c1=gcol(g),bs=r.boosters.map(b=>({pity:b.pity_hit,golden:b.golden,god:b.god,cards:b.cards.map(x=>({...CARDS[x.n-1],new:x.new,bonus:x.bonus}))})),all=bs.flatMap(b=>b.cards);let bi=-1;
+ const c1=gcol(g),bs=r.boosters.map(b=>({pity:b.pity_hit,golden:b.golden,god:b.god,cards:b.cards.map(x=>({...CARDS[x.n-1],new:x.new,bonus:x.bonus})).sort((p,q)=>rankOf(p)-rankOf(q))})),all=bs.flatMap(b=>b.cards);let bi=-1;
  const flash=col=>{const f=document.createElement('div');f.className='flash';f.style.setProperty('--fc',col);document.body.append(f);setTimeout(()=>f.remove(),900)};
  const note=c=>`${c.new?'<span class="new">NOUVEAU</span>':`<span class="dup">Doublon · +${REC[c.r]} 🍿 si recyclé</span>`}${c.bonus?` <span class="new" style="background:var(--yel);color:#1a1300">+${c.bonus} 🍿 bonus</span>`:''}`;
- const kh=e=>{if(e.code=='Space'||e.key==' '){e.preventDefault();d._tap&&d._tap()}};
+ const kh=e=>{if(e.code=='Space'||e.key==' '){e.preventDefault();d._tap&&d._tap(e.repeat)}};
  document.addEventListener('keydown',kh);
  const end=()=>{document.removeEventListener('keydown',kh);d._tap=null};
  const nextB=()=>{bi++;if(bi>=bs.length)return recap();stack(bs[bi])};
  const stack=b=>{const cs=b.cards,top=cs.reduce((a,c)=>rankOf(c)>rankOf(a)?c:a),n=cs.length;let i=0,lock=false;
   d.innerHTML=`<button class="skip" id="sk">${bs.length>1?'Passer au récap':'Passer'}</button><div class="mut mono ct" id="ct"></div>
-   <div class="deck ${rankOf(top)>=2?'glow':''} ${top.r=='M'?'rbw':''}" id="dk" style="--glow:${RC[top.r]}">${cs.map((c,k)=>`<div class="dk" style="--o:${k}"><div class="f3"><div class="fa">${cardBack(b.golden||b.god?'#f7c61b':c1)}</div><div class="fb">${card(c)}</div></div></div>`).join('')}</div>
-   <div class="info" id="in"></div><p class="mut" id="hn" style="margin:0">Touche la pile pour retourner la première carte</p><button class="btn g sm" id="ra">Tout révéler</button>`;
+   <div class="deck" id="dk"><div class="hal"></div><div class="rays" id="ry"></div><div class="burst" id="bu"></div>${cs.map((c,k)=>`<div class="dk deal" style="--o:${k};--dd:${(n-1-k)*110}ms"><div class="f3"><div class="fa">${cardBack(b.golden||b.god?'#f7c61b':c1)}</div><div class="fb">${card(c)}</div></div></div>`).join('')}</div>
+   <div class="info" id="in"></div><div class="pslots" id="ps">${cs.map((c,k)=>`<i class="${k?'':'cur'}"></i>`).join('')}</div><p class="mut" id="hn" style="margin:0">Touche la carte pour la retourner</p><button class="btn g sm" id="ra">Tout révéler</button>${matchMedia('(hover:hover)').matches?'<p class="mut mono kbd">Espace : suivante · maintenir : avance rapide</p>':''}<button class="sndb" id="sdb">${SND()?'🔊':'🔇'}</button>`;
+  $('#sdb').onclick=e=>{e.stopPropagation();lsset('snd',SND()?'0':'1');e.target.textContent=SND()?'🔊':'🔇'};
+  const pss=$$('#ps i');cs.forEach((c,k)=>setTimeout(()=>SFX.slide(),(n-1-k)*110));
   const dks=$$('.dk'),bl=b.god?'GOD PACK · ':b.golden?'✦ Booster doré · ':'',ct=()=>{$('#ct').textContent=bl+(bs.length>1?`Booster ${bi+1}/${bs.length} · `:'')+`Carte ${Math.min(i+1,n)}/${n}`};ct();
-  const tap=()=>{if(lock||i>=n)return;const e=dks[i],c=cs[i];
-   if(!e.classList.contains('fl')){e.classList.add('fl');lock=true;setTimeout(()=>lock=false,350);if(rankOf(c)>=3)flash(c.r=='M'?'#ff5c8a':RC[c.r]);if(c.r=='M'||c.r=='L'){$('#dk').classList.remove('shake');void $('#dk').offsetWidth;$('#dk').classList.add('shake')}navigator.vibrate&&rankOf(c)>=2&&navigator.vibrate(20);
-    $('#in').innerHTML=`${note(c)} <b style="color:${RC[c.r]}">${RN[c.r]}</b>`;$('#hn').textContent=i<n-1?'Touche pour la suivante':'Touche pour continuer'}
-   else{e.classList.add('out');i++;lock=true;setTimeout(()=>lock=false,250);$('#in').innerHTML='';
-    if(i>=n){$('#dk').classList.remove('glow','rbw');setTimeout(nextB,380);return}
-    dks.forEach((x,k)=>x.style.setProperty('--o',Math.max(0,k-i)));ct();$('#hn').textContent='Touche la pile pour retourner la carte'}};
-  d._tap=tap;$('#dk').onclick=tap;
+  const burst=c=>{const b=$('#bu');if(!b)return;const k=rankOf(c),N=6+k*6;b.innerHTML=Array.from({length:N},(_,j)=>{const a=j/N*6.283+Math.random()*.5,rr=80+Math.random()*90+k*22;return `<i style="--c:${c.r=='M'?['#ff3d81','#ffb13d','#3dff9a','#3dc5ff','#a43dff'][j%5]:RC[c.r]};--dx:${Math.cos(a)*rr|0}px;--dy:${Math.sin(a)*rr|0}px;animation-delay:${Math.random()*90|0}ms"></i>`}).join('')};
+  const rays=c=>{const y=$('#ry');if(!y)return;y.style.setProperty('--c',RC[c.r]);y.classList.toggle('rbw',c.r=='M');y.classList.remove('on');void y.offsetWidth;y.classList.add('on')};
+  if(navigator.vibrate)navigator.vibrate(10);
+  const tap=fast=>{if(lock||i>=n)return;const e=dks[i],c=cs[i],k=rankOf(c);
+   if(!e.classList.contains('fl')){lock=true;
+    const flipNow=()=>{e.classList.remove('charge');e.classList.add('fl');SFX.flip();
+     pss[i]&&(pss[i].style.setProperty('--c',RC[c.r]),pss[i].classList.add('on'),pss[i].classList.remove('cur'));
+     setTimeout(()=>{SFX.rar(c.r);if(k>=2)burst(c);if(k>=4)rays(c);if(k>=3)flash(c.r=='M'?'#ff5c8a':RC[c.r]);
+      if(k>=4){$('#dk').classList.remove('shake');void $('#dk').offsetWidth;$('#dk').classList.add('shake')}navigator.vibrate&&k>=2&&navigator.vibrate(k>=4?[30,40,60]:20);
+      $('#in').innerHTML=`${note(c)} <b style="color:${RC[c.r]}">${RN[c.r]}</b>`;$('#hn').textContent=i<n-1?'Touche pour la suivante':'Touche pour continuer';lock=false},280)};
+    if(k>=3&&!MO()&&!fast){const dur=k>=5?1300:k>=4?1000:650;e.style.setProperty('--cg',c.r=='M'?'#ff5c8a':RC[c.r]);e.style.setProperty('--cd',dur+'ms');e.classList.add('charge');SFX.charge(k,dur/1000);$('#hn').textContent='…';setTimeout(flipNow,dur)}else flipNow()}
+   else{e.classList.add('out');SFX.slide();i++;lock=true;setTimeout(()=>lock=false,260);$('#in').innerHTML='';
+    if(i>=n){setTimeout(nextB,420);return}pss[i]&&pss[i].classList.add('cur');
+    dks.forEach((x,kk)=>x.style.setProperty('--o',Math.max(0,kk-i)));ct();$('#hn').textContent='Touche la pile pour retourner la carte'}};
+  d._tap=tap;$('#dk').onclick=()=>tap();
   $('#ra').onclick=()=>{d._tap=null;const nw=cs.filter(c=>c.new).length;if(rankOf(top)>=3)flash(top.r=='M'?'#ff5c8a':RC[top.r]);
    d.innerHTML=`<button class="skip" id="sk">${bs.length>1?'Passer au récap':'Passer'}</button><div class="mut mono ct">${bs.length>1?`Booster ${bi+1}/${bs.length}`:'Ton tirage'}</div><div class="mini five">${cs.map((c,k)=>`<div class="rise" style="animation-delay:${k*90}ms">${card(c)}</div>`).join('')}</div>
     <div class="sum">${nw?`<span class="new">${nw} nouvelle${nw>1?'s':''}</span>`:''}${b.pity?'<span class="new" style="background:var(--acc);color:#fff">Mythique sûre !</span>':''}${b.god?'<span class="tagg">GOD PACK</span>':b.golden?'<span class="tagg">✦ Booster doré</span>':''}${cs.reduce((a,c)=>a+(c.bonus||0),0)?`<span class="new" style="background:var(--yel);color:#1a1300">+${cs.reduce((a,c)=>a+(c.bonus||0),0)} 🍿 bonus</span>`:''}</div>
     <button class="btn y sm" id="nx3">${bi<bs.length-1?'Booster suivant':'Voir le récap'}</button>`;
+   cs.forEach((c,k)=>setTimeout(()=>SFX.tick(c.r),k*90));setTimeout(()=>SFX.rar(top.r),cs.length*90+120);
    $('#nx3').onclick=nextB;d._tap=nextB;$('#sk').onclick=recap};
   $('#sk').onclick=recap};
  const recap=()=>{end();
   const best=all.reduce((a,c)=>rankOf(c)>rankOf(a)||(rankOf(c)==rankOf(a)&&c.new&&!a.new)?c:a),cnt={};all.forEach(c=>cnt[c.n]=(cnt[c.n]||0)+1);
-  const uniq=Object.keys(cnt).map(n=>CARDS[n-1]).sort((a,b)=>rankOf(b)-rankOf(a)||a.n-b.n),nw=all.filter(c=>c.new).length;
-  d.innerHTML=`<div class="recap"><div class="eyebrow">${bs.some(b=>b.god)?'God pack !':bs.some(b=>b.pity)?'Mythique garantie !':bs.some(b=>b.golden)?'✦ Booster doré':'Ton tirage'}</div><div class="best"><div class="mut mono" style="font-size:11px;letter-spacing:.1em">MEILLEURE CARTE</div>${card(best)}</div>
-  <div class="sum">${nw?`<span class="new">${nw} nouvelle${nw>1?'s':''}</span>`:''}${r.gain?`<span class="new" style="background:var(--yel);color:#1a1300">+${r.gain} 🍿 de bonus</span>`:''}<span class="dup">${all.length} cartes</span>${all.length-nw?`<span class="dup">${all.length-nw} doublon${all.length-nw>1?'s':''} · +${all.filter(c=>!c.new).reduce((a,c)=>a+REC[c.r],0)} 🍿 si recyclés</span>`:''}</div>
-  ${all.length>1?`<div class="mini">${uniq.map(c=>card(c,{q:cnt[c.n]})).join('')}</div>`:''}
-  <div style="width:100%;display:grid;gap:8px"><button class="btn y" id="ag">Ouvrir un autre booster</button><button class="btn g" id="vc">Voir la collection</button><button class="btn g" id="cl">Continuer</button></div></div>`;
-  $('#ag').onclick=()=>{d.remove();render();openSheet(freeTot()>0?'free':'paid')};$('#cl').onclick=()=>{d.remove();render()};$('#vc').onclick=()=>{d.remove();view='coll';render()};
+  const uniq=Object.keys(cnt).map(n=>CARDS[n-1]).sort((a,b)=>rankOf(a)-rankOf(b)||a.n-b.n),nw=all.filter(c=>c.new).length;
+  /* éventail : la meilleure au centre, les autres de part et d'autre (les plus rares près du centre) */
+  const rest=uniq.filter(c=>c.n!=best.n).sort((a,b)=>rankOf(b)-rankOf(a)||a.n-b.n).slice(0,innerWidth<600?4:6),L=[],R=[];
+  rest.forEach((c,k)=>(k%2?R:L).push(c));
+  const fan=[...L.slice().reverse().map((c,k,arr)=>({c,k:k-arr.length})),{c:best,k:0},...R.map((c,k)=>({c,k:k+1}))];
+  const fw=innerWidth<600?Math.min(innerWidth*.3,130):Math.min(190,(Math.min(innerWidth,960)-60)/(fan.length*.62+.5));
+  const dups=all.length-nw,recG=all.filter(c=>!c.new).reduce((a,c)=>a+REC[c.r],0);
+  d.innerHTML=`<div class="recap"><div class="eyebrow">${bs.some(b=>b.god)?'God pack !':bs.some(b=>b.pity)?'Mythique garantie !':bs.some(b=>b.golden)?'✦ Booster doré':qty>1?qty+' boosters ouverts':'Ton tirage'}</div>
+  <div class="rfan" style="--fw:${fw}px">${fan.map(({c,k})=>`<div class="fc ${k==0?'top':''}" style="--k:${k};--a:${Math.abs(k)};--dd:${120+Math.abs(k)*110}ms">${k==0?'<span class="bl">Meilleure carte</span>':''}${card(c,{q:cnt[c.n]})}</div>`).join('')}</div>
+  <div class="sum">${nw?`<span class="new">${nw} nouvelle${nw>1?'s':''}</span>`:''}${dups?`<span class="dup">${dups} doublon${dups>1?'s':''} · +${recG} 🍿 si recyclés</span>`:''}${r.gain?`<span class="new" style="background:var(--yel);color:#1a1300">+${r.gain} 🍿 de bonus</span>`:''}</div>
+  ${uniq.length>fan.length?`<div class="all"><div class="mut mono" style="font-size:11px;letter-spacing:.1em;margin:8px 0">TOUTES TES CARTES · ${all.length}</div><div class="mini">${uniq.map(c=>card(c,{q:cnt[c.n]})).join('')}</div></div>`:''}
+  <div class="acts2"><button class="btn y" id="ag">Ouvrir un autre booster</button><button class="btn g" id="vc">Voir la collection</button><button class="btn g" id="cl">Continuer</button></div></div>`;
+  setTimeout(()=>SFX.rar(best.r),120);
+  $('#ag').onclick=()=>{d.remove();openSheet(freeTot()>0?'free':'paid')};$('#cl').onclick=()=>{d.remove();render()};$('#vc').onclick=()=>{d.remove();view='coll';render()};
   $$('.recap .cw').forEach(e=>e.onclick=()=>detail(+e.dataset.n))};
  nextB()}
 /* ---------- collection ---------- */
@@ -556,11 +707,11 @@ function mkt(){$('#v').innerHTML=`<div class="center"><div style="font-size:54px
 function more(){
  $('#v').innerHTML=`<div class="sec"><div class="eyebrow">Compte</div><h2>${esc(ST.name)}</h2></div>
  <div class="tiles"><div class="tile"><b>${ST.boosters}</b><small>boosters ouverts</small></div><div class="tile"><b>${Math.max(0,ST.pity_max-ST.pity)}</b><small>avant Mythique sûre</small></div><div class="tile"><b>${ST.popcorns}</b><small>Popcorns</small></div></div>
- <div class="sec"><div class="eyebrow">Réglages</div></div><button class="btn g" id="mo">Animations : ${MO()?'désactivées':'activées'}</button>
+ <div class="sec"><div class="eyebrow">Réglages</div></div><button class="btn g" id="mo">Animations : ${MO()?'désactivées':'activées'}</button><br><button class="btn g" id="snd">Son : ${SND()?'activé':'coupé'}</button>
  <div class="sec"><div class="eyebrow">Règles</div><h2>Comment ça marche</h2></div>
  <p class="mut">Un booster gratuit se recharge toutes les ${CFG.free_minutes} minutes (jusqu'à ${ST.free_max} en stock). Le pack du jour est offert chaque jour avec une Épique garantie. Chaque booster contient 5 cartes : 3 Communes ou mieux, 1 Peu commune ou mieux et 1 Rare ou mieux (C C C U R). Après ${ST.golden_every||10} boosters, le suivant est doré (C C U R E). Très rarement, un god pack donne 4 Épiques et 1 Mythique. Une Mythique est garantie après ${ST.pity_max} boosters sans Mythique. À chaque Légendaire ou Mythique obtenue, même en double, tu gagnes ${BON.L} ou ${BON.M} 🍿. Les doublons se recyclent en Popcorns : ${Object.entries(REC).map(([r,v])=>RN[r]+' '+v).join(', ')}.</p><br>
  <button class="btn g" id="lo">Se déconnecter</button><footer>Projet fan non officiel. This product uses the TMDB API but is not endorsed or certified by TMDB.</footer>`;
- $('#mo').onclick=()=>{lsset('mo',MO()?'0':'1');document.documentElement.classList.toggle('mo',MO());more()};
+ $('#snd').onclick=()=>{lsset('snd',SND()?'0':'1');if(SND())SFX.rar('E');more()};$('#mo').onclick=()=>{lsset('mo',MO()?'0':'1');document.documentElement.classList.toggle('mo',MO());more()};
  $('#lo').onclick=async()=>{await sb.auth.signOut();ST=null;render()}}
 init();
 </script></body></html>
