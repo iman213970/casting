@@ -1404,6 +1404,12 @@ html.mo .kglow.on{animation:none}
 /* éclat qui passe (R, É, L, M) : sous l'image comme Kyara (z-index 0, l'image au-dessus) → plus de trait sur la photo */
 .tcg .fx{z-index:0}
 .tcg .im{z-index:1}
+
+/* ---------- colonne de lumière d'ouverture (mesurée sur Kyara) : derrière le paquet, seulement au-dessus de la déchirure,
+   étroite au centre, blanche puis couleur de la meilleure carte, s'efface quand les cartes montent ---------- */
+.packwrap .beam{z-index:0;transition:height .6s cubic-bezier(.2,.9,.3,1),opacity .3s,background .4s}
+.packwrap .lay.strip{z-index:3}
+.packwrap.out .beam{opacity:0;transition:opacity .8s .5s}
 </style></head><body>
 <div id="app"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
@@ -1801,13 +1807,17 @@ function packScreen(kind,genre,q0){
   if(!env){const sh=$('#shd');sh.innerHTML=Array.from({length:46},()=>{const a=-Math.PI*(.05+.9*Math.random()),v=140+Math.random()*380;return `<i style="left:${Math.random()*100}%;--dx:${Math.cos(a)*v|0}px;--dy:${Math.sin(a)*v*.7|0}px;--t:${(.8+Math.random()*.7).toFixed(2)}s;--s:${3+Math.random()*5|0}px;--c:${Math.random()<.5?'#fff':c1}"></i>`}).join('')}
   ['#qr','.pkb','#chg','#hn0','.gar','#gl0'].forEach(q=>{const e=$(q);if(e)e.style.visibility='hidden'});
   const t0=Date.now(),req=rpc('open_boosters',{kind,genre:env?null:genre,qty:env||sp?1:qty}).then(async r=>{ST=r.state;const cs=r.boosters.flatMap(b=>b.cards.map(x=>CARDS[x.n-1]));preload(cs);return r});
-  req.then(r=>setTimeout(()=>{
+  req.then(r=>{
+   /* comme Kyara : la colonne reste blanche pendant la déchirure, prend la couleur de la meilleure carte (Rare ou mieux)
+      dès que le tirage est connu, et reste au moins 700 ms en tout avant que les cartes sortent */
    const bc=r.boosters.flatMap(b=>b.cards.map(x=>CARDS[x.n-1])).reduce((a,c)=>rankOf(c)>rankOf(a)?c:a),bk=rankOf(bc),b0=r.boosters[0];
+   const gc=bk>=2&&!r.boosters.some(b=>b.god)?rcol(bc.r):'#ffffff';pw.style.setProperty('--bc',gc);pw.style.setProperty('--gc',gc);
+   setTimeout(()=>{
    const dv=r.boosters.some(b=>b.god);if(dv){gildPack(pw,'divine');$('#pf').insertAdjacentHTML('afterbegin','<div class="drays"></div>');d.classList.add('divine');SFX.rar&&SFX.rar('M')}
-   const gc=bk>=2?rcol(bc.r):'#ffffff';pw.style.setProperty('--bc',gc);pw.style.setProperty('--gc',gc);pw.classList.add('bm');
+   pw.classList.add('bm');
    $('#cout').innerHTML=Array.from({length:5},(_,k)=>`<div style="--r:${k*1.6}deg;animation-delay:${k*40}ms">${cardBack(dv?'#fff4de':b0.golden?'#f7c61b':c1)}</div>`).join('');
    pw.classList.add('out');SFX.whoosh();if(bk>=4)SFX.rumble(.9);
-   setTimeout(()=>{document.removeEventListener('keydown',kh);reveal(d,r,kind,sp?sp.id:g,env||sp?1:qty)},1100)},Math.max(0,700-(Date.now()-t0))),
+   setTimeout(()=>{document.removeEventListener('keydown',kh);reveal(d,r,kind,sp?sp.id:g,env||sp?1:qty)},1100)},Math.max(0,700-(Date.now()-t0)))},
    e=>{toast(e.message);close()})};
  let hold=0;const unhold=()=>{clearTimeout(hold);hold=0;pw.classList.remove('charge')};
  pw.onpointerdown=e=>{if(done||auto0)return;ac();sx=e.clientX;sy=e.clientY;moved=0;pw.setPointerCapture(e.pointerId);
