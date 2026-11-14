@@ -1016,21 +1016,70 @@ html.mo .tcg .fx{animation:none}
 .wall{margin-left:10px;background:none;border:1px solid #ff5c8a55;color:#ff8fb1;border-radius:99px;padding:3px 12px;font:600 12px Inter,sans-serif;cursor:pointer}.wall.on{color:#ff5c8a;border-color:#ff5c8a}
 .nwb.wsh,.nb.wsh{background:#ff5c8a;color:#fff}
 
-/* fiche wiki */
-.wk .wbg{filter:blur(30px) saturate(1.1) brightness(.4)}
-.wk .lwm{-webkit-text-stroke:1px color-mix(in srgb,var(--rc) 30%,transparent)}
-.wtabs{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 6px}.wtabs button{background:#ffffff0a;border:1px solid var(--line);color:#e8e4ee;border-radius:99px;padding:7px 14px;font:600 13px Inter,sans-serif;cursor:pointer}
-.wtabs button:hover{background:#ffffff14}
-.wtab{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:12px}
-.wr{display:grid;grid-template-columns:90px 1fr 1fr;gap:12px;padding:13px 18px;border-top:1px solid var(--line);font-size:14px}.wr:first-child{border-top:0}
-.wr span:first-child{color:#8b8796}.wr.wh{background:#ffffff08;font-weight:700;color:#e8e4ee}.wr.wh span{color:#e8e4ee}
-.wsts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
-.wsts div{position:relative;border:1px solid var(--line);background:#ffffff08;border-radius:12px;padding:12px 14px;overflow:hidden}
-.wsts small{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8b8796}.wsts b{font-size:22px}
-.wsts i{position:absolute;left:0;bottom:0;height:3px;background:var(--rc)}
-.wbts{display:flex;flex-direction:column;gap:8px;margin:12px 0}
-.wk .lcard{cursor:pointer}.wk .lcard .tcg{filter:none}
 .kb-wiki{position:absolute;left:6cqi;bottom:6cqi;color:#ff8a5c;font-size:4.4cqi;font-weight:700;cursor:pointer;text-decoration:none}
+
+/* ===== wiki (mesures kyara.games/wiki) ===== */
+.kwh{padding:26px 0 10px}.kwrow{display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px}
+.kwhl{min-width:0}.kwh1row{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 14px}
+.kwh1{margin:0;font:800 clamp(28px,4vw,40px)/1.05 'Bricolage Grotesque',Inter,sans-serif;letter-spacing:-.02em}
+.kwcnt{border-radius:99px;background:#1c1a23;color:var(--mut);white-space:nowrap;display:inline-flex;align-items:baseline;gap:6px;padding:4px 10px;font-size:12px}.kwcnt strong{color:#edeae4;font-size:13px}
+.kwtools{display:flex;align-items:center;gap:10px;margin-left:auto}
+.kwsearch{position:relative;flex:0 1 340px;display:block;color:var(--mut)}.kwsearch span{position:absolute;left:14px;top:50%;transform:translateY(-50%);pointer-events:none}
+.kwsearch input{box-sizing:border-box;width:100%;height:38px;border-radius:99px;background:#15141a;border:1px solid #2f2c38;color:#edeae4;padding:0 14px 0 36px;font:14px Inter,sans-serif}
+.kwfilt{height:38px;border-radius:99px;background:#15141a;border:1px solid #2f2c38;color:var(--mut);display:inline-flex;align-items:center;gap:8px;padding:0 14px 0 10px;font:600 13px Inter,sans-serif;white-space:nowrap;cursor:pointer}
+.kwfilt .box{width:18px;height:18px;border:1px solid #3a3742;border-radius:5px;display:grid;place-items:center;font-size:12px;color:#0e0d12}
+.kwfilt.on{border-color:var(--yel);color:#edeae4}.kwfilt.on .box{background:var(--yel);border-color:var(--yel)}
+.kwlist{list-style:none;margin:0;padding:0 0 0;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:10px}
+.kwr{width:100%;display:flex;align-items:center;gap:12px;padding:10px 14px 10px 10px;border:1px solid #25232c;background:#15141a;border-radius:14px;color:#edeae4;text-align:left;cursor:pointer;transition:border-color .15s,transform .15s}
+.kwr:hover{border-color:var(--acc);transform:translateY(-2px)}
+.kwr .th{width:48px;height:64px;flex:0 0 auto;border-radius:10px;overflow:hidden;background:#1c1a23;box-shadow:inset 0 0 0 2px var(--rc)}
+.kwr .th img{width:100%;height:100%;object-fit:cover;object-position:50% 20%;display:block}
+.kwr.locked .th img{filter:grayscale(1) brightness(.4)}
+.kwr .tx{flex:1 1 0;min-width:0;display:flex;flex-direction:column;gap:3px}
+.kwr .n{font:700 14px 'Bricolage Grotesque',Inter,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.kwr.locked .n{color:#b7b2bd}
+.kwr .s{color:#8a8590;font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kwr .r{font:900 13px 'Bricolage Grotesque',Inter,sans-serif}.kwr .lk{flex:0 0 auto;opacity:.45;font-size:12px}
+.kwmore{display:flex;justify-content:center;padding:32px 0 80px}
+.kwlink{display:grid;grid-template-columns:1fr auto;gap:2px 12px;width:100%;margin:20px 0 6px;padding:16px 18px;border:1px solid #25232c;background:#15141a;border-radius:14px;color:#edeae4;text-align:left;cursor:pointer}
+.kwlink b{font:700 16px 'Bricolage Grotesque',Inter,sans-serif}.kwlink small{color:var(--mut);grid-column:1}.kwlink span{grid-row:1/3;grid-column:2;align-self:center;color:var(--acc);font-size:20px}
+@media (max-width:768px){.kwh1{display:none}.kwtools{width:100%;margin-left:0}.kwsearch{flex:1 1 auto}}
+/* fiche */
+.kw .kw-hero{position:relative;overflow:hidden;border-bottom:1px solid #25232c;background-color:#1c1a23;background-image:repeating-linear-gradient(135deg,#ffffff09 0 10px,transparent 10px 20px)}
+.kw-bg{position:absolute;inset:-40px;background-size:cover;background-position:50% 25%;filter:blur(28px) saturate(1.2);opacity:.38}
+.kw-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,#0e0d12 0%,#0e0d128c 55%,#0e0d1240)}
+.kw-kanji{position:absolute;right:16px;top:10px;max-width:70%;overflow:hidden;white-space:nowrap;pointer-events:none;z-index:1;font:700 clamp(90px,16vw,220px)/1 'Bricolage Grotesque',Inter,sans-serif;letter-spacing:-.02em;color:#edeae412}
+.kw-in{position:relative;z-index:1;display:flex;flex-direction:column;justify-content:flex-end;gap:14px;min-height:300px;padding-top:28px;padding-bottom:40px}
+.kw-crumbs{position:absolute;top:24px;left:16px;right:16px;display:flex;flex-wrap:wrap;gap:10px;font-size:14px;color:var(--mut)}
+.kw-crumbs button{background:none;border:0;padding:0;color:#cfcad6;font:inherit;cursor:pointer}.kw-crumbs button:hover{color:#ff8a5c}.kw-crumbs [aria-current]{color:#edeae4}
+.kw-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:48px}
+.kw-tag{border:1px solid #3a3742;color:#d8d4de;border-radius:6px;padding:4px 10px;font-size:13px;font-weight:700}.kw-tag.st{background:var(--acc);border-color:var(--acc);color:#0e0d12}
+.kw h1{margin:0;font:900 clamp(38px,8vw,76px)/1 'Bricolage Grotesque',Inter,sans-serif;letter-spacing:-.02em;overflow-wrap:anywhere}
+.kw-sub{color:#cfcad6;font-size:22px;font-weight:500}.kw-sub .mono{color:var(--mut);font-size:14px}
+.kw-lay{display:flex;flex-wrap:wrap;align-items:flex-start;gap:48px;padding-top:40px;padding-bottom:80px}
+.kw-main{flex:999 1 560px;min-width:0;display:flex;flex-direction:column;gap:56px}
+.kw-toc{display:flex;flex-wrap:wrap;gap:8px}.kw-toc a{height:40px;display:flex;align-items:center;padding:0 14px;border:1px solid #2f2c38;border-radius:999px;color:#d8d4de;font-size:14px;font-weight:700;cursor:pointer}.kw-toc a:hover{border-color:var(--acc);color:#edeae4}
+.kw-sec{display:flex;flex-direction:column;gap:16px;scroll-margin-top:100px}.kw-sec h2{margin:0;font:800 26px/1.15 'Bricolage Grotesque',Inter,sans-serif}
+.kw-k{font:13px 'JetBrains Mono',monospace;letter-spacing:.14em;color:var(--acc)}
+.kw-big{margin:0;font-size:clamp(18px,2.4vw,22px);font-weight:500;line-height:1.55}.kw-mut{margin:0;color:#cfcad6;font-size:16px;line-height:1.75}
+.kw-table{border:1px solid #25232c;border-radius:14px;overflow-x:auto}.kw-table table{border-collapse:collapse;width:100%;font-size:14px}
+.kw-table th{background:#1c1a23;text-align:left;color:#d8d4de;padding:14px 18px;font-weight:700}.kw-table td{border-top:1px solid #25232c;padding:14px 18px}.kw-table td.mut{color:var(--mut);width:120px}
+.kw-rel{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.kw-rc{display:flex;align-items:center;gap:14px;padding:14px;border:1px solid #25232c;background:#15141a;border-radius:14px;color:#edeae4;text-align:left;cursor:pointer;transition:transform .18s,border-color .18s}.kw-rc:hover{border-color:var(--acc);transform:translateY(-3px)}
+.kw-rc .ri{width:64px;height:64px;flex:0 0 auto;border-radius:10px;overflow:hidden;background:#1c1a23;display:grid;place-items:center;font:900 24px 'Bricolage Grotesque',sans-serif;color:#34313b}
+.kw-rc .ri.miss{border:2px dashed #34313b}.kw-rc .ri img{width:100%;height:100%;object-fit:cover;object-position:50% 20%}
+.kw-rc .rt{display:flex;flex-direction:column;gap:4px;min-width:0}.kw-rc .rn{font:700 14px 'Bricolage Grotesque',Inter,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.kw-rc .rl{font-size:13px;font-weight:700}
+.kw-aside{flex:1 1 320px;min-width:0;position:sticky;top:24px;border:1px solid #25232c;background:#15141a;border-radius:18px;overflow:hidden}
+.kw-at{display:flex;flex-direction:column;gap:16px;padding:24px 24px 8px}
+.kw-zoom{display:block;width:100%;max-width:340px;margin:0 auto;padding:0;background:none;border:0;cursor:zoom-in}.kw-zoom .cw{width:100%}
+.kw-own{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px}.kw-own .o{font-size:14px;font-weight:700}.kw-own .dr{color:var(--mut);font-size:12px}
+.kw-btns{display:flex;flex-wrap:wrap;gap:8px}.kw-btns>*{flex:1 1 140px;border-radius:10px;width:auto;height:44px;font-size:14px}
+.kw-inf{margin:0;padding:8px 20px 0}.kw-inf div{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid #25232c;font-size:14px}
+.kw-inf dt{color:var(--mut);flex:0 0 auto}.kw-inf dd{margin:0;text-align:right;overflow-wrap:anywhere;font-weight:500}
+.kw-odds{margin:16px 20px 0;padding:14px 16px;background:#1c1a23;border-radius:14px;display:flex;flex-direction:column;gap:8px}
+.kw-odds .t{font:11px 'JetBrains Mono',monospace;letter-spacing:.12em;color:var(--mut)}.kw-odds .rw{display:flex;justify-content:space-between;gap:12px;font-size:13px}.kw-odds .rw b{font-size:12px}
+.kw-foot{padding:16px 20px 20px;color:var(--mut);font-size:13px;line-height:1.5}
+@media (max-width:960px){.kw-aside{order:-1;position:static}}
+@media (max-width:720px){.kw-in{min-height:240px;padding-bottom:28px}.kw-sub{font-size:18px}.kw-lay{gap:40px;padding-top:28px}.kw-at{padding:20px 16px 8px}.kw-inf{padding:8px 16px 0}.kw-zoom{max-width:260px}}
 </style></head><body>
 <div id="app"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
@@ -1181,7 +1230,7 @@ function render(){
  $$('.nav button[data-v],.dnav button[data-v]').forEach(b=>b.onclick=()=>{view=b.dataset.v;render();scrollTo(0,0)});
  $('#lg').onclick=()=>{view='home';render();scrollTo(0,0)};
  $('#msb').onclick=()=>{view='miss';render();scrollTo(0,0)};$('#ob').onclick=()=>openSheet(freeTot()>0?'free':ST.daily_ready?'daily':'paid');$('#av').onclick=()=>{view='more';render()};
- ({home,coll,mkt,more,miss,boost})[view]();
+ ({home,coll,mkt,more,miss,boost,wiki})[view]();
  tickT=setInterval(tick,1000)}
 function tick(){if(ST&&ST.free_next!=null){ST.free_next--;['#nx','#nx2'].forEach(s=>{const e=$(s);if(e)e.textContent=fmt(ST.free_next)});$$('[data-nx]').forEach(e=>e.textContent='Dans '+fmt(ST.free_next));$$('[data-nxp],[data-nxh]').forEach(e=>e.textContent=fmt(ST.free_next));if(ST.free_next<=0){refresh().then(()=>{if(!$('.stage')&&!$('.shade'))render()})}}}
 /* ---------- accueil ---------- */
@@ -1615,39 +1664,54 @@ function detail(n){
  rpc('card_since',{card:n}).then(v=>{const e=$('#since');if(e&&v&&!isNaN(new Date(v)))e.textContent=new Date(v).toLocaleDateString('fr',{day:'numeric',month:'long',year:'numeric'})}).catch(()=>{});
  if($('#rc1'))$('#rc1').onclick=async()=>{try{const x=await rpc('recycle',{n_card:n,k:q-1});ST=x.state;d.remove();toast('+'+x.gain+' 🍿');render()}catch(e){toast(e.message)}}}
 
-/* ---------- fiche wiki d'un perso possédé (comme la page wiki de Kyara : en-tête, apparitions, même univers ;
-   à droite la carte, ses infos, ses chances par booster et la date d'obtention) ---------- */
+/* ---------- wiki (mesuré sur kyara.games/wiki et /wiki/<id>) ---------- */
+/* accueil du wiki : titre + compteur, recherche, « fiches débloquées seulement », liste en grille 280 px */
+let WQ={q:'',own:false,n:60};
+function wiki(){
+ const own=Object.keys(ST.inv).filter(k=>ST.inv[k]>0).length;
+ $('#v').innerHTML=`<div class="kwh"><div class="kwrow"><div class="kwhl"><div class="eyebrow">Wiki · Persos</div><div class="kwh1row"><h1 class="kwh1">Le wiki des persos</h1><span class="kwcnt"><strong>${own.toLocaleString('fr')}</strong> fiches débloquées sur ${CARDS.length.toLocaleString('fr')}.</span></div></div>
+  <div class="kwtools"><label class="kwsearch"><span>⌕</span><input id="wq" placeholder="Perso ou univers…" value="${esc(WQ.q)}"></label><button class="kwfilt ${WQ.own?'on':''}" id="wown"><span class="box">${WQ.own?'✓':''}</span>Fiches débloquées seulement</button></div></div></div>
+  <ul class="kwlist" id="wl"></ul><div class="kwmore" id="wm"></div>`;
+ const draw=()=>{const q=WQ.q.toLowerCase();let L=CARDS.filter(c=>(!WQ.own||ST.inv[c.n])&&(!q||(c.name+' '+c.show).toLowerCase().includes(q)));
+  $('#wl').innerHTML=L.slice(0,WQ.n).map(c=>{const o=ST.inv[c.n];return `<li><button class="kwr ${o?'':'locked'}" data-wn="${c.n}"><span class="th" style="--rc:${RC[c.r]}">${pic(c)}</span><span class="tx"><span class="n">${esc(c.name)}</span><span class="s">${esc(c.show)} · <span class="mono">#${pad(c.n)}</span></span></span><span class="r" style="color:${RC[c.r]}">${c.r}</span>${o?'':'<span class="lk">🔒</span>'}</button></li>`}).join('');
+  $('#wm').innerHTML=L.length>WQ.n?`<button class="btn g" id="wmore">Afficher plus · ${(L.length-WQ.n).toLocaleString('fr')} restantes</button>`:'';
+  const m=$('#wmore');if(m)m.onclick=()=>{WQ.n+=60;draw()};
+  $$('[data-wn]').forEach(b=>b.onclick=()=>lockedPage(+b.dataset.wn))};
+ let t=0;$('#wq').oninput=e=>{clearTimeout(t);t=setTimeout(()=>{WQ.q=e.target.value;WQ.n=60;draw()},150)};
+ $('#wown').onclick=()=>{WQ.own=!WQ.own;WQ.n=60;wiki()};
+ draw()}
+/* fiche d'un perso possédé : en-tête rayé + photo floue, fil d'Ariane, filigrane, étiquettes, grand nom ;
+   à gauche sommaire en pastilles et sections « 01 — … » ; à droite panneau collant : carte, possession, boutons, infos, chances, date */
 function wikiPage(n){
  const old=$('.lpg');if(old)old.remove();
  const c=CARDS[n-1],q=ST.inv[n]||0,mix=cardPct(c,null,false),th=ST.themes.filter(t=>c.g.includes(t)),
-  same=CARDS.filter(x=>x.show==c.show&&x.n!=c.n).sort((a,b)=>ORD.indexOf(b.r)-ORD.indexOf(a.r)||a.n-b.n).slice(0,12),
-  sAll=CARDS.filter(x=>x.show==c.show),sOwn=sAll.filter(x=>ST.inv[x.n]).length;
- const rows=[['Casting Mix',mix],...th.map(t=>[fr(t),cardPct(c,t,false)]),...(c.g.includes(ST.daily_theme)?[['Pack du jour · '+fr(ST.daily_theme),cardPct(c,ST.daily_theme,true)]]:[])].sort((a,b)=>b[1]-a[1]);
- const ini=c.name.split(/\s+/).map(w=>w[0]).join('').slice(0,3).toUpperCase();
- const d=document.createElement('div');d.className='lpg wk';d.style.setProperty('--rc',RC[c.r]);
- d.innerHTML=`<div class="lhero"><div class="lbg wbg" style="background-image:url('${imgUrl(c)}')"></div><div class="wrap lhin"><button class="lbk" id="lbk">← Retour</button><div class="crumb mono">Collection / ${esc(c.show)} / ${esc(c.name)}</div>
-  <div class="ltags"><span class="tg acc">${esc(c.show)}</span><span class="tg" style="--c:${RC[c.r]}">${RN[c.r]}</span><span class="tg" style="--c:#8b8b99">Possédée ×${q}</span></div><h1>${esc(c.name)}</h1><div class="lno mono">${c.act?esc(c.act)+' · ':''}#${pad(c.n)} / ${CARDS.length.toLocaleString('fr')}</div></div><div class="lwm">${esc(ini)}</div></div>
- <div class="wrap lbody"><div class="lmain">
-  <div class="wtabs"><button data-go2="wap">Apparitions</button><button data-go2="wst">Statistiques</button>${same.length?'<button data-go2="wmu">Même univers</button>':''}</div>
-  <div class="lsec" id="wap"><div class="eyebrow">01 — Apparitions</div>
-   <div class="wtab"><div class="wr wh"><span>Média</span><span>Titre</span><span>Rôle</span></div><div class="wr"><span>Série</span><span>${esc(c.show)}</span><span>${c.act?'Joué par '+esc(c.act):'–'}</span></div></div>
-   <p class="mut" style="font-size:13px;margin:10px 0 0">${c.g.slice(0,3).map(fr).join(' · ')||''}</p></div>
-  <div class="lsec" id="wst"><div class="eyebrow">02 — Statistiques</div><h2>La carte</h2>
-   <div class="wsts"><div><small>POW</small><b class="mono">${c.pow}</b><i style="width:${c.pow}%"></i></div><div><small>AURA</small><b class="mono">${c.aura}</b><i style="width:${c.aura}%"></i></div>
-    <div><small>Joueurs qui l'ont</small><b class="mono" id="wown">–</b></div><div><small>Série complétée</small><b class="mono">${sOwn} / ${sAll.length}</b></div></div></div>
-  ${same.length?`<div class="lsec" id="wmu"><div class="eyebrow">Même univers</div><h2>Autres persos de ${esc(c.show)}</h2><div class="lsame">${same.map(x=>ST.inv[x.n]?`<button class="sm1" data-ln2="${x.n}"><span class="smi">${pic(x)}</span><div><b>${esc(x.name)}</b><small style="color:${RC[x.r]}">${RN[x.r]}</small></div></button>`:`<button class="sm1" data-ln2="${x.n}"><span class="q">?</span><div><b>???</b><small style="color:${RC[x.r]}">${RN[x.r]} · à trouver</small></div></button>`).join('')}</div></div>`:''}
- </div><aside class="lside"><div class="lcard" id="wcd">${card(c,{q})}</div><div class="lst"><b style="color:${RC[c.r]}">${RN[c.r]}</b> · possédée ×${q}</div><div class="mono mut" style="font-size:13px">${fpct(mix)} / booster Mix</div>
-  <div class="wbts"><button class="btn a" id="wsee">Voir la carte</button>${q>1?`<button class="btn y" id="wrc">Recycler ${q-1} doublon${q>2?'s':''} · +${(q-1)*REC[c.r]} 🍿</button>`:''}</div>
-  <dl class="linf"><dt>Interprète</dt><dd>${esc(c.act||'–')}</dd><dt>Série</dt><dd>${esc(c.show)}</dd><dt>Genres</dt><dd>${c.g.slice(0,3).map(fr).join(', ')||'–'}</dd><dt>Numéro</dt><dd class="mono">#${pad(c.n)}</dd><dt>Recyclée</dt><dd>${REC[c.r]} 🍿</dd></dl>
-  <div class="lodl"><div class="mono mut" style="font-size:11px;letter-spacing:.1em;margin-bottom:4px">CHANCE PAR BOOSTER</div>${rows.map(([l,v])=>`<div class="o"><span>${esc(l)}</span><em>${fpct(v)}</em></div>`).join('')}</div>
-  <p class="lft mono" id="wsince">Carte obtenue</p></aside></div>`;
+  same=CARDS.filter(x=>x.show==c.show&&x.n!=c.n).sort((a,b)=>(!!ST.inv[b.n]-!!ST.inv[a.n])||ORD.indexOf(b.r)-ORD.indexOf(a.r)||a.n-b.n).slice(0,12);
+ const rows=[['Casting Mix',mix],...th.map(t=>[fr(t),cardPct(c,t,false)]),...(c.g.includes(ST.daily_theme)?[['Pack du jour',cardPct(c,ST.daily_theme,true)]]:[])].sort((a,b)=>b[1]-a[1]);
+ const gs=c.g.slice(0,3).map(fr);
+ const d=document.createElement('div');d.className='lpg kw';d.style.setProperty('--rc',RC[c.r]);
+ d.innerHTML=`<div class="kw-hero"><div class="kw-bg" style="background-image:url('${imgUrl(c)}')"></div><div class="kw-kanji">${esc(c.name)}</div>
+  <div class="wrap kw-in"><nav class="kw-crumbs"><button id="kwb">← Wiki</button><span>/</span><button id="kws">${esc(c.show)}</button><span>/</span><span aria-current="page">${esc(c.name)}</span></nav>
+   <div class="kw-tags"><span class="kw-tag st">${esc(c.show)}</span><span class="kw-tag" style="color:${RC[c.r]};border-color:${RC[c.r]}">${RN[c.r]}</span><span class="kw-tag">Possédée ×${q}</span></div>
+   <h1>${esc(c.name)}</h1><div class="kw-sub">${c.act?esc(c.act)+' · ':''}<span class="mono">#${pad(c.n)}/${CARDS.length}</span></div></div></div>
+ <div class="wrap kw-lay"><div class="kw-main">
+  <div class="kw-toc"><a data-to="kbio">Biographie</a><a data-to="kapp">Apparitions</a>${same.length?'<a data-to="kuni">Même univers</a>':''}</div>
+  <section class="kw-sec" id="kbio"><div class="kw-k">01 — BIOGRAPHIE</div><p class="kw-big">${esc(c.name)} est un personnage de la série ${esc(c.show)}${c.act?`, joué par ${esc(c.act)}`:''}.</p>${gs.length?`<p class="kw-mut">Genres de la série : ${gs.join(', ')}.</p>`:''}</section>
+  <section class="kw-sec" id="kapp"><div class="kw-k">02 — APPARITIONS</div><div class="kw-table"><table><thead><tr><th>Média</th><th>Titre</th></tr></thead><tbody><tr><td class="mut">Série</td><td>${esc(c.show)}</td></tr>${c.act?`<tr><td class="mut">Interprète</td><td>${esc(c.act)}</td></tr>`:''}</tbody></table></div></section>
+  ${same.length?`<section class="kw-sec" id="kuni"><div class="kw-k">MÊME UNIVERS</div><h2>Autres persos de ${esc(c.show)}</h2><div class="kw-rel">${same.map(x=>ST.inv[x.n]?`<button class="kw-rc" data-rn="${x.n}"><span class="ri">${pic(x)}</span><span class="rt"><span class="rn">${esc(x.name)}</span><span class="rl" style="color:${RC[x.r]}">${RN[x.r]}</span></span></button>`:`<button class="kw-rc" data-rn="${x.n}"><span class="ri miss">?</span><span class="rt"><span class="rn">???</span><span class="rl" style="color:${RC[x.r]}">${RN[x.r]} · à trouver</span></span></button>`).join('')}</div></section>`:''}
+ </div><aside class="kw-aside"><div class="kw-at"><button class="kw-zoom" id="kwz">${card(c,{q})}</button>
+   <div class="kw-own"><span class="o" style="color:${RC[c.r]}">${RN[c.r]} · possédée ×${q}</span><span class="dr mono">${fpct(mix)} / booster</span></div>
+   <div class="kw-btns"><button class="btn a" id="wsee">Voir la carte</button>${q>1?`<button class="btn y" id="wrc">Recycler ${q-1} · +${(q-1)*REC[c.r]} 🍿</button>`:''}</div></div>
+  <dl class="kw-inf"><div><dt>Interprète</dt><dd>${esc(c.act||'–')}</dd></div><div><dt>Univers</dt><dd>${esc(c.show)}</dd></div><div><dt>Genres</dt><dd>${gs.join(', ')||'–'}</dd></div><div><dt>POW</dt><dd class="mono">${c.pow}</dd></div><div><dt>AURA</dt><dd class="mono">${c.aura}</dd></div><div><dt>Joueurs qui l'ont</dt><dd class="mono" id="wown">–</dd></div><div><dt>Recyclée</dt><dd>${REC[c.r]} 🍿</dd></div></dl>
+  <div class="kw-odds"><div class="t">CHANCE PAR BOOSTER</div>${rows.map(([l,v])=>`<div class="rw"><span>${esc(l)}</span><b class="mono">${fpct(v)}</b></div>`).join('')}</div>
+  <div class="kw-foot" id="wsince">Carte obtenue</div></aside></div>`;
  document.body.append(d);d.scrollTop=0;
  const close=()=>{document.removeEventListener('keydown',kh);d.remove()};const kh=e=>{if(e.key=='Escape')close()};document.addEventListener('keydown',kh);
- d.querySelector('#lbk').onclick=close;
- d.querySelectorAll('[data-go2]').forEach(b=>b.onclick=()=>{const t=d.querySelector('#'+b.dataset.go2);if(t)d.scrollTo({top:t.offsetTop-80,behavior:'smooth'})});
- d.querySelector('#wsee').onclick=()=>detail(n);d.querySelector('#wcd').onclick=()=>detail(n);
+ d.querySelector('#kwb').onclick=()=>{close();if(view!='wiki'){view='wiki';render();scrollTo(0,0)}};
+ d.querySelector('#kws').onclick=()=>{close();view='coll';F.show=c.show;F.mode='cards';F.n=60;render();scrollTo(0,0)};
+ d.querySelectorAll('[data-to]').forEach(a=>a.onclick=()=>{const t=d.querySelector('#'+a.dataset.to);if(t)d.scrollTo({top:t.offsetTop-90,behavior:'smooth'})});
+ d.querySelector('#wsee').onclick=()=>detail(n);d.querySelector('#kwz').onclick=()=>detail(n);
  const rc=d.querySelector('#wrc');if(rc)rc.onclick=async()=>{try{const x=await rpc('recycle',{n_card:n,k:q-1});ST=x.state;toast('+'+x.gain+' 🍿');wikiPage(n);if(view=='coll')list()}catch(e){toast(e.message)}};
- d.querySelectorAll('[data-ln2]').forEach(b=>b.onclick=()=>lockedPage(+b.dataset.ln2));
+ d.querySelectorAll('[data-rn]').forEach(b=>b.onclick=()=>lockedPage(+b.dataset.rn));
  rpc('card_owners',{card:n}).then(v=>{const e=d.querySelector('#wown');if(e&&Number.isFinite(+v))e.textContent=(+v).toLocaleString('fr')}).catch(()=>{});
  rpc('card_since',{card:n}).then(v=>{const e=d.querySelector('#wsince');if(e&&v&&!isNaN(new Date(v)))e.textContent='Carte obtenue le '+new Date(v).toLocaleDateString('fr',{day:'numeric',month:'long',year:'numeric'})}).catch(()=>{});
 }
@@ -1716,13 +1780,13 @@ async function miss(){
 /* ---------- autres onglets ---------- */
 function mkt(){$('#v').innerHTML=`<div class="center"><div style="font-size:54px">🏷️</div><h2>Marché</h2><p>Vente et échange de cartes entre joueurs : bientôt.</p></div>`}
 function more(){
- $('#v').innerHTML=`<div class="sec"><div class="eyebrow">Compte</div><h2>${esc(ST.name)}</h2></div>
+ $('#v').innerHTML=`<button class="kwlink" id="gwk"><b>Le wiki des persos</b><small>Toutes les fiches, débloquées ou à trouver</small><span>→</span></button><div class="sec"><div class="eyebrow">Compte</div><h2>${esc(ST.name)}</h2></div>
  <div class="tiles"><div class="tile"><b>${ST.boosters}</b><small>boosters ouverts</small></div><div class="tile"><b>${Math.max(0,ST.pity_max-ST.pity)}</b><small>avant Mythique sûre</small></div><div class="tile"><b>${ST.popcorns}</b><small>Popcorns</small></div></div>
  <div class="sec"><div class="eyebrow">Réglages</div></div><button class="btn g" id="mo">Animations : ${MO()?'désactivées':'activées'}</button><br><button class="btn g" id="snd">Son : ${SND()?'activé':'coupé'}</button>
  <div class="sec"><div class="eyebrow">Règles</div><h2>Comment ça marche</h2></div>
  <p class="mut">Un booster gratuit se recharge toutes les ${CFG.free_minutes} minutes (jusqu'à ${ST.free_max} en stock). Le pack du jour est offert chaque jour avec une Épique garantie. Chaque booster contient 5 cartes : 3 Communes ou mieux, 1 Peu commune ou mieux et 1 Rare ou mieux (C C C U R). Après ${ST.golden_every||10} boosters, le suivant est doré (C C U R E). Très rarement, un god pack donne 4 Épiques et 1 Mythique. Une Mythique est garantie après ${ST.pity_max} boosters sans Mythique. À chaque Légendaire ou Mythique obtenue, même en double, tu gagnes ${BON.L} ou ${BON.M} 🍿. Les doublons se recyclent en Popcorns : ${Object.entries(REC).map(([r,v])=>RN[r]+' '+v).join(', ')}.</p><br>
  <button class="btn g" id="lo">Se déconnecter</button><footer>Projet fan non officiel. This product uses the TMDB API but is not endorsed or certified by TMDB.</footer>`;
- $('#snd').onclick=()=>{lsset('snd',SND()?'0':'1');if(SND())SFX.rar('E');more()};$('#mo').onclick=()=>{lsset('mo',MO()?'0':'1');document.documentElement.classList.toggle('mo',MO());more()};
+ $('#snd').onclick=()=>{lsset('snd',SND()?'0':'1');if(SND())SFX.rar('E');more()};$('#gwk').onclick=()=>{view='wiki';render();scrollTo(0,0)};$('#mo').onclick=()=>{lsset('mo',MO()?'0':'1');document.documentElement.classList.toggle('mo',MO());more()};
  $('#lo').onclick=async()=>{await sb.auth.signOut();ST=null;render()}}
 init();
 </script></body></html>
