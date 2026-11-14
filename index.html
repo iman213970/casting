@@ -926,7 +926,6 @@ html.mo .who,html.mo .who *{animation:none!important}
 /* booster doré : ruban, phrase, bandeau (principe Kyara : compteur, puis Épique ou mieux garantie) */
 .gribbon{position:absolute;left:-6%;right:-6%;top:66%;z-index:7;height:11%;display:grid;place-items:center;background:linear-gradient(90deg,#b8860b,#ffe27a 30%,#f7c61b 60%,#b8860b);box-shadow:0 4px 14px #0008,inset 0 1px 0 #fff8;transform:rotate(-4deg);pointer-events:none}
 .gribbon b{font:800 clamp(14px,calc(var(--w,220px)*.09),26px) 'Bricolage Grotesque',Inter,sans-serif;letter-spacing:.3em;text-indent:.3em;color:#3a2600}
-.packwrap.gold .pkw{filter:sepia(.55) saturate(1.8) hue-rotate(-8deg) brightness(1.08)}
 .packwrap.go .gribbon{opacity:0;transition:opacity .3s}
 .gline{margin:0;color:#f7c61b;font-weight:700;font-size:14px;text-align:center}
 .gbn{position:fixed;left:0;right:0;top:clamp(70px,12vh,120px);z-index:46;text-align:center;pointer-events:none;font:800 clamp(30px,6vw,64px)/1 'Bricolage Grotesque',Inter,sans-serif;letter-spacing:.06em;color:#fff6d6;text-shadow:0 0 12px #f7c61b,0 0 34px #f7a21b,0 0 70px #ff7a00;animation:gbin .5s cubic-bezier(.2,.9,.3,1.2) both;transition:opacity .5s}
@@ -1080,6 +1079,24 @@ html.mo .tcg .fx{animation:none}
 .kw-foot{padding:16px 20px 20px;color:var(--mut);font-size:13px;line-height:1.5}
 @media (max-width:960px){.kw-aside{order:-1;position:static}}
 @media (max-width:720px){.kw-in{min-height:240px;padding-bottom:28px}.kw-sub{font-size:18px}.kw-lay{gap:40px;padding-top:28px}.kw-at{padding:20px 16px 8px}.kw-inf{padding:8px 16px 0}.kw-zoom{max-width:260px}}
+
+/* ---------- boosters doré et divin : vernis sur le paquet (mesuré sur Kyara) ---------- */
+.packwrap{--u:calc(var(--w,220px)/100)}
+.gild{position:absolute;inset:0;pointer-events:none;border-radius:6%/4%;overflow:hidden;z-index:6;backface-visibility:hidden;
+ background:radial-gradient(2px 2px at 18% 22%,#fff 60%,#0000),radial-gradient(2px 2px at 76% 14%,#fff 60%,#0000),radial-gradient(1.5px 1.5px at 84% 58%,#fff 60%,#0000),radial-gradient(2px 2px at 12% 70%,#fff 60%,#0000),linear-gradient(125deg,#fff0c859,#0000 30%,#ffdc8c40 60%,#0000 80%);
+ box-shadow:inset 0 0 0 calc(var(--u)*1.4) #f5c518,inset 0 0 0 calc(var(--u)*2.2) #8c5f3eb3,inset 0 0 0 calc(var(--u)*2.6) #fff0becc,inset 0 0 calc(var(--u)*12) #f5c51866}
+.gild.golden::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,#0000 30%,#ffeca066 46%,#ffffff8c 50%,#ffeca066 54%,#0000 70%);transform:translate(-110%);animation:gshine 3.2s ease-in-out infinite}
+@keyframes gshine{60%,to{transform:translate(110%)}}
+.gild-rb{position:absolute;left:calc(var(--u)*-2);right:calc(var(--u)*-2);bottom:22%;padding:calc(var(--u)*1.4) 0;text-align:center;font:900 calc(var(--u)*6) 'Bricolage Grotesque',Inter,sans-serif;letter-spacing:.3em;text-indent:.3em;color:#3a2410;background:linear-gradient(90deg,#8c5f3e,#f5c518 20%,#fff0c0 50%,#f5c518 80%,#8c5f3e);transform:rotate(-4deg);box-shadow:0 calc(var(--u)*1) calc(var(--u)*3) #00000073}
+.gild-k{position:absolute;top:calc(var(--u)*4);right:calc(var(--u)*4);width:calc(var(--u)*13);aspect-ratio:1;display:grid;place-items:center;border-radius:calc(var(--u)*2);font:900 calc(var(--u)*8) Inter,sans-serif;color:#3a2410;background:linear-gradient(160deg,#fff0d8,#e9c496 50%,#8c5f3e);transform:rotate(-4deg);box-shadow:0 calc(var(--u)*1) calc(var(--u)*3) #00000073}
+.gild.divine{background:conic-gradient(at 50% 42%,#ff4d2e33,#f5c51833,#3fbf7f33,#4dd6ff33,#b072ff33,#ff4d9e33,#ff4d2e33),radial-gradient(70% 50% at 50% 42%,#ffffff8c,#0000 70%);box-shadow:inset 0 0 0 calc(var(--u)*1.2) #ffffffe6,inset 0 0 calc(var(--u)*14) #ffffffb3}
+.gild.divine .gild-rb{color:#ff4d2e;background:linear-gradient(90deg,#e9c496,#fff 30%,#fff4de 70%,#e9c496)}
+.gild.divine .gild-k{color:#ff4d2e;background:linear-gradient(160deg,#fff,#fff4de)}
+.drays{position:absolute;inset:-60%;z-index:-1;pointer-events:none;border-radius:50%;background:repeating-conic-gradient(#ffffff80 0deg 4deg,#0000 4deg 14deg);-webkit-mask:radial-gradient(closest-side,#000 20%,#0000 100%);mask:radial-gradient(closest-side,#000 20%,#0000 100%);animation:drot 12s linear infinite,fadein .5s both}
+@keyframes drot{to{rotate:360deg}}
+html.mo .drays,html.mo .gild::after{animation:none}
+.stage.divine{--pc1:#ffffff}
+.tagg.dv{background:linear-gradient(90deg,#fff,#fff4de);color:#ff4d2e}
 </style></head><body>
 <div id="app"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
@@ -1384,6 +1401,8 @@ function poolSheet(g){
  $$('[data-pr]').forEach(c=>c.onclick=()=>{PQ.r=PQ.r==c.dataset.pr?'':c.dataset.pr;PQ.n=90;draw()});draw()}
 /* ---------- écran du paquet : quantité, gestes, ouverture ---------- */
 const rankOf=c=>ORD.indexOf(c.r),rcol=r=>r=='M'?'#ff5c8a':RC[r];
+const GILD=v=>`<span class="gild ${v}"><span class="gild-k">${v=='divine'?'✦':'★'}</span><span class="gild-rb">${v=='divine'?'DIVIN':'DORÉ'}</span></span>`;
+function gildPack(pw,v){pw.querySelectorAll('.gild').forEach(x=>x.remove());pw.querySelectorAll('.lay').forEach(l=>l.insertAdjacentHTML('beforeend',GILD(v)));pw.classList.toggle('divine',v=='divine');pw.classList.toggle('golden',v=='golden')}
 function packScreen(kind,genre,q0){
  const sp=kind=='shop'?SHOP.find(x=>x.id==genre):null,g=sp?null:kind=='daily'?ST.daily_theme:genre,c1=sp?sp.c:gcol(g),price=sp?shopPrice(sp):g?ST.gprice:ST.price,mode=sp?sp.mode:'tear';let qty=q0||1,done=false,sx=null,sy=0,p=0,moved=0,tearing=false,auto0=false;
  const maxQ=()=>kind=='daily'?(ST.daily_ready?1:0):kind=='free'?freeTot():sp?(ST.popcorns>=price?1:0):Math.floor(ST.popcorns/price);
@@ -1396,10 +1415,11 @@ function packScreen(kind,genre,q0){
  const art=sp?shopArt(sp):packArt(env?'daily':'pochette',g),gold=!env&&goldIn()==0;
  const motes=`<div class="motes">${Array.from({length:innerWidth<600?26:50},()=>`<i style="left:${Math.random()*100}%;--md:${7+Math.random()*7}s;--dl:${-Math.random()*12}s;--mx:${(Math.random()-.5)*80|0}px"></i>`).join('')}</div>`;
  d.innerHTML=`${motes}<button class="skip" id="cl0" aria-label="Fermer">✕</button><button class="sndb" id="sdb">${SND()?'🔊':'🔇'}</button><div class="eyebrow">${gold?'✦ Booster doré · ':''}${sp?'Boutique · '+esc(sp.n):(env?'Pack du jour':kind=='free'?'Booster gratuit':'Booster')+(g?' · '+fr(g):' · Mix')}</div>
-  <div class="pkdrop"><div class="pkfloat" id="pf"><div class="packwrap ${env?'envp':''} ${gold?'gold':''} m-${mode}" id="pw" style="--w:${W}px;--h:${HR}"><div class="cout" id="cout"></div>${env?`<div class="lay body">${art}</div>`:`<div class="lay whole">${art}</div><div class="lay body" style="clip-path:${pbody}">${art}</div><div class="beam"></div><div class="lay strip" id="stp" style="clip-path:${pstrip}">${art}</div><div class="hintl"><i></i></div><div class="tear" id="tr"></div>`}<div class="shards" id="shd"></div>${gold?'<div class="gribbon"><b>DORÉ</b></div>':''}<i class="glare"></i></div></div><div class="pkgnd" style="--w:${W}px"></div></div>
+  <div class="pkdrop"><div class="pkfloat" id="pf"><div class="packwrap ${env?'envp':''} ${gold?'gold':''} m-${mode}" id="pw" style="--w:${W}px;--h:${HR}"><div class="cout" id="cout"></div>${env?`<div class="lay body">${art}</div>`:`<div class="lay whole">${art}</div><div class="lay body" style="clip-path:${pbody}">${art}</div><div class="beam"></div><div class="lay strip" id="stp" style="clip-path:${pstrip}">${art}</div><div class="hintl"><i></i></div><div class="tear" id="tr"></div>`}<div class="shards" id="shd"></div><i class="glare"></i></div></div><div class="pkgnd" style="--w:${W}px"></div></div>
   ${gold?'<p class="gline" id="gl0">Ce booster sera doré : Épique ou mieux garantie</p>':''}<div class="qrow" id="qr"></div><div class="pkb"><button class="ob" id="obt" style="--c1:var(--yel)">Ouvrir<small id="cost"></small></button></div>
   <p class="mut" style="margin:0" id="hn0">${env?'Touche l’enveloppe ou glisse-la vers le haut':mode=='seal'?'Maintiens le sceau pour le briser':mode=='lid'?'Glisse vers le haut pour soulever le couvercle':mode=='flap'?'Glisse vers le haut pour ouvrir le rabat':'Glisse le long de la ligne pointillée pour déchirer'}</p>
   <p class="mut mono gar">Mythique garantie dans ${Math.max(1,ST.pity_max-ST.pity)} booster${ST.pity_max-ST.pity>1?'s':''} au plus</p><button class="lnk" id="chg">Changer de booster</button>`;
+ if(gold)gildPack($('#pw'),'golden');
  $('#sdb').onclick=e=>{e.stopPropagation();lsset('snd',SND()?'0':'1');e.target.textContent=SND()?'🔊':'🔇';if(SND())SFX.flip()};
  $('#cl0').onclick=close;$('#chg').onclick=()=>{document.removeEventListener('keydown',kh);d.remove();openSheet(sp?'shop':env?'daily':kind=='free'?'free':'paid')};
  const drawQ=()=>{const mq=maxQ();qty=Math.min(qty,Math.max(1,mq));
@@ -1426,8 +1446,9 @@ function packScreen(kind,genre,q0){
   const t0=Date.now(),req=rpc('open_boosters',{kind,genre:env?null:genre,qty:env||sp?1:qty}).then(async r=>{ST=r.state;const cs=r.boosters.flatMap(b=>b.cards.map(x=>CARDS[x.n-1]));preload(cs);return r});
   req.then(r=>setTimeout(()=>{
    const bc=r.boosters.flatMap(b=>b.cards.map(x=>CARDS[x.n-1])).reduce((a,c)=>rankOf(c)>rankOf(a)?c:a),bk=rankOf(bc),b0=r.boosters[0];
+   const dv=r.boosters.some(b=>b.god||b.pity_hit);if(dv){gildPack(pw,'divine');$('#pf').insertAdjacentHTML('afterbegin','<div class="drays"></div>');d.classList.add('divine');SFX.rar&&SFX.rar('M')}
    const gc=bk>=2?rcol(bc.r):'#ffffff';pw.style.setProperty('--bc',gc);pw.style.setProperty('--gc',gc);if(bk>=2)d.style.setProperty('--pc1',gc);pw.classList.add('bm');
-   $('#cout').innerHTML=Array.from({length:5},(_,k)=>`<div style="--r:${k*1.6}deg;animation-delay:${k*40}ms">${cardBack(b0.golden||b0.god?'#f7c61b':c1)}</div>`).join('');
+   $('#cout').innerHTML=Array.from({length:5},(_,k)=>`<div style="--r:${k*1.6}deg;animation-delay:${k*40}ms">${cardBack(dv?'#fff4de':b0.golden?'#f7c61b':c1)}</div>`).join('');
    pw.classList.add('out');SFX.whoosh();if(bk>=4)SFX.rumble(.9);
    setTimeout(()=>{document.removeEventListener('keydown',kh);reveal(d,r,kind,sp?sp.id:g,env||sp?1:qty)},1100)},Math.max(0,700-(Date.now()-t0))),
    e=>{toast(e.message);close()})};
@@ -1484,7 +1505,7 @@ function fanHtml(list,best,cnt){
  const span=2*mk*sp+w0,s=Math.max(.45,Math.min(1,(Math.min(innerWidth,1240)-48)/span,(innerHeight-300)/(w0*1.4+90+cy*mk*mk))),w=w0*s;
  return `<div class="rfan2" style="width:${span*s|0}px;height:${(w*1.4+40+(cy*mk*mk+30)*s)|0}px">${fan.map(({c,k},j)=>`<div class="fc ${k==0?'fbest':''}" style="--w:${w|0}px;--x:${k*sp*s|0}px;--y:${(k==0?-30:cy*k*k)*s|0}px;--r:${k*rot}deg;--dd:${dl*j|0}ms;z-index:${k==0?20:20-Math.abs(k)}">${k==0?`<span class="bl" style="--c:${rcol(c.r)}">Meilleure carte</span>`:''}${nb(c)}${card(c,{q:cnt?cnt[c.n]:0})}</div>`).join('')}</div>`}
 function reveal(d,r,kind,g,qty){
- const c1=kind=='shop'?(SHOP.find(x=>x.id==g)||{}).c||'#fff':gcol(g);setTimeout(()=>r.boosters.forEach(b=>b.cards.forEach(x=>WISH.delete(x.n))));let bs=r.boosters.map(b=>({pity:b.pity_hit,golden:b.golden,god:b.god,cards:b.cards.map(x=>({...CARDS[x.n-1],new:x.new,bonus:x.bonus,wished:WISH.has(x.n)})).sort((p,q)=>rankOf(p)-rankOf(q))}));
+ const c1=kind=='shop'?(SHOP.find(x=>x.id==g)||{}).c||'#fff':gcol(g);setTimeout(()=>r.boosters.forEach(b=>b.cards.forEach(x=>WISH.delete(x.n))));let bs=r.boosters.map(b=>({pity:b.pity_hit,golden:b.golden,god:b.god||b.pity_hit,cards:b.cards.map(x=>({...CARDS[x.n-1],new:x.new,bonus:x.bonus,wished:WISH.has(x.n)})).sort((p,q)=>rankOf(p)-rankOf(q))}));
  const multi=bs.length;if(multi>1)bs=[{pity:bs.some(b=>b.pity),golden:bs.some(b=>b.golden),god:bs.some(b=>b.god),cards:bs.flatMap(b=>b.cards).sort((p,q)=>rankOf(p)-rankOf(q))}];
  const all=bs[0].cards.slice(),WHO=multi>1?4:3;let bi=-1;
  const flash=col=>{const f=document.createElement('div');f.className='flash';f.style.setProperty('--fc',col);document.body.append(f);setTimeout(()=>f.remove(),800)};
@@ -1497,13 +1518,13 @@ function reveal(d,r,kind,g,qty){
   const DW=Math.round(Math.max(150,Math.min(340,innerWidth*.7,(innerHeight-(innerHeight<760?390:330))*.714)));
   if(rankOf(top)<2)d.style.setProperty('--pc1',c1);d.classList.remove('dim');
   d.innerHTML=`<button class="skip" id="sk">Passer</button><div class="mut mono ct" id="ct"></div>
-   <div class="deck" id="dk" style="--dw:${DW}px"><div class="hal" id="hal"></div><div class="rays" id="ry"></div>${cs.map((c,k)=>`<div class="dk" style="--o:${k};--oo:${Math.min(k,3)};${k>3?'opacity:0;':''}"><div class="f3" style="--fd:${FD[c.r]}ms"><div class="fa">${cardBack(b.golden||b.god?'#f7c61b':c1)}</div><div class="fb">${card(c)}${c.wished?'<span class="nwb wsh">♥ ENVIE</span>':c.new?'<span class="nwb">NOUVEAU</span>':''}</div></div><i class="cring"></i></div>`).join('')}</div>
+   <div class="deck" id="dk" style="--dw:${DW}px"><div class="hal" id="hal"></div><div class="rays" id="ry"></div>${cs.map((c,k)=>`<div class="dk" style="--o:${k};--oo:${Math.min(k,3)};${k>3?'opacity:0;':''}"><div class="f3" style="--fd:${FD[c.r]}ms"><div class="fa">${cardBack(b.god?'#fff4de':b.golden?'#f7c61b':c1)}</div><div class="fb">${card(c)}${c.wished?'<span class="nwb wsh">♥ ENVIE</span>':c.new?'<span class="nwb">NOUVEAU</span>':''}</div></div><i class="cring"></i></div>`).join('')}</div>
    <div class="rv" id="in"></div><div class="pslots ${n>10?'sm':''}" id="ps">${cs.map((c,k)=>`<i class="${k?'':'cur'}"></i>`).join('')}</div><p class="mut" id="hn" style="margin:0">Touche la carte pour la retourner</p>
    <div class="rbtns">${cs.some(c=>rankOf(c)>=3)?'<button class="btn g" id="nxe">Passer à la prochaine Épique ou +</button>':''}<button class="btn g" id="ra">Tout révéler</button></div>${matchMedia('(hover:hover)').matches?'<p class="mut mono kbd">Espace : suivante · maintenir : avance rapide</p>':''}<button class="sndb" id="sdb">${SND()?'🔊':'🔇'}</button>`;
   $('#sdb').onclick=e=>{e.stopPropagation();lsset('snd',SND()?'0':'1');e.target.textContent=SND()?'🔊':'🔇'};
   pxInit(d);const pss=$$('#ps i'),dks=$$('.dk');cs.slice(0,8).forEach((c,k)=>SFX.slide(k));
-  if((b.golden||b.god)&&!$('.gbn')){const gb=document.createElement('div');gb.className='gbn'+(b.god?' god':'');gb.textContent=b.god?'GOD PACK':'BOOSTER DORÉ';d.append(gb);setTimeout(()=>gb.classList.add('out'),2600);setTimeout(()=>gb.remove(),3200)}
-  const bl=b.god?'GOD PACK · ':b.golden?'✦ Booster doré · ':'',ct=()=>{$('#ct').textContent=bl+(multi>1?`${multi} boosters · `:'')+`Carte ${Math.min(i+1,n)}/${n}`};ct();
+  if((b.golden||b.god)&&!$('.gbn')){const gb=document.createElement('div');gb.className='gbn'+(b.god?' god':'');gb.textContent=b.god?'BOOSTER DIVIN !':'BOOSTER DORÉ !';d.append(gb);setTimeout(()=>gb.classList.add('out'),2600);setTimeout(()=>gb.remove(),3200)}
+  const bl=b.god?'✦ Booster divin · Mythique garantie · ':b.golden?'★ Booster doré · ':'',ct=()=>{$('#ct').textContent=bl+(multi>1?`${multi} boosters · `:'')+`Carte ${Math.min(i+1,n)}/${n}`};ct();
   const setHal=()=>{const h=$('#hal');if(!h)return;h.style.setProperty('--hc',bestK<0?'#ffffff':rcol(ORD[bestK]));h.style.setProperty('--ho',bestK<0?.15:Math.max(.15,bestK/5))};setHal();
   const lay=()=>{dks.forEach((x,kk)=>{if(kk<i)return;const o=kk-i;x.style.setProperty('--o',o);x.style.setProperty('--oo',Math.min(o,3));x.style.opacity=o>3?0:''});
    const e=dks[i];if(e&&!e.classList.contains('fl')){const k=rankOf(cs[i]);e.style.setProperty('--tc',rcol(cs[i].r));e.classList.toggle('tease',k>=2);e.classList.toggle('trem',k>=3)}};lay();
@@ -1541,7 +1562,7 @@ function reveal(d,r,kind,g,qty){
    setHal();$('#in').innerHTML='';if(i>=n){nextB();return}pss[i]&&pss[i].classList.add('cur');lay();ct();$('#hn').textContent='Touche la carte pour la retourner'};
   $('#ra').onclick=()=>{d._tap=null;d.classList.remove('dim');const nw=cs.filter(c=>c.new).length;if(rankOf(top)>=3)flash(rcol(top.r));d.style.setProperty('--pc1',rcol(top.r));
    d.innerHTML=`<button class="skip" id="sk">${bs.length>1?'Passer au récap':'Passer'}</button><div class="mut mono ct">${bs.length>1?`Booster ${bi+1}/${bs.length}`:'Ton tirage'}</div>
-    <div class="recap">${fanHtml(cs,top)}<div class="sum">${nw?`<span class="new">${nw} nouvelle${nw>1?'s':''}</span>`:''}${b.pity?'<span class="new" style="background:var(--acc);color:#fff">Mythique sûre !</span>':''}${b.god?'<span class="tagg">GOD PACK</span>':b.golden?'<span class="tagg">✦ Booster doré</span>':''}</div>
+    <div class="recap">${fanHtml(cs,top)}<div class="sum">${nw?`<span class="new">${nw} nouvelle${nw>1?'s':''}</span>`:''}${b.pity?'<span class="new" style="background:var(--acc);color:#fff">Mythique sûre !</span>':''}${b.god?'<span class="tagg dv">✦ Booster divin</span>':b.golden?'<span class="tagg">★ Booster doré</span>':''}</div>
     <button class="btn y sm" id="nx3">${bi<bs.length-1?'Booster suivant':'Voir le récap'}</button></div>`;
    cs.forEach((c,k)=>setTimeout(()=>SFX.tick(c.r),k*90));setTimeout(()=>SFX.rar(top.r),cs.length*90+120);
    $$('.recap .cw').forEach(e=>e.onclick=()=>detail(+e.dataset.n));
@@ -1554,7 +1575,7 @@ function reveal(d,r,kind,g,qty){
   const sp2=kind=='shop'?SHOP.find(x=>x.id==g):null,k2=kind=='daily'?'free':kind,g2=kind=='daily'?null:g,pr=sp2?shopPrice(sp2):g2?ST.gprice:ST.price,mq=k2=='free'?freeTot():sp2?(ST.popcorns>=pr?1:0):Math.floor(ST.popcorns/pr);let rq=Math.min(qty>1?qty:1,Math.max(1,mq));
   const sub=k2=='free'?(freeTot()>0?`Gratuit · ${freeTot()} restant${freeTot()>1?'s':''}`:'Plus de gratuit'):`🍿 ${pr}`;
   d.style.setProperty('--pc1',rcol(best.r));
-  d.innerHTML=`<div class="recap"><div class="eyebrow">${bs.some(b=>b.god)?'God pack !':bs.some(b=>b.pity)?'Mythique garantie !':bs.some(b=>b.golden)?'✦ Booster doré':qty>1?qty+' boosters ouverts · '+all.length+' cartes':'Ton tirage'}</div>
+  d.innerHTML=`<div class="recap"><div class="eyebrow">${bs.some(b=>b.god)?(qty>1?'Un booster divin dans le lot · Mythique garantie':'Booster divin · Mythique garantie'):bs.some(b=>b.golden)?'✦ Booster doré':qty>1?qty+' boosters ouverts · '+all.length+' cartes':'Ton tirage'}</div>
   ${fanHtml(uq,best,cnt)}
   <div class="sum">${nw?`<span class="new">${nw} nouvelle${nw>1?'s':''}</span>`:''}${dups?`<span class="dup">${dups} doublon${dups>1?'s':''} · +${recG} 🍿 si recyclés</span>`:''}${r.gain?`<span class="new" style="background:var(--yel);color:#1a1300">+${r.gain} 🍿 de bonus</span>`:''}</div>
   ${k2=='daily'||sp2?'':`<div class="qrow" id="rq">${[1,5,10].map(n=>`<button data-q="${n}" class="${rq==n?'on':''}" ${mq<n?'disabled':''}>×${n}</button>`).join('')}</div>`}
