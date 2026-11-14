@@ -1288,6 +1288,39 @@ html{overflow-x:clip}
 .gt-t{font-size:12px;color:#8a8590;margin-top:-6px}
 html.mo .gt-live i{animation:none}
 @media (max-width:899px){.gtir{padding-top:40px}.gtir h2{font-size:24px}.gt-row li{flex-basis:120px}.gt-card{width:120px;height:168px}}
+
+/* ---------- face des cartes comme Kyara : cadre de couleur, bandeau du nom, image encadrée, série, barre POW/AURA ---------- */
+.tcg{border-radius:clamp(10px,7.4cqi,18px);box-shadow:inset 0 0 0 2px var(--fr),0 3.2cqi 7.4cqi #00000073}
+.tcg .im{left:3.7cqi;right:3.7cqi;top:20.6cqi;bottom:auto;height:85.6cqi;inset:20.6cqi 3.7cqi auto;border-radius:5.3cqi;background-color:#1c1a23;background-image:repeating-linear-gradient(135deg,#ffffff0a 0 8px,#0000 8px 16px)}
+.tcg .im img{object-position:50% 18%}
+.tcg .im::after{background:linear-gradient(#0000 66%,#0a080eb3)}
+.tcg .an{position:absolute;left:4.3cqi;bottom:3.2cqi;z-index:2;font:clamp(9px,5.9cqi,11px) 'JetBrains Mono',ui-monospace,monospace;color:#ffffffb8}
+.tcg .nm{left:6.9cqi;right:20cqi;top:5.6cqi;font-weight:700;font-size:clamp(11px,7.6cqi,18px);line-height:1.15;text-shadow:none}
+.tcg .rp{right:6.9cqi;top:4.6cqi;width:11.7cqi;height:11.7cqi;max-width:28px;max-height:28px;display:grid;place-items:center;border-radius:50%;background:var(--fr);color:#0e0d12;font:900 clamp(9px,5.9cqi,12px)/1 Unbounded,sans-serif;box-shadow:0 0 6cqi color-mix(in srgb,var(--fr) 60%,transparent)}
+.tcg .sw{left:6.9cqi;right:6.9cqi;top:110cqi;bottom:auto;font-size:clamp(9px,5.9cqi,13px);font-weight:700;font-family:Inter,sans-serif;color:#f4f1ecc7;text-shadow:none}
+.tcg .bt{left:3.7cqi;right:3.7cqi;bottom:3.7cqi;height:13.6cqi;padding:0 4.3cqi;align-items:center;border-radius:3.2cqi;background:#0006;font:700 clamp(9px,6.4cqi,13px) 'JetBrains Mono',ui-monospace,monospace;text-shadow:none}
+/* couleurs de cadre exactes de Kyara */
+.r-C{--bg:#34313b;--fr:#5a5662}.r-U{--bg:#1f3b2e;--fr:#3fbf7f}.r-R{--bg:#1b2c4a;--fr:#4d9bff}.r-E{--bg:#2e1c47;--fr:#b072ff}
+.r-L{--bg:linear-gradient(160deg,#5a4510,#221a05 60%,#4a390c);--fr:#f5c518}
+.r-L{box-shadow:none}
+.tcg.r-M{background:conic-gradient(from var(--spin),#ff4d2e,#f5c518,#3fbf7f,#4dd6ff,#b072ff,#ff4d9e,#ff4d2e);box-shadow:0 3.2cqi 7.4cqi #00000073}
+.tcg.r-M::before{inset:clamp(3px,2.1cqi,4px);border-radius:5.3cqi;background:#14101c}
+.tcg.r-M .rp{background:#fff}
+.unk .im{background:#000}
+.unk .qm{top:32%}
+/* dos de la carte (fenêtre) : valeurs de Kyara */
+.kb{border-radius:5.3cqi;padding:5.9cqi 5.3cqi;gap:2.4cqi;background:radial-gradient(120% 70% at 50% 0%,color-mix(in srgb,var(--rc) 22%,transparent),transparent 60%),repeating-linear-gradient(45deg,#ffffff06 0 6px,transparent 6px 12px),#14131a;border:1.6px solid color-mix(in srgb,var(--rc) 60%,transparent);box-shadow:0 30px 60px #0000008c}
+.kb-top{font-size:3.5cqi;color:#8a8590}
+.kb-r{letter-spacing:.04em}
+.kb h2{margin:1.2cqi 0 0;font:700 6.5cqi/1.15 Unbounded,Inter,sans-serif}
+.kb-nat{font-size:4.1cqi;color:#b7b2bd}
+.kb-ser{font-size:3.8cqi;color:#8a8590}
+.kb dl{gap:2.4cqi;margin:2.4cqi 0 0}
+.kb dl div{border:1px solid #25232c;background:#ffffff0a;border-radius:2.9cqi;padding:2.4cqi 2.9cqi}
+.kb dt{font-size:3.2cqi;letter-spacing:.06em;color:#8a8590}
+.kb dd{margin:.6cqi 0 0;font-size:4.1cqi}.kb dd#since{font-size:4.1cqi;font-family:Inter,sans-serif}
+.kb-seal{right:5.3cqi;bottom:5.3cqi;width:10.9cqi;height:10.9cqi;border-radius:2.9cqi;opacity:1;font-size:5cqi}
+.kb-wiki{left:5.3cqi;bottom:8.3cqi;color:#ff4d2e;font-size:3.8cqi}
 </style></head><body>
 <div id="app"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
@@ -1390,8 +1423,8 @@ document.addEventListener('pointermove',e=>{if(e.pointerType!='mouse'||MO())retu
 function card(c,o={}){
  const q=o.q||0,unk=o.unk,fx=c.r=='R'||FOIL(c.r)||o.foil;
  return `<div class="cw ${o.foil?'foil':''}" data-n="${c.n}" ${o.st||''}><div class="tcg r-${c.r} ${unk?'unk':''}">
- <div class="im">${pic(c)}${unk?'<span class="qm">?</span>':''}</div>
- <div class="nm"${c.name.length>12?` style="font-size:${Math.max(4,118/c.name.length).toFixed(2)}cqi"`:''}>${esc(c.name)}</div><span class="rp">${c.r}</span>
+ <div class="im">${pic(c)}${unk?'<span class="qm">?</span>':`<span class="an">#${pad(c.n)}/${CARDS.length}</span>`}</div>
+ <div class="nm">${esc(c.name)}</div><span class="rp">${c.r}</span>
  ${unk?'':`<div class="sw">${esc(c.show)}</div>`}
  <div class="bt">${unk?`<span class="no">#${pad(c.n)}</span><span>${RN[c.r]}</span>`:`<span>POW ${c.pow}</span><span>AURA ${c.aura}</span>`}</div>
  ${fx?'<i class="fx"></i>':''}${FOIL(c.r)&&!unk?'<i class="hl"></i>':''}${unk?'':'<i class="gl"></i>'}</div>${q>1?`<span class="q">×${q}</span>`:''}${o.lock?'<span class="lk">🔒</span>':''}</div>`}
