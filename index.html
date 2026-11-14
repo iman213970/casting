@@ -1400,6 +1400,10 @@ html.mo .kglow.on{animation:none}
 .stage .rv b{font:900 clamp(20px,3.4vw,28px)/1.1 Unbounded,sans-serif}
 .stage .rv .rl{font-size:14px;color:#c9c5ce;gap:4px 10px}
 @media (max-width:599px){.stage .rv{min-height:78px;margin-top:4px}.stage .rv b{font-size:20px}.stage .rv .rl{font-size:13px}}
+
+/* éclat qui passe (R, É, L, M) : sous l'image comme Kyara (z-index 0, l'image au-dessus) → plus de trait sur la photo */
+.tcg .fx{z-index:0}
+.tcg .im{z-index:1}
 </style></head><body>
 <div id="app"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
