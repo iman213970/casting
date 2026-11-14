@@ -1384,6 +1384,22 @@ html.mo .kglow.on{animation:none}
 .omm .om-knot{left:47.9cqi;top:10.4cqi;width:6.2cqi;height:6.2cqi;border-radius:50%;background:#c22a12;box-shadow:0 .5cqi 1cqi #0008;z-index:2}
 .omm .om-tag{left:50%;top:9.4cqi;transform:translateX(-50%);z-index:3;max-width:60cqi;padding:1.3cqi 4cqi;border-radius:99px;background:#15141a;border:.6cqi solid #e5483a;color:#fff;font:700 4.6cqi/1 Unbounded,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .omm .om-shine{left:12.3cqi;right:11.8cqi;top:37cqi;bottom:0;border-radius:0 0 2.8cqi 2.8cqi;pointer-events:none;background:radial-gradient(circle at 50% 30%,#ffffff26,#0000 38%),linear-gradient(115deg,#0000 40%,#ffffff1a 50%,#0000 60%);mix-blend-mode:screen}
+
+/* Lumière d'ouverture comme Kyara : colonne blanche qui monte de la déchirure, puis couleur de la dernière carte (Rare ou mieux) ; pas d'aura sur tout l'écran */
+.packwrap .beam{left:4%;right:4%;top:auto;bottom:84%;height:0;clip-path:none;transform:none;filter:blur(4px);opacity:0;animation:none;
+ background:linear-gradient(to top,var(--bc,#fff),color-mix(in srgb,var(--bc,#fff) 25%,transparent) 35%,transparent 80%);
+ -webkit-mask:linear-gradient(90deg,#0000,#000 25% 75%,#0000);mask:linear-gradient(90deg,#0000,#000 25% 75%,#0000);transition:height .6s cubic-bezier(.2,.9,.3,1),opacity .3s}
+.packwrap.go .beam,.packwrap.bm .beam{animation:none;opacity:.75;height:120vh}
+.packwrap.out .beam{opacity:0;transition:opacity .8s .5s}
+.packwrap.out::after{display:none}
+.cout>div{filter:none}
+
+/* ouverture : cartes à la taille de Kyara (--cw), texte sous la carte plus compact */
+.stage .rv{min-height:74px;margin-top:10px;gap:3px;max-width:min(520px,92vw)}
+.stage .rv small{font:700 13px Unbounded,sans-serif;letter-spacing:.04em}
+.stage .rv b{font:900 clamp(20px,3.4vw,28px)/1.1 Unbounded,sans-serif}
+.stage .rv .rl{font-size:14px;color:#c9c5ce;gap:4px 10px}
+@media (max-width:599px){.stage .rv{min-height:78px;margin-top:4px}.stage .rv b{font-size:20px}.stage .rv .rl{font-size:13px}}
 </style></head><body>
 <div id="app"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
@@ -1737,7 +1753,7 @@ function poolSheet(g,top,nm,lo){
  $('#px').onclick=()=>d.remove();$('#pq').oninput=e=>{PQ.q=e.target.value;PQ.n=90;draw()};
  $$('[data-pr]').forEach(c=>c.onclick=()=>{PQ.r=PQ.r==c.dataset.pr?'':c.dataset.pr;PQ.n=90;draw()});draw()}
 /* ---------- écran du paquet : quantité, gestes, ouverture ---------- */
-const rankOf=c=>ORD.indexOf(c.r),rcol=r=>r=='M'?'#ff5c8a':RC[r];
+const rankOf=c=>ORD.indexOf(c.r),rcol=r=>RC[r];
 const GILD=v=>`<span class="gild ${v}"><span class="gild-k">${v=='divine'?'✦':'★'}</span><span class="gild-rb">${v=='divine'?'DIVIN':'DORÉ'}</span></span>`;
 function gildPack(pw,v){pw.querySelectorAll('.gild').forEach(x=>x.remove());pw.querySelectorAll('.lay').forEach(l=>l.insertAdjacentHTML('beforeend',GILD(v)));pw.classList.toggle('divine',v=='divine');pw.classList.toggle('golden',v=='golden')}
 function packScreen(kind,genre,q0){
@@ -1784,7 +1800,7 @@ function packScreen(kind,genre,q0){
   req.then(r=>setTimeout(()=>{
    const bc=r.boosters.flatMap(b=>b.cards.map(x=>CARDS[x.n-1])).reduce((a,c)=>rankOf(c)>rankOf(a)?c:a),bk=rankOf(bc),b0=r.boosters[0];
    const dv=r.boosters.some(b=>b.god);if(dv){gildPack(pw,'divine');$('#pf').insertAdjacentHTML('afterbegin','<div class="drays"></div>');d.classList.add('divine');SFX.rar&&SFX.rar('M')}
-   const gc=bk>=2?rcol(bc.r):'#ffffff';pw.style.setProperty('--bc',gc);pw.style.setProperty('--gc',gc);if(bk>=2)d.style.setProperty('--pc1',gc);pw.classList.add('bm');
+   const gc=bk>=2?rcol(bc.r):'#ffffff';pw.style.setProperty('--bc',gc);pw.style.setProperty('--gc',gc);pw.classList.add('bm');
    $('#cout').innerHTML=Array.from({length:5},(_,k)=>`<div style="--r:${k*1.6}deg;animation-delay:${k*40}ms">${cardBack(dv?'#fff4de':b0.golden?'#f7c61b':c1)}</div>`).join('');
    pw.classList.add('out');SFX.whoosh();if(bk>=4)SFX.rumble(.9);
    setTimeout(()=>{document.removeEventListener('keydown',kh);reveal(d,r,kind,sp?sp.id:g,env||sp?1:qty)},1100)},Math.max(0,700-(Date.now()-t0))),
@@ -1852,7 +1868,7 @@ function reveal(d,r,kind,g,qty){
  const end=()=>{document.removeEventListener('keydown',kh);d._tap=null};
  const nextB=()=>{bi++;if(bi>=bs.length)return recap();stack(bs[bi])};
  const stack=b=>{const cs=b.cards,top=cs.reduce((a,c)=>rankOf(c)>rankOf(a)?c:a),n=cs.length,phone=innerWidth<600;let i=0,lock=false,bestK=-1;
-  const DW=Math.round(Math.max(150,Math.min(340,innerWidth*.7,(innerHeight-(innerHeight<760?390:330))*.714)));
+  const DW=Math.round(Math.max(170,innerWidth<600?Math.min(320,innerWidth*.78,(innerHeight-320)*.714):Math.min(340,innerWidth*.7,(innerHeight-330)*.714)));
   if(rankOf(top)<2)d.style.setProperty('--pc1',c1);d.classList.remove('dim');
   d.innerHTML=`<button class="skip" id="sk">Passer</button><div class="mut mono ct" id="ct"></div>
    <div class="kglow" id="rg2" aria-hidden="true"></div><div class="deck" id="dk" style="--dw:${DW}px"><div class="hal" id="hal"></div><div class="rays" id="ry"></div>${cs.map((c,k)=>`<div class="dk" style="--o:${k};--oo:${Math.min(k,3)};${k>3?'opacity:0;':''}"><div class="f3" style="--fd:${FD[c.r]}ms"><div class="fa">${cardBack(b.god?'#fff4de':b.golden?'#f7c61b':c1)}</div><div class="fb">${card(c)}${c.wished?'<span class="nwb wsh">♥ ENVIE</span>':c.new?'<span class="nwb">NOUVEAU</span>':''}</div></div><i class="cring"></i></div>`).join('')}</div>
