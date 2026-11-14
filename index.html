@@ -1015,6 +1015,22 @@ html.mo .tcg .fx{animation:none}
 .wbt.on{color:#ff5c8a;border-color:#ff5c8a66}
 .wall{margin-left:10px;background:none;border:1px solid #ff5c8a55;color:#ff8fb1;border-radius:99px;padding:3px 12px;font:600 12px Inter,sans-serif;cursor:pointer}.wall.on{color:#ff5c8a;border-color:#ff5c8a}
 .nwb.wsh,.nb.wsh{background:#ff5c8a;color:#fff}
+
+/* fiche wiki */
+.wk .wbg{filter:blur(30px) saturate(1.1) brightness(.4)}
+.wk .lwm{-webkit-text-stroke:1px color-mix(in srgb,var(--rc) 30%,transparent)}
+.wtabs{display:flex;gap:8px;flex-wrap:wrap;margin:4px 0 6px}.wtabs button{background:#ffffff0a;border:1px solid var(--line);color:#e8e4ee;border-radius:99px;padding:7px 14px;font:600 13px Inter,sans-serif;cursor:pointer}
+.wtabs button:hover{background:#ffffff14}
+.wtab{border:1px solid var(--line);border-radius:14px;overflow:hidden;margin-top:12px}
+.wr{display:grid;grid-template-columns:90px 1fr 1fr;gap:12px;padding:13px 18px;border-top:1px solid var(--line);font-size:14px}.wr:first-child{border-top:0}
+.wr span:first-child{color:#8b8796}.wr.wh{background:#ffffff08;font-weight:700;color:#e8e4ee}.wr.wh span{color:#e8e4ee}
+.wsts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.wsts div{position:relative;border:1px solid var(--line);background:#ffffff08;border-radius:12px;padding:12px 14px;overflow:hidden}
+.wsts small{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:#8b8796}.wsts b{font-size:22px}
+.wsts i{position:absolute;left:0;bottom:0;height:3px;background:var(--rc)}
+.wbts{display:flex;flex-direction:column;gap:8px;margin:12px 0}
+.wk .lcard{cursor:pointer}.wk .lcard .tcg{filter:none}
+.kb-wiki{position:absolute;left:6cqi;bottom:6cqi;color:#ff8a5c;font-size:4.4cqi;font-weight:700;cursor:pointer;text-decoration:none}
 </style></head><body>
 <div id="app"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
@@ -1578,14 +1594,14 @@ function backFace(c,q){return `<div class="cw"><div class="kb" style="--rc:${RC[
  <h2>${esc(c.name)}</h2>${c.act?`<p class="kb-nat">Joué par ${esc(c.act)}</p>`:''}<p class="kb-ser">${esc(c.show)}</p>
  <dl><div><dt>POW</dt><dd class="mono">${c.pow}</dd></div><div><dt>AURA</dt><dd class="mono">${c.aura}</dd></div>
  <div><dt>Joueurs qui l'ont</dt><dd class="mono" id="own">–</dd></div><div><dt>Tu l'as depuis</dt><dd id="since">–</dd></div>${q>1?`<div><dt>Exemplaires</dt><dd class="mono">${q}</dd></div>`:''}</dl>
- <span class="kb-seal" aria-hidden="true">C</span></div></div>`}
+ <a class="kb-wiki" data-wk="${c.n}">Voir la fiche du perso</a><span class="kb-seal" aria-hidden="true">C</span></div></div>`}
 function detail(n){
  const c=CARDS[n-1],q=ST.inv[n]||0;if(!q)return lockedPage(n);
  const d=document.createElement('div');d.className='shade dz';d.style.alignItems='center';d.style.zIndex=50;d.style.setProperty('--rc',RC[c.r]);d.onclick=e=>{if(e.target==d)d.remove()};
  if(!window._vw){window._vw=1;rpc('quest_event',{e:'view'}).catch(()=>{})}
  d.innerHTML=`<button class="xr" id="xr" aria-label="Fermer">✕</button><div class="dv"><div class="tw" id="tw"><div class="flip" id="fl"><div class="face">${card(c,{q})}</div><div class="face bk">${backFace(c,q)}</div></div></div>
  <p class="hint">${esc(c.act||'')}${c.act?' · ':''}${c.g.slice(0,3).map(fr).join(', ')}<br>Bouge la souris ou le doigt pour l'incliner · touche la carte pour la retourner</p>
- <div class="acts">${q>1?`<button class="btn y" id="rc1">Recycler ${q-1} doublon${q>2?'s':''} · +${(q-1)*REC[c.r]} 🍿</button>`:''}<button class="btn g" id="cl2">Fermer</button></div></div>`;
+ <div class="acts">${q>1?`<button class="btn y" id="rc1">Recycler ${q-1} doublon${q>2?'s':''} · +${(q-1)*REC[c.r]} 🍿</button>`:''}<button class="btn g" id="wk2">Voir la fiche du perso</button><button class="btn g" id="cl2">Fermer</button></div></div>`;
  document.body.append(d);$('#cl2').onclick=()=>d.remove();$('#xr').onclick=()=>d.remove();
  const tw=$('#tw'),fl=$('#fl'),cd=tw.querySelector('.cw');let flip=0,sx=0,sy=0,mv=0,rx=0,ry=0;
  const apply=()=>{fl.style.setProperty('--rx',rx+'deg');fl.style.setProperty('--ry',(ry+flip)+'deg')};
@@ -1593,15 +1609,54 @@ function detail(n){
  tw.onpointerdown=e=>{sx=e.clientX;sy=e.clientY;mv=0;fl.classList.add('live');cd.classList.add('tilting');aim(e)};
  tw.onpointermove=e=>{if(e.pointerType=='mouse'||e.buttons||mv>=0){mv=Math.max(mv,Math.abs(e.clientX-sx)+Math.abs(e.clientY-sy));fl.classList.add('live');cd.classList.add('tilting');aim(e)}};
  const end=()=>{fl.classList.remove('live');cd.classList.remove('tilting');rx=0;ry=0;apply()};
- tw.onpointerup=()=>{if(mv<8)flip=flip?0:180;end()};tw.onpointerleave=end;tw.onpointercancel=end;
+ tw.onpointerup=e=>{if(mv<8&&flip&&e.target.closest('[data-wk]')){end();d.remove();wikiPage(n);return}if(mv<8)flip=flip?0:180;end()};
+ $('#wk2').onclick=()=>{d.remove();wikiPage(n)};tw.onpointerleave=end;tw.onpointercancel=end;
  rpc('card_owners',{card:n}).then(v=>{const e=$('#own');if(e&&Number.isFinite(+v))e.textContent=(+v).toLocaleString('fr')}).catch(()=>{});
  rpc('card_since',{card:n}).then(v=>{const e=$('#since');if(e&&v&&!isNaN(new Date(v)))e.textContent=new Date(v).toLocaleDateString('fr',{day:'numeric',month:'long',year:'numeric'})}).catch(()=>{});
  if($('#rc1'))$('#rc1').onclick=async()=>{try{const x=await rpc('recycle',{n_card:n,k:q-1});ST=x.state;d.remove();toast('+'+x.gain+' 🍿');render()}catch(e){toast(e.message)}}}
+
+/* ---------- fiche wiki d'un perso possédé (comme la page wiki de Kyara : en-tête, apparitions, même univers ;
+   à droite la carte, ses infos, ses chances par booster et la date d'obtention) ---------- */
+function wikiPage(n){
+ const old=$('.lpg');if(old)old.remove();
+ const c=CARDS[n-1],q=ST.inv[n]||0,mix=cardPct(c,null,false),th=ST.themes.filter(t=>c.g.includes(t)),
+  same=CARDS.filter(x=>x.show==c.show&&x.n!=c.n).sort((a,b)=>ORD.indexOf(b.r)-ORD.indexOf(a.r)||a.n-b.n).slice(0,12),
+  sAll=CARDS.filter(x=>x.show==c.show),sOwn=sAll.filter(x=>ST.inv[x.n]).length;
+ const rows=[['Casting Mix',mix],...th.map(t=>[fr(t),cardPct(c,t,false)]),...(c.g.includes(ST.daily_theme)?[['Pack du jour · '+fr(ST.daily_theme),cardPct(c,ST.daily_theme,true)]]:[])].sort((a,b)=>b[1]-a[1]);
+ const ini=c.name.split(/\s+/).map(w=>w[0]).join('').slice(0,3).toUpperCase();
+ const d=document.createElement('div');d.className='lpg wk';d.style.setProperty('--rc',RC[c.r]);
+ d.innerHTML=`<div class="lhero"><div class="lbg wbg" style="background-image:url('${imgUrl(c)}')"></div><div class="wrap lhin"><button class="lbk" id="lbk">← Retour</button><div class="crumb mono">Collection / ${esc(c.show)} / ${esc(c.name)}</div>
+  <div class="ltags"><span class="tg acc">${esc(c.show)}</span><span class="tg" style="--c:${RC[c.r]}">${RN[c.r]}</span><span class="tg" style="--c:#8b8b99">Possédée ×${q}</span></div><h1>${esc(c.name)}</h1><div class="lno mono">${c.act?esc(c.act)+' · ':''}#${pad(c.n)} / ${CARDS.length.toLocaleString('fr')}</div></div><div class="lwm">${esc(ini)}</div></div>
+ <div class="wrap lbody"><div class="lmain">
+  <div class="wtabs"><button data-go2="wap">Apparitions</button><button data-go2="wst">Statistiques</button>${same.length?'<button data-go2="wmu">Même univers</button>':''}</div>
+  <div class="lsec" id="wap"><div class="eyebrow">01 — Apparitions</div>
+   <div class="wtab"><div class="wr wh"><span>Média</span><span>Titre</span><span>Rôle</span></div><div class="wr"><span>Série</span><span>${esc(c.show)}</span><span>${c.act?'Joué par '+esc(c.act):'–'}</span></div></div>
+   <p class="mut" style="font-size:13px;margin:10px 0 0">${c.g.slice(0,3).map(fr).join(' · ')||''}</p></div>
+  <div class="lsec" id="wst"><div class="eyebrow">02 — Statistiques</div><h2>La carte</h2>
+   <div class="wsts"><div><small>POW</small><b class="mono">${c.pow}</b><i style="width:${c.pow}%"></i></div><div><small>AURA</small><b class="mono">${c.aura}</b><i style="width:${c.aura}%"></i></div>
+    <div><small>Joueurs qui l'ont</small><b class="mono" id="wown">–</b></div><div><small>Série complétée</small><b class="mono">${sOwn} / ${sAll.length}</b></div></div></div>
+  ${same.length?`<div class="lsec" id="wmu"><div class="eyebrow">Même univers</div><h2>Autres persos de ${esc(c.show)}</h2><div class="lsame">${same.map(x=>ST.inv[x.n]?`<button class="sm1" data-ln2="${x.n}"><span class="smi">${pic(x)}</span><div><b>${esc(x.name)}</b><small style="color:${RC[x.r]}">${RN[x.r]}</small></div></button>`:`<button class="sm1" data-ln2="${x.n}"><span class="q">?</span><div><b>???</b><small style="color:${RC[x.r]}">${RN[x.r]} · à trouver</small></div></button>`).join('')}</div></div>`:''}
+ </div><aside class="lside"><div class="lcard" id="wcd">${card(c,{q})}</div><div class="lst"><b style="color:${RC[c.r]}">${RN[c.r]}</b> · possédée ×${q}</div><div class="mono mut" style="font-size:13px">${fpct(mix)} / booster Mix</div>
+  <div class="wbts"><button class="btn a" id="wsee">Voir la carte</button>${q>1?`<button class="btn y" id="wrc">Recycler ${q-1} doublon${q>2?'s':''} · +${(q-1)*REC[c.r]} 🍿</button>`:''}</div>
+  <dl class="linf"><dt>Interprète</dt><dd>${esc(c.act||'–')}</dd><dt>Série</dt><dd>${esc(c.show)}</dd><dt>Genres</dt><dd>${c.g.slice(0,3).map(fr).join(', ')||'–'}</dd><dt>Numéro</dt><dd class="mono">#${pad(c.n)}</dd><dt>Recyclée</dt><dd>${REC[c.r]} 🍿</dd></dl>
+  <div class="lodl"><div class="mono mut" style="font-size:11px;letter-spacing:.1em;margin-bottom:4px">CHANCE PAR BOOSTER</div>${rows.map(([l,v])=>`<div class="o"><span>${esc(l)}</span><em>${fpct(v)}</em></div>`).join('')}</div>
+  <p class="lft mono" id="wsince">Carte obtenue</p></aside></div>`;
+ document.body.append(d);d.scrollTop=0;
+ const close=()=>{document.removeEventListener('keydown',kh);d.remove()};const kh=e=>{if(e.key=='Escape')close()};document.addEventListener('keydown',kh);
+ d.querySelector('#lbk').onclick=close;
+ d.querySelectorAll('[data-go2]').forEach(b=>b.onclick=()=>{const t=d.querySelector('#'+b.dataset.go2);if(t)d.scrollTo({top:t.offsetTop-80,behavior:'smooth'})});
+ d.querySelector('#wsee').onclick=()=>detail(n);d.querySelector('#wcd').onclick=()=>detail(n);
+ const rc=d.querySelector('#wrc');if(rc)rc.onclick=async()=>{try{const x=await rpc('recycle',{n_card:n,k:q-1});ST=x.state;toast('+'+x.gain+' 🍿');wikiPage(n);if(view=='coll')list()}catch(e){toast(e.message)}};
+ d.querySelectorAll('[data-ln2]').forEach(b=>b.onclick=()=>lockedPage(+b.dataset.ln2));
+ rpc('card_owners',{card:n}).then(v=>{const e=d.querySelector('#wown');if(e&&Number.isFinite(+v))e.textContent=(+v).toLocaleString('fr')}).catch(()=>{});
+ rpc('card_since',{card:n}).then(v=>{const e=d.querySelector('#wsince');if(e&&v&&!isNaN(new Date(v)))e.textContent='Carte obtenue le '+new Date(v).toLocaleDateString('fr',{day:'numeric',month:'long',year:'numeric'})}).catch(()=>{});
+}
 /* ---------- fiche verrouillée (carte pas encore obtenue) ---------- */
 function rarExp(r,minE){const o=ST.odds,sl=minE?SLOTS.daily:SLOTS.norm;let e=0;for(const f of sl){const al=ORD.slice(ORD.indexOf(f));if(!al.includes(r))continue;e+=o[r]/[...al].reduce((a,k)=>a+o[k],0)}return e}
 function cardPct(c,g,minE){const nr=CARDS.filter(x=>x.r==c.r&&(!g||x.g.includes(g))).length;return nr?rarExp(c.r,minE)/nr*100:0}
 const fpct=x=>(x>=1?x.toFixed(1):x>=.1?x.toFixed(2):x>=.01?x.toFixed(3):x.toFixed(4)).replace('.',',')+' %';
 function lockedPage(n){
+ if(ST.inv[n])return wikiPage(n);
  const old=$('.lpg');if(old)old.remove();
  const c=CARDS[n-1],mix=cardPct(c,null,false),th=ST.themes.filter(t=>c.g.includes(t)),same=CARDS.filter(x=>x.show==c.show&&x.n!=c.n).sort((a,b)=>ORD.indexOf(b.r)-ORD.indexOf(a.r)||a.n-b.n).slice(0,9);
  const rows=[['Casting Mix',mix],...th.map(t=>[fr(t),cardPct(c,t,false)]),...(c.g.includes(ST.daily_theme)?[['Pack du jour · '+fr(ST.daily_theme),cardPct(c,ST.daily_theme,true)]]:[])];
