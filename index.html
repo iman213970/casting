@@ -1071,12 +1071,12 @@ html.mo .tcg .fx{animation:none}
 .kw-aside{flex:1 1 320px;min-width:0;position:sticky;top:24px;border:1px solid #25232c;background:#15141a;border-radius:18px;overflow:hidden}
 .kw-at{display:flex;flex-direction:column;gap:16px;padding:24px 24px 8px}
 .kw-zoom{display:block;width:100%;max-width:340px;margin:0 auto;padding:0;background:none;border:0;cursor:zoom-in}.kw-zoom .cw{width:100%}
-.kw-own{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px}.kw-own .o{font-size:14px;font-weight:700}.kw-own .dr{color:var(--mut);font-size:12px}
-.kw-btns{display:flex;flex-wrap:wrap;gap:8px}.kw-btns>*{flex:1 1 140px;border-radius:10px;width:auto;height:44px;font-size:14px}
+.kw-own{display:flex;flex-direction:column;gap:6px}.kw-own .o{font-size:14px;font-weight:700}.kw-own .dr{color:var(--mut);font-size:12px}
+.kw-btns{display:flex;flex-direction:column;gap:8px}.kw-btns>*{border-radius:10px;width:100%;height:44px;font-size:14px}.kw-b1{background:#ece8e0;color:#14131a}.kw-b2{background:transparent;color:var(--fg);border:1px solid var(--line)}
 .kw-inf{margin:0;padding:8px 20px 0}.kw-inf div{display:flex;justify-content:space-between;gap:16px;padding:12px 0;border-bottom:1px solid #25232c;font-size:14px}
 .kw-inf dt{color:var(--mut);flex:0 0 auto}.kw-inf dd{margin:0;text-align:right;overflow-wrap:anywhere;font-weight:500}
 .kw-odds{margin:16px 20px 0;padding:14px 16px;background:#1c1a23;border-radius:14px;display:flex;flex-direction:column;gap:8px}
-.kw-odds .t{font:11px 'JetBrains Mono',monospace;letter-spacing:.12em;color:var(--mut)}.kw-odds .rw{display:flex;justify-content:space-between;gap:12px;font-size:13px}.kw-odds .rw b{font-size:12px}
+.kw-odds .t{font:11px 'JetBrains Mono',monospace;letter-spacing:.12em;color:var(--mut)}.kw-odds .rw{display:flex;justify-content:space-between;gap:12px;font-size:13px}.kw-odds .rw b{font-size:12px;color:var(--acc)}
 .kw-foot{padding:16px 20px 20px;color:var(--mut);font-size:13px;line-height:1.5}
 @media (max-width:960px){.kw-aside{order:-1;position:static}}
 @media (max-width:720px){.kw-in{min-height:240px;padding-bottom:28px}.kw-sub{font-size:18px}.kw-lay{gap:40px;padding-top:28px}.kw-at{padding:20px 16px 8px}.kw-inf{padding:8px 16px 0}.kw-zoom{max-width:260px}}
@@ -1685,7 +1685,7 @@ function wiki(){
 function wikiPage(n){
  const old=$('.lpg');if(old)old.remove();
  const c=CARDS[n-1],q=ST.inv[n]||0,mix=cardPct(c,null,false),th=ST.themes.filter(t=>c.g.includes(t)),
-  same=CARDS.filter(x=>x.show==c.show&&x.n!=c.n).sort((a,b)=>(!!ST.inv[b.n]-!!ST.inv[a.n])||ORD.indexOf(b.r)-ORD.indexOf(a.r)||a.n-b.n).slice(0,12);
+  same=CARDS.filter(x=>x.show==c.show&&x.n!=c.n).sort((a,b)=>ORD.indexOf(b.r)-ORD.indexOf(a.r)||a.n-b.n).slice(0,6);
  const rows=[['Casting Mix',mix],...th.map(t=>[fr(t),cardPct(c,t,false)]),...(c.g.includes(ST.daily_theme)?[['Pack du jour',cardPct(c,ST.daily_theme,true)]]:[])].sort((a,b)=>b[1]-a[1]);
  const gs=c.g.slice(0,3).map(fr);
  const d=document.createElement('div');d.className='lpg kw';d.style.setProperty('--rc',RC[c.r]);
@@ -1694,15 +1694,14 @@ function wikiPage(n){
    <div class="kw-tags"><span class="kw-tag st">${esc(c.show)}</span><span class="kw-tag" style="color:${RC[c.r]};border-color:${RC[c.r]}">${RN[c.r]}</span><span class="kw-tag">Possédée ×${q}</span></div>
    <h1>${esc(c.name)}</h1><div class="kw-sub">${c.act?esc(c.act)+' · ':''}<span class="mono">#${pad(c.n)}/${CARDS.length}</span></div></div></div>
  <div class="wrap kw-lay"><div class="kw-main">
-  <div class="kw-toc"><a data-to="kbio">Biographie</a><a data-to="kapp">Apparitions</a>${same.length?'<a data-to="kuni">Même univers</a>':''}</div>
-  <section class="kw-sec" id="kbio"><div class="kw-k">01 — BIOGRAPHIE</div><p class="kw-big">${esc(c.name)} est un personnage de la série ${esc(c.show)}${c.act?`, joué par ${esc(c.act)}`:''}.</p>${gs.length?`<p class="kw-mut">Genres de la série : ${gs.join(', ')}.</p>`:''}</section>
-  <section class="kw-sec" id="kapp"><div class="kw-k">02 — APPARITIONS</div><div class="kw-table"><table><thead><tr><th>Média</th><th>Titre</th></tr></thead><tbody><tr><td class="mut">Série</td><td>${esc(c.show)}</td></tr>${c.act?`<tr><td class="mut">Interprète</td><td>${esc(c.act)}</td></tr>`:''}</tbody></table></div></section>
+  <div class="kw-toc"><a data-to="kapp">Apparitions</a>${same.length?'<a data-to="kuni">Même univers</a>':''}</div>
+  <section class="kw-sec" id="kapp"><div class="kw-k">02 — APPARITIONS</div><div class="kw-table"><table><thead><tr><th>Média</th><th>Titre</th></tr></thead><tbody><tr><td class="mut">Série</td><td>${esc(c.show)}</td></tr></tbody></table></div></section>
   ${same.length?`<section class="kw-sec" id="kuni"><div class="kw-k">MÊME UNIVERS</div><h2>Autres persos de ${esc(c.show)}</h2><div class="kw-rel">${same.map(x=>ST.inv[x.n]?`<button class="kw-rc" data-rn="${x.n}"><span class="ri">${pic(x)}</span><span class="rt"><span class="rn">${esc(x.name)}</span><span class="rl" style="color:${RC[x.r]}">${RN[x.r]}</span></span></button>`:`<button class="kw-rc" data-rn="${x.n}"><span class="ri miss">?</span><span class="rt"><span class="rn">???</span><span class="rl" style="color:${RC[x.r]}">${RN[x.r]} · à trouver</span></span></button>`).join('')}</div></section>`:''}
  </div><aside class="kw-aside"><div class="kw-at"><button class="kw-zoom" id="kwz">${card(c,{q})}</button>
-   <div class="kw-own"><span class="o" style="color:${RC[c.r]}">${RN[c.r]} · possédée ×${q}</span><span class="dr mono">${fpct(mix)} / booster</span></div>
-   <div class="kw-btns"><button class="btn a" id="wsee">Voir la carte</button>${q>1?`<button class="btn y" id="wrc">Recycler ${q-1} · +${(q-1)*REC[c.r]} 🍿</button>`:''}</div></div>
-  <dl class="kw-inf"><div><dt>Interprète</dt><dd>${esc(c.act||'–')}</dd></div><div><dt>Univers</dt><dd>${esc(c.show)}</dd></div><div><dt>Genres</dt><dd>${gs.join(', ')||'–'}</dd></div><div><dt>POW</dt><dd class="mono">${c.pow}</dd></div><div><dt>AURA</dt><dd class="mono">${c.aura}</dd></div><div><dt>Joueurs qui l'ont</dt><dd class="mono" id="wown">–</dd></div><div><dt>Recyclée</dt><dd>${REC[c.r]} 🍿</dd></div></dl>
-  <div class="kw-odds"><div class="t">CHANCE PAR BOOSTER</div>${rows.map(([l,v])=>`<div class="rw"><span>${esc(l)}</span><b class="mono">${fpct(v)}</b></div>`).join('')}</div>
+   <div class="kw-own"><span class="o" style="color:${RC[c.r]}">${RN[c.r]} · possédée ×${q}</span><span class="dr mono">${kpct(rows[0]?rows[0][1]:mix)} / booster</span></div>
+   <div class="kw-btns"><button class="btn kw-b1" id="wsee">Voir la carte</button>${q>1?`<button class="btn kw-b2" id="wrc">Recycler ${q-1} · +${(q-1)*REC[c.r]} 🍿</button>`:''}</div></div>
+  <dl class="kw-inf"><div><dt>Univers</dt><dd>${esc(c.show)}</dd></div><div><dt>Joueurs qui l'ont</dt><dd class="mono" id="wown">–</dd></div><div><dt>Genres</dt><dd>${gs.join(', ')||'–'}</dd></div><div><dt>Interprète</dt><dd>${esc(c.act||'–')}</dd></div></dl>
+  <div class="kw-odds"><div class="t">CHANCE PAR BOOSTER</div>${rows.map(([l,v])=>`<div class="rw"><span>${esc(l)}</span><b class="mono">${kpct(v)}</b></div>`).join('')}</div>
   <div class="kw-foot" id="wsince">Carte obtenue</div></aside></div>`;
  document.body.append(d);d.scrollTop=0;
  const close=()=>{document.removeEventListener('keydown',kh);d.remove()};const kh=e=>{if(e.key=='Escape')close()};document.addEventListener('keydown',kh);
@@ -1718,6 +1717,7 @@ function wikiPage(n){
 /* ---------- fiche verrouillée (carte pas encore obtenue) ---------- */
 function rarExp(r,minE){const o=ST.odds,sl=minE?SLOTS.daily:SLOTS.norm;let e=0;for(const f of sl){const al=ORD.slice(ORD.indexOf(f));if(!al.includes(r))continue;e+=o[r]/[...al].reduce((a,k)=>a+o[k],0)}return e}
 function cardPct(c,g,minE){const nr=CARDS.filter(x=>x.r==c.r&&(!g||x.g.includes(g))).length;return nr?rarExp(c.r,minE)/nr*100:0}
+const kpct=x=>x<.01?'< 0,01 %':(x>=1?x.toFixed(1):x>=.1?x.toFixed(2):x.toFixed(3)).replace('.',',')+' %';
 const fpct=x=>(x>=1?x.toFixed(1):x>=.1?x.toFixed(2):x>=.01?x.toFixed(3):x.toFixed(4)).replace('.',',')+' %';
 function lockedPage(n){
  if(ST.inv[n])return wikiPage(n);
