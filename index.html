@@ -1409,6 +1409,10 @@ html.mo .kglow.on{animation:none}
    étroite au centre, blanche puis couleur de la meilleure carte, s'efface quand les cartes montent ---------- */
 .packwrap .beam{z-index:0;transition:height .6s cubic-bezier(.2,.9,.3,1),opacity .3s,background .4s}
 .packwrap .lay.strip{z-index:3}
+/* comme Kyara : colonne z0 < cartes qui montent z1 (lueur de la couleur du tirage) < corps du paquet z2 < haut déchiré z3 */
+.packwrap .cout{z-index:1}
+.packwrap .lay.body{z-index:2}
+.packwrap .cout>div{filter:drop-shadow(0 0 18px var(--bc,#fff))}
 .packwrap.out .beam{opacity:0;transition:opacity .8s .5s}
 </style></head><body>
 <div id="app"></div>
