@@ -4,7 +4,7 @@
 <meta name="theme-color" content="#0b0b10"><meta name="apple-mobile-web-app-capable" content="yes">
 <link rel="manifest" href="manifest.json"><title>Casting</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="preconnect" href="https://wsrv.nl" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=JetBrains+Mono:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;700;800&family=Unbounded:wght@700;800&family=JetBrains+Mono:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0b0b10;--panel:#14141c;--panel2:#1a1a24;--line:#262632;--fg:#f4f2ef;--mut:#8b8b99;--acc:#ff4b2b;--yel:#f7c61b;--grn:#3ddc84;
 --C:#7b7f8c;--U:#37c26e;--R:#3b82f6;--E:#a855f7;--L:#f7c61b}
@@ -1207,6 +1207,60 @@ html.mo .drays,html.mo .gild::after{animation:none}
 .kacf{display:flex;justify-content:space-between;align-items:center;font-size:12px}.kacf .mono{color:var(--mut)}.kacf .ok{color:var(--grn);font-weight:700}.kacf .kacr{color:#7cb8ff}
 .kacf button{height:28px;padding:0 12px;border-radius:99px;background:var(--yel);color:#1a1300;font-weight:800;font-size:12px}
 @media (min-width:900px){.kacg{grid-template-columns:repeat(4,minmax(0,1fr))}.kst{padding:14px 4px}.ksti{width:44px;height:44px;font-size:16px}.kst-h{font-size:26px}}
+
+/* ---------- boutique v3 : mesurée de nouveau sur la vitrine Kyara ---------- */
+html{overflow-x:clip}
+.bsec.zshow{position:relative;isolation:isolate}
+.bsec.zshow::before{content:"";position:absolute;z-index:-1;top:-34px;bottom:-40px;left:calc(50% - 50vw);right:calc(50% - 50vw);pointer-events:none;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:radial-gradient(60% 70% at 32% 60%,color-mix(in srgb,var(--pc,#ff4d2e) 16%,transparent),transparent 70%),linear-gradient(#0b0a0f,#09080c);transition:background .6s}
+.bsh h1,.bsh h2{font-family:Unbounded,'Bricolage Grotesque',sans-serif;font-weight:700;letter-spacing:-.01em}
+.ptabs{display:inline-flex;gap:0;padding:4px;border-radius:999px;background:#17161d;border:1px solid #2e2b36;flex-wrap:nowrap}
+.ptabs button{height:36px;padding:0 14px;border:0;background:none;color:#c9c5ce;font-size:14px}
+.ptabs button:hover{color:var(--fg);border:0}
+.ptabs button.on{background:#ff4d2e;border:0;color:#0e0d12}
+.zpr{font:500 12px 'JetBrains Mono',ui-monospace,monospace;color:#b7b2bd}.zpr i{font-style:normal;font-size:10px}
+.bcell.on .zpr{color:var(--fg)}
+.pnl h2{font-family:Unbounded,'Bricolage Grotesque',sans-serif;font-weight:700}
+.wln strong{color:#ff6fae;font-weight:700}
+.spk b{font-family:Unbounded,'Bricolage Grotesque',sans-serif;font-weight:800;letter-spacing:-.01em}
+/* lumière et papier froissé posés sur chaque paquet */
+.spk .zlt,.spk .zck{inset:0;border-radius:6cqi/4cqi;pointer-events:none;z-index:1}
+.spk .zck{mix-blend-mode:overlay;background:repeating-linear-gradient(98deg,#ffffff12 0 1px,#0000 1px 7px),repeating-linear-gradient(8deg,#0000000f 0 1px,#0000 1px 11px)}
+.spk .zlt{background:linear-gradient(90deg,#0000004d,#0000 8%,#ffffff17 14%,#0000 28% 76%,#ffffff0f 86%,#0000 92%,#00000057),linear-gradient(#ffffff24,#0000 16% 78%,#0000003d)}
+.sprs .zlt,.sprs .zck{border-radius:3cqi}
+.sbox .zlt,.sbox .zck{left:1cqi;right:1cqi;top:4cqi;border-radius:2cqi}
+.smin .zlt,.smin .zck{left:14cqi;right:14cqi;top:2cqi;bottom:2cqi;border-radius:1.4cqi}
+/* Avant-première : rouge plus profond, rayons doux, cadre doré */
+.stik .bx{background:radial-gradient(70% 45% at 50% 40%,#ff8a6a66,#0000 70%),repeating-conic-gradient(from 0deg at 50% 40%,#e9573f 0 6deg,#d9452f 6deg 12deg),#d9452f}
+.stik .zfr{left:3.4cqi;right:3.4cqi;top:10.5cqi;bottom:10.5cqi;border:.5cqi solid #e9c98f;border-radius:3cqi;opacity:.75}
+.stik .zcr{background:repeating-linear-gradient(90deg,#ffffff40 0 .8cqi,#0000 .8cqi 2.2cqi),linear-gradient(#a92a1b,#7d1d12)}
+.stik b{color:#4a140b;text-shadow:0 .5cqi 0 #ffffff33}
+.stik .zmd svg{width:34cqi;height:34cqi}
+.stik b{font-size:8.6cqi;white-space:nowrap}.sdeep b{white-space:nowrap}
+/* Deep Cuts : bleu profond, vagues, bulles, médaillon argent */
+.sdeep .bx{inset:0;border-radius:6cqi/4cqi;overflow:hidden;background:radial-gradient(80% 45% at 50% 35%,#7fa6e04d,#0000 70%),linear-gradient(180deg,#5b84c2,#355f9e 55%,#1f3d6e);box-shadow:inset 0 0 0 .6cqi #ffffff30,0 3cqi 8cqi #000a}
+.sdeep .zwv{left:0;right:0;bottom:0;height:46%;border-radius:0 0 6cqi 6cqi/0 0 4cqi 4cqi;background:radial-gradient(circle at 50% 100%,#0000 2.8cqi,#ffffff2e 3cqi 3.4cqi,#0000 3.6cqi,#0000 4.8cqi,#ffffff1f 5cqi 5.4cqi,#0000 5.6cqi) 0 0/8cqi 4.4cqi,linear-gradient(#0000,#0b1d3a99)}
+.sdeep .zcr{left:0;right:0;height:7cqi;background:repeating-linear-gradient(90deg,#ffffff4d 0 .8cqi,#0000 .8cqi 2.2cqi),linear-gradient(#8ea3c2,#5d7194);z-index:1}
+.sdeep .zcr.t{top:0;border-radius:6cqi 6cqi 0 0/4cqi 4cqi 0 0}.sdeep .zcr.b{bottom:0;border-radius:0 0 6cqi 6cqi/0 0 4cqi 4cqi}
+.sdeep .zfr{left:3.4cqi;right:3.4cqi;top:10.5cqi;bottom:10.5cqi;border:.5cqi solid #c8d6ee66;border-radius:3cqi}
+.sdeep .zbr{color:#e6eefb}.sdeep .zbr em{background:radial-gradient(circle at 35% 30%,#fff3dc,#c9a26a);color:#3a1a10}
+.sdeep .zbub{left:14cqi;top:66cqi;width:12cqi;height:12cqi;border-radius:50%;border:.5cqi solid #ffffff40;box-shadow:6cqi -7cqi 0 -2.6cqi #ffffff30,-2cqi 9cqi 0 -3.4cqi #ffffff30,64cqi -24cqi 0 -3cqi #ffffff26}
+.sdeep .zmd{left:50%;top:62cqi;width:54cqi;height:54cqi;margin:-27cqi;border-radius:50%;display:grid;place-items:center;color:#6f9ee6;background:radial-gradient(circle at 40% 30%,#24324a,#0d1422 70%);box-shadow:0 0 0 1cqi #cfd9ea,0 0 0 2.2cqi #6b7f9f,0 0 0 2.8cqi #cfd9ea99,0 2cqi 6cqi #0009,inset 0 0 6cqi #000}
+.sdeep .zmd svg{width:30cqi;height:30cqi;filter:drop-shadow(0 0 3cqi #6f9ee688)}
+.sdeep b{top:100cqi;font-size:10cqi;color:#eaf1fc;text-shadow:0 .6cqi 1.6cqi #0009}
+.sdeep small{top:113cqi;font:500 4.2cqi Inter,sans-serif;color:#d5e2f5}
+.sdeep .zpl{bottom:16cqi;background:#e9eef7;color:#1f3150}
+.sdeep .pf{left:5cqi;right:5cqi;top:16.2%;border-top:.6cqi dashed #ffffff60;z-index:3}
+/* Prestige et Coffret : grands symboles pleins en relief */
+.sprs .zgl{top:74cqi;width:56cqi;height:56cqi;margin:-28cqi;filter:drop-shadow(0 .8cqi 0 #0009) drop-shadow(0 0 5cqi #d9bf8c40)}
+.sprs .zhd{left:-1cqi;right:-1cqi;border:.5cqi solid #c9a86a55;border-bottom-color:#c9a86a88;box-shadow:0 1.2cqi 2cqi #000a;z-index:2}
+.sprs .sl{z-index:4}
+.sprs b{font-size:9.4cqi}
+.sbox .zgl{top:70cqi;width:46cqi;height:46cqi;margin:-23cqi;filter:drop-shadow(0 .8cqi 0 #0009)}
+.sbox b{color:#e8dcc0}
+.sbox .ld{left:-2cqi;right:-2cqi;background:radial-gradient(circle at 50% 100%,#0000 2.6cqi,#ffffff24 2.7cqi 3.1cqi,#0000 3.2cqi) 0 0/6cqi 3.2cqi,linear-gradient(180deg,#5a4aa0,#3a2e72);box-shadow:inset 0 0 0 .5cqi #d9ccff40,0 1.4cqi 2.4cqi #000a}
+.sbox .ld::before,.sbox .ld::after{content:"";position:absolute;top:2cqi;width:6cqi;height:6cqi;border:.6cqi solid #c9a86a;border-bottom:0}
+.sbox .ld::before{left:3cqi;border-right:0}.sbox .ld::after{right:3cqi;border-left:0}
+.pnl .zpi.deep{color:#6f9ee6}
 </style></head><body>
 <div id="app"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
@@ -1329,7 +1383,7 @@ async function setWish(ns,on){try{const a=await rpc('set_wishes',{cards:ns,on_:o
  catch(e){toast(/set_wishes|function/.test(e.message)?'Envies : lance d’abord 12_envies.sql dans Supabase':e.message);return false}}
 function wishLine(pool,g,daily){const w=pool.filter(c=>WISH.has(c.n)&&!ST.inv[c.n]);if(!w.length)return '';
  let none=1;for(const c of w)none*=1-cardPct(c,g||null,daily)/100;
- const p=(1-none)*100;return `<p class="wln"><b>♥</b> ${w.length} de tes envies dans ce booster · ${p<.01?'< 0,01':p.toFixed(p<1?2:1).replace('.',',')} % d’en avoir une par booster</p>`}
+ const p=(1-none)*100;return `<p class="wln"><b>♥</b> <strong>${w.length} de tes envies</strong> dans ce booster · ${p<.01?'< 0,01':p.toFixed(p<1?2:1).replace('.',',')} % d’en avoir une par booster</p>`}
 /* ---------- connexion ---------- */
 function authView(){
  $('#app').innerHTML=`<div class="wrap auth"><div class="logo" style="width:64px;height:64px;font-size:34px;border-radius:18px;margin-bottom:16px">🍿</div><h1 style="font-size:44px">CASTING</h1><p class="mut">Collectionne les personnages de tes séries préférées.</p><br>
@@ -1420,10 +1474,11 @@ function bcell(kind,g){const daily=kind=='daily',price=g?ST.gprice:ST.price;
 /* boutique : formats à venir (aucun achat possible tant que le serveur ne les gère pas) */
 const SHOP=[
  {id:'avp',n:'Avant-première',f:'5 cartes',d:'5 cartes tirées parmi les 3 000 persos les plus connus. Épique garantie, Légendaires et Mythiques bien plus fréquentes.',c:'#e2462e',sub:'Top 3 000 persos',ic:'star',p:750,sl:'RRRRE',bo:3.5,top:3000,gar:'E',mode:'tear'},
- {id:'prestige',n:'Prestige',f:'5 cartes',d:'5 cartes de tout le catalogue, Rare garantie, Légendaires et Mythiques 2,7 fois plus fréquentes.',c:'#c9a86a',sub:'Légendaires et Mythiques ×2,7',ic:'gem',p:575,sl:'CCCUR',bo:2.7,gar:'R',mode:'seal'},
+ {id:'deep',n:'Deep Cuts',f:'5 cartes',d:'5 cartes parmi les persos moins connus (rang 1 000 et plus) : plus de Communes et Peu communes, de quoi remplir les trous de la collection.',c:'#3d6db5',sub:'Rang 1 000+ · plus de C/U',ic:'deep',p:100,sl:'CCCUR',bo:1,lo:1000,gar:'R',mode:'tear'},
+ {id:'mini',n:'Mini',f:'3 cartes',d:'3 cartes à petit prix, Rare garantie, pour compléter ta collection.',c:'#c43b2a',sub:'3 cartes à petit prix',ic:'mini',p:100,sl:'CUR',bo:1,gar:'R',mode:'flap'},
  {id:'coffret',n:'Coffret',f:'20 cartes',d:'Une boîte de 20 cartes : 1 Épique et 3 Rares garanties.',c:'#7c66d9',sub:'20 cartes · Épique garantie',ic:'reel',p:550,sl:'CCCCCCCCCCCUUUUURRRE',bo:1,gar:'E',mode:'lid'},
- {id:'mini',n:'Mini',f:'3 cartes',d:'3 cartes à petit prix, Rare garantie, pour compléter ta collection.',c:'#c43b2a',sub:'3 cartes à petit prix',ic:'mini',p:100,sl:'CUR',bo:1,gar:'R',mode:'flap'}];
-const shopOn=()=>!!ST.shop,shopPrice=s=>(ST.shop&&ST.shop[s.id])||s.p;
+ {id:'prestige',n:'Prestige',f:'5 cartes',d:'5 cartes de tout le catalogue, Rare garantie, Légendaires et Mythiques 2,7 fois plus fréquentes.',c:'#c9a86a',sub:'Légendaires et Mythiques ×2,7',ic:'gem',p:575,sl:'CCCUR',bo:2.7,gar:'R',mode:'seal'}];
+const shopPool=s=>CARDS.filter(c=>(!s.top||c.n<=s.top)&&(!s.lo||c.n>s.lo)),shopOn=s=>!!ST.shop&&(!s||ST.shop[s.id]!=null),shopPrice=s=>(ST.shop&&ST.shop[s.id])||s.p;
 function shopOdds(s){const o=ST.odds,w=r=>o[r]*(r=='L'||r=='M'?s.bo:1),res={};
  for(const r of 'RELM'){let none=1;for(const f of s.sl){const al=[...ORD.slice(ORD.indexOf(f))].filter(k=>!s.top||k!='C'&&k!='U');if(!al.includes(r))continue;none*=1-w(r)/al.reduce((a,k)=>a+w(k),0)}res[r]=1-none}
  return res}
@@ -1436,29 +1491,31 @@ const SVGC=(()=>{let r=1234567,o='';const rnd=()=>(r=r*16807%2147483647)/2147483
  return `<svg class="zcfx" viewBox="0 0 100 172" preserveAspectRatio="none" aria-hidden="true"><g fill="#d8c08a">${o}</g></svg>`})();
 const ICO={
  star:'<svg viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.6l2.8 6 6.5.7-4.9 4.4 1.4 6.4L12 16.9l-5.8 3.2 1.4-6.4L2.7 9.3l6.5-.7z"/></svg>',
- gem:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><path d="M7 4h10l4 5-9 11L3 9z"/><path d="M3 9h18M9.5 4L8 9l4 11 4-11-1.5-5"/></svg>',
- reel:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="1.6"/><circle cx="12" cy="6.6" r="2"/><circle cx="12" cy="17.4" r="2"/><circle cx="6.6" cy="12" r="2"/><circle cx="17.4" cy="12" r="2"/></svg>'};
-function shopArt(s){const k={coffret:'sbox',prestige:'sprs',mini:'smin',avp:'stik'}[s.id];
+ gem:'<svg viewBox="0 0 24 24"><path fill="#efe0c2" d="M7 4h10l4 5H3z"/><path fill="#c9ae82" d="M3 9h18l-9 11z"/><path fill="#fbf3e2" d="M9.5 4h5L16 9H8z"/><path fill="#a8895a" d="M8 9h8l-4 11z"/><path fill="#00000026" d="M12 20l9-11h-2.2z"/></svg>',
+ deep:'<svg viewBox="0 0 24 24"><path fill="currentColor" fill-rule="evenodd" d="M10.2 2.6a7.6 7.6 0 016.1 12.1l4.6 4.6-1.9 1.9-4.6-4.6A7.6 7.6 0 1110.2 2.6zm0 2.7a4.9 4.9 0 100 9.8 4.9 4.9 0 000-9.8z"/><path fill="#ffffff55" d="M7.1 7.4a4.1 4.1 0 014.6-1.6 5 5 0 00-4.9 3.9z"/></svg>',
+ reel:'<svg viewBox="0 0 24 24"><defs><linearGradient id="zgb" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3e6c9"/><stop offset="1" stop-color="#b59b70"/></linearGradient></defs><path fill="url(#zgb)" fill-rule="evenodd" d="M2.4000000000000004 12a9.6 9.6 0 1 0 19.2 0a9.6 9.6 0 1 0 -19.2 0zM9.8 6.7a2.2 2.2 0 1 0 4.4 0a2.2 2.2 0 1 0 -4.4 0zM9.8 17.3a2.2 2.2 0 1 0 4.4 0a2.2 2.2 0 1 0 -4.4 0zM4.5 12a2.2 2.2 0 1 0 4.4 0a2.2 2.2 0 1 0 -4.4 0zM15.100000000000001 12a2.2 2.2 0 1 0 4.4 0a2.2 2.2 0 1 0 -4.4 0zM11 12a1 1 0 1 0 2 0a1 1 0 1 0 -2 0z"/></svg>'};
+function shopArt(s){const k={coffret:'sbox',prestige:'sprs',mini:'smin',avp:'stik',deep:'sdeep'}[s.id];const fx='<i class="zck"></i><i class="zlt"></i>';
  const top=s.top?`Top ${s.top.toLocaleString('fr')} persos`:'',brand='<i class="zbr"><em>C</em>CASTING</i>';
  const inner={
-  stik:`<i class="bx"></i><i class="zcr t"></i><i class="zcr b"></i><i class="zfr"></i>${brand}<i class="zsts">★ ★ ★</i>${SVGL}<i class="zmd">${ICO.star}</i><b>${esc(s.n)}</b><small>${top}</small><i class="zpl">${s.f}</i><i class="pf"></i>`,
-  sprs:`<i class="bx"></i>${SVGC}<i class="zhd">C A S T I N G</i><i class="zfr"></i><i class="sl">C</i><i class="zgl">${ICO.gem}</i><b>${esc(s.n)}</b><small>Légendaires et Mythiques ×${String(s.bo).replace('.',',')}</small><i class="zpl">${s.f}</i>`,
-  sbox:`<i class="bx"></i><i class="ztp"></i><i class="ld"></i><i class="rb"></i><i class="sl">C</i><i class="zcn a"></i><i class="zcn b"></i><i class="zgl">${ICO.reel}</i><b>${esc(s.n)}</b><i class="zpq">${s.f} · ${RN[s.gar]} garantie</i>`,
-  smin:`<i class="bx"></i><i class="zbd"></i><i class="fl"></i><i class="sl">C</i><i class="zgl">${s.sl.length}</i><i class="zcd"></i><i class="zkn"></i><i class="zstp">C</i><b>Mini-booster</b><small>${s.f}</small>`}[k];
+  stik:`<i class="bx"></i>${fx}<i class="zcr t"></i><i class="zcr b"></i><i class="zfr"></i>${brand}<i class="zsts">★ ★ ★</i>${SVGL}<i class="zmd">${ICO.star}</i><b>${esc(s.n)}</b><small>${top}</small><i class="zpl">${s.f}</i><i class="pf"></i>`,
+  sprs:`<i class="bx"></i>${fx}${SVGC}<i class="zhd">C A S T I N G</i><i class="zfr"></i><i class="sl">C</i><i class="zgl">${ICO.gem}</i><b>${esc(s.n)}</b><small>Légendaires et Mythiques ×${String(s.bo).replace('.',',')}</small><i class="zpl">${s.f}</i>`,
+  sbox:`<i class="bx"></i>${fx}<i class="ztp"></i><i class="ld"></i><i class="rb"></i><i class="sl">C</i><i class="zcn a"></i><i class="zcn b"></i><i class="zgl">${ICO.reel}</i><b>${esc(s.n)}</b><i class="zpq">${s.f} · ${RN[s.gar]} garantie</i>`,
+  smin:`<i class="bx"></i>${fx}<i class="zbd"></i><i class="fl"></i><i class="sl">C</i><i class="zgl">${s.sl.length}</i><i class="zcd"></i><i class="zkn"></i><i class="zstp">C</i><b>Mini-booster</b><small>${s.f}</small>`,
+  sdeep:`<i class="bx"></i><i class="zwv"></i>${fx}<i class="zcr t"></i><i class="zcr b"></i><i class="zfr"></i>${brand}<i class="zbub"></i><i class="zmd">${ICO.deep}</i><b>${esc(s.n)}</b><small>Rang ${(s.lo||0).toLocaleString('fr')}+ · plus de C/U</small><i class="zpl">${s.f}</i><i class="pf"></i>`}[k];
  return `<div class="spk ${k}">${inner}</div>`}
-function shopCell(s){const on=BSEL&&BSEL.k=='shop'&&BSEL.g==s.id;return `<button class="bcell ${shopOn()?'':'soon'} ${on?'on':''}" data-k="shop" data-g="${s.id}" style="--c1:${s.c}"><div class="tilt">${shopArt(s)}</div><span class="bpr">${shopOn()?'🍿 '+shopPrice(s):'Bientôt'}</span></button>`}
-function shopPanel(id,modal){const s=SHOP.find(x=>x.id==id),pr=shopPrice(s),od=shopOdds(s),on=shopOn(),ok=on&&ST.popcorns>=pr;
+function shopCell(s){const on=BSEL&&BSEL.k=='shop'&&BSEL.g==s.id;return `<button class="bcell ${shopOn(s)?'':'soon'} ${on?'on':''}" data-k="shop" data-g="${s.id}" style="--c1:${s.c}"><div class="tilt">${shopArt(s)}</div><span class="bpr zpr">${shopOn(s)?shopPrice(s)+' <i>🍿</i>':'Bientôt'}</span></button>`}
+function shopPanel(id,modal){const s=SHOP.find(x=>x.id==id),pr=shopPrice(s),od=shopOdds(s),on=shopOn(s),ok=on&&ST.popcorns>=pr;
  return `<div class="pnl" style="--c1:${s.c}"><div class="ph"><div class="pi zpi">${s.ic=='mini'?'3':ICO[s.ic]}</div><div style="flex:1;min-width:0"><h2>${esc(s.n)}</h2><div class="mut" style="font-size:14px">${esc(s.sub)}</div></div>${modal?'<button class="x" data-cx>✕</button>':''}</div>
   <div class="facts"><div class="fact"><b>${s.sl.length}</b><small>cartes par booster</small></div><div class="fact"><b style="color:${RC[s.gar]}">${RN[s.gar]}</b><small>ou mieux, garantie</small></div>
   <div class="fact"><b style="color:${RC.M}">${Math.max(0,ST.pity_max-ST.pity)}</b><small>avant Mythique sûre</small></div><div class="fact"><b style="color:var(--yel)">${goldIn()||'✦'}</b><small>${goldIn()?'avant le doré':'celui-ci est doré'}</small></div></div>
-  <button class="vp" data-pl><span class="stk">${['R','E','L','M'].map(r=>`<i style="--c:${RC[r]}"></i>`).join('')}</span>Voir les ${(s.top||CARDS.length).toLocaleString('fr')} persos</button>
+  <button class="vp" data-pl><span class="stk">${['R','E','L','M'].map(r=>`<i style="--c:${RC[r]}"></i>`).join('')}</span>Voir les ${shopPool(s).length.toLocaleString('fr')} persos</button>
   ${shopWish(s,od)}
   <div class="mut mono" style="font-size:11px;letter-spacing:.1em">CHANCE PAR BOOSTER</div><div class="odds">${['R','E','L','M'].map(r=>`<div class="o" style="--c:${RC[r]}"><span>● ${RN[r]}</span><i style="width:${Math.max(2,Math.min(1,od[r])*100*.62)}%"></i><em>${od[r]>.9995?'100':(od[r]*100).toFixed(od[r]<.05?2:1).replace('.',',')} %</em></div>`).join('')}</div>
   <button class="ob" data-go ${ok?'':'disabled'}>${on?'Ouvrir':'Bientôt'}<small>${on?(ok?'🍿 '+pr:'Pas assez de Popcorns · 🍿 '+pr):'en attente de la mise à jour du serveur'}</small></button></div>`}
-function shopWish(s,od){const pool=CARDS.filter(c=>!s.top||c.n<=s.top),w=pool.filter(c=>WISH.has(c.n)&&!ST.inv[c.n]);if(!w.length)return '';
+function shopWish(s,od){const pool=shopPool(s),w=pool.filter(c=>WISH.has(c.n)&&!ST.inv[c.n]);if(!w.length)return '';
  const nr={};for(const c of pool)nr[c.r]=(nr[c.r]||0)+1;let none=1;for(const c of w)none*=1-(od[c.r]||0)/nr[c.r];
- const p=(1-none)*100;return `<p class="wln"><b>♥</b> ${w.length} de tes envies dans ce booster · ${p<.01?'< 0,01':p.toFixed(p<1?2:1).replace('.',',')} % d’en avoir une par booster</p>`}
-function bindShop(root,id){const s=SHOP.find(x=>x.id==id);root.querySelector('[data-pl]').onclick=()=>poolSheet(null,s.top,s.n);root.querySelector('[data-go]').onclick=()=>{const sh=root.closest('.shade');if(sh)sh.remove();packScreen('shop',id)};
+ const p=(1-none)*100;return `<p class="wln"><b>♥</b> <strong>${w.length} de tes envies</strong> dans ce booster · ${p<.01?'< 0,01':p.toFixed(p<1?2:1).replace('.',',')} % d’en avoir une par booster</p>`}
+function bindShop(root,id){const s=SHOP.find(x=>x.id==id);root.querySelector('[data-pl]').onclick=()=>poolSheet(null,s.top,s.n,s.lo);root.querySelector('[data-go]').onclick=()=>{const sh=root.closest('.shade');if(sh)sh.remove();packScreen('shop',id)};
  const x=root.querySelector('[data-cx]');if(x)x.onclick=()=>root.closest('.shade').remove()}
 let BSEL=null;const wide=()=>innerWidth>=900;
 function bindPacks(){$$('.bcell').forEach(b=>{b.onclick=()=>{const k=b.dataset.k,g=b.dataset.g||null;
@@ -1472,11 +1529,12 @@ function boostBlock(el,page){
  const H=page?'<h1>Choisis ton booster</h1>':`<div><div class="eyebrow">${freeTot()>0?freeTot()+' gratuit'+(freeTot()>1?'s':'')+' à ouvrir':'Boosters'}</div><h2>Choisis ton booster</h2></div>`;
  const hs=page?'':'hs1';
  el.innerHTML=`<div class="bsh">${H}<div class="ptabs">${[['free','Gratuits'],['daily','Du jour & limités'],['shop','Boutique']].map(([k,l])=>`<button class="${tab==k?'on':''}" data-t="${k}">${l}</button>`).join('')}</div></div>
- <div class="bwrap"><div><p class="mut" style="margin:-8px 0 8px">${intro}</p><div class="bgrid ${hs}">${shop?SHOP.map(shopCell).join(''):items.map(g=>bcell(kind,daily?null:g)).join('')}</div></div><aside class="bside" id="bside"></aside></div>`;
+ <div class="bwrap"><div>${shop?'':`<p class="mut" style="margin:-8px 0 8px">${intro}</p>`}<div class="bgrid ${hs}">${shop?SHOP.map(shopCell).join(''):items.map(g=>bcell(kind,daily?null:g)).join('')}</div></div><aside class="bside" id="bside"></aside></div>`;
  el.querySelectorAll('.ptabs button').forEach(b=>b.onclick=()=>{sheetTab=b.dataset.t;boostBlock(el,page)});
  bindPacks();drawSide()}
 function boost(){$('#v').innerHTML='<section class="bsec" id="bb" style="margin-top:22px"></section>';boostBlock($('#bb'),1)}
 function drawSide(){const el=$('#bside');if(!el||!BSEL||!wide())return;
+ const sec=el.closest('.bsec');if(sec){sec.classList.add('zshow');sec.style.setProperty('--pc',BSEL.k=='shop'?SHOP.find(x=>x.id==BSEL.g).c:gcol(BSEL.k=='daily'?ST.daily_theme:BSEL.g))}
  if(BSEL.k=='shop'){el.innerHTML=shopPanel(BSEL.g);bindShop(el,BSEL.g);return}
  el.innerHTML=packPanel(BSEL.k,BSEL.g);bindPanel(el,BSEL.k,BSEL.g)}
 /* ---------- fiche d'un booster (panneau à droite sur ordi, fenêtre sur téléphone) ---------- */
@@ -1515,8 +1573,8 @@ function oddsOld(minE){const o=ST.odds,t=10000,p=k=>o[k]/t,n=5;
 function openSheet(tab){sheetTab=tab=='paid'?'free':tab||sheetTab;view='boost';render();scrollTo(0,0)}
 /* ---------- persos d'un booster ---------- */
 let PQ={q:'',r:'',n:90};
-function poolSheet(g,top,nm){
- PQ={q:'',r:'',n:90};const base=CARDS.filter(c=>(!g||c.g.includes(g))&&(!top||c.n<=top)),d=document.createElement('div');d.className='shade';d.style.zIndex=35;d.onclick=e=>{if(e.target==d)d.remove()};
+function poolSheet(g,top,nm,lo){
+ PQ={q:'',r:'',n:90};const base=CARDS.filter(c=>(!g||c.g.includes(g))&&(!top||c.n<=top)&&(!lo||c.n>lo)),d=document.createElement('div');d.className='shade';d.style.zIndex=35;d.onclick=e=>{if(e.target==d)d.remove()};
  d.innerHTML=`<div class="sheet"><div class="hdr"><h2>${nm?esc(nm):g?fr(g):'Casting Mix'}</h2><button class="x" id="px">✕</button></div>
  <p class="mut" id="pc"></p><div class="srch"><input id="pq" placeholder="Rechercher un perso ou une série…"></div>
  <div class="chips">${['M','L','E','R','U','C'].map(r=>`<span class="chip" data-pr="${r}">${RN[r]}</span>`).join('')}</div><div class="grid" id="pg"></div><div id="pm"></div></div>`;
