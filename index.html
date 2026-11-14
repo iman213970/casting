@@ -955,6 +955,7 @@ html.mo .gbn{animation:none}
 .who.t3{background:radial-gradient(60% 50% at 50% 60%,#2a0f0a,#050408 75%)}
 .who.t3 .whalo{filter:blur(44px);opacity:.55;background:conic-gradient(#ff4d2e,#f5c518,#3fbf7f,#4dd6ff,#b072ff,#ff4d9e,#ff4d2e);animation:wturn 18s linear infinite;-webkit-mask:radial-gradient(closest-side,#000 30%,#0000 72%);mask:radial-gradient(closest-side,#000 30%,#0000 72%)}
 @keyframes wturn{to{transform:rotate(1turn)}}
+.who .sim.mono{display:grid;place-items:center;font:800 clamp(24px,3.4vw,38px)/1 'Bricolage Grotesque',Inter,sans-serif;font-style:normal;color:var(--rc);background:radial-gradient(circle at 50% 30%,color-mix(in srgb,var(--rc) 28%,#16141c),#0b0a10)}
 </style></head><body>
 <div id="app"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
@@ -1303,17 +1304,17 @@ function pxFrame(t){const x=PX.x,dt=Math.min(.05,(t-PX.t)/1000);PX.t=t;if(!PX.c|
 const RAINBOW=['#ff3d81','#ffb13d','#3dff9a','#3dc5ff','#a43dff'];
 /* ---------- « Qui est-ce ? » : indices avant une Épique ou mieux ---------- */
 function whoIs(c){return new Promise(res=>{const k=rankOf(c),t=k>=5?3:k>=4?2:1,T=t==3?[900,1500,1500,1700]:t==2?[600,1300,1300,1400]:[450,1200,1200,0];
- const bgc=CARDS.find(x=>x.show==c.show&&x.n!=c.n&&x.i);
+
  const facts=[c.act?['Joué par',c.act]:['POW · AURA',c.pow+' · '+c.aura],['Genres',c.g.slice(0,2).map(fr).join(', ')||'–'],['Nom','？'.repeat(Math.min(6,[...c.name].length))]];
  const o=document.createElement('div');o.className='who t'+t;o.style.setProperty('--rc',rcol(c.r));
- o.innerHTML=`${bgc?`<div class="wbg" style="background-image:url('${imgUrl(bgc)}')"></div>`:''}<div class="whalo"></div><div class="wcl" aria-live="assertive"></div><div class="wtag">${RN[c.r].toUpperCase()}</div><button class="wsk">Passer ›</button>`;
+ o.innerHTML=`<div class="whalo"></div><div class="wcl" aria-live="assertive"></div><div class="wtag">${RN[c.r].toUpperCase()}</div><button class="wsk">Passer ›</button>`;
  document.body.append(o);const cl=o.querySelector('.wcl'),ts=[],t0=performance.now();let done=false,n=0;
  const kh=e=>{if(e.key==' '||e.key=='Enter'||e.key=='Escape'){e.preventDefault();e.stopImmediatePropagation();fin()}};
  const fin=()=>{if(done)return;done=true;ts.forEach(clearTimeout);removeEventListener('keydown',kh,true);o.classList.add('out');setTimeout(()=>o.remove(),260);res()};
  addEventListener('keydown',kh,true);o.onclick=()=>{if(performance.now()-t0>600)fin()};o.querySelector('.wsk').onclick=e=>{e.stopPropagation();fin()};
  const add=h=>ts.push(setTimeout(()=>cl.insertAdjacentHTML('beforeend',h),n));
  const top=Math.max(.1,c.n/CARDS.length*100);
- n=T[0];add(`<div class="clue sr">${bgc?`<i class="sim" style="background-image:url('${imgUrl(bgc)}')"></i>`:'<i class="sim"></i>'}<div><span class="lab">Série</span><b class="big">${esc(c.show)}</b></div></div>`);n+=T[1];
+ n=T[0];add(`<div class="clue sr"><i class="sim mono">${esc(c.show.replace(/^(the|le|la|les)\s+/i,'').split(/\s+/).slice(0,2).map(w=>[...w][0]||'').join('').toUpperCase())}</i><div><span class="lab">Série</span><b class="big">${esc(c.show)}</b></div></div>`);n+=T[1];
  add(`<div class="clue pop"><span class="lab">Popularité</span><b class="big mono">Top ${top.toFixed(top<10?1:0).replace('.',',')} %</b><small class="mono">#${c.n.toLocaleString('fr')} sur ${CARDS.length.toLocaleString('fr')}</small></div>`);n+=T[2];
  if(T[3]){add(`<div class="clue wfacts">${facts.map((f,i)=>`<div class="fact" style="--d:${i*180}ms"><span class="lab">${f[0]}</span><b>${esc(f[1])}</b></div>`).join('')}</div>`);n+=T[3]}
  ts.push(setTimeout(fin,n));SFX.riser(n/1000)})}
