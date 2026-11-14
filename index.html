@@ -1506,7 +1506,7 @@ function packScreen(kind,genre,q0){
   const t0=Date.now(),req=rpc('open_boosters',{kind,genre:env?null:genre,qty:env||sp?1:qty}).then(async r=>{ST=r.state;const cs=r.boosters.flatMap(b=>b.cards.map(x=>CARDS[x.n-1]));preload(cs);return r});
   req.then(r=>setTimeout(()=>{
    const bc=r.boosters.flatMap(b=>b.cards.map(x=>CARDS[x.n-1])).reduce((a,c)=>rankOf(c)>rankOf(a)?c:a),bk=rankOf(bc),b0=r.boosters[0];
-   const dv=r.boosters.some(b=>b.god||b.pity_hit);if(dv){gildPack(pw,'divine');$('#pf').insertAdjacentHTML('afterbegin','<div class="drays"></div>');d.classList.add('divine');SFX.rar&&SFX.rar('M')}
+   const dv=r.boosters.some(b=>b.god);if(dv){gildPack(pw,'divine');$('#pf').insertAdjacentHTML('afterbegin','<div class="drays"></div>');d.classList.add('divine');SFX.rar&&SFX.rar('M')}
    const gc=bk>=2?rcol(bc.r):'#ffffff';pw.style.setProperty('--bc',gc);pw.style.setProperty('--gc',gc);if(bk>=2)d.style.setProperty('--pc1',gc);pw.classList.add('bm');
    $('#cout').innerHTML=Array.from({length:5},(_,k)=>`<div style="--r:${k*1.6}deg;animation-delay:${k*40}ms">${cardBack(dv?'#fff4de':b0.golden?'#f7c61b':c1)}</div>`).join('');
    pw.classList.add('out');SFX.whoosh();if(bk>=4)SFX.rumble(.9);
@@ -1565,7 +1565,7 @@ function fanHtml(list,best,cnt){
  const span=2*mk*sp+w0,s=Math.max(.45,Math.min(1,(Math.min(innerWidth,1240)-48)/span,(innerHeight-300)/(w0*1.4+90+cy*mk*mk))),w=w0*s;
  return `<div class="rfan2" style="width:${span*s|0}px;height:${(w*1.4+40+(cy*mk*mk+30)*s)|0}px">${fan.map(({c,k},j)=>`<div class="fc ${k==0?'fbest':''}" style="--w:${w|0}px;--x:${k*sp*s|0}px;--y:${(k==0?-30:cy*k*k)*s|0}px;--r:${k*rot}deg;--dd:${dl*j|0}ms;z-index:${k==0?20:20-Math.abs(k)}">${k==0?`<span class="bl" style="--c:${rcol(c.r)}">Meilleure carte</span>`:''}${nb(c)}${card(c,{q:cnt?cnt[c.n]:0})}</div>`).join('')}</div>`}
 function reveal(d,r,kind,g,qty){
- const c1=kind=='shop'?(SHOP.find(x=>x.id==g)||{}).c||'#fff':gcol(g);setTimeout(()=>r.boosters.forEach(b=>b.cards.forEach(x=>WISH.delete(x.n))));let bs=r.boosters.map(b=>({pity:b.pity_hit,golden:b.golden,god:b.god||b.pity_hit,cards:b.cards.map(x=>({...CARDS[x.n-1],new:x.new,bonus:x.bonus,wished:WISH.has(x.n)})).sort((p,q)=>rankOf(p)-rankOf(q))}));
+ const c1=kind=='shop'?(SHOP.find(x=>x.id==g)||{}).c||'#fff':gcol(g);setTimeout(()=>r.boosters.forEach(b=>b.cards.forEach(x=>WISH.delete(x.n))));let bs=r.boosters.map(b=>({pity:b.pity_hit,golden:b.golden,god:b.god,cards:b.cards.map(x=>({...CARDS[x.n-1],new:x.new,bonus:x.bonus,wished:WISH.has(x.n)})).sort((p,q)=>rankOf(p)-rankOf(q))}));
  const multi=bs.length;if(multi>1)bs=[{pity:bs.some(b=>b.pity),golden:bs.some(b=>b.golden),god:bs.some(b=>b.god),cards:bs.flatMap(b=>b.cards).sort((p,q)=>rankOf(p)-rankOf(q))}];
  const all=bs[0].cards.slice(),WHO=multi>1?4:3;let bi=-1;
  const flash=col=>{const f=document.createElement('div');f.className='flash';f.style.setProperty('--fc',col);document.body.append(f);setTimeout(()=>f.remove(),800)};
@@ -1635,7 +1635,7 @@ function reveal(d,r,kind,g,qty){
   const sp2=kind=='shop'?SHOP.find(x=>x.id==g):null,k2=kind=='daily'?'free':kind,g2=kind=='daily'?null:g,pr=sp2?shopPrice(sp2):g2?ST.gprice:ST.price,mq=k2=='free'?freeTot():sp2?(ST.popcorns>=pr?1:0):Math.floor(ST.popcorns/pr);let rq=Math.min(qty>1?qty:1,Math.max(1,mq));
   const sub=k2=='free'?(freeTot()>0?`Gratuit · ${freeTot()} restant${freeTot()>1?'s':''}`:'Plus de gratuit'):`🍿 ${pr}`;
   d.style.setProperty('--pc1',rcol(best.r));
-  d.innerHTML=`<div class="recap"><div class="eyebrow">${bs.some(b=>b.god)?(qty>1?'Un booster divin dans le lot · Mythique garantie':'Booster divin · Mythique garantie'):bs.some(b=>b.golden)?'✦ Booster doré':qty>1?qty+' boosters ouverts · '+all.length+' cartes':'Ton tirage'}</div>
+  d.innerHTML=`<div class="recap"><div class="eyebrow">${bs.some(b=>b.god)?(qty>1?'Un booster divin dans le lot · Mythique garantie':'Booster divin · Mythique garantie'):bs.some(b=>b.pity)?'Mythique sûre !':bs.some(b=>b.golden)?'✦ Booster doré':qty>1?qty+' boosters ouverts · '+all.length+' cartes':'Ton tirage'}</div>
   ${fanHtml(uq,best,cnt)}
   <div class="sum">${nw?`<span class="new">${nw} nouvelle${nw>1?'s':''}</span>`:''}${dups?`<span class="dup">${dups} doublon${dups>1?'s':''} · +${recG} 🍿 si recyclés</span>`:''}${r.gain?`<span class="new" style="background:var(--yel);color:#1a1300">+${r.gain} 🍿 de bonus</span>`:''}</div>
   ${k2=='daily'||sp2?'':`<div class="qrow" id="rq">${[1,5,10].map(n=>`<button data-q="${n}" class="${rq==n?'on':''}" ${mq<n?'disabled':''}>×${n}</button>`).join('')}</div>`}
