@@ -1267,6 +1267,27 @@ html{overflow-x:clip}
  background-size:auto,400% 400%;background-position:0 0,var(--mx,50%) var(--my,50%);background-blend-mode:screen;filter:brightness(.55) contrast(1.5) saturate(1.1)}
 .tilting .r-E .hl,.cw.htilt .r-E .hl{opacity:.55}
 .r-E .fx{background:linear-gradient(115deg,transparent 35%,#ffffff2e 46%,#c99bff33 50%,#9fb8ff29 54%,transparent 65%) 0 0/300% 300%}
+
+/* ---------- Accueil : Gros tirages (mesuré sur Kyara) ---------- */
+.gtir{padding:72px 0 0}
+.gt-live{display:flex;align-items:center;gap:8px;color:#8a8590;font:500 12px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase}
+.gt-live i{width:8px;height:8px;border-radius:50%;background:#ff4d2e;animation:gtblink 1.6s ease-in-out infinite}
+@keyframes gtblink{50%{opacity:.25}}
+.gtir h2{margin:6px 0 0;font:700 32px/1.15 Unbounded,sans-serif}
+.gt-row{list-style:none;display:flex;gap:16px;margin:0 -10px;padding:10px 10px 14px;overflow-x:auto;scrollbar-width:thin}
+.gt-row li{flex:0 0 150px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.gt-card{position:relative;display:block;width:150px;height:210px;padding:2px;border:0;border-radius:14px;cursor:pointer;background:#f5c518;box-shadow:0 0 12px #f5c5184d}
+.gt-card.rM{background:conic-gradient(#ff4d2e,#f5c518,#3fbf7f,#4dd6ff,#b072ff,#ff4d9e,#ff4d2e);box-shadow:0 0 12px #ff4d2e4d}
+.gt-card img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 20%;border-radius:12px;background:#1b1a21}
+.gt-lab{position:absolute;top:10px;left:10px;padding:2px 8px;border-radius:6px;font:700 11px Inter,sans-serif;background:#f5c518;color:#2a1f00}
+.gt-card.rM .gt-lab{background:#fff;color:#ff4d2e}
+.gt-nm{position:absolute;left:2px;right:2px;bottom:2px;padding:22px 8px 7px;border-radius:0 0 12px 12px;background:linear-gradient(#0000,#000000e0);color:#fff;font:700 12px Inter,sans-serif;text-align:left;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gt-who{display:flex;align-items:center;gap:8px;min-width:0}
+.gt-av{flex:0 0 30px;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:#25232c;color:#ff4d2e;font:900 12px Unbounded,sans-serif}
+.gt-ps{font:700 13px Inter,sans-serif;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gt-t{font-size:12px;color:#8a8590;margin-top:-6px}
+html.mo .gt-live i{animation:none}
+@media (max-width:899px){.gtir{padding-top:40px}.gtir h2{font-size:24px}.gt-row li{flex-basis:120px}.gt-card{width:120px;height:168px}}
 </style></head><body>
 <div id="app"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
@@ -1442,6 +1463,7 @@ function home(){
   ${pill('#f7c61b','✦',gi||'✦',gi?'avant le booster doré':'prochain booster doré','',!gi)}
   ${pill('#ff5c8a','◆',Math.max(0,ST.pity_max-ST.pity),'avant Mythique sûre')}</div>
  <section class="bsec" id="bb"></section>
+ <section class="gtir" id="gtir" hidden></section>
  ${best.length?`<div class="sec"><div class="eyebrow">Ta vitrine</div><h2>Tes plus belles cartes</h2></div><div class="scroll">${best.map(c=>card(c,{q:inv[c.n]})).join('')}</div>`:''}
  <footer>Projet fan non officiel. This product uses the TMDB API but is not endorsed or certified by TMDB.</footer>`;
  const show=i=>{hbI=i;$$('.hs').forEach((e,k)=>e.classList.toggle('on',k==i));$$('.dots button').forEach((e,k)=>e.classList.toggle('on',k==i))};
@@ -1449,7 +1471,21 @@ function home(){
  $$('[data-hd]').forEach(b=>b.onclick=()=>{show(+b.dataset.hd);clearInterval(hbT)});
  {const hb=$('#hb');let hx=null;hb.addEventListener('pointerdown',e=>{if(e.pointerType!='mouse')hx=e.clientX});hb.addEventListener('pointerup',e=>{if(hx==null)return;const dx=e.clientX-hx;hx=null;if(Math.abs(dx)>40){clearInterval(hbT);show((hbI+(dx<0?1:slides.length-1))%slides.length)}})}
  $$('[data-hgo]').forEach(b=>b.onclick=()=>slides[+b.dataset.hgo].go());$$('[data-hsee]').forEach(b=>b.onclick=()=>slides[+b.dataset.hsee].see());
- boostBlock($('#bb'),0);$$('[data-gom]').forEach(b=>b.onclick=e=>{e.stopPropagation();view='miss';render();scrollTo(0,0)});bindCards()}
+ boostBlock($('#bb'),0);bigPulls();$$('[data-gom]').forEach(b=>b.onclick=e=>{e.stopPropagation();view='miss';render();scrollTo(0,0)});bindCards()}
+/* ---------- Accueil : « Gros tirages » en direct (comme Kyara) ---------- */
+let gtT=null;
+const agoTxt=x=>x<60?'à l’instant':x<3600?`il y a ${x/60|0} min`:x<86400?`il y a ${x/3600|0} h`:`il y a ${x/86400|0} j`;
+async function bigPulls(){
+ clearTimeout(gtT);const el=$('#gtir');if(!el)return;
+ let L;try{L=await rpc('big_pulls',{lim:24})}catch(e){L=null}
+ if(!$('#gtir'))return;
+ if(!L||!L.length){el.hidden=true}else{
+  el.hidden=false;
+  el.innerHTML=`<div class="eyebrow gt-live"><i></i>En direct · Légendaires et Mythiques</div><h2>Gros tirages</h2>
+  <ul class="gt-row">${L.filter(x=>CARDS[x.n-1]).map(x=>{const c=CARDS[x.n-1];return `<li><button class="gt-card r${c.r}" data-gtn="${c.n}"><img src="${imgUrl(c)}" alt="" loading="lazy"><span class="gt-lab">${RN[c.r]}</span><span class="gt-nm">${esc(c.name)}</span></button>
+   <div class="gt-who"><span class="gt-av">${esc((x.name||'?').trim().charAt(0).toUpperCase())}</span><span class="gt-ps">${esc(x.name)}</span></div><span class="gt-t mono">${agoTxt(x.ago)}</span></li>`}).join('')}</ul>`;
+  el.querySelectorAll('[data-gtn]').forEach(b=>b.onclick=()=>{const n=+b.dataset.gtn;ST.inv[n]?detail(n):lockedPage(n)})}
+ gtT=setTimeout(()=>{if(view=='home'&&$('#gtir'))bigPulls()},60000)}
 function strip(){const q=QS(),gi=goldIn();
  return `<div class="strip"><button class="sc" data-gom><b>${q.daily_done??0}/${q.daily_total??3}</b><small>missions du jour</small></button>
  <button class="sc ${q.streak_ready?'hot':''}" data-gom><b>J${q.streak_day||0}/7</b><small>série de connexion${q.streak_ready?' · à récupérer':''}</small></button>
