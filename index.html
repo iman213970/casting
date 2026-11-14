@@ -1137,6 +1137,40 @@ html.mo .drays,html.mo .gild::after{animation:none}
 .pnl .zpi{color:var(--c1)}.pnl .zpi svg{width:58%;height:58%}
 /* geste du sceau (Prestige) : le sceau reste cliquable */
 .packwrap.m-seal .sprs .sl{cursor:pointer}
+
+/* ---------- pages d'info ---------- */
+.sfoot{border-top:1px solid var(--line);margin-top:40px;padding:22px 0 calc(110px + env(safe-area-inset-bottom));color:var(--mut);font-size:13px}
+.sfoot .wrap{display:flex;flex-wrap:wrap;gap:10px 24px;justify-content:space-between;align-items:center}
+.sfoot nav{display:flex;flex-wrap:wrap;gap:4px 18px}.sfoot button{background:none;border:0;padding:4px 0;color:var(--mut);font:500 13px Inter,sans-serif;cursor:pointer}.sfoot button:hover{color:var(--fg)}
+@media (min-width:900px){.sfoot{padding-bottom:28px}}
+.ilinks{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}.ilinks .btn{width:auto;padding:0 16px;height:38px;font-size:14px}
+.ilnk{background:none;border:0;padding:0;color:var(--acc);font:inherit;cursor:pointer}
+.ip{padding:30px 0 10px;display:flex;flex-direction:column;gap:18px}
+.iph .eyebrow{color:var(--acc)}
+.iph h1{margin:6px 0 8px;font:800 clamp(34px,5vw,64px)/1.02 'Bricolage Grotesque',Inter,sans-serif;letter-spacing:-.02em}
+.iph p{margin:0;color:var(--mut);font-size:15px}.iph p b{color:var(--fg)}
+.ipan{background:#121117;border:1px solid #25232c;border-radius:16px;padding:24px 28px}
+.ipan h2{margin:0 0 10px;font:800 17px 'Bricolage Grotesque',Inter,sans-serif}
+.ipan p{margin:10px 0 0;color:#cfcad6;font-size:14px;line-height:1.65}.ipan p:first-of-type{margin-top:0}
+.ipan2{display:grid;grid-template-columns:1fr 1fr;gap:32px}
+.ipan2 .ipan{padding:28px}.ipan2 h2{font-size:clamp(26px,3vw,38px);margin:4px 0 16px}
+.kick{font:500 11px 'JetBrains Mono',monospace;letter-spacing:.12em;color:var(--mut)}
+.irows{list-style:none;margin:0 0 14px;padding:0;display:flex;flex-direction:column;gap:8px}
+.irows li{display:flex;align-items:center;gap:14px;background:#18171e;border-radius:10px;padding:12px 14px;font-size:14px;font-weight:600}
+.irows li>b{min-width:34px;color:var(--mut);font-weight:700}.irows li i{width:10px;height:10px;border-radius:50%;flex:0 0 auto}.irows li span{flex:1}.irows .pc{min-width:0;color:#7cc7ff}
+.irgrid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:18px;margin-bottom:12px}
+.rcol h3{display:flex;align-items:center;gap:8px;margin:12px 0 6px;font:800 18px 'Bricolage Grotesque',Inter,sans-serif}.rcol h3 i{width:10px;height:10px;border-radius:50%}
+.rcol p{margin:0 0 6px;font-size:13px;color:var(--mut);line-height:1.5}.rcol p.mono{font-size:12px;color:#cfcad6}
+.rcard .cw,.rcard>*{width:100%;max-width:220px}
+.rules{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:12px;color:#cfcad6;font-size:14px;line-height:1.65}.rules b{color:var(--fg)}
+.inews{max-width:760px;margin:0 auto}
+.nw .nd{font-size:12px;color:var(--mut);margin-bottom:4px}.nw h2{font-size:22px;margin-bottom:14px}
+.nw ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px}
+.nw li{display:flex;gap:14px;align-items:flex-start;font-size:14px;line-height:1.55;color:#cfcad6}
+.ntag{flex:0 0 auto;width:96px;border-radius:99px;padding:2px 10px;font:700 11px Inter,sans-serif;text-align:center;margin-top:1px}
+.ntag.n{background:#f5c5181f;color:#f5c518}.ntag.a{background:#4d8bff1f;color:#7aa7ff}
+@media (max-width:1100px){.irgrid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:760px){.irgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.ipan2{grid-template-columns:1fr;gap:18px}.ipan{padding:20px}.nw li{flex-direction:column;gap:4px}}
 </style></head><body>
 <div id="app"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
@@ -1281,13 +1315,15 @@ function render(){
  <div class="wal" title="Boosters gratuits et Popcorns"><span class="wf"><b class="mono" id="fs">${ST.free}/${ST.free_max}${bonusN()?`<em>+${bonusN()}</em>`:''}</b><span class="bar"><i style="width:${ST.free/ST.free_max*100}%"></i></span></span><span class="wp mono">🍿 ${ST.popcorns.toLocaleString('fr')}</span></div>
  <button class="rnd mbtn ${view=='miss'?'on':''}" id="msb" aria-label="Missions">🎯<span class="ml">Missions</span>${qc?`<span class="bdg">${qc}</span>`:''}</button><button class="avatar" id="av">${esc(ST.name[0].toUpperCase())}</button></div></div>
  <div class="wrap" id="v"></div>
+ <footer class="sfoot"><div class="wrap"><span>Casting · jeu de cartes de séries entre nous</span><nav>${[['raretes','Raretés'],['regles','Règles'],['infos','Infos'],['nouv','Nouveautés'],['wiki','Wiki']].map(([v,l])=>`<button data-iv="${v}">${l}</button>`).join('')}</nav></div></footer>
  <div class="nav"><div class="wrap">${nav('home','🏠','Accueil')}${nav('coll','🗂️','Collection')}
  <div><button class="open-btn" id="ob" aria-label="Ouvrir un booster">🍿${nb>0?`<span class="bd">${nb}</span>`:''}</button><div class="open-lbl">Ouvrir</div></div>
  ${nav('mkt','🏷️','Marché')}${nav('more','⋯','Plus')}</div></div>`;
  $$('.nav button[data-v],.dnav button[data-v]').forEach(b=>b.onclick=()=>{view=b.dataset.v;render();scrollTo(0,0)});
  $('#lg').onclick=()=>{view='home';render();scrollTo(0,0)};
  $('#msb').onclick=()=>{view='miss';render();scrollTo(0,0)};$('#ob').onclick=()=>openSheet(freeTot()>0?'free':ST.daily_ready?'daily':'paid');$('#av').onclick=()=>{view='more';render()};
- ({home,coll,mkt,more,miss,boost,wiki})[view]();
+ $$('[data-iv]').forEach(b=>b.onclick=()=>{view=b.dataset.iv;render();scrollTo(0,0)});
+ ({home,coll,mkt,more,miss,boost,wiki,raretes,regles,infos,nouv})[view]();
  tickT=setInterval(tick,1000)}
 function tick(){if(ST&&ST.free_next!=null){ST.free_next--;['#nx','#nx2'].forEach(s=>{const e=$(s);if(e)e.textContent=fmt(ST.free_next)});$$('[data-nx]').forEach(e=>e.textContent='Dans '+fmt(ST.free_next));$$('[data-nxp],[data-nxh]').forEach(e=>e.textContent=fmt(ST.free_next));if(ST.free_next<=0){refresh().then(()=>{if(!$('.stage')&&!$('.shade'))render()})}}}
 /* ---------- accueil ---------- */
@@ -1795,6 +1831,70 @@ function wikiPage(n){
  rpc('card_owners',{card:n}).then(v=>{const e=d.querySelector('#wown');if(e&&Number.isFinite(+v))e.textContent=(+v).toLocaleString('fr')}).catch(()=>{});
  rpc('card_since',{card:n}).then(v=>{const e=d.querySelector('#wsince');if(e&&v&&!isNaN(new Date(v)))e.textContent='Carte obtenue le '+new Date(v).toLocaleDateString('fr',{day:'numeric',month:'long',year:'numeric'})}).catch(()=>{});
 }
+
+/* ---------- pages d'info (mesurées sur kyara.games/raretes, /regles, /infos, /nouveautes) ---------- */
+const IPH=(eb,h,lead)=>`<header class="iph"><div class="eyebrow">${eb}</div><h1>${h}</h1>${lead?`<p>${lead}</p>`:''}</header>`;
+function rarRange(r){const N=CARDS.length,k='MLERUC',sh=x=>CARDS.filter(c=>c.r==x).length/N*100;let st=0;for(const x of k){if(x==r)break;st+=sh(x)}const en=st+sh(r);
+ const f=x=>Math.round(x).toLocaleString('fr');return r=='M'?`top ${f(en)} %`:r=='C'?`le reste (${f(100-st)} %)`:`top ${f(st)}–${f(en)} %`}
+const RFX={C:'Cadre gris, simple reflet.',U:'Cadre vert, simple reflet.',R:'Cadre bleu, éclat bleu qui passe.',E:'Cadre violet, premier holo rayé animé.',L:'Cadre or, holo doré pailleté.',M:'Cadre arc-en-ciel, holo intégral pailleté.'};
+function raretes(){const o0=ST.odds,sm=Object.values(o0).reduce((a,b)=>a+b,0),o=Object.fromEntries(Object.entries(o0).map(([k,v])=>[k,v/sm*100])),pc=x=>(x>=10?x.toFixed(0):x>=1?x.toFixed(1):x>=.1?x.toFixed(2):x.toFixed(3)).replace('.',',');
+ const ex=r=>CARDS.filter(c=>c.r==r).sort((a,b)=>(!!ST.inv[b.n]-!!ST.inv[a.n])||a.n-b.n)[0];
+ $('#v').innerHTML=`<div class="ip">${IPH('Système de rareté · Raretés','De Commune à Mythique','La rareté d’un perso dépend de sa <b>popularité</b> : plus il est connu, plus sa carte est rare.')}
+ <div class="irgrid">${[...ORD].map(r=>{const c=ex(r);return `<div class="rcol"><div class="rcard">${c?card(c,{q:ST.inv[c.n]||0}):''}</div><h3><i style="background:${RC[r]}"></i>${RN[r]}</h3><p class="mono">${pc(o[r])} % des cartes tirées</p><p>Popularité : ${rarRange(r)}</p><p>${RFX[r]}</p></div>`}).join('')}
+  <div class="rcol"><div class="rcard">${cardBack('#f7c61b')}</div><h3>Dos de carte</h3><p>Bobine dorée, sceau C. Il prend la teinte du booster, jamais celle de la rareté.</p></div></div>
+ <div class="ipan2"><section class="ipan"><div class="kick">COMPOSITION</div><h2>5 cartes par booster</h2>
+   <ol class="irows"><li><b class="mono">1–3</b><span>Commune ou mieux</span></li><li><b class="mono">4</b><span style="color:${RC.U}">Peu commune ou mieux</span></li><li><b class="mono">5</b><span style="color:${RC.R}">Rare ou mieux, garantie</span></li></ol>
+   <p>Pitié : au <b>${ST.pity_max}<sup>e</sup> booster</b> sans Mythique, la 5<sup>e</sup> carte est forcément <span style="color:${RC.M}">Mythique</span>. Le compteur repart à zéro à chaque Mythique.</p>
+   <p>Booster doré : chaque <b>${ST.golden_every||10}<sup>e</sup> booster</b> standard contient une <span style="color:${RC.E}">Épique</span> ou mieux.</p>
+   <p>Booster divin : 1 chance sur 2 000 d’avoir 5 Épiques ou mieux d’un coup, dont une Mythique garantie.</p>
+   <p>Pack du jour : offert chaque jour, avec une <span style="color:${RC.E}">Épique</span> ou mieux garantie.</p></section>
+  <section class="ipan"><div class="kick">RECYCLAGE</div><h2>Doublons → Popcorns</h2>
+   <ol class="irows">${[...ORD].map(r=>`<li><i style="background:${RC[r]}"></i><span>${RN[r]}</span><b class="mono pc">${REC[r]} 🍿</b></li>`).join('')}</ol>
+   <p>Tu gardes toujours un exemplaire de chaque carte. Recycle depuis ta <button class="ilnk" data-iv="coll">collection</button>.</p>
+   <p>Bonus : chaque Légendaire rapporte ${BON.L} 🍿 et chaque Mythique ${BON.M} 🍿, même en double.</p></section></div></div>`;
+ $$('#v [data-iv]').forEach(b=>b.onclick=()=>{view=b.dataset.iv;render();scrollTo(0,0)})}
+function regles(){
+ $('#v').innerHTML=`<div class="ip">${IPH('Règles','Les règles de Casting','Pour que la collection et les échanges restent justes entre nous.')}
+ <section class="ipan"><ol class="rules">
+  <li><b>Un compte par personne.</b> Pas de deuxième compte pour gagner plus de boosters ou te faire des cadeaux.</li>
+  <li><b>Pas de triche.</b> Pas de scripts ni d’outils qui jouent à ta place. Un bug trouvé, tu le dis tout de suite au lieu d’en profiter.</li>
+  <li><b>Respect.</b> On se chambre gentiment, mais pas d’insultes ni de moqueries méchantes.</li>
+  <li><b>Pas d’argent réel.</b> Les cartes et les Popcorns ne s’achètent pas et ne se vendent pas contre de l’argent.</li>
+  <li><b>Les échanges sont libres</b> tant qu’ils restent équilibrés : pas de gros cadeaux qui vident un compte pour en remplir un autre.</li>
+  <li><b>Dernier mot.</b> En cas de doute ou de dispute, c’est l’organisatrice du jeu qui tranche. Ce qui n’est pas écrit ici n’est pas forcément permis : demande avant.</li>
+ </ol></section></div>`}
+function infos(){const N=CARDS.length.toLocaleString('fr'),shows=new Set(CARDS.map(c=>c.show)).size.toLocaleString('fr');
+ $('#v').innerHTML=`<div class="ip">${IPH('Infos','Casting, c’est quoi ?','Un jeu de collection de cartes de séries, gratuit et sans pub, fait pour la famille.')}
+ <section class="ipan"><h2>Un projet de famille</h2><p>Casting est un jeu privé, fait pour jouer entre frères et sœurs. Il n’y a ni studio ni entreprise derrière, et il n’est pas ouvert au public.</p></section>
+ <section class="ipan"><h2>Les personnages</h2><p>Le catalogue réunit ${N} personnages de ${shows} séries : leur nom, leur photo, la série et l’acteur ou l’actrice qui les joue.</p>
+  <p>Le <b>numéro</b> sur une carte (par exemple #0001/${CARDS.length}) est sa place dans le catalogue, classé par popularité : #0001 = le perso le plus connu. C’est cette place qui donne la <button class="ilnk" data-iv="raretes">rareté</button> : les plus connus sont Mythiques, les moins connus sont Communs.</p></section>
+ <section class="ipan"><h2>Les Popcorns</h2><p>Les Popcorns 🍿 sont la monnaie du jeu. Tu en gagnes avec les missions, la série de connexion, les succès, les Légendaires et Mythiques, et en recyclant tes doublons. Ils servent à ouvrir des boosters en plus et à acheter les produits de la boutique.</p></section>
+ <section class="ipan"><h2>Hébergement et données</h2><p>Le site tourne sur Cloudflare et les comptes sont gardés chez Supabase. On ne garde que ton pseudo, ton adresse de connexion et ta collection. Les photos viennent de TVmaze, TMDB et des wikis Fandom.</p></section>
+ <section class="ipan"><h2>Ton compte</h2><p>Tu peux te déconnecter depuis la page <button class="ilnk" data-iv="more">Plus</button>. Pour changer de pseudo ou supprimer ton compte, demande à l’organisatrice.</p></section></div>`;
+ $$('#v [data-iv]').forEach(b=>b.onclick=()=>{view=b.dataset.iv;render();scrollTo(0,0)})}
+const NEWS=[
+ {d:'14 novembre 2026',t:'Mise à jour 1.3',l:[
+  ['n','Booster divin : 1 chance sur 2 000 d’avoir 4 Épiques et une Mythique, avec un paquet arc-en-ciel et des rayons.'],
+  ['a','Boutique redessinée : Avant-première, Prestige, Coffret et Mini-booster ont chacun leur paquet.'],
+  ['a','Booster doré : le paquet a maintenant un cadre doré, un reflet et un ruban « DORÉ ».'],
+  ['n','Pages Raretés, Règles, Infos et Nouveautés, en bas de chaque page.']]},
+ {d:'14 novembre 2026',t:'Mise à jour 1.2',l:[
+  ['n','Le wiki des persos : toutes les fiches, débloquées ou à trouver, avec la chance par booster.'],
+  ['n','Envies : un cœur sur les cartes qui te manquent, et la chance d’en avoir une dans chaque booster.'],
+  ['a','Effets des cartes par rareté : éclat bleu pour les Rares, holo pour les Épiques, Légendaires et Mythiques.'],
+  ['a','Dos de carte : POW, AURA, nombre de joueurs qui l’ont et date d’obtention.'],
+  ['a','Sur téléphone, le son d’ouverture marche dès le premier geste.']]},
+ {d:'13 novembre 2026',t:'Mise à jour 1.1',l:[
+  ['n','Ouverture façon cinéma : « Qui est-ce ? » avant les grandes cartes, pile à retourner, récap.'],
+  ['n','Boutique : Avant-première, Prestige, Coffret et Mini-booster.'],
+  ['a','Nouveaux sons et nouveau dos de carte.']]},
+ {d:'13 novembre 2026',t:'Lancement',l:[
+  ['n','Boosters par genre, pack du jour et boosters gratuits qui se rechargent.'],
+  ['n','Missions, série de connexion de 7 jours et succès.'],
+  ['n','Booster doré tous les 10 boosters, Mythique garantie au bout du compteur.'],
+  ['n','Collection et albums par série.']]}];
+function nouv(){
+ $('#v').innerHTML=`<div class="ip inews">${IPH('Nouveautés','Quoi de neuf ?','')}${NEWS.map(u=>`<section class="ipan nw"><div class="nd mono">${u.d}</div><h2>${u.t}</h2><ul>${u.l.map(([k,x])=>`<li><span class="ntag ${k}">${k=='n'?'✨ Nouveau':'🔧 Amélioré'}</span><span>${x}</span></li>`).join('')}</ul></section>`).join('')}</div>`}
 /* ---------- fiche verrouillée (carte pas encore obtenue) ---------- */
 function rarExp(r,minE){const o=ST.odds,sl=minE?SLOTS.daily:SLOTS.norm;let e=0;for(const f of sl){const al=ORD.slice(ORD.indexOf(f));if(!al.includes(r))continue;e+=o[r]/[...al].reduce((a,k)=>a+o[k],0)}return e}
 function cardPct(c,g,minE){const nr=CARDS.filter(x=>x.r==c.r&&(!g||x.g.includes(g))).length;return nr?rarExp(c.r,minE)/nr*100:0}
@@ -1864,10 +1964,10 @@ function more(){
  $('#v').innerHTML=`<button class="kwlink" id="gwk"><b>Le wiki des persos</b><small>Toutes les fiches, débloquées ou à trouver</small><span>→</span></button><div class="sec"><div class="eyebrow">Compte</div><h2>${esc(ST.name)}</h2></div>
  <div class="tiles"><div class="tile"><b>${ST.boosters}</b><small>boosters ouverts</small></div><div class="tile"><b>${Math.max(0,ST.pity_max-ST.pity)}</b><small>avant Mythique sûre</small></div><div class="tile"><b>${ST.popcorns}</b><small>Popcorns</small></div></div>
  <div class="sec"><div class="eyebrow">Réglages</div></div><button class="btn g" id="mo">Animations : ${MO()?'désactivées':'activées'}</button><br><button class="btn g" id="snd">Son : ${SND()?'activé':'coupé'}</button>
- <div class="sec"><div class="eyebrow">Règles</div><h2>Comment ça marche</h2></div>
- <p class="mut">Un booster gratuit se recharge toutes les ${CFG.free_minutes} minutes (jusqu'à ${ST.free_max} en stock). Le pack du jour est offert chaque jour avec une Épique garantie. Chaque booster contient 5 cartes : 3 Communes ou mieux, 1 Peu commune ou mieux et 1 Rare ou mieux (C C C U R). Après ${ST.golden_every||10} boosters, le suivant est doré (C C U R E). Très rarement, un god pack donne 4 Épiques et 1 Mythique. Une Mythique est garantie après ${ST.pity_max} boosters sans Mythique. À chaque Légendaire ou Mythique obtenue, même en double, tu gagnes ${BON.L} ou ${BON.M} 🍿. Les doublons se recyclent en Popcorns : ${Object.entries(REC).map(([r,v])=>RN[r]+' '+v).join(', ')}.</p><br>
+ <div class="sec"><div class="eyebrow">Règles</div><h2>Comment ça marche</h2></div><div class="ilinks">${[['raretes','Raretés'],['regles','Règles'],['infos','Infos'],['nouv','Nouveautés']].map(([v,l])=>`<button class="btn g" data-iv="${v}">${l}</button>`).join('')}</div>
+ <p class="mut">Un booster gratuit se recharge toutes les ${CFG.free_minutes} minutes (jusqu'à ${ST.free_max} en stock). Le pack du jour est offert chaque jour avec une Épique garantie. Chaque booster contient 5 cartes : 3 Communes ou mieux, 1 Peu commune ou mieux et 1 Rare ou mieux (C C C U R). Après ${ST.golden_every||10} boosters, le suivant est doré (C C U R E). Très rarement (1 chance sur 2 000), un booster divin donne 4 Épiques et 1 Mythique. Une Mythique est garantie après ${ST.pity_max} boosters sans Mythique. À chaque Légendaire ou Mythique obtenue, même en double, tu gagnes ${BON.L} ou ${BON.M} 🍿. Les doublons se recyclent en Popcorns : ${Object.entries(REC).map(([r,v])=>RN[r]+' '+v).join(', ')}.</p><br>
  <button class="btn g" id="lo">Se déconnecter</button><footer>Projet fan non officiel. This product uses the TMDB API but is not endorsed or certified by TMDB.</footer>`;
  $('#snd').onclick=()=>{lsset('snd',SND()?'0':'1');if(SND())SFX.rar('E');more()};$('#gwk').onclick=()=>{view='wiki';render();scrollTo(0,0)};$('#mo').onclick=()=>{lsset('mo',MO()?'0':'1');document.documentElement.classList.toggle('mo',MO());more()};
- $('#lo').onclick=async()=>{await sb.auth.signOut();ST=null;render()}}
+ $('#lo').onclick=async()=>{await sb.auth.signOut();ST=null;render()};$$('#v [data-iv]').forEach(b=>b.onclick=()=>{view=b.dataset.iv;render();scrollTo(0,0)})}
 init();
 </script></body></html>
