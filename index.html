@@ -1171,6 +1171,42 @@ html.mo .drays,html.mo .gild::after{animation:none}
 .ntag.n{background:#f5c5181f;color:#f5c518}.ntag.a{background:#4d8bff1f;color:#7aa7ff}
 @media (max-width:1100px){.irgrid{grid-template-columns:repeat(4,minmax(0,1fr))}}
 @media (max-width:760px){.irgrid{grid-template-columns:repeat(2,minmax(0,1fr))}.ipan2{grid-template-columns:1fr;gap:18px}.ipan{padding:20px}.nw li{flex-direction:column;gap:4px}}
+
+/* ---------- collection + missions alignées sur Kyara ---------- */
+.cempty{grid-column:1/-1;text-align:center;padding:48px 16px;border:1px dashed var(--line);border-radius:16px}.cempty b{font:800 22px 'Bricolage Grotesque',Inter,sans-serif}.cempty .btn{width:auto;display:inline-flex;margin-top:10px;padding:0 22px}
+.fcols .sel{width:100%}
+.kick{display:block;font:700 11px 'JetBrains Mono',monospace;letter-spacing:.14em;text-transform:uppercase;color:var(--mut);margin-bottom:4px}
+.kpill{display:inline-flex;align-items:center;height:28px;padding:0 12px;border-radius:99px;background:#132a1c;border:1px solid #2c6b45;color:var(--grn);font-size:12px;font-weight:700;white-space:nowrap}
+.kclm{height:32px;padding:0 14px;border-radius:99px;background:var(--yel);color:#1a1300;font-weight:800;font-size:13px;white-space:nowrap}
+.kst-h{font-size:20px;margin:0 0 14px}
+.kstrk{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px}
+.kst{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 2px;border-radius:12px;background:#0005;border:1px solid var(--line)}
+.kstl{font:700 11px 'JetBrains Mono',monospace;color:var(--mut)}
+.ksti{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font:800 14px 'JetBrains Mono',monospace;color:var(--mut);border:2px solid var(--line)}
+.kstr{font-size:12px;color:var(--fg)}
+.kst.dn .ksti{background:var(--grn);border-color:var(--grn);color:#08140d}
+.kst.cur{border-color:var(--yel);box-shadow:0 0 12px #f7c61b44}.kst.cur .ksti{border-color:var(--yel);color:var(--yel)}
+.kst.d7 .ksti{background:linear-gradient(160deg,#ffe58a,#f5c518 55%,#b8860b);border-color:#f5c518;color:#3a2410}.kst.d7.dn .ksti{background:var(--grn);border-color:var(--grn);color:#08140d}
+.kstf{display:flex;flex-wrap:wrap;justify-content:space-between;gap:6px 14px;margin-top:12px;font-size:12px}.kstf .gold{color:#f5c518;font-weight:700}
+.kpgs{display:grid;gap:14px}
+.kpgl{display:flex;justify-content:space-between;gap:10px;font-size:13px;margin-bottom:6px}.kpgl .mono{font-size:12px;color:var(--mut)}
+.kpgb{display:block;height:5px;border-radius:9px;background:#000;overflow:hidden}.kpgb i{display:block;height:100%;border-radius:9px;background:linear-gradient(90deg,#ff7a3c,#f7c61b)}
+.kpg.full .kpgb i,.kac.got .kpgb i{background:var(--grn)}
+.ktm{display:inline-flex;align-items:center;height:26px;padding:0 10px;border-radius:99px;border:1px solid var(--line);background:#0005}
+.kalb{display:grid;grid-template-columns:1fr auto auto;gap:10px;align-items:center;padding:10px 12px;border-radius:12px;background:#0005;border:1px solid var(--line);margin-bottom:8px;font-size:13px}
+.kalb b{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.kalb .mono{color:var(--mut);font-size:12px}.kalb .ok{color:var(--grn);font-weight:700;font-size:12px}
+.kalb0{font-size:13px;margin:0}
+.kach{margin-bottom:14px}.kach h2 .kacn{font-size:14px;color:var(--mut);margin-left:6px}
+.ktabs{display:flex;gap:4px;padding:3px;border-radius:99px;background:#0006;border:1px solid var(--line)}
+.ktabs button{height:30px;padding:0 14px;border-radius:99px;font-size:13px;font-weight:700;color:var(--mut)}.ktabs button.on{background:var(--fg);color:#14101a}
+.kacg{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:10px}
+.kac{display:flex;gap:12px;padding:12px;border-radius:12px;background:#0005;border:1px solid var(--line)}
+.kaci{flex:0 0 auto;width:40px;height:40px;border-radius:10px;display:grid;place-items:center;font:800 16px 'JetBrains Mono',monospace;background:#ffffff0d;border:1px solid var(--line);color:var(--mut)}
+.kac.got .kaci{background:#132a1c;border-color:#2c6b45;color:var(--grn)}.kac.rdy{border-color:#7a6212;background:#1a1608}.kac.rdy .kaci{color:var(--yel);border-color:#7a6212}
+.kacb{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}.kacb b{font-size:14px}.kacb small{color:var(--mut);font-size:12px;margin-top:-3px}
+.kacf{display:flex;justify-content:space-between;align-items:center;font-size:12px}.kacf .mono{color:var(--mut)}.kacf .ok{color:var(--grn);font-weight:700}.kacf .kacr{color:#7cb8ff}
+.kacf button{height:28px;padding:0 12px;border-radius:99px;background:var(--yel);color:#1a1300;font-weight:800;font-size:12px}
+@media (min-width:900px){.kacg{grid-template-columns:repeat(4,minmax(0,1fr))}.kst{padding:14px 4px}.ksti{width:44px;height:44px;font-size:16px}.kst-h{font-size:26px}}
 </style></head><body>
 <div id="app"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
@@ -1185,7 +1221,7 @@ const GCL={'Action':'#ff5a36','Adventure':'#2fbf71','Comedy':'#ffc21a','Crime':'
 const gcol=g=>g?(GCL[g]||'#5b9bff'):'#f7c61b';
 const fr=g=>GFR[g]||g;
 function shade(h,k){const n=parseInt(h.slice(1),16),f=x=>Math.round(x*k).toString(16).padStart(2,'0');return '#'+f(n>>16)+f(n>>8&255)+f(n&255)}
-let ST=null,CARDS=[],view='home',F={q:'',r:'',g:'',own:'all',show:'',sort:'r',mode:'cards',n:60},tickT=null;
+let ST=null,CARDS=[],view='home',F={q:'',r:'',g:'',own:'own',show:'',sort:'n',mode:'cards',n:60},tickT=null;
 const sb=supabase.createClient(window.SUPABASE_URL,window.SUPABASE_KEY);
 const mail=n=>n.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'@casting-game.app';
 async function rpc(f,a){const {data,error}=await sb.rpc(f,a||{});if(error)throw new Error(error.message);return data}
@@ -1685,7 +1721,7 @@ function reveal(d,r,kind,g,qty){
 /* ---------- collection ---------- */
 function coll(){
  const inv=ST.inv,tot=CARDS.length,own=CARDS.reduce((a,c)=>a+(inv[c.n]?1:0),0),dups=Object.values(inv).reduce((a,q)=>a+Math.max(0,q-1),0),pc=own/tot*100,rv=recVal();
- const nf=(F.g?1:0)+(F.show?1:0)+(F.own!='all'?1:0)+(F.sort!='r'?1:0)+(F.r&&!wide()?1:0);
+ const nf=(F.g?1:0)+(F.show?1:0)+(F.own!='own'?1:0)+(F.sort!='n'?1:0)+(F.r&&!wide()?1:0);
  const seg=cls=>`<div class="seg ${cls}">${[['cards','Cartes'],['albums','Albums']].map(([k,l])=>`<button class="${F.mode==k?'on':''}" data-m="${k}">${l}</button>`).join('')}</div>`;
  $('#v').innerHTML=`<div class="chd"><div><div class="eyebrow">Album · ta collection</div><h1>Ma collection</h1></div>${seg('')}
   <div class="cst"><div><b>${own.toLocaleString('fr')}<span>/${tot.toLocaleString('fr')}</span></b><small>cartes uniques</small></div><div><b class="acc">${pc.toFixed(1).replace('.',',')} %</b><small>complétion</small><span class="cbar"><i style="width:${pc}%"></i></span></div><div><b>${dups.toLocaleString('fr')}</b><small>doublons</small></div></div></div>
@@ -1709,15 +1745,14 @@ function filterPop(){const P=$('#fpop');if(!P.hidden){P.hidden=true;const s=$('.
  const opt=(k,v,l,cur,extra)=>`<button class="fo ${cur==v?'on':''}" data-${k}="${v}" ${extra||''}>${l}</button>`;
  const draw=()=>{P.innerHTML=`<div class="fcols">
   <div><h4>Univers</h4><select class="sel" id="fg2"><option value="">Tous les genres</option>${ST.themes.map(g=>`<option value="${g}" ${D.g==g?'selected':''}>${fr(g)}</option>`).join('')}</select><select class="sel" id="fs3"><option value="">Toutes les séries</option>${shows.map(s=>`<option ${D.show==s?'selected':''}>${esc(s)}</option>`).join('')}</select></div>
-  <div><h4>Cartes</h4>${[['all','Toutes'],['own','Possédées'],['miss','Manquantes'],['dup','Doublons'],['wish','Envies ♥']].map(([k,l])=>opt('fo',k,l,D.own)).join('')}</div>
-  <div><h4>Tri</h4>${[['r','Rareté'],['n','Numéro'],['a','Nom'],['s','Série']].map(([k,l])=>opt('fs',k,l,D.sort)).join('')}</div>
+  <div><h4>Cartes</h4><select class="sel" id="fo2">${[['all','Toutes'],['own','Possédées'],['miss','Manquantes'],['dup','Doublons'],['wish',`Mes envies (${WISH.size})`]].map(([k,l])=>`<option value="${k}" ${D.own==k?'selected':''}>${l}</option>`).join('')}</select></div>
+  <div><h4>Tri</h4><select class="sel" id="fs2">${[['n','Numéro'],['r','Rareté'],['a','Nom'],['s','Série']].map(([k,l])=>`<option value="${k}" ${D.sort==k?'selected':''}>${l}</option>`).join('')}</select></div>
   ${wide()?'':`<div><h4>Rareté</h4>${opt('fr','','Toutes',D.r)}${[...'MLEURC'].map(r=>opt('fr',r,`<i class="d"></i>${RN[r]}`,D.r,`style="--c:${RC[r]}"`)).join('')}</div>`}</div>
   <div class="fbt"><button class="btn g" id="frs">Réinitialiser</button><button class="btn a" id="fap">Appliquer</button></div>`;
   $('#fg2').onchange=e=>D.g=e.target.value;$('#fs3').onchange=e=>D.show=e.target.value;
-  P.querySelectorAll('[data-fo]').forEach(b=>b.onclick=()=>{D.own=b.dataset.fo;draw()});
-  P.querySelectorAll('[data-fs]').forEach(b=>b.onclick=()=>{D.sort=b.dataset.fs;draw()});
+  $('#fo2').onchange=e=>D.own=e.target.value;$('#fs2').onchange=e=>D.sort=e.target.value;
   P.querySelectorAll('[data-fr]').forEach(b=>b.onclick=()=>{D.r=b.dataset.fr;draw()});
-  $('#frs').onclick=()=>{Object.assign(D,{g:'',show:'',own:'all',sort:'r',r:wide()?D.r:''});draw()};
+  $('#frs').onclick=()=>{Object.assign(D,{g:'',show:'',own:'own',sort:'n',r:wide()?D.r:''});draw()};
   $('#fap').onclick=()=>{Object.assign(F,D,{n:60});close();coll()}};
  draw();P.hidden=false}
 function list(){
@@ -1729,13 +1764,14 @@ function list(){
  const so={r:(a,b)=>ORD.indexOf(b.r)-ORD.indexOf(a.r)||a.n-b.n,n:(a,b)=>a.n-b.n,a:(a,b)=>a.name.localeCompare(b.name),s:(a,b)=>a.show.localeCompare(b.show)||a.n-b.n}[F.sort]||((a,b)=>a.n-b.n);
  L=L.slice().sort(so);
  const ob=base.filter(o).length;
- $('#cnt').textContent=`${L.length.toLocaleString('fr')} carte${L.length>1?'s':''}`+(base.length!=CARDS.length||F.own!='all'?` · ${ob.toLocaleString('fr')} / ${base.length.toLocaleString('fr')} possédées dans cette sélection`:'');
+ $('#cnt').textContent=`${L.length.toLocaleString('fr')} carte${L.length>1?'s':''} · ${{all:'toutes',own:'possédées',miss:'manquantes',dup:'en double',wish:'dans tes envies'}[F.own]}`+(base.length!=CARDS.length?` · ${ob.toLocaleString('fr')} / ${base.length.toLocaleString('fr')} possédées dans cette sélection`:'');
+ if(!L.length&&F.own=='own'&&!q&&!F.r&&!F.g&&!F.show){$('#gr').className='cgrid';$('#gr').innerHTML='<div class="cempty"><b>Ta collection est vide</b><p class="mut">Ouvre un booster pour obtenir tes premières cartes.</p><button class="btn y" id="cgo">Ouvrir un booster</button></div>';$('#gm').innerHTML='';$('#cgo').onclick=()=>{view='home';render()};return}
  if(F.show){const mi=base.filter(c=>!o(c)).map(c=>c.n),allw=mi.length&&mi.every(n=>WISH.has(n));
   if(mi.length){$('#cnt').insertAdjacentHTML('beforeend',` <button class="wall ${allw?'on':''}" id="wall">${allw?`♥ Retirer les ${mi.length} de mes envies`:`♡ Ajouter les ${mi.length} manquante${mi.length>1?'s':''} à mes envies`}</button>`);
    $('#wall').onclick=async()=>{if(await setWish(mi,!allw))list()}}}
  const cell=c=>o(c)?`<div class="gc">${card(c,{q:o(c)})}${o(c)>1?`<div class="val">+${(o(c)-1)*REC[c.r]} 🍿 recyclables</div>`:''}</div>`:`<button class="miss" data-ln="${c.n}" style="--c:${RC[c.r]}">${WISH.has(c.n)?'<i class="whr" title="Dans tes envies">♥</i>':''}<b>?</b><span class="mono">#${pad(c.n)}</span><em>${RN[c.r]}</em></button>`;
  let html='',pr='';
- L.slice(0,F.n).forEach(c=>{if(F.sort=='r'&&c.r!=pr){pr=c.r;const br=base.filter(x=>x.r==c.r);html+=`<div class="rsep" style="--c:${RC[c.r]}"><i>${c.r}</i>${RN[c.r]}<span>${br.filter(o).length.toLocaleString('fr')} / ${br.length.toLocaleString('fr')}</span></div>`}html+=cell(c)});
+ L.slice(0,F.n).forEach(c=>{html+=cell(c)});
  $('#gr').className='cgrid';$('#gr').innerHTML=html||'<p class="mut" style="grid-column:1/-1">Aucune carte.</p>';
  $('#gm').innerHTML=L.length>F.n?`<button class="btn g" id="gmore">Afficher plus · ${(L.length-F.n).toLocaleString('fr')} restantes</button>`:'';
  const m=$('#gmore');if(m)m.onclick=()=>{F.n+=60;list()};
@@ -1926,7 +1962,7 @@ function lockedPage(n){
  d.querySelectorAll('[data-ln2]').forEach(b=>b.onclick=()=>{close();lockedPage(+b.dataset.ln2)});
  d.querySelectorAll('[data-n2]').forEach(b=>b.onclick=()=>detail(+b.dataset.n2))}
 /* ---------- missions ---------- */
-let ACHALL=false;
+let ACHALL=false,ACHT='all';
 async function miss(){
  $('#v').innerHTML='<div class="center">Chargement des missions…</div>';
  let Q;try{Q=await rpc('my_quests')}catch(e){$('#v').innerHTML=`<div class="center">${esc(e.message)}</div>`;return}
@@ -1939,17 +1975,25 @@ async function miss(){
   <div class="mqf"><span class="mono">${q.progress.toLocaleString('fr')} / ${q.target.toLocaleString('fr')}</span>${q.claimed?'<span class="ok">Réclamé ✓</span>':q.done?`<button data-cq="${q.id}">Réclamer</button>`:'<span class="mut">En cours</span>'}</div></div>`;
  const bon=(k,l)=>{const b=Q.bonus[k],n=Q.bonus_rewards[k];return `<div class="mbon"><span>${l} → +${n} booster${n>1?'s':''} bonus</span>${b.claimed?'<span class="ok">Réclamé ✓</span>':b.all?`<button data-cq="bonus_${k}">Récupérer</button>`:'<span>🔒</span>'}</div>`};
  const bar=(l,a,b)=>`<div><span>${l}</span><span class="qb"><i style="width:${b?Math.min(100,a/b*100):0}%"></i></span><span class="mono">${a}/${b}</span></div>`;
- $('#v').innerHTML=`<div class="mhd"><div><h1>Missions <em>&amp;</em> succès</h1><p class="mut">Missions du jour et de la semaine, série de connexion et succès : tout rapporte des Popcorns ou des boosters.</p></div><button class="ob mall" id="mall" ${ids.length?'':'disabled'}>Tout réclamer${ids.length?' · '+ids.length:''}</button></div>
- <div class="mrow1"><div class="mcard"><div class="mch"><div><div class="eyebrow">Chaque jour</div><h2>Série de 7 jours</h2></div><span class="mono">Jour ${gotTo}/7</span></div>
-  <div class="strk">${s.rewards.map((r,i)=>{const d=i+1;return `<div class="${d<=gotTo?'got':''} ${!s.claimed_today&&d==s.next?'cur':''} ${d==7?'d7':''}">J${d}<b>${d<=gotTo?'✓':r}</b>${d<=gotTo?'':'🍿'}${d==7?'<br>+ doré':''}</div>`}).join('')}</div>
-  <button class="btn ${s.claimed_today?'g':'y'}" data-cq="streak" ${s.claimed_today?'disabled':''}>${s.claimed_today?'Reviens demain pour le jour '+(s.day>=7?1:s.day+1):'Jour '+s.next+' · +'+s.rewards[s.next-1]+' 🍿'}</button>
-  <p class="mut" style="font-size:12px;margin:8px 0 0">Un jour de grâce : si tu rates un jour, la série tient encore.</p></div>
-  <div class="mcard"><div class="mch"><h2>Ta progression</h2></div><div class="pgr">${bar('Connexion',gotTo,7)}${bar('Du jour',cl(dd),dd.length)}${bar('Semaine',cl(ww),ww.length)}${!Q.bonus.welcome.claimed?bar('Bienvenue',cl(wl),wl.length):''}${bar('Succès',cl(ach),ach.length)}</div></div></div>
- ${!Q.bonus.welcome.claimed&&wl.length?`<div class="mcard" style="margin-bottom:14px"><div class="mch"><div><div class="eyebrow">Pour bien commencer</div><h2>Bienvenue</h2></div><span class="mono">${cl(wl)} / ${wl.length}</span></div><div class="mwl">${wl.map(qc).join('')}</div>${bon('welcome','Toutes réclamées')}</div>`:''}
- <div class="mcols"><div class="mcard"><div class="mch"><h2>Missions du jour</h2><span class="mono">↻ ${hm(Q.next_daily)}</span></div>${dd.map(qc).join('')}${bon('daily','Les 3 réclamées')}</div>
-  <div class="mcard"><div class="mch"><h2>Missions de la semaine</h2><span class="mono">↻ ${hm(Q.next_weekly)}</span></div>${ww.map(qc).join('')}${bon('weekly','Les 3 réclamées')}</div>
-  <div class="mcard"><div class="mch"><h2>Succès</h2><span class="mono">${cl(ach)} / ${ach.length}</span></div>${(ACHALL?ach:ach.slice(0,6)).map(qc).join('')}${ach.length>6?`<button class="more2" id="achm">${ACHALL?'Réduire':`Voir les ${ach.length} succès`}</button>`:''}</div></div>`;
- if($('#achm'))$('#achm').onclick=()=>{ACHALL=!ACHALL;miss()};
+ const albs=(()=>{const M=new Map();for(const c of CARDS){const x=M.get(c.show)||{t:0,o:0};x.t++;if(ST.inv[c.n])x.o++;M.set(c.show,x)}return [...M.entries()].filter(([,x])=>x.o==x.t).map(([n,x])=>({n,t:x.t}))})();
+ const pb=(l,a,b2)=>{const f=b2&&a>=b2;return `<div class="kpg ${f?'full':''}"><div class="kpgl"><span>${l}</span><span class="mono">${a} / ${b2}</span></div><span class="kpgb"><i style="width:${b2?Math.min(100,a/b2*100):0}%"></i></span></div>`};
+ const tile=(r,i)=>{const d=i+1,dn=d<=gotTo,cur=!s.claimed_today&&d==s.next;return `<div class="kst ${dn?'dn':''} ${cur?'cur':''} ${d==7?'d7':''}"><span class="kstl">J${d}</span><span class="ksti">${dn?'✓':d==7?'★':d}</span><span class="kstr mono">+${r}</span></div>`};
+ const at=ACHT=='todo'?ach.filter(q=>!q.claimed):ACHT=='got'?ach.filter(q=>q.claimed):ach;
+ const ac=q=>`<div class="kac ${q.claimed?'got':q.done?'rdy':''}"><span class="kaci">${q.claimed?'✓':q.done?'★':'?'}</span><div class="kacb"><b>${esc(q.label)}</b>${q.desc?`<small>${esc(q.desc)}</small>`:''}<span class="kpgb"><i style="width:${Math.min(100,q.progress/q.target*100)}%"></i></span>
+  <div class="kacf"><span class="mono">${q.progress.toLocaleString('fr')} / ${q.target.toLocaleString('fr')}</span>${q.claimed?'<span class="ok">Obtenu ✓</span>':q.done?`<button data-cq="${q.id}">+${q.pop} 🍿</button>`:`<span class="mono kacr">+${q.pop} 🍿</span>`}</div></div></div>`;
+ $('#v').innerHTML=`<div class="mhd"><div><div class="eyebrow">Missions</div><h1>Missions</h1><p class="mut">Connecte-toi chaque jour, termine tes missions et débloque des succès.</p></div><button class="ob mall" id="mall" ${ids.length?'':'disabled'}>Tout réclamer${ids.length?' · '+ids.length:''}</button></div>
+ <div class="mrow1"><div class="mcard kser"><div class="mch"><span class="kick">Connexion</span>${s.claimed_today?'<span class="kpill">Réclamé aujourd’hui ✓</span>':`<button class="kclm" data-cq="streak">Réclamer · +${s.rewards[s.next-1]} 🍿</button>`}</div>
+  <h2 class="kst-h">Série de connexion · jour ${gotTo}/7</h2>
+  <div class="kstrk">${s.rewards.map(tile).join('')}</div>
+  <div class="kstf"><span class="gold">J7 : prochain booster doré</span><span class="mut">1 jour manqué toléré cette semaine</span></div></div>
+  <div class="mcard"><div class="mch"><h2>Ta progression</h2></div><div class="kpgs">${pb('Connexion',gotTo,7)}${pb('Missions du jour',cl(dd),dd.length)}${pb('Missions de la semaine',cl(ww),ww.length)}${!Q.bonus.welcome.claimed?pb('Bienvenue',cl(wl),wl.length):''}${pb('Succès',cl(ach),ach.length)}</div></div></div>
+ ${!Q.bonus.welcome.claimed&&wl.length?`<div class="mcard" style="margin-bottom:14px"><div class="mch"><div><span class="kick">Pour bien commencer</span><h2>Bienvenue</h2></div><span class="mono">${cl(wl)} / ${wl.length}</span></div><div class="mwl">${wl.map(qc).join('')}</div>${bon('welcome','Toutes réclamées')}</div>`:''}
+ <div class="mcols"><div class="mcard"><div class="mch"><div><span class="kick">Du jour</span><h2>Missions du jour</h2></div><span class="ktm mono">${hm(Q.next_daily)}</span></div>${dd.map(qc).join('')}${bon('daily','Les 3 réclamées')}</div>
+  <div class="mcard"><div class="mch"><div><span class="kick">De la semaine</span><h2>Missions de la semaine</h2></div><span class="ktm mono">${hm(Q.next_weekly)}</span></div>${ww.map(qc).join('')}${bon('weekly','Les 3 réclamées')}</div>
+  <div class="mcard"><div class="mch"><div><span class="kick">Albums</span><h2>Séries complètes</h2></div><span class="mono">${albs.length}</span></div>${albs.length?albs.slice(0,8).map(x=>`<div class="kalb"><b>${esc(x.n)}</b><span class="mono">${x.t} / ${x.t}</span><span class="ok">Complète ✓</span></div>`).join('')+(albs.length>8?`<p class="mut" style="font-size:12px;margin:6px 0 0">et ${albs.length-8} autre${albs.length-8>1?'s':''}</p>`:''):'<p class="mut kalb0">Aucune série complète pour l’instant. Les albums sont dans Collection.</p>'}</div></div>
+ <div class="mcard kach"><div class="mch"><h2>Succès <span class="mono kacn">${cl(ach)}/${ach.length}</span></h2><div class="ktabs">${[['all','Tous'],['todo','À faire'],['got','Obtenus']].map(([k,l])=>`<button class="${ACHT==k?'on':''}" data-at="${k}">${l}</button>`).join('')}</div></div>
+  <div class="kacg">${at.length?at.map(ac).join(''):'<p class="mut">Rien ici pour l’instant.</p>'}</div></div>`;
+ $$('[data-at]').forEach(b=>b.onclick=()=>{ACHT=b.dataset.at;const y=scrollY;miss().then(()=>scrollTo(0,y))});
  const fin=x=>toast([x.pop?`+${x.pop} 🍿`:'',x.bo?`+${x.bo} booster${x.bo>1?'s':''} bonus`:'',x.gold?'prochain booster doré !':''].filter(Boolean).join(' · ')||'C’est récupéré');
  $$('[data-cq]').forEach(b=>b.onclick=async()=>{b.disabled=true;try{const x=await rpc('claim_quest',{qid:b.dataset.cq});ST=x.state;
   fin({pop:x.popcorns,bo:x.boosters,gold:x.golden});const y=scrollY;render();scrollTo(0,y)}catch(e){toast(e.message);b.disabled=false}});
