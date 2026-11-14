@@ -1053,6 +1053,12 @@ function ac(){if(!SND())return null;if(!AC){try{AC=new (window.AudioContext||win
   OUT=AC.createGain();OUT.gain.value=.5;OUT.connect(AC.createDynamicsCompressor()).connect(AC.destination);
   NB=AC.createBuffer(1,AC.sampleRate,AC.sampleRate);const x=NB.getChannelData(0);for(let k=0;k<x.length;k++)x[k]=Math.random()*2-1}
  if(AC.state=='suspended')AC.resume();return AC}
+/* déblocage du son (comme le « unlock » de Kyara) : iPhone et Chrome n'autorisent le son qu'après un vrai geste
+   (relâcher le doigt, clic, touche). On réveille donc le son à chaque geste, avant qu'un son soit joué hors geste
+   (ex. la déchirure qui s'ouvre toute seule à 82 % pendant le glissé). */
+let AUL=0;function unlockAudio(){const a=ac();if(!a)return;if(a.state!='running')a.resume();if(AUL)return;
+ try{const b=a.createBuffer(1,1,22050),s=a.createBufferSource();s.buffer=b;s.connect(a.destination);s.start(0);AUL=1}catch(e){}}
+['pointerup','touchend','click','keydown'].forEach(t=>document.addEventListener(t,unlockAudio,{capture:true,passive:true}));
 /* recettes de sons mesurées sur Kyara : enveloppe 8 ms puis décroissance, bruit filtré qui glisse */
 const aenv=(g,t0,att,vol,d)=>{g.gain.setValueAtTime(1e-4,t0);g.gain.exponentialRampToValueAtTime(vol,t0+att);g.gain.exponentialRampToValueAtTime(1e-4,t0+att+d)};
 function tone(fr,t,d,vol,type,fr2){const a=ac();if(!a)return;const t0=a.currentTime+t,o=a.createOscillator(),g=a.createGain();o.type=type||'sine';o.frequency.setValueAtTime(fr,t0);if(fr2)o.frequency.exponentialRampToValueAtTime(fr2,t0+d);
