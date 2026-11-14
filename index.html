@@ -355,7 +355,7 @@ footer{text-align:center;color:var(--mut);font-size:11px;margin:30px 0}
 .ob:disabled{opacity:.45}
 .nxp{text-align:center;font:500 13px 'JetBrains Mono',monospace;color:var(--mut);margin:10px 0 0}
 /* cartes manquantes : noir et blanc net, nom visible, « ? » coloré */
-.r-C{--qc:#b7b9c4}.r-U{--qc:#3fbf7f}.r-R{--qc:#4d9bff}.r-E{--qc:#b072ff}.r-L{--qc:#f5c518}.r-M{--qc:#ff5c5c}
+.r-C{--qc:#b7b9c4}.r-U{--qc:#3fbf7f}.r-R{--qc:#4d9bff}.r-E{--qc:#b072ff}.r-L{--qc:#f5c518}.r-M{--qc:#ff4d2e}
 .unk .im img{filter:grayscale(1) brightness(.62) contrast(1.05);transform:none}
 .unk .im{background:#000}
 .unk .qm{top:30%;font-size:30cqi;color:var(--qc);opacity:.95;text-shadow:0 0 4cqi #000c}
@@ -654,7 +654,7 @@ footer{text-align:center;color:var(--mut);font-size:11px;margin:30px 0}
 .csr input{flex:1;min-width:0;background:none;border:0;outline:0;color:var(--fg);font:inherit;font-size:14px}
 .rch{display:none;align-items:center;gap:6px;height:44px;padding:0 9px;border-radius:99px;background:var(--panel);border:1px solid var(--line)}
 .rall{height:26px;padding:0 10px 0 6px;border-radius:99px;font-size:12px;font-weight:700;display:flex;align-items:center;gap:6px;opacity:.6;transition:opacity .15s}
-.rall::before{content:"";width:14px;height:14px;border-radius:50%;background:conic-gradient(#b5b1bb,#3fbf7f,#4d9bff,#b072ff,#f5c518,#ff5c8a,#b5b1bb)}
+.rall::before{content:"";width:14px;height:14px;border-radius:50%;background:conic-gradient(#b5b1bb,#3fbf7f,#4d9bff,#b072ff,#f5c518,#ff4d2e,#b5b1bb)}
 .rall.on,.rall:hover{opacity:1}
 .rdot{width:26px;height:26px;border-radius:50%;background:var(--c);color:#14101a;font:800 11px 'JetBrains Mono',monospace;opacity:.55;transition:opacity .15s,transform .15s,box-shadow .15s}
 .rdot:hover{opacity:1;transform:translateY(-1px)}
@@ -1261,6 +1261,12 @@ html{overflow-x:clip}
 .sbox .ld::before,.sbox .ld::after{content:"";position:absolute;top:2cqi;width:6cqi;height:6cqi;border:.6cqi solid #c9a86a;border-bottom:0}
 .sbox .ld::before{left:3cqi;border-right:0}.sbox .ld::after{right:3cqi;border-left:0}
 .pnl .zpi.deep{color:#6f9ee6}
+
+/* Épique : holo rayé violet propre (plus de taches vertes et rouges), intensités de Kyara */
+.r-E .hl{background-image:repeating-linear-gradient(115deg,#0000 0 3px,#ffffff66 3px 4.5px,#0000 4.5px 7px),repeating-linear-gradient(110deg,#5b2bd6 0%,#b072ff 8%,#ff8fe6 13%,#8fb6ff 18%,#b072ff 24%,#5b2bd6 32%);
+ background-size:auto,400% 400%;background-position:0 0,var(--mx,50%) var(--my,50%);background-blend-mode:screen;filter:brightness(.55) contrast(1.5) saturate(1.1)}
+.tilting .r-E .hl,.cw.htilt .r-E .hl{opacity:.55}
+.r-E .fx{background:linear-gradient(115deg,transparent 35%,#ffffff2e 46%,#c99bff33 50%,#9fb8ff29 54%,transparent 65%) 0 0/300% 300%}
 </style></head><body>
 <div id="app"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
@@ -1268,7 +1274,7 @@ html{overflow-x:clip}
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const RN={C:'Commune',U:'Peu commune',R:'Rare',E:'Épique',L:'Légendaire',M:'Mythique'},ORD='CURELM';
-const RC={C:'#7b7f8c',U:'#37c26e',R:'#3b82f6',E:'#a855f7',L:'#f7c61b',M:'#ff5c8a'};
+const RC={C:'#b5b1bb',U:'#3fbf7f',R:'#4d9bff',E:'#b072ff',L:'#f5c518',M:'#ff4d2e'};
 const GFR={'Drama':'Drame','Crime':'Crime','Comedy':'Comédie','Action':'Action','Science-Fiction':'Science-fiction','Thriller':'Thriller','Mystery':'Mystère','Adventure':'Aventure','Fantasy':'Fantastique','Family':'Famille','Romance':'Romance','Supernatural':'Surnaturel','Horror':'Horreur','History':'Histoire','Medical':'Médical','Espionage':'Espionnage','Legal':'Judiciaire','War':'Guerre','Western':'Western','Sports':'Sport','Music':'Musique','Children':'Enfants','Food':'Cuisine'};
 const GICO={'Drama':'🎭','Crime':'🔪','Comedy':'😂','Action':'💥','Science-Fiction':'🚀','Thriller':'😰','Mystery':'🔍','Adventure':'🧭','Fantasy':'🐉','Family':'🏠','Romance':'💘','Supernatural':'👻','Horror':'🩸','History':'🏰','Medical':'🩺','Espionage':'🕶️','Legal':'⚖️','War':'🎖️','Western':'🤠'};
 const GCL={'Action':'#ff5a36','Adventure':'#2fbf71','Comedy':'#ffc21a','Crime':'#8a93a8','Drama':'#b04bd6','Espionage':'#4a6c8c','Family':'#ff8fb1','Fantasy':'#7a5cff','History':'#c58b3a','Horror':'#c21f3a','Legal':'#3f6fd1','Medical':'#1fb5b0','Mystery':'#6a4fb8','Romance':'#ff5c8a','Science-Fiction':'#2db7ff','Supernatural':'#8d3fd0','Thriller':'#d4552b','War':'#7b8a3a','Western':'#d98a3a'};
@@ -1510,7 +1516,7 @@ function shopPanel(id,modal){const s=SHOP.find(x=>x.id==id),pr=shopPrice(s),od=s
   <div class="fact"><b style="color:${RC.M}">${Math.max(0,ST.pity_max-ST.pity)}</b><small>avant Mythique sûre</small></div><div class="fact"><b style="color:var(--yel)">${goldIn()||'✦'}</b><small>${goldIn()?'avant le doré':'celui-ci est doré'}</small></div></div>
   <button class="vp" data-pl><span class="stk">${['R','E','L','M'].map(r=>`<i style="--c:${RC[r]}"></i>`).join('')}</span>Voir les ${shopPool(s).length.toLocaleString('fr')} persos</button>
   ${shopWish(s,od)}
-  <div class="mut mono" style="font-size:11px;letter-spacing:.1em">CHANCE PAR BOOSTER</div><div class="odds">${['R','E','L','M'].map(r=>`<div class="o" style="--c:${RC[r]}"><span>● ${RN[r]}</span><i style="width:${Math.max(2,Math.min(1,od[r])*100*.62)}%"></i><em>${od[r]>.9995?'100':(od[r]*100).toFixed(od[r]<.05?2:1).replace('.',',')} %</em></div>`).join('')}</div>
+  <div class="mut mono" style="font-size:11px;letter-spacing:.1em">CHANCE PAR BOOSTER</div><div class="odds">${['R','E','L','M'].map(r=>`<div class="o" style="--c:${RC[r]}"><span>● ${RN[r]}</span><i style="width:${Math.max(2,Math.min(1,od[r])*100*.62)}%"></i><em>${!shopPool(s).some(c=>c.r==r)?'—':od[r]>.9995?'100 %':(od[r]*100).toFixed(od[r]<.05?2:1).replace('.',',')+' %'}</em></div>`).join('')}</div>
   <button class="ob" data-go ${ok?'':'disabled'}>${on?'Ouvrir':'Bientôt'}<small>${on?(ok?'🍿 '+pr:'Pas assez de Popcorns · 🍿 '+pr):'en attente de la mise à jour du serveur'}</small></button></div>`}
 function shopWish(s,od){const pool=shopPool(s),w=pool.filter(c=>WISH.has(c.n)&&!ST.inv[c.n]);if(!w.length)return '';
  const nr={};for(const c of pool)nr[c.r]=(nr[c.r]||0)+1;let none=1;for(const c of w)none*=1-(od[c.r]||0)/nr[c.r];
