@@ -1414,6 +1414,71 @@ html.mo .kglow.on{animation:none}
 .packwrap .lay.body{z-index:2}
 .packwrap .cout>div{filter:drop-shadow(0 0 18px var(--bc,#fff))}
 .packwrap.out .beam{opacity:0;transition:opacity .8s .5s}
+/* ---------- audit « vite » : avatar, nav, pied de page, Jouer, Avis (mesurés sur Kyara) ---------- */
+.avd{width:280px}
+.avh{display:flex;align-items:center;gap:10px;padding:10px 12px 8px}.avh b{font:900 15px Unbounded,sans-serif}
+.avb{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;border:1.5px solid #ff4d2e;color:#ff4d2e;font:900 15px Unbounded,sans-serif}
+.avs{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;padding:4px 6px 8px;border-bottom:.8px solid #2e2b36;margin-bottom:4px}
+.avs div{background:#17161d;border:.8px solid #2e2b36;border-radius:10px;padding:8px;display:grid;gap:2px}.avs b{font-size:14px;color:#edeae4}.avs small{font-size:11px;color:#8a8590}
+.avout .pd-t b{color:#ff6a4d}
+.pl[data-gof],.pl[data-gom],.pl[data-gor]{cursor:pointer}.pl[data-gof]:hover,.pl[data-gom]:hover,.pl[data-gor]:hover{border-color:color-mix(in srgb,var(--c) 45%,var(--line))}
+.sfoot .wrap{display:flex;flex-wrap:wrap;gap:24px 40px;justify-content:space-between;align-items:flex-start}
+.sf-l{max-width:420px;display:grid;gap:8px}.sf-l p{margin:0;line-height:1.5}.sf-tm{font-size:12px;opacity:.75}
+.sf-b{display:flex;align-items:center;gap:10px}.sf-b .lseal{width:30px;height:30px;flex-basis:30px;font-size:15px;border-radius:9px}.sf-b b{font:900 15px Unbounded,sans-serif;letter-spacing:.06em;color:var(--fg)}
+.sf-r{display:flex;gap:48px}.sf-r div{display:grid;gap:4px;align-content:start}.sf-r h4{margin:0 0 4px;font:700 11px 'JetBrains Mono',monospace;letter-spacing:.12em;text-transform:uppercase;color:var(--fg)}.sf-r button{text-align:left}
+.jhead{margin:28px 0 20px}.jhead h1{margin:6px 0 8px;font:900 clamp(28px,4vw,40px) Unbounded,sans-serif}
+.jgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:14px}
+.jcard{position:relative;background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:18px;display:grid;gap:8px;opacity:.85}
+.jcard b{font:900 17px Unbounded,sans-serif}.jcard p{margin:0;color:var(--mut);font-size:13px;line-height:1.45}
+.jk{width:44px;height:44px;border-radius:12px;display:grid;place-items:center;background:color-mix(in srgb,var(--c) 16%,#000);color:var(--c);font:900 20px Unbounded,sans-serif}
+.jsoon{position:absolute;top:14px;right:14px;font:700 11px 'JetBrains Mono',monospace;color:var(--mut);border:1px solid var(--line);border-radius:99px;padding:3px 9px}
+.avf{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:16px;display:grid;gap:12px;max-width:640px}
+.avk{display:flex;gap:6px;flex-wrap:wrap}.avk button{border:1px solid var(--line);background:none;color:var(--mut);border-radius:99px;padding:7px 14px;font:700 13px 'Zen Kaku Gothic New',sans-serif;cursor:pointer}.avk button.on{background:#ff4d2e;border-color:#ff4d2e;color:#fff}
+#avt{width:100%;box-sizing:border-box;resize:vertical;background:#0f0e13;border:1px solid var(--line);border-radius:12px;color:var(--fg);padding:12px;font:15px 'Zen Kaku Gothic New',sans-serif}
+.avbar{display:flex;justify-content:space-between;align-items:center}
+.avl{display:grid;gap:10px;max-width:640px}.avm{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:12px 14px}.avm>div{display:flex;gap:10px;align-items:center}.avm p{margin:8px 0 0;white-space:pre-wrap}
+.avtag{font:700 11px 'JetBrains Mono',monospace;color:#ff6a4d;border:1px solid #ff4d2e55;border-radius:99px;padding:2px 8px}
+.avr{margin-top:10px;border-left:2px solid #3ddc84;padding-left:10px}.avr b{font-size:12px;color:#3ddc84}
+
+.bsh .fsb{width:40px;height:40px;flex:0 0 40px;display:grid;place-items:center;border-radius:50%;background:var(--panel);border:1px solid var(--line);color:var(--fg);cursor:pointer}
+.bsh .fsb:hover{border-color:#ffffff40}
+.bsec.zshow{position:relative;isolation:isolate}
+.bsec.zshow::after{content:attr(data-wm);position:absolute;right:-2%;bottom:-6%;z-index:-1;pointer-events:none;font:900 min(46vw,560px)/.8 Unbounded,sans-serif;color:transparent;-webkit-text-stroke:1.5px color-mix(in srgb,var(--pc,#fff) 22%,transparent);opacity:.55}
+@media (max-width:899px){.bsec.zshow::after{display:none}}
+
+/* ---------- audit « vite » : ouverture ---------- */
+.stage{justify-content:safe center}
+.stage .rhd{position:absolute;top:calc(16px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:9px;max-width:calc(100vw - 220px);white-space:nowrap;z-index:5}
+.stage .rhd b{font:900 15px Unbounded,sans-serif;color:#edeae4;overflow:hidden;text-overflow:ellipsis}
+.stage .rhi{font:900 17px Unbounded,sans-serif}
+.stage .rct{top:calc(56px + env(safe-area-inset-top));left:18px;display:grid;justify-items:start;gap:2px;max-width:none;color:#edeae4;font-family:'JetBrains Mono',monospace;text-align:left}
+.stage .rct b{font:700 26px/1 'JetBrains Mono',monospace;display:inline}.stage .rct span{font-size:15px;color:#8a8590}
+.stage .rct small{font:700 11px 'JetBrains Mono',monospace;color:#f5c518;letter-spacing:.06em}
+.stage .rct{display:block}.stage .rct small{display:block;margin-top:4px}
+@media (max-width:599px){.stage .rhd{max-width:calc(100vw - 150px)}.stage .rhd b{font-size:13px}}
+.stage .rrow{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+.stage .rrow .btn{margin:0;width:auto;min-width:0;flex:0 0 auto;padding:9px 18px;font-size:13px}
+.rshare .btn{white-space:nowrap;width:auto}
+.dk.wpulse::before{content:"";position:absolute;inset:-6%;border-radius:8%;pointer-events:none;z-index:-1;box-shadow:0 0 0 0 #ff5c8acc,0 0 40px 10px #ff5c8a66;animation:wpul 1.6s ease-out 2}
+@keyframes wpul{0%{box-shadow:0 0 0 0 #ff5c8acc,0 0 30px 6px #ff5c8a88}100%{box-shadow:0 0 0 28px #ff5c8a00,0 0 60px 20px #ff5c8a00}}
+.mburst{position:absolute;left:50%;top:46%;width:60vmax;height:60vmax;translate:-50% -50%;border-radius:50%;pointer-events:none;z-index:3;background:conic-gradient(#ff4d2e,#f5c518,#3fbf7f,#4dd6ff,#b072ff,#ff4d9e,#ff4d2e);-webkit-mask:radial-gradient(closest-side,#0000 86%,#000 89%,#000 94%,#0000 97%);mask:radial-gradient(closest-side,#0000 86%,#000 89%,#000 94%,#0000 97%);filter:blur(2px);animation:mbst 1.3s cubic-bezier(.2,.8,.3,1) forwards}
+@keyframes mbst{from{scale:.12;opacity:1}70%{opacity:.9}to{scale:1.5;opacity:0}}
+/* dos de carte : vagues fines + médaillon à graduations */
+.cb .wv{position:absolute;inset:7cqi;border-radius:3cqi;pointer-events:none;opacity:.55;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='40' height='12' viewBox='0 0 40 12'%3E%3Cpath d='M0 6 Q10 0 20 6 T40 6' fill='none' stroke='%23c9a24a' stroke-opacity='.32' stroke-width='1'/%3E%3C/svg%3E") 0 0/10cqi 3cqi;-webkit-mask:radial-gradient(closest-side at 50% 44%,#0000 58%,#000 75%);mask:radial-gradient(closest-side at 50% 44%,#0000 58%,#000 75%)}
+.cb .tk{position:absolute;left:50%;top:44%;width:64cqi;aspect-ratio:1;transform:translate(-50%,-50%);border-radius:50%;pointer-events:none;background:repeating-conic-gradient(#e8c46acc 0 1.2deg,transparent 1.2deg 7.5deg);-webkit-mask:radial-gradient(circle,#0000 84%,#000 85%,#000 97%,#0000 98%);mask:radial-gradient(circle,#0000 84%,#000 85%,#000 97%,#0000 98%)}
+.cb .seal{opacity:.6}
+
+/* ---------- audit « vite » : récap, collection ---------- */
+.rshare{display:flex;gap:8px;justify-content:center;margin-top:4px}
+.tbb.rcy{width:44px;height:44px;border-radius:50%;background:#3ddc84;border-color:#3ddc84;color:#04150b;font-size:19px;position:relative}
+.tbb.rcy:hover{background:#5fe69c}
+.tbb.rcy .nb3{position:absolute;top:-6px;right:-10px;background:#15141a;color:#3ddc84;border:1px solid #3ddc84}
+.csr{position:relative}
+.qhelp{flex:0 0 22px;width:22px;height:22px;border-radius:50%;border:1px solid var(--line);background:none;color:var(--mut);font:700 12px/1 'JetBrains Mono',monospace;cursor:help;position:relative;padding:0}
+.qhelp:hover,.qhelp:focus{color:var(--fg);border-color:#ffffff40}
+.qtip{position:absolute;right:-6px;top:calc(100% + 10px);width:250px;z-index:30;display:none;text-align:left;background:#15141a;border:.8px solid #2e2b36;border-radius:12px;padding:10px 12px;box-shadow:0 18px 40px #0009;color:#c9c5ce;font:500 13px/1.5 'Zen Kaku Gothic New',sans-serif;cursor:default}
+.qtip b{display:block;color:#edeae4;margin-bottom:2px}.qtip code{font:12px 'JetBrains Mono',monospace;color:#ff6a4d}
+.qhelp:hover .qtip,.qhelp:focus .qtip{display:block}
 </style></head><body>
 <div id="app"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
@@ -1428,7 +1493,7 @@ const GCL={'Action':'#ff5a36','Adventure':'#2fbf71','Comedy':'#ffc21a','Crime':'
 const gcol=g=>g?(GCL[g]||'#5b9bff'):'#f7c61b';
 const fr=g=>GFR[g]||g;
 function shade(h,k){const n=parseInt(h.slice(1),16),f=x=>Math.round(x*k).toString(16).padStart(2,'0');return '#'+f(n>>16)+f(n>>8&255)+f(n&255)}
-let ST=null,CARDS=[],view='home',F={q:'',r:'',g:'',own:'own',show:'',sort:'n',mode:'cards',n:60},tickT=null;
+let ST=null,CARDS=[],view='home',F={q:'',r:'',g:'',own:'own',show:'',sort:'r',mode:'cards',n:60},tickT=null;
 const sb=supabase.createClient(window.SUPABASE_URL,window.SUPABASE_KEY);
 const mail=n=>n.trim().toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'')+'@casting-game.app';
 async function rpc(f,a){const {data,error}=await sb.rpc(f,a||{});if(error)throw new Error(error.message);return data}
@@ -1442,6 +1507,8 @@ const bonusN=()=>ST&&ST.bonus||0;
 const freeTot=()=>ST.free+bonusN();
 const goldIn=()=>Math.max(0,ST.golden_in??10);
 const QS=()=>ST.quests||{};
+/* secondes jusqu'au prochain minuit à Paris (le pack du jour change à cette heure-là) */
+const toParisMidnight=()=>{const p=new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/Paris',hour:'2-digit',minute:'2-digit',second:'2-digit',hourCycle:'h23'}).formatToParts(new Date()),g=t=>+p.find(x=>x.type==t).value;return Math.max(1,86400-(g('hour')*3600+g('minute')*60+g('second')))};
 /* ---------- animations : réglage + pause quand l'onglet est caché ---------- */
 const lsget=k=>{try{return localStorage.getItem(k)}catch(e){return null}},lsset=(k,v)=>{try{localStorage.setItem(k,v)}catch(e){}};
 const MO=()=>lsget('mo')=='1';
@@ -1521,13 +1588,15 @@ function card(c,o={}){
  ${unk?'':`<div class="sw">${esc(c.show)}</div>`}
  <div class="bt">${unk?`<span class="no">#${pad(c.n)}</span><span>${RN[c.r]}</span>`:`<span>POW ${c.pow}</span><span>AURA ${c.aura}</span>`}</div>
  ${fx?'<i class="fx"></i>':''}${FOIL(c.r)&&!unk?'<i class="hl"></i>':''}${unk?'':'<i class="gl"></i>'}</div>${q>1?`<span class="q">×${q}</span>`:''}${o.lock?'<span class="lk">🔒</span>':''}</div>`}
-function cardBack(t){return `<div class="cw"><div class="cb" style="--t:${t}"><i class="co a"></i><i class="co b"></i><i class="co c"></i><i class="co d"></i><i class="fr"></i><i class="pf l"></i><i class="pf r"></i><i class="seal"></i><div class="med"><b>C</b></div><div class="wm">CASTING</div><div class="ws">SÉRIES · PERSOS · CARTES</div></div></div>`}
+function cardBack(t){return `<div class="cw"><div class="cb" style="--t:${t}"><i class="co a"></i><i class="co b"></i><i class="co c"></i><i class="co d"></i><i class="fr"></i><i class="wv"></i><i class="seal"></i><i class="tk"></i><div class="med"><b>C</b></div><div class="wm">CASTING</div><div class="ws">SÉRIES · PERSOS · CARTES</div></div></div>`}
 async function init(){
  const {data}=await sb.from('config').select('k,v');window.CFG={};(data||[]).forEach(x=>CFG[x.k]=x.v);
  CARDS=await (await fetch('cards.json')).json();
  await refresh();render()}
 let WISH=new Set();
+let FREEC=0;
 async function refresh(){const {data:{session}}=await sb.auth.getSession();ST=session?await rpc('my_state'):null;
+ if(ST)rpc('my_free_coffret').then(n=>{const was=FREEC;FREEC=+n||0;if(FREEC!=was&&$('#bside'))drawSide()}).catch(()=>{});
  if(ST)await rpc('my_wishes').then(a=>{WISH=new Set(a||[])}).catch(()=>{})}
 /* envies (comme Kyara) : aucune chance en plus, juste une liste ; une envie obtenue sort de la liste */
 async function setWish(ns,on){try{const a=await rpc('set_wishes',{cards:ns,on_:on});const before=WISH.size;WISH=new Set(a||[]);
@@ -1553,12 +1622,13 @@ function render(){
  clearInterval(tickT);clearInterval(hbT);
  if(!ST)return authView();
  const nav=(k,i,l)=>`<button class="${view==k?'on':''}" data-v="${k}"><b>${i}</b>${l}</button>`,nb=freeTot()+(ST.daily_ready?1:0),qc=QS().claimable;
- const dn=(k,l,b)=>`<button class="${view==k?'on':''}" data-v="${k}">${l}${b?`<span class="bdg">${b}</span>`:''}</button>`;
- $('#app').innerHTML=`<div class="top"><div class="wrap"><button class="logo" id="lg" aria-label="Casting, accueil"><span class="lseal" aria-hidden="true">C</span><span class="lword">CASTING</span></button><div class="dnav">${dn('home','Accueil')}${dn('boost','Boosters',nb)}${dn('coll','Collection')}${dn('mkt','Marché')}${dn('more','Plus')}</div><div class="sp"></div>
+ const dn=(k,l,b)=>`<button class="${view==k||(k=='home'&&view=='boost')?'on':''}" data-v="${k}">${l}${b?`<span class="bdg">${b}</span>`:''}</button>`;
+ $('#app').innerHTML=`<div class="top"><div class="wrap"><button class="logo" id="lg" aria-label="Casting, accueil"><span class="lseal" aria-hidden="true">C</span><span class="lword">CASTING</span></button><div class="dnav">${dn('home','Boosters',nb)}${dn('coll','Collection')}${dn('mkt','Marché')}${dn('jouer','Jouer')}${dn('more','Plus')}</div><div class="sp"></div>
  <div class="wal" title="Boosters gratuits et Popcorns"><span class="wf"><b class="mono" id="fs">${ST.free}/${ST.free_max}${bonusN()?`<em>+${bonusN()}</em>`:''}</b><span class="bar"><i style="width:${ST.free/ST.free_max*100}%"></i></span></span><span class="wp mono">🍿 ${ST.popcorns.toLocaleString('fr')}</span></div>
  <button class="rnd mbtn ${view=='miss'?'on':''}" id="msb" aria-label="Missions">🎯<span class="ml">Missions</span>${qc?`<span class="bdg">${qc}</span>`:''}</button><button class="avatar" id="av">${esc(ST.name[0].toUpperCase())}</button></div></div>
  <div class="wrap" id="v"></div>
- <footer class="sfoot"><div class="wrap"><span>Casting · jeu de cartes de séries entre nous</span><nav>${[['raretes','Raretés'],['regles','Règles'],['infos','Infos'],['nouv','Nouveautés'],['wiki','Wiki']].map(([v,l])=>`<button data-iv="${v}">${l}</button>`).join('')}</nav></div></footer>
+ <footer class="sfoot"><div class="wrap"><div class="sf-l"><div class="sf-b"><span class="lseal" aria-hidden="true">C</span><b>CASTING</b></div><p>Jeu de cartes de séries entre nous. Projet fan non officiel.</p><p class="sf-tm">This product uses the TMDB API but is not endorsed or certified by TMDB.</p></div>
+ <div class="sf-r"><div><h4>Le jeu</h4>${[['raretes','Raretés'],['regles','Règles'],['wiki','Wiki']].map(([v,l])=>`<button data-iv="${v}">${l}</button>`).join('')}</div><div><h4>Infos</h4>${[['infos','Infos'],['nouv','Nouveautés'],['avis','Avis et bugs']].map(([v,l])=>`<button data-iv="${v}">${l}</button>`).join('')}</div></div></div></footer>
  <div class="nav"><div class="wrap">${nav('home','🏠','Accueil')}${nav('coll','🗂️','Collection')}
  <div><button class="open-btn" id="ob" aria-label="Ouvrir un booster">🍿${nb>0?`<span class="bd">${nb}</span>`:''}</button><div class="open-lbl">Ouvrir</div></div>
  ${nav('mkt','🏷️','Marché')}${nav('more','⋯','Plus')}</div></div>`;
@@ -1566,22 +1636,33 @@ function render(){
  {const mb=$('.dnav [data-v="more"]');if(mb){mb.classList.add('pmore');mb.innerHTML+='<svg width="10" height="10" viewBox="0 0 10 10" aria-hidden="true"><path d="M2 3.5 5 6.5 8 3.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
   mb.onclick=e=>{e.stopPropagation();const o=$('#pdrop');if(o){o.remove();mb.classList.remove('open');return}
    const r=mb.getBoundingClientRect(),dd=document.createElement('div');dd.id='pdrop';dd.className='pdrop';dd.style.left=Math.round(r.left)+'px';dd.style.top=Math.round(r.bottom+8)+'px';
-   dd.innerHTML=[['wiki','W','Wiki','Toutes les fiches des persos'],['raretes','R','Raretés','Les six raretés et leurs chances'],['regles','?','Règles','Comment marche le jeu'],['nouv','N','Nouveautés','Ce qui a changé'],['more','⚙','Compte et réglages','Son, animations, déconnexion']].map(([v,k,t,sub])=>`<button class="pd-it" data-pv="${v}"><span class="pd-k">${k}</span><span class="pd-t"><b>${t}</b><small>${sub}</small></span></button>`).join('');
+   dd.innerHTML=[['wiki','W','Wiki','Toutes les fiches des persos'],['raretes','R','Raretés','Les six raretés et leurs chances'],['regles','?','Règles','Comment marche le jeu'],['nouv','N','Nouveautés','Ce qui a changé'],['avis','!','Avis et bugs','Une idée, un souci : dis-le']].map(([v,k,t,sub])=>`<button class="pd-it" data-pv="${v}"><span class="pd-k">${k}</span><span class="pd-t"><b>${t}</b><small>${sub}</small></span></button>`).join('');
    document.body.append(dd);mb.classList.add('open');
    dd.querySelectorAll('[data-pv]').forEach(b=>b.onclick=()=>{dd.remove();view=b.dataset.pv;render();scrollTo(0,0)});
    setTimeout(()=>document.addEventListener('click',function cl(ev){if(!dd.contains(ev.target)){dd.remove();mb.classList.remove('open')}document.removeEventListener('click',cl)}),0)}}}
  $('#lg').onclick=()=>{view='home';render();scrollTo(0,0)};
- $('#msb').onclick=()=>{view='miss';render();scrollTo(0,0)};$('#ob').onclick=()=>openSheet(freeTot()>0?'free':ST.daily_ready?'daily':'paid');$('#av').onclick=()=>{view='more';render()};
+ $('#msb').onclick=()=>{view='miss';render();scrollTo(0,0)};$('#ob').onclick=()=>openSheet(freeTot()>0?'free':ST.daily_ready?'daily':'paid');$('#av').onclick=e=>{e.stopPropagation();const o=$('#avdrop');if(o){o.remove();return}$('#pdrop')?.remove();
+  const r=$('#av').getBoundingClientRect(),dd=document.createElement('div');dd.id='avdrop';dd.className='pdrop avd';dd.style.right=Math.round(innerWidth-r.right)+'px';dd.style.top=Math.round(r.bottom+8)+'px';
+  const nC=Object.keys(ST.inv).length;
+  dd.innerHTML=`<div class="avh"><span class="avb">${esc(ST.name[0].toUpperCase())}</span><b>${esc(ST.name)}</b></div>
+   <div class="avs"><div><b class="mono">${ST.popcorns.toLocaleString('fr')}</b><small>Popcorns</small></div><div><b class="mono">${nC.toLocaleString('fr')}</b><small>Cartes</small></div><div><b class="mono">${ST.pity}/${ST.pity_max}</b><small>Pitié M</small></div></div>
+   <button class="pd-it" data-pv="more"><span class="pd-k">⚙</span><span class="pd-t"><b>Compte et réglages</b><small>Son, animations, nom</small></span></button>
+   <button class="pd-it" data-pv="avis"><span class="pd-k">!</span><span class="pd-t"><b>Avis et bugs</b><small>Une idée, un souci : dis-le</small></span></button>
+   <button class="pd-it avout" data-lo><span class="pd-k">⏻</span><span class="pd-t"><b>Se déconnecter</b></span></button>`;
+  document.body.append(dd);
+  dd.querySelectorAll('[data-pv]').forEach(b=>b.onclick=()=>{dd.remove();view=b.dataset.pv;render();scrollTo(0,0)});
+  dd.querySelector('[data-lo]').onclick=async()=>{dd.remove();await sb.auth.signOut();ST=null;render()};
+  setTimeout(()=>document.addEventListener('click',function cl(ev){if(!dd.contains(ev.target))dd.remove();document.removeEventListener('click',cl)}),0)};
  $$('[data-iv]').forEach(b=>b.onclick=()=>{view=b.dataset.iv;render();scrollTo(0,0)});
- ({home,coll,mkt,more,miss,boost,wiki,raretes,regles,infos,nouv})[view]();
+ ({home,coll,mkt,more,miss,boost,wiki,raretes,regles,infos,nouv,jouer,avis})[view]();
  tickT=setInterval(tick,1000)}
-function tick(){if(ST&&ST.free_next!=null){ST.free_next--;['#nx','#nx2'].forEach(s=>{const e=$(s);if(e)e.textContent=fmt(ST.free_next)});$$('[data-nx]').forEach(e=>e.textContent='Dans '+fmt(ST.free_next));$$('[data-nxp],[data-nxh]').forEach(e=>e.textContent=fmt(ST.free_next));if(ST.free_next<=0){refresh().then(()=>{if(!$('.stage')&&!$('.shade'))render()})}}}
+function tick(){{const dl=$$('[data-dly],[data-dlyp]');if(dl.length){const t=toParisMidnight();dl.forEach(e=>e.textContent=(e.hasAttribute('data-dly')?'De retour dans ':'')+fmt(t))}}
+ if(ST&&ST.free_next!=null){ST.free_next--;['#nx','#nx2'].forEach(s=>{const e=$(s);if(e)e.textContent=fmt(ST.free_next)});$$('[data-nx]').forEach(e=>e.textContent='Dans '+fmt(ST.free_next));$$('[data-nxp],[data-nxh]').forEach(e=>e.textContent=fmt(ST.free_next));if(ST.free_next<=0){refresh().then(()=>{if(!$('.stage')&&!$('.shade'))render()})}}}
 /* ---------- accueil ---------- */
 function themePack(g){const l=CARDS.filter(c=>c.g.includes(g)&&'ELM'.includes(c.r));return [l[2]||l[0],l[0],l[4]||l[1]].filter(Boolean)}
 let hbT=null,hbI=0;
 function home(){
  const inv=ST.inv,dt=ST.daily_theme,q=QS(),gi=goldIn();
- const best=CARDS.filter(c=>inv[c.n]).sort((a,b)=>ORD.indexOf(b.r)-ORD.indexOf(a.r)||a.n-b.n).slice(0,12);
  const mixFan=CARDS.filter(c=>c.r=='M').slice(3,6);
  const slides=[
   {c:gcol(dt),eb:'Pack du jour · gratuit',t:fr(dt),w:gIni(dt),d:'Un booster offert chaque jour, thème différent, Épique garantie.',fan:themePack(dt),b1:ST.daily_ready?'Ouvrir le pack du jour':'Reviens demain',n:ST.daily_ready?1:0,ok:ST.daily_ready,go:()=>packScreen('daily',null),see:()=>packInfo('daily',null)},
@@ -1590,21 +1671,22 @@ function home(){
  $('#v').innerHTML=`<div class="hb" id="hb">${slides.map((x,i)=>`<div class="hs ${i==hbI?'on':''}" style="--hc:${x.c}"><span class="hwm">${esc(x.w)}</span><div><div class="eyebrow">${x.eb}</div><h1>${esc(x.t)}</h1><p class="mut" style="margin:0">${x.d}</p>
   <div class="bts"><button class="cta" data-hgo="${i}" ${x.ok?'':'disabled'}>${x.b1}${x.n?`<span class="cn">${x.n}</span>`:''}</button><button class="btn2" data-hsee="${i}">Voir le booster</button></div></div>
   <div class="hfan">${x.fan.map((c,k)=>`<div class="hf" style="--k:${k-1}">${card(c)}</div>`).join('')}</div></div>`).join('')}<div class="dots">${slides.map((x,i)=>`<button class="${i==hbI?'on':''}" data-hd="${i}" aria-label="Bannière ${i+1}"></button>`).join('')}</div></div>
- <div class="pls">${pill('#ff6a4d','▤',`${ST.free}/${ST.free_max}`,ST.free_next==null?'gratuits · stock plein':'gratuits · +1 dans <span data-nxh>'+fmt(ST.free_next)+'</span>','',ST.free>0)}
-  ${pill('#3ddc84','✓',q.claimable||0,'à récupérer',q.claimable?'<button class="mini2" data-gom>Récupérer</button>':'',q.claimable,'gom')}
+ <div class="pls">${pill('#ff6a4d','▤',`${ST.free}/${ST.free_max}`,ST.free_next==null?'boosters gratuits · stock plein':'boosters gratuits · +1 dans <span data-nxh>'+fmt(ST.free_next)+'</span>','',ST.free>0,'gof')}
+  ${pill('#3ddc84','✓',`${q.daily_done||0}/${q.daily_total||3}`,'missions du jour','',q.claimable,'gom')}
   ${pill('#a98bff','⟳',`J${q.streak_day||0}/7`,'série de connexion','',q.streak_ready,'gom')}
-  ${pill('#f7c61b','✦',gi||'✦',gi?'avant le booster doré':'prochain booster doré','',!gi)}
-  ${pill('#ff5c8a','◆',Math.max(0,ST.pity_max-ST.pity),'avant Mythique sûre')}</div>
+  ${pill('#f7c61b','✦',gi||'✦',gi?'avant le booster doré':'prochain booster doré','',!gi,'gor')}
+  ${pill('#ff4d2e','◆',Math.max(0,ST.pity_max-ST.pity),'avant Mythique sûre','',0,'gor')}</div>
  <section class="bsec" id="bb"></section>
  <section class="gtir" id="gtir" hidden></section>
- ${best.length?`<div class="sec"><div class="eyebrow">Ta vitrine</div><h2>Tes plus belles cartes</h2></div><div class="scroll">${best.map(c=>card(c,{q:inv[c.n]})).join('')}</div>`:''}
- <footer>Projet fan non officiel. This product uses the TMDB API but is not endorsed or certified by TMDB.</footer>`;
+`;
  const show=i=>{hbI=i;$$('.hs').forEach((e,k)=>e.classList.toggle('on',k==i));$$('.dots button').forEach((e,k)=>e.classList.toggle('on',k==i))};
  clearInterval(hbT);hbT=setInterval(()=>{if(!$('#hb')){clearInterval(hbT);return}show((hbI+1)%slides.length)},8000);
  $$('[data-hd]').forEach(b=>b.onclick=()=>{show(+b.dataset.hd);clearInterval(hbT)});
  {const hb=$('#hb');let hx=null;hb.addEventListener('pointerdown',e=>{if(e.pointerType!='mouse')hx=e.clientX});hb.addEventListener('pointerup',e=>{if(hx==null)return;const dx=e.clientX-hx;hx=null;if(Math.abs(dx)>40){clearInterval(hbT);show((hbI+(dx<0?1:slides.length-1))%slides.length)}})}
  $$('[data-hgo]').forEach(b=>b.onclick=()=>slides[+b.dataset.hgo].go());$$('[data-hsee]').forEach(b=>b.onclick=()=>slides[+b.dataset.hsee].see());
- boostBlock($('#bb'),0);bigPulls();$$('[data-gom]').forEach(b=>b.onclick=e=>{e.stopPropagation();view='miss';render();scrollTo(0,0)});bindCards()}
+ boostBlock($('#bb'),0);bigPulls();$$('[data-gom]').forEach(b=>b.onclick=e=>{e.stopPropagation();view='miss';render();scrollTo(0,0)});
+ $$('[data-gor]').forEach(b=>b.onclick=()=>{view='regles';render();scrollTo(0,0)});
+ $$('[data-gof]').forEach(b=>b.onclick=()=>$('#bb')?.scrollIntoView({behavior:'smooth',block:'start'}));bindCards()}
 /* ---------- Accueil : « Gros tirages » en direct (comme Kyara) ---------- */
 let gtT=null;
 const agoTxt=x=>x<60?'à l’instant':x<3600?`il y a ${x/60|0} min`:x<86400?`il y a ${x/3600|0} h`:`il y a ${x/86400|0} j`;
@@ -1645,7 +1727,7 @@ function tiltable(el,host){host=host||el;if(MO())return;let live=false;
  host.addEventListener('pointermove',aim);host.addEventListener('pointerdown',aim);host.addEventListener('pointerleave',off);host.addEventListener('pointercancel',off);host.addEventListener('pointerup',e=>{if(e.pointerType!='mouse')off()});return off}
 /* ---------- page Boosters ---------- */
 function bcell(kind,g){const daily=kind=='daily',price=g?ST.gprice:ST.price;
- const lab=daily?(ST.daily_ready?'<span class="bpr ok">Gratuit</span>':'<span class="bpr">Demain</span>'):kind=='free'?(freeTot()>0?'<span class="bpr ok">Gratuit</span>':`<span class="bpr" data-nx>Dans ${ST.free_next==null?'':fmt(ST.free_next)}</span>`):`<span class="bpr y">🍿 ${price}</span>`;
+ const lab=daily?(ST.daily_ready?'<span class="bpr ok">Gratuit</span>':`<span class="bpr" data-dly>De retour dans ${fmt(toParisMidnight())}</span>`):kind=='free'?(freeTot()>0?'<span class="bpr ok">Gratuit</span>':`<span class="bpr" data-nx>Dans ${ST.free_next==null?'':fmt(ST.free_next)}</span>`):`<span class="bpr y">🍿 ${price}</span>`;
  const on=BSEL&&BSEL.k==kind&&(BSEL.g||'')==(g||'');
  return `<button class="bcell ${on?'on':''}" data-k="${kind}" data-g="${g||''}" style="--c1:${gcol(daily?ST.daily_theme:g)}"><div class="tilt">${packArt(daily?'daily':'pochette',daily?ST.daily_theme:g)}</div>${lab}</button>`}
 /* boutique : formats à venir (aucun achat possible tant que le serveur ne les gère pas) */
@@ -1680,15 +1762,15 @@ function shopArt(s){const k={coffret:'sbox',prestige:'sprs',mini:'smin',avp:'sti
   smin:`<i class="bx"></i>${fx}<i class="zbd"></i><i class="fl"></i><i class="sl">C</i><i class="zgl">${s.sl.length}</i><i class="zcd"></i><i class="zkn"></i><i class="zstp">C</i><b>Mini-booster</b><small>${s.f}</small>`,
   sdeep:`<i class="bx"></i><i class="zwv"></i>${fx}<i class="zcr t"></i><i class="zcr b"></i><i class="zfr"></i>${brand}<i class="zbub"></i><i class="zmd">${ICO.deep}</i><b>${esc(s.n)}</b><small>Rang ${(s.lo||0).toLocaleString('fr')}+ · plus de C/U</small><i class="zpl">${s.f}</i><i class="pf"></i>`}[k];
  return `<div class="spk ${k}">${inner}</div>`}
-function shopCell(s){const on=BSEL&&BSEL.k=='shop'&&BSEL.g==s.id;return `<button class="bcell ${shopOn(s)?'':'soon'} ${on?'on':''}" data-k="shop" data-g="${s.id}" style="--c1:${s.c}"><div class="tilt">${shopArt(s)}</div><span class="bpr zpr">${shopOn(s)?shopPrice(s)+' <i>🍿</i>':'Bientôt'}</span></button>`}
-function shopPanel(id,modal){const s=SHOP.find(x=>x.id==id),pr=shopPrice(s),od=shopOdds(s),on=shopOn(s),ok=on&&ST.popcorns>=pr;
+function shopCell(s){const on=BSEL&&BSEL.k=='shop'&&BSEL.g==s.id;return `<button class="bcell ${shopOn(s)?'':'soon'} ${on?'on':''}" data-k="shop" data-g="${s.id}" style="--c1:${s.c}"><div class="tilt">${shopArt(s)}</div><span class="bpr zpr ${s.id=='coffret'&&FREEC>0?'ok':''}">${s.id=='coffret'&&FREEC>0?'Offert':shopOn(s)?shopPrice(s)+' <i>🍿</i>':'Bientôt'}</span></button>`}
+function shopPanel(id,modal){const s=SHOP.find(x=>x.id==id),pr=shopPrice(s),od=shopOdds(s),on=shopOn(s),gift=s.id=='coffret'&&FREEC>0,ok=on&&(gift||ST.popcorns>=pr);
  return `<div class="pnl" style="--c1:${s.c}"><div class="ph"><div class="pi zpi">${s.ic=='mini'?'3':ICO[s.ic]}</div><div style="flex:1;min-width:0"><h2>${esc(s.n)}</h2><div class="mut" style="font-size:14px">${esc(s.sub)}</div></div>${modal?'<button class="x" data-cx>✕</button>':''}</div>
   <div class="facts"><div class="fact"><b>${s.sl.length}</b><small>cartes par booster</small></div><div class="fact"><b style="color:${RC[s.gar]}">${RN[s.gar]}</b><small>ou mieux, garantie</small></div>
   <div class="fact"><b style="color:${RC.M}">${Math.max(0,ST.pity_max-ST.pity)}</b><small>avant Mythique sûre</small></div><div class="fact"><b style="color:var(--yel)">${goldIn()||'✦'}</b><small>${goldIn()?'avant le doré':'celui-ci est doré'}</small></div></div>
   <button class="vp" data-pl><span class="stk">${['R','E','L','M'].map(r=>`<i style="--c:${RC[r]}"></i>`).join('')}</span>Voir les ${shopPool(s).length.toLocaleString('fr')} persos</button>
   ${shopWish(s,od)}
   <div class="mut mono" style="font-size:11px;letter-spacing:.1em">CHANCE PAR BOOSTER</div><div class="odds">${['R','E','L','M'].map(r=>`<div class="o" style="--c:${RC[r]}"><span>● ${RN[r]}</span><i style="width:${Math.max(2,Math.min(1,od[r])*100*.62)}%"></i><em>${!shopPool(s).some(c=>c.r==r)?'—':od[r]>.9995?'100 %':(od[r]*100).toFixed(od[r]<.05?2:1).replace('.',',')+' %'}</em></div>`).join('')}</div>
-  <button class="ob" data-go ${ok?'':'disabled'}>${on?'Ouvrir':'Bientôt'}<small>${on?(ok?'🍿 '+pr:'Pas assez de Popcorns · 🍿 '+pr):'en attente de la mise à jour du serveur'}</small></button></div>`}
+  <button class="ob" data-go ${ok?'':'disabled'}>${on?'Ouvrir':'Bientôt'}<small>${gift?`Offert · ${FREEC} en stock`:on?(ok?'🍿 '+pr:'Pas assez de Popcorns · 🍿 '+pr):'en attente de la mise à jour du serveur'}</small></button></div>`}
 function shopWish(s,od){const pool=shopPool(s),w=pool.filter(c=>WISH.has(c.n)&&!ST.inv[c.n]);if(!w.length)return '';
  const nr={};for(const c of pool)nr[c.r]=(nr[c.r]||0)+1;let none=1;for(const c of w)none*=1-(od[c.r]||0)/nr[c.r];
  const p=(1-none)*100;return `<p class="wln"><b>♥</b> <strong>${w.length} de tes envies</strong> dans ce booster · ${p<.01?'< 0,01':p.toFixed(p<1?2:1).replace('.',',')} % d’en avoir une par booster</p>`}
@@ -1705,13 +1787,15 @@ function boostBlock(el,page){
  const intro=daily?'Un booster offert chaque jour, thème différent, Épique garantie.':shop?`Des formats à part, chacun avec sa façon de s'ouvrir. Tu as 🍿 ${ST.popcorns.toLocaleString('fr')}.`:freeTot()>0?`Tu as ${freeTot()} booster${freeTot()>1?'s':''} gratuit${freeTot()>1?'s':''}. Un nouveau toutes les ${CFG.free_minutes} minutes.`:`Plus de booster gratuit : prochain dans <span class="mono" id="nx2">${ST.free_next==null?'':fmt(ST.free_next)}</span>. En attendant, ils s'ouvrent contre des Popcorns (tu en as 🍿 ${ST.popcorns.toLocaleString('fr')}).`;
  const H=page?'<h1>Choisis ton booster</h1>':`<div><div class="eyebrow">${freeTot()>0?freeTot()+' gratuit'+(freeTot()>1?'s':'')+' à ouvrir':'Boosters'}</div><h2>Choisis ton booster</h2></div>`;
  const hs=page?'':'hs1';
- el.innerHTML=`<div class="bsh">${H}<div class="ptabs">${[['free','Gratuits'],['daily','Du jour & limités'],['shop','Boutique']].map(([k,l])=>`<button class="${tab==k?'on':''}" data-t="${k}">${l}</button>`).join('')}</div></div>
+ el.innerHTML=`<div class="bsh">${H}<div class="ptabs">${[['free','Gratuits'],['daily','Du jour & limités'],['shop','Boutique']].map(([k,l])=>`<button class="${tab==k?'on':''}" data-t="${k}">${l}</button>`).join('')}</div>${document.fullscreenEnabled?`<button class="fsb" id="fsb" aria-label="Plein écran" title="Plein écran"><svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="${document.fullscreenElement?'M6 2v4H2M10 2v4h4M6 14v-4H2M10 14v-4h4':'M2 6V2h4M14 6V2h-4M2 10v4h4M14 10v4h-4'}" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>`:''}</div>
  <div class="bwrap"><div>${shop?'':`<p class="mut" style="margin:-8px 0 8px">${intro}</p>`}<div class="bgrid ${hs}">${shop?SHOP.map(shopCell).join(''):items.map(g=>bcell(kind,daily?null:g)).join('')}</div></div><aside class="bside" id="bside"></aside></div>`;
  el.querySelectorAll('.ptabs button').forEach(b=>b.onclick=()=>{sheetTab=b.dataset.t;boostBlock(el,page)});
+ const fb=el.querySelector('#fsb');if(fb)fb.onclick=async()=>{try{document.fullscreenElement?await document.exitFullscreen():await document.documentElement.requestFullscreen()}catch(e){}boostBlock(el,page)};
  bindPacks();drawSide()}
-function boost(){$('#v').innerHTML='<section class="bsec" id="bb" style="margin-top:22px"></section>';boostBlock($('#bb'),1)}
+function boost(){home()}
 function drawSide(){const el=$('#bside');if(!el||!BSEL||!wide())return;
- const sec=el.closest('.bsec');if(sec){sec.classList.add('zshow');sec.style.setProperty('--pc',BSEL.k=='shop'?SHOP.find(x=>x.id==BSEL.g).c:gcol(BSEL.k=='daily'?ST.daily_theme:BSEL.g))}
+ const sec=el.closest('.bsec');if(sec){sec.classList.add('zshow');sec.style.setProperty('--pc',BSEL.k=='shop'?SHOP.find(x=>x.id==BSEL.g).c:gcol(BSEL.k=='daily'?ST.daily_theme:BSEL.g));
+  sec.dataset.wm=BSEL.k=='shop'?SHOP.find(x=>x.id==BSEL.g).n[0]:gIni(BSEL.k=='daily'?ST.daily_theme:BSEL.g)}
  if(BSEL.k=='shop'){el.innerHTML=shopPanel(BSEL.g);bindShop(el,BSEL.g);return}
  el.innerHTML=packPanel(BSEL.k,BSEL.g);bindPanel(el,BSEL.k,BSEL.g)}
 /* ---------- fiche d'un booster (panneau à droite sur ordi, fenêtre sur téléphone) ---------- */
@@ -1719,14 +1803,14 @@ function packPanel(kind,g,modal){
  const daily=kind=='daily',free=kind=='free',gg=daily?ST.daily_theme:g,price=gg&&!daily?ST.gprice:ST.price,c1=gcol(gg),od=odds(daily),cnt=gg?CARDS.filter(c=>c.g.includes(gg)).length:CARDS.length;
  const title=daily?fr(gg):gg?fr(gg):'Casting Mix',desc=daily?'Pack du jour · Épique ou mieux garantie':gSub(gg);
  const okb=daily?ST.daily_ready:free?freeTot()>0:ST.popcorns>=price;
- const sub=daily?(ST.daily_ready?'Gratuit':'Demain'):free?(freeTot()>0?`Gratuit · ${freeTot()} restant${freeTot()>1?'s':''}`:'Plus de gratuit'):`🍿 ${price}`;
+ const sub=daily?(ST.daily_ready?'Gratuit':'Déjà ouvert aujourd’hui'):free?(freeTot()>0?`Gratuit · ${freeTot()} restant${freeTot()>1?'s':''}`:'Plus de gratuit'):`🍿 ${price}`;
  return `<div class="pnl" style="--c1:${c1}"><div class="ph"><div class="pi">${gIni(gg)}</div><div style="flex:1;min-width:0"><h2>${esc(title)}</h2><div class="mut" style="font-size:14px">${esc(desc)}</div></div>${modal?'<button class="x" data-cx>✕</button>':''}</div>
   <div class="facts"><div class="fact"><b>5</b><small>cartes par booster</small></div><div class="fact"><b style="color:${daily?RC.E:RC.R}">${daily?'Épique':'Rare'}</b><small>ou mieux, garantie</small></div>
-  <div class="fact"><b style="color:${RC.M}">${Math.max(0,ST.pity_max-ST.pity)}</b><small>avant Mythique sûre</small></div><div class="fact"><b style="color:var(--yel)">${daily?'–':goldIn()||'✦'}</b><small>${daily?'pas de doré sur ce pack':goldIn()?'avant le doré':'celui-ci est doré'}</small></div></div>
+  <div class="fact"><b style="color:${RC.M}">${Math.max(0,ST.pity_max-ST.pity)}</b><small>avant Mythique sûre</small></div>${daily?`<div class="fact"><b style="color:${c1}">${esc(fr(gg))}</b><small>thème du jour</small></div>`:`<div class="fact"><b style="color:var(--yel)">${goldIn()||'✦'}</b><small>${goldIn()?'avant le doré':'celui-ci est doré'}</small></div>`}</div>
   <button class="vp" data-pl><span class="stk">${['R','E','L','M'].map(r=>`<i style="--c:${RC[r]}"></i>`).join('')}</span>Voir les ${cnt.toLocaleString('fr')} persos</button>
   <div class="mut mono" style="font-size:11px;letter-spacing:.1em">CHANCE PAR BOOSTER</div><div class="odds">${['R','E','L','M'].map(r=>`<div class="o" style="--c:${RC[r]}"><span>● ${RN[r]}</span><i style="width:${Math.max(2,od[r]*100*.62)}%"></i><em>${(od[r]*100).toFixed(od[r]<.05?2:1).replace('.',',')} %</em></div>`).join('')}</div>
   ${wishLine(gg?CARDS.filter(c=>c.g.includes(gg)):CARDS,gg,daily)}<button class="ob" data-go ${okb?'':'disabled'}>Ouvrir<small>${sub}</small></button>
-  ${free?`<p class="nxp">${ST.free_next==null?'Stock de gratuits plein':`Prochain gratuit dans <span data-nxp>${fmt(ST.free_next)}</span>`}</p>`:daily&&!ST.daily_ready?'<p class="nxp">Nouveau pack du jour demain</p>':''}</div>`}
+  ${free?`<p class="nxp">${ST.free_next==null?'Stock de gratuits plein':`Prochain gratuit dans <span data-nxp>${fmt(ST.free_next)}</span>`}</p>`:daily&&!ST.daily_ready?`<p class="nxp">De retour dans <span data-dlyp>${fmt(toParisMidnight())}</span></p>`:''}</div>`}
 function bindPanel(root,kind,g){const daily=kind=='daily',gg=daily?ST.daily_theme:g;
  root.querySelector('[data-pl]').onclick=()=>poolSheet(gg);
  root.querySelector('[data-go]').onclick=()=>{const sh=root.closest('.shade');if(sh)sh.remove();packScreen(kind,daily?null:g)};
@@ -1756,7 +1840,7 @@ function poolSheet(g,top,nm,lo){
  <p class="mut" id="pc"></p><div class="srch"><input id="pq" placeholder="Rechercher un perso ou une série…"></div>
  <div class="chips">${['M','L','E','R','U','C'].map(r=>`<span class="chip" data-pr="${r}">${RN[r]}</span>`).join('')}</div><div class="grid" id="pg"></div><div id="pm"></div></div>`;
  document.body.append(d);
- const draw=()=>{const q=PQ.q.toLowerCase(),L=base.filter(c=>(!PQ.r||c.r==PQ.r)&&(!q||(c.name+' '+c.show).toLowerCase().includes(q)));
+ const draw=()=>{const q=PQ.q.toLowerCase(),L=base.filter(c=>(!PQ.r||c.r==PQ.r)&&(!q||(/^#\d+$/.test(q)?c.n==+q.slice(1):(c.name+' '+c.show).toLowerCase().includes(q))));
   const own=base.filter(c=>ST.inv[c.n]).length;
   $('#pc').textContent=L.length.toLocaleString('fr')+' persos · tu en as '+own+' / '+base.length;
   $('#pg').innerHTML=L.slice(0,PQ.n).map(c=>card(c,{q:ST.inv[c.n]||0,unk:!ST.inv[c.n]})).join('');
@@ -1772,7 +1856,7 @@ const GILD=v=>`<span class="gild ${v}"><span class="gild-k">${v=='divine'?'✦':
 function gildPack(pw,v){pw.querySelectorAll('.gild').forEach(x=>x.remove());pw.querySelectorAll('.lay').forEach(l=>l.insertAdjacentHTML('beforeend',GILD(v)));pw.classList.toggle('divine',v=='divine');pw.classList.toggle('golden',v=='golden')}
 function packScreen(kind,genre,q0){
  const sp=kind=='shop'?SHOP.find(x=>x.id==genre):null,g=sp?null:kind=='daily'?ST.daily_theme:genre,c1=sp?sp.c:gcol(g),price=sp?shopPrice(sp):g?ST.gprice:ST.price,mode=sp?sp.mode:'tear';let qty=q0||1,done=false,sx=null,sy=0,p=0,moved=0,tearing=false,auto0=false;
- const maxQ=()=>kind=='daily'?(ST.daily_ready?1:0):kind=='free'?freeTot():sp?(ST.popcorns>=price?1:0):Math.floor(ST.popcorns/price);
+ const maxQ=()=>kind=='daily'?(ST.daily_ready?1:0):kind=='free'?freeTot():sp?(sp.id=='coffret'&&FREEC>0||ST.popcorns>=price?1:0):Math.floor(ST.popcorns/price);
  const d=document.createElement('div');d.className='stage';d.style.setProperty('--pc1',c1);document.body.append(d);
  const kh=e=>{if(e.code=='Space'||e.key==' '){e.preventDefault();if(!done)auto()}else if(e.key=='Escape'&&!done)close()};
  document.addEventListener('keydown',kh);
@@ -1810,7 +1894,7 @@ function packScreen(kind,genre,q0){
   $('#pf').classList.add('go');untilt();SFX.tear();pw.classList.add('go');navigator.vibrate&&navigator.vibrate(30);
   if(!env){const sh=$('#shd');sh.innerHTML=Array.from({length:46},()=>{const a=-Math.PI*(.05+.9*Math.random()),v=140+Math.random()*380;return `<i style="left:${Math.random()*100}%;--dx:${Math.cos(a)*v|0}px;--dy:${Math.sin(a)*v*.7|0}px;--t:${(.8+Math.random()*.7).toFixed(2)}s;--s:${3+Math.random()*5|0}px;--c:${Math.random()<.5?'#fff':c1}"></i>`}).join('')}
   ['#qr','.pkb','#chg','#hn0','.gar','#gl0'].forEach(q=>{const e=$(q);if(e)e.style.visibility='hidden'});
-  const t0=Date.now(),req=rpc('open_boosters',{kind,genre:env?null:genre,qty:env||sp?1:qty}).then(async r=>{ST=r.state;const cs=r.boosters.flatMap(b=>b.cards.map(x=>CARDS[x.n-1]));preload(cs);return r});
+  const t0=Date.now(),req=(sp&&sp.id=='coffret'&&FREEC>0?rpc('open_free_coffret').then(x=>{FREEC--;return x}):rpc('open_boosters',{kind,genre:env?null:genre,qty:env||sp?1:qty})).then(async r=>{ST=r.state;const cs=r.boosters.flatMap(b=>b.cards.map(x=>CARDS[x.n-1]));preload(cs);return r});
   req.then(r=>{
    /* comme Kyara : la colonne reste blanche pendant la déchirure, prend la couleur de la meilleure carte (Rare ou mieux)
       dès que le tirage est connu, et reste au moins 700 ms en tout avant que les cartes sortent */
@@ -1866,6 +1950,24 @@ function whoIs(c){return new Promise(res=>{const k=rankOf(c),t=k>=5?3:k>=4?2:1,T
  ts.push(setTimeout(fin,n));SFX.riser(n/1000)})}
 /* ---------- révélation : pile face cachée, on touche pour retourner ---------- */
 const FD={C:420,U:460,R:560,E:760,L:1200,M:1800},PN={C:0,U:14,R:26,E:70,L:120,M:200};
+/* image PNG du tirage (dessinée sur un canevas ; les photos hors du site sont remplacées par un aplat) */
+async function shareImage(cs,name,total){const W=1200,H=760,cv=document.createElement('canvas');cv.width=W;cv.height=H;const x=cv.getContext('2d');
+ const g=x.createRadialGradient(W/2,H*.45,40,W/2,H*.45,W*.7);g.addColorStop(0,'#1b1722');g.addColorStop(1,'#07060a');x.fillStyle=g;x.fillRect(0,0,W,H);
+ await document.fonts.ready;x.textAlign='center';x.fillStyle='#ff4d2e';x.font='900 22px Unbounded, sans-serif';x.fillText('CASTING',W/2,58);
+ x.fillStyle='#edeae4';x.font='900 40px Unbounded, sans-serif';x.fillText(name,W/2,112);
+ x.fillStyle='#8a8590';x.font='500 20px "Zen Kaku Gothic New", sans-serif';x.fillText(`${total} carte${total>1?'s':''} · ${new Date().toLocaleDateString('fr',{day:'numeric',month:'long',year:'numeric'})}`,W/2,146);
+ const cw=200,ch=280,gap=24,n=cs.length,x0=(W-(n*cw+(n-1)*gap))/2,y0=200;
+ const load=src=>new Promise(r=>{const im=new Image();im.crossOrigin='anonymous';im.onload=()=>r(im);im.onerror=()=>r(null);im.src=src});
+ for(let i=0;i<n;i++){const c=cs[i],cx=x0+i*(cw+gap),col=RC[c.r];
+  x.save();x.shadowColor=col;x.shadowBlur=c.r=='L'||c.r=='M'?40:16;x.fillStyle='#15141a';x.beginPath();x.roundRect(cx,y0,cw,ch,14);x.fill();x.restore();
+  x.lineWidth=5;x.strokeStyle=col;x.beginPath();x.roundRect(cx,y0,cw,ch,14);x.stroke();
+  const im=await load(imgUrl(c));x.save();x.beginPath();x.roundRect(cx+12,y0+12,cw-24,ch-80,8);x.clip();
+  if(im){const k=Math.max((cw-24)/im.width,(ch-80)/im.height),iw=im.width*k,ih=im.height*k;x.drawImage(im,cx+12+(cw-24-iw)/2,y0+12+(ch-80-ih)/2,iw,ih)}else{x.fillStyle=col+'33';x.fillRect(cx+12,y0+12,cw-24,ch-80)}x.restore();
+  x.fillStyle=col;x.font='700 13px "JetBrains Mono", monospace';x.fillText(RN[c.r].toUpperCase(),cx+cw/2,y0+ch-44);
+  x.fillStyle='#edeae4';x.font='700 16px Unbounded, sans-serif';let nm=c.name;while(x.measureText(nm).width>cw-20&&nm.length>3)nm=nm.slice(0,-2);if(nm!=c.name)nm=nm.trim()+'…';x.fillText(nm,cx+cw/2,y0+ch-20)}
+ x.fillStyle='#5a5662';x.font='500 16px "Zen Kaku Gothic New", sans-serif';x.fillText(location.host,W/2,H-34);
+ let url;try{url=cv.toDataURL('image/png')}catch(e){toast('Image impossible');return}
+ const a=document.createElement('a');a.href=url;a.download='casting-tirage.png';document.body.append(a);a.click();a.remove()}
 function fanHtml(list,best,cnt){
  const n=list.length,phone=innerWidth<600,nb=c=>c.wished?'<span class="nb wsh">♥ Envie</span>':c.new?'<span class="nb">Nouveau</span>':'',dl=Math.min(70,1500/n);
  if(phone||n>10){const L=list.slice().sort((a,b)=>rankOf(b)-rankOf(a)||a.n-b.n);
@@ -1879,6 +1981,7 @@ function reveal(d,r,kind,g,qty){
  const c1=kind=='shop'?(SHOP.find(x=>x.id==g)||{}).c||'#fff':gcol(g);setTimeout(()=>r.boosters.forEach(b=>b.cards.forEach(x=>WISH.delete(x.n))));let bs=r.boosters.map(b=>({pity:b.pity_hit,golden:b.golden,god:b.god,cards:b.cards.map(x=>({...CARDS[x.n-1],new:x.new,bonus:x.bonus,wished:WISH.has(x.n)})).sort((p,q)=>rankOf(p)-rankOf(q))}));
  const multi=bs.length;if(multi>1)bs=[{pity:bs.some(b=>b.pity),golden:bs.some(b=>b.golden),god:bs.some(b=>b.god),cards:bs.flatMap(b=>b.cards).sort((p,q)=>rankOf(p)-rankOf(q))}];
  const all=bs[0].cards.slice(),WHO=multi>1?4:3;let bi=-1;
+ const SPr=kind=='shop'?SHOP.find(x=>x.id==g):null,GG=kind=='daily'?ST.daily_theme:g,PN=SPr?SPr.n:GG?fr(GG):'Casting Mix',PI=SPr?SPr.n[0]:gIni(GG);
  const flash=col=>{const f=document.createElement('div');f.className='flash';f.style.setProperty('--fc',col);document.body.append(f);setTimeout(()=>f.remove(),800)};
  const note=c=>`${c.new?'<span class="new">NOUVEAU</span>':`<span class="dup">Doublon · +${REC[c.r]} 🍿 si recyclé</span>`}${c.bonus?` <span class="new" style="background:var(--yel);color:#1a1300">+${c.bonus} 🍿 bonus</span>`:''}`;
  const kh=e=>{if(e.code=='Space'||e.key==' '){e.preventDefault();d._tap&&d._tap(e.repeat)}};
@@ -1888,14 +1991,13 @@ function reveal(d,r,kind,g,qty){
  const stack=b=>{const cs=b.cards,top=cs.reduce((a,c)=>rankOf(c)>rankOf(a)?c:a),n=cs.length,phone=innerWidth<600;let i=0,lock=false,bestK=-1;
   const DW=Math.round(Math.max(170,innerWidth<600?Math.min(320,innerWidth*.78,(innerHeight-320)*.714):Math.min(340,innerWidth*.7,(innerHeight-330)*.714)));
   if(rankOf(top)<2)d.style.setProperty('--pc1',c1);d.classList.remove('dim');
-  d.innerHTML=`<button class="skip" id="sk">Passer</button><div class="mut mono ct" id="ct"></div>
+  d.innerHTML=`<button class="skip" id="sk">Passer</button><div class="rhd"><span class="rhi" style="color:${c1}">${esc(PI)}</span><b>${esc(PN)}</b></div><div class="ct rct" id="ct"></div>
    <div class="kglow" id="rg2" aria-hidden="true"></div><div class="deck" id="dk" style="--dw:${DW}px"><div class="hal" id="hal"></div><div class="rays" id="ry"></div>${cs.map((c,k)=>`<div class="dk" style="--o:${k};--oo:${Math.min(k,3)};${k>3?'opacity:0;':''}"><div class="f3" style="--fd:${FD[c.r]}ms"><div class="fa">${cardBack(b.god?'#fff4de':b.golden?'#f7c61b':c1)}</div><div class="fb">${card(c)}${c.wished?'<span class="nwb wsh">♥ ENVIE</span>':c.new?'<span class="nwb">NOUVEAU</span>':''}</div></div><i class="cring"></i></div>`).join('')}</div>
-   <div class="rv" id="in"></div><div class="pslots ${n>10?'sm':''}" id="ps">${cs.map((c,k)=>`<i class="${k?'':'cur'}"></i>`).join('')}</div><p class="mut" id="hn" style="margin:0">Touche la carte pour la retourner</p>
-   <div class="rbtns">${cs.some(c=>rankOf(c)>=3)?'<button class="btn g" id="nxe">Passer à la prochaine Épique ou +</button>':''}<button class="btn g" id="ra">Tout révéler</button></div>${matchMedia('(hover:hover)').matches?'<p class="mut mono kbd">Espace : suivante · maintenir : avance rapide</p>':''}<button class="sndb" id="sdb">${SND()?'🔊':'🔇'}</button>`;
+   <div class="rv" id="in"></div><div class="pslots ${n>10?'sm':''}" id="ps">${cs.map((c,k)=>`<i class="${k?'':'cur'}"></i>`).join('')}</div><div class="rrow"><p class="mut" id="hn" style="margin:0">Touche la carte pour la retourner</p><button class="btn g" id="ra">Tout révéler</button></div>${matchMedia('(hover:hover)').matches?'<p class="mut mono kbd">Espace : suivante · maintenir : avance rapide</p>':''}<button class="sndb" id="sdb">${SND()?'🔊':'🔇'}</button>`;
   $('#sdb').onclick=e=>{e.stopPropagation();lsset('snd',SND()?'0':'1');e.target.textContent=SND()?'🔊':'🔇'};
   pxInit(d);const pss=$$('#ps i'),dks=$$('.dk');cs.slice(0,8).forEach((c,k)=>SFX.slide(k));
   if((b.golden||b.god)&&!$('.gbn')){const gb=document.createElement('div');gb.className='gbn'+(b.god?' god':'');gb.textContent=b.god?'BOOSTER DIVIN !':'BOOSTER DORÉ !';d.append(gb);setTimeout(()=>gb.classList.add('out'),2600);setTimeout(()=>gb.remove(),3200)}
-  const bl=b.god?'✦ Booster divin · Mythique garantie · ':b.golden?'★ Booster doré · ':'',ct=()=>{$('#ct').textContent=bl+(multi>1?`${multi} boosters · `:'')+`Carte ${Math.min(i+1,n)}/${n}`};ct();
+  const bl=b.god?'✦ Booster divin · Mythique garantie · ':b.golden?'★ Booster doré · ':'',ct=()=>{$('#ct').innerHTML=`<b>${Math.min(i+1,n)}</b><span>/${n}</span>${bl||multi>1?`<small>${esc(bl.replace(/ · $/,''))}${bl&&multi>1?' · ':''}${multi>1?multi+' boosters':''}</small>`:''}`};ct();
   const setHal=()=>{const h=$('#hal');if(!h)return;h.style.setProperty('--hc',bestK<0?'#ffffff':rcol(ORD[bestK]));h.style.setProperty('--ho',bestK<0?.15:Math.max(.15,bestK/5))};setHal();
   const lay=()=>{dks.forEach((x,kk)=>{if(kk<i)return;const o=kk-i;x.style.setProperty('--o',o);x.style.setProperty('--oo',Math.min(o,3));x.style.opacity=o>3?0:''});
    const e=dks[i];if(e&&!e.classList.contains('fl')){const k=rankOf(cs[i]);e.style.setProperty('--tc',rcol(cs[i].r));e.classList.toggle('tease',k>=2);e.classList.toggle('trem',k>=3)}};lay();
@@ -1915,6 +2017,8 @@ function reveal(d,r,kind,g,qty){
    const fd=fast||MO()?Math.min(FD[c.r],420):FD[c.r];e.querySelector('.f3').style.setProperty('--fd',fd+'ms');e.classList.add('fl');SFX.flip();
    setTimeout(()=>{e.classList.add('shown');SFX.rar(c.r);burst(c,e);ring(c,e);
     if(k>=4){flash(rcol(c.r));banner(c);rays(c);shake(k)}else if(k>=3)flash(rcol(c.r));
+    if(c.wished&&!MO()){e.classList.remove('wpulse');void e.offsetWidth;e.classList.add('wpulse')}
+    if(c.r=='M'&&!MO()){const mb=document.createElement('div');mb.className='mburst';d.append(mb);setTimeout(()=>mb.remove(),1400)}
     navigator.vibrate&&k>=2&&navigator.vibrate(k>=4?[30,40,60]:20);
     bestK=Math.max(bestK,k);setHal();glow(c);thumb(i,c,e);
     $('#in').innerHTML=`<small style="color:${rcol(c.r)}">${RN[c.r]}</small><b>${esc(c.name)}</b><div class="rl">${esc(c.show)} ${note(c)}</div>`;$('#hn').textContent=i<n-1?'Touche ou glisse pour la suivante':'Touche ou glisse pour continuer'},fd*.55);
@@ -1950,21 +2054,26 @@ function reveal(d,r,kind,g,qty){
   ${fanHtml(uq,best,cnt)}
   <div class="sum">${nw?`<span class="new">${nw} nouvelle${nw>1?'s':''}</span>`:''}${dups?`<span class="dup">${dups} doublon${dups>1?'s':''} · +${recG} 🍿 si recyclés</span>`:''}${r.gain?`<span class="new" style="background:var(--yel);color:#1a1300">+${r.gain} 🍿 de bonus</span>`:''}</div>
   ${k2=='daily'||sp2?'':`<div class="qrow" id="rq">${[1,5,10].map(n=>`<button data-q="${n}" class="${rq==n?'on':''}" ${mq<n?'disabled':''}>×${n}</button>`).join('')}</div>`}
-  <div class="rbar" style="--c1:${sp2?sp2.c:gcol(g2)}"><button class="ob" id="ag" ${mq>0?'':'disabled'}>Ouvrir un autre<small>${sub}</small></button><button class="btn g" id="chg2">Changer de booster</button><button class="btn g" id="vc">Voir la collection</button><button class="btn g" id="cl">Continuer</button></div></div>`;
+  <div class="rbar" style="--c1:${sp2?sp2.c:gcol(g2)}"><button class="ob" id="ag" ${mq>0?'':'disabled'}>Ouvrir un autre<small>${sub}</small></button><button class="btn g" id="chg2">Changer de booster</button><button class="btn g" id="vc">Voir la collection</button><button class="btn g" id="cl">Continuer</button></div>
+  <div class="rshare"><button class="btn g sm" id="cpl">Copier le lien</button><button class="btn g sm" id="cpi">Image</button></div></div>`;
   setTimeout(()=>SFX.rar(best.r),120);
   $$('#rq button').forEach(b=>b.onclick=()=>{rq=+b.dataset.q;$$('#rq button').forEach(x=>x.classList.toggle('on',x==b))});
   $('#ag').onclick=()=>{d.remove();render();packScreen(k2,g2,rq)};$('#chg2').onclick=()=>{d.remove();openSheet(sp2?'shop':k2)};
   $('#cl').onclick=()=>{d.remove();render()};$('#vc').onclick=()=>{d.remove();view='coll';render()};
+  const top5=all.slice().sort((a,b)=>rankOf(b)-rankOf(a)).slice(0,5),PNm=PN;
+  $('#cpl').onclick=async()=>{const t=`Mon tirage Casting (${PNm}) : ${top5.map(c=>`${c.name} (${RN[c.r]})`).join(', ')}${all.length>5?` et ${all.length-5} autre${all.length>6?'s':''}`:''}\n${location.origin}${location.pathname}`;
+   try{await navigator.clipboard.writeText(t);toast('Copié')}catch(e){toast('Copie impossible sur cet appareil')}};
+  $('#cpi').onclick=()=>shareImage(top5,PNm,all.length);
   $$('.recap .cw').forEach(e=>e.onclick=()=>detail(+e.dataset.n))};
  nextB()}
 /* ---------- collection ---------- */
 function coll(){
  const inv=ST.inv,tot=CARDS.length,own=CARDS.reduce((a,c)=>a+(inv[c.n]?1:0),0),dups=Object.values(inv).reduce((a,q)=>a+Math.max(0,q-1),0),pc=own/tot*100,rv=recVal();
- const nf=(F.g?1:0)+(F.show?1:0)+(F.own!='own'?1:0)+(F.sort!='n'?1:0)+(F.r&&!wide()?1:0);
+ const nf=(F.g?1:0)+(F.show?1:0)+(F.own!='own'?1:0)+(F.sort!='r'?1:0)+(F.r&&!wide()?1:0);
  const seg=cls=>`<div class="seg ${cls}">${[['cards','Cartes'],['albums','Albums']].map(([k,l])=>`<button class="${F.mode==k?'on':''}" data-m="${k}">${l}</button>`).join('')}</div>`;
  $('#v').innerHTML=`<div class="chd"><div><div class="eyebrow">Album · ta collection</div><h1>Ma collection</h1></div>${seg('')}
   <div class="cst"><div><b>${own.toLocaleString('fr')}<span>/${tot.toLocaleString('fr')}</span></b><small>cartes uniques</small></div><div><b class="acc">${pc.toFixed(1).replace('.',',')} %</b><small>complétion</small><span class="cbar"><i style="width:${pc}%"></i></span></div><div><b>${dups.toLocaleString('fr')}</b><small>doublons</small></div></div></div>
-  <div class="ctb"><label class="csr"><span aria-hidden="true">⌕</span><input id="q" placeholder="Rechercher un perso ou une série…" value="${esc(F.q)}"></label>
+  <div class="ctb"><label class="csr"><span aria-hidden="true">⌕</span><input id="q" placeholder="Rechercher un perso ou une série…" value="${esc(F.q)}"><button class="qhelp" type="button" aria-label="Aide de la recherche">i<span class="qtip" role="tooltip"><b>Rechercher</b>Un nom de perso ou de série, même incomplet.<br><code>#123</code> pour une carte par son numéro.</span></button></label>
    <div class="rch"><button class="rall ${!F.r?'on':''}" data-r="">Toutes</button>${[...'CURELM'].map(r=>`<button class="rdot ${F.r==r?'on':''}" data-r="${r}" style="--c:${RC[r]}" title="${RN[r]}">${r}</button>`).join('')}</div>
    <button class="tbb" id="flt">Filtres${nf?`<span class="nb2">${nf}</span>`:''}</button>
    <button class="tbb rcy" id="rcb" title="Recycler les doublons" aria-label="Recycler les doublons">♻${rv?`<span class="nb3">${rv>999?'999+':'+'+rv}</span>`:''}</button>${seg('tb')}
@@ -1991,12 +2100,12 @@ function filterPop(){const P=$('#fpop');if(!P.hidden){P.hidden=true;const s=$('.
   $('#fg2').onchange=e=>D.g=e.target.value;$('#fs3').onchange=e=>D.show=e.target.value;
   $('#fo2').onchange=e=>D.own=e.target.value;$('#fs2').onchange=e=>D.sort=e.target.value;
   P.querySelectorAll('[data-fr]').forEach(b=>b.onclick=()=>{D.r=b.dataset.fr;draw()});
-  $('#frs').onclick=()=>{Object.assign(D,{g:'',show:'',own:'own',sort:'n',r:wide()?D.r:''});draw()};
+  $('#frs').onclick=()=>{Object.assign(D,{g:'',show:'',own:'own',sort:'r',r:wide()?D.r:''});draw()};
   $('#fap').onclick=()=>{Object.assign(F,D,{n:60});close();coll()}};
  draw();P.hidden=false}
 function list(){
  const q=F.q.toLowerCase(),o=c=>ST.inv[c.n]||0;
- let L=CARDS.filter(c=>(!F.r||c.r==F.r)&&(!F.show||c.show==F.show)&&(!F.g||c.g.includes(F.g))&&(!q||(c.name+' '+c.show).toLowerCase().includes(q)));
+ let L=CARDS.filter(c=>(!F.r||c.r==F.r)&&(!F.show||c.show==F.show)&&(!F.g||c.g.includes(F.g))&&(!q||(/^#\d+$/.test(q)?c.n==+q.slice(1):(c.name+' '+c.show).toLowerCase().includes(q))));
  const base=L;
  if(F.mode=='albums')return albums(base);
  if(F.own=='own')L=L.filter(c=>o(c));if(F.own=='miss')L=L.filter(c=>!o(c));if(F.own=='dup')L=L.filter(c=>o(c)>1);if(F.own=='wish')L=L.filter(c=>WISH.has(c.n)&&!o(c));
@@ -2064,7 +2173,7 @@ function wiki(){
  $('#v').innerHTML=`<div class="kwh"><div class="kwrow"><div class="kwhl"><div class="eyebrow">Wiki · Persos</div><div class="kwh1row"><h1 class="kwh1">Le wiki des persos</h1><span class="kwcnt"><strong>${own.toLocaleString('fr')}</strong> fiches débloquées sur ${CARDS.length.toLocaleString('fr')}.</span></div></div>
   <div class="kwtools"><label class="kwsearch"><span>⌕</span><input id="wq" placeholder="Perso ou univers…" value="${esc(WQ.q)}"></label><button class="kwfilt ${WQ.own?'on':''}" id="wown"><span class="box">${WQ.own?'✓':''}</span>Fiches débloquées seulement</button></div></div></div>
   <ul class="kwlist" id="wl"></ul><div class="kwmore" id="wm"></div>`;
- const draw=()=>{const q=WQ.q.toLowerCase();let L=CARDS.filter(c=>(!WQ.own||ST.inv[c.n])&&(!q||(c.name+' '+c.show).toLowerCase().includes(q)));
+ const draw=()=>{const q=WQ.q.toLowerCase();let L=CARDS.filter(c=>(!WQ.own||ST.inv[c.n])&&(!q||(/^#\d+$/.test(q)?c.n==+q.slice(1):(c.name+' '+c.show).toLowerCase().includes(q))));
   $('#wl').innerHTML=L.slice(0,WQ.n).map(c=>{const o=ST.inv[c.n];return `<li><button class="kwr ${o?'':'locked'}" data-wn="${c.n}"><span class="th" style="--rc:${RC[c.r]}">${pic(c)}</span><span class="tx"><span class="n">${esc(c.name)}</span><span class="s">${esc(c.show)} · <span class="mono">#${pad(c.n)}</span></span></span><span class="r" style="color:${RC[c.r]}">${c.r}</span>${o?'':'<span class="lk"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span>'}</button></li>`}).join('');
   $('#wm').innerHTML=L.length>WQ.n?`<button class="btn g" id="wmore">Afficher plus · ${(L.length-WQ.n).toLocaleString('fr')} restantes</button>`:'';
   const m=$('#wmore');if(m)m.onclick=()=>{WQ.n+=60;draw()};
@@ -2212,7 +2321,7 @@ async function miss(){
  const ids=[];if(!s.claimed_today)ids.push('streak');Q.quests.forEach(q=>{if(q.done&&!q.claimed)ids.push(q.id)});['welcome','daily','weekly'].forEach(k=>{const b=Q.bonus[k];if(b&&b.all&&!b.claimed)ids.push('bonus_'+k)});
  const qc=q=>`<div class="mq ${q.claimed?'done':q.done?'rdy':''}"><div class="mqt"><b>${esc(q.label)}</b><span class="rw mono">+${q.pop} 🍿</span></div>${q.desc?`<small>${esc(q.desc)}</small>`:''}<div class="qb"><i style="width:${Math.min(100,q.progress/q.target*100)}%"></i></div>
   <div class="mqf"><span class="mono">${q.progress.toLocaleString('fr')} / ${q.target.toLocaleString('fr')}</span>${q.claimed?'<span class="ok">Réclamé ✓</span>':q.done?`<button data-cq="${q.id}">Réclamer</button>`:'<span class="mut">En cours</span>'}</div></div>`;
- const bon=(k,l)=>{const b=Q.bonus[k],n=Q.bonus_rewards[k];return `<div class="mbon"><span>${l} → +${n} booster${n>1?'s':''} bonus</span>${b.claimed?'<span class="ok">Réclamé ✓</span>':b.all?`<button data-cq="bonus_${k}">Récupérer</button>`:'<span>🔒</span>'}</div>`};
+ const bon=(k,l)=>{const b=Q.bonus[k],n=Q.bonus_rewards[k];return `<div class="mbon"><span>${l} → ${k=='weekly'?'Coffret offert':`+${n} booster${n>1?'s':''} bonus`}</span>${b.claimed?'<span class="ok">Réclamé ✓</span>':b.all?`<button data-cq="bonus_${k}">Récupérer</button>`:'<span>🔒</span>'}</div>`};
  const bar=(l,a,b)=>`<div><span>${l}</span><span class="qb"><i style="width:${b?Math.min(100,a/b*100):0}%"></i></span><span class="mono">${a}/${b}</span></div>`;
  const albs=(()=>{const M=new Map();for(const c of CARDS){const x=M.get(c.show)||{t:0,o:0};x.t++;if(ST.inv[c.n])x.o++;M.set(c.show,x)}return [...M.entries()].filter(([,x])=>x.o==x.t).map(([n,x])=>({n,t:x.t}))})();
  const pb=(l,a,b2)=>{const f=b2&&a>=b2;return `<div class="kpg ${f?'full':''}"><div class="kpgl"><span>${l}</span><span class="mono">${a} / ${b2}</span></div><span class="kpgb"><i style="width:${b2?Math.min(100,a/b2*100):0}%"></i></span></div>`};
@@ -2227,21 +2336,38 @@ async function miss(){
   <div class="kstf"><span class="gold">J7 : prochain booster doré</span><span class="mut">1 jour manqué toléré cette semaine</span></div></div>
   <div class="mcard"><div class="mch"><h2>Ta progression</h2></div><div class="kpgs">${pb('Connexion',gotTo,7)}${pb('Missions du jour',cl(dd),dd.length)}${pb('Missions de la semaine',cl(ww),ww.length)}${!Q.bonus.welcome.claimed?pb('Bienvenue',cl(wl),wl.length):''}${pb('Succès',cl(ach),ach.length)}</div></div></div>
  ${!Q.bonus.welcome.claimed&&wl.length?`<div class="mcard" style="margin-bottom:14px"><div class="mch"><div><span class="kick">Pour bien commencer</span><h2>Bienvenue</h2></div><span class="mono">${cl(wl)} / ${wl.length}</span></div><div class="mwl">${wl.map(qc).join('')}</div>${bon('welcome','Toutes réclamées')}</div>`:''}
- <div class="mcols"><div class="mcard"><div class="mch"><div><span class="kick">Du jour</span><h2>Missions du jour</h2></div><span class="ktm mono">${hm(Q.next_daily)}</span></div>${dd.map(qc).join('')}${bon('daily','Les 3 réclamées')}</div>
-  <div class="mcard"><div class="mch"><div><span class="kick">De la semaine</span><h2>Missions de la semaine</h2></div><span class="ktm mono">${hm(Q.next_weekly)}</span></div>${ww.map(qc).join('')}${bon('weekly','Les 3 réclamées')}</div>
+ <div class="mcols"><div class="mcard"><div class="mch"><div><span class="kick">Du jour</span><h2>Missions du jour</h2></div><span class="ktm mono" title="Nouvelles missions à minuit (heure de Paris)">${hm(Q.next_daily)}</span></div>${dd.map(qc).join('')}${bon('daily','Les 3 réclamées')}</div>
+  <div class="mcard"><div class="mch"><div><span class="kick">De la semaine</span><h2>Missions de la semaine</h2></div><span class="ktm mono" title="Nouvelles missions lundi à minuit (heure de Paris)">${hm(Q.next_weekly)}</span></div>${ww.map(qc).join('')}${bon('weekly','Les 3 réclamées')}</div>
   <div class="mcard"><div class="mch"><div><span class="kick">Albums</span><h2>Séries complètes</h2></div><span class="mono">${albs.length}</span></div>${albs.length?albs.slice(0,8).map(x=>`<div class="kalb"><b>${esc(x.n)}</b><span class="mono">${x.t} / ${x.t}</span><span class="ok">Complète ✓</span></div>`).join('')+(albs.length>8?`<p class="mut" style="font-size:12px;margin:6px 0 0">et ${albs.length-8} autre${albs.length-8>1?'s':''}</p>`:''):'<p class="mut kalb0">Aucune série complète pour l’instant. Les albums sont dans Collection.</p>'}</div></div>
  <div class="mcard kach"><div class="mch"><h2>Succès <span class="mono kacn">${cl(ach)}/${ach.length}</span></h2><div class="ktabs">${[['all','Tous'],['todo','À faire'],['got','Obtenus']].map(([k,l])=>`<button class="${ACHT==k?'on':''}" data-at="${k}">${l}</button>`).join('')}</div></div>
   <div class="kacg">${at.length?at.map(ac).join(''):'<p class="mut">Rien ici pour l’instant.</p>'}</div></div>`;
  $$('[data-at]').forEach(b=>b.onclick=()=>{ACHT=b.dataset.at;const y=scrollY;miss().then(()=>scrollTo(0,y))});
- const fin=x=>toast([x.pop?`+${x.pop} 🍿`:'',x.bo?`+${x.bo} booster${x.bo>1?'s':''} bonus`:'',x.gold?'prochain booster doré !':''].filter(Boolean).join(' · ')||'C’est récupéré');
+ const fin=x=>toast([x.pop?`+${x.pop} 🍿`:'',x.bo?`+${x.bo} booster${x.bo>1?'s':''} bonus`:'',x.cof?'Coffret offert ! Il t’attend dans la Boutique':'',x.gold?'prochain booster doré !':''].filter(Boolean).join(' · ')||'C’est récupéré');
  $$('[data-cq]').forEach(b=>b.onclick=async()=>{b.disabled=true;try{const x=await rpc('claim_quest',{qid:b.dataset.cq});ST=x.state;
-  fin({pop:x.popcorns,bo:x.boosters,gold:x.golden});const y=scrollY;render();scrollTo(0,y)}catch(e){toast(e.message);b.disabled=false}});
- $('#mall').onclick=async()=>{const b=$('#mall');b.disabled=true;b.textContent='Récupération…';const R={pop:0,bo:0,gold:false};
-  const claim=async id=>{try{const x=await rpc('claim_quest',{qid:id});ST=x.state;R.pop+=x.popcorns||0;R.bo+=x.boosters||0;R.gold=R.gold||!!x.golden}catch(e){}};
+  if(x.coffret)FREEC+=x.coffret;fin({pop:x.popcorns,bo:x.boosters,gold:x.golden,cof:x.coffret});const y=scrollY;render();scrollTo(0,y)}catch(e){toast(e.message);b.disabled=false}});
+ $('#mall').onclick=async()=>{const b=$('#mall');b.disabled=true;b.textContent='Récupération…';const R={pop:0,bo:0,gold:false,cof:0};
+  const claim=async id=>{try{const x=await rpc('claim_quest',{qid:id});ST=x.state;R.pop+=x.popcorns||0;R.bo+=x.boosters||0;R.gold=R.gold||!!x.golden;if(x.coffret){R.cof+=x.coffret;FREEC+=x.coffret}}catch(e){}};
   for(const id of ids.filter(i=>!i.startsWith('bonus_')))await claim(id);
   try{const Q2=await rpc('my_quests');for(const k of ['welcome','daily','weekly']){const bb=Q2.bonus[k];if(bb&&bb.all&&!bb.claimed)await claim('bonus_'+k)}}catch(e){}
   fin(R);const y=scrollY;render();scrollTo(0,y)}}
 /* ---------- autres onglets ---------- */
+function jouer(){
+ const G=[['?','Qui est-ce ?','Devine le perso à partir de sa silhouette.','#ff4d2e'],['▶','Série express','Retrouve la série en quelques secondes.','#4d9bff'],['▦','Mémoire','Retourne les paires de cartes.','#3ddc84'],['♥','Le plus aimé ?','Lequel des deux persos est le plus collectionné ?','#ff5c8a']];
+ $('#v').innerHTML=`<div class="jhead"><div class="eyebrow">Salle de jeux</div><h1>Jouer</h1><p class="mut">Des mini-jeux pour gagner des tickets et des tickets dorés. Ils arrivent bientôt.</p></div>
+ <div class="jgrid">${G.map(([k,t,d,c])=>`<div class="jcard" style="--c:${c}"><span class="jk">${k}</span><b>${t}</b><p>${d}</p><span class="jsoon">Bientôt</span></div>`).join('')}</div>`}
+async function avis(){
+ $('#v').innerHTML=`<div class="jhead"><div class="eyebrow">Avis et bugs</div><h1>Dis-nous tout</h1><p class="mut">Une idée, un bug, une carte mal recadrée : écris-le ici, on le lit.</p></div>
+ <div class="avf"><div class="avk">${[['idee','Idée'],['bug','Bug'],['carte','Carte'],['autre','Autre']].map(([k,l],i)=>`<button class="${i?'':'on'}" data-ak="${k}">${l}</button>`).join('')}</div>
+ <textarea id="avt" maxlength="2000" rows="5" placeholder="Explique en quelques mots…"></textarea><div class="avbar"><span class="mut mono" id="avn">0/2000</span><button class="cta" id="avs">Envoyer</button></div></div>
+ <div class="sec"><div class="eyebrow">Tes messages</div></div><div id="avl" class="avl"><p class="mut">Chargement…</p></div>`;
+ let kind='idee';$$('[data-ak]').forEach(b=>b.onclick=()=>{kind=b.dataset.ak;$$('[data-ak]').forEach(x=>x.classList.toggle('on',x==b))});
+ const t=$('#avt');t.oninput=()=>$('#avn').textContent=t.value.length+'/2000';
+ const KL={idee:'Idée',bug:'Bug',carte:'Carte',autre:'Autre'};
+ const load=async()=>{let L;try{L=await rpc('my_feedback')}catch(e){L=null}if(!Array.isArray(L))L=null;const el=$('#avl');if(!el)return;
+  el.innerHTML=!L?'<p class="mut">Lance 14_vite.sql dans Supabase pour activer cette page.</p>':!L.length?'<p class="mut">Aucun message pour l’instant.</p>':L.map(x=>`<div class="avm"><div><span class="avtag">${KL[x.kind]||x.kind}</span><span class="mut mono">${new Date(x.at).toLocaleDateString('fr',{day:'numeric',month:'short'})}</span></div><p>${esc(x.body)}</p>${x.reply?`<div class="avr"><b>Réponse</b><p>${esc(x.reply)}</p></div>`:''}</div>`).join('')};
+ $('#avs').onclick=async()=>{const v=t.value.trim();if(v.length<3){toast('Écris au moins quelques mots');return}
+  try{await rpc('send_feedback',{kind,body:v});t.value='';t.oninput();toast('Merci, c’est envoyé');load()}catch(e){toast(e.message)}};
+ load()}
 function mkt(){$('#v').innerHTML=`<div class="center"><div style="font-size:54px">🏷️</div><h2>Marché</h2><p>Vente et échange de cartes entre joueurs : bientôt.</p></div>`}
 function more(){
  $('#v').innerHTML=`<button class="kwlink" id="gwk"><b>Le wiki des persos</b><small>Toutes les fiches, débloquées ou à trouver</small><span>→</span></button><div class="sec"><div class="eyebrow">Compte</div><h2>${esc(ST.name)}</h2></div>
