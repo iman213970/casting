@@ -73,14 +73,8 @@ button{font:inherit;color:inherit;cursor:pointer;border:0;background:none}
 .tcg.r-M::before{content:"";position:absolute;inset:1.8cqi;border-radius:4.6cqi;background:rgb(20,16,28);z-index:0}
 .tcg.r-M .rp{background:conic-gradient(from var(--spin),#ff3d81,#ffb13d,#3dff9a,#3dc5ff,#a43dff,#ff3d81)}
 @keyframes mspin{to{--spin:360deg}}
-.r-R .fx{background:linear-gradient(115deg,transparent 38%,rgba(110,170,255,.38) 50%,transparent 62%);background-size:300% 100%;animation:sweep 5s ease-in-out infinite}
-.r-E .fx{background:linear-gradient(115deg,transparent 40%,rgba(200,150,255,.22) 50%,transparent 60%);background-size:300% 100%;animation:sweep 6s ease-in-out infinite}
 .r-L{box-shadow:0 0 4cqi #f5c51855}
-.r-L .fx{background:radial-gradient(circle at 20% 20%,#fff9 0,transparent 3%),radial-gradient(circle at 70% 60%,#fff7 0,transparent 2.5%),radial-gradient(circle at 40% 85%,#fff8 0,transparent 3%),linear-gradient(115deg,transparent 30%,rgba(255,225,120,.45) 48%,transparent 66%);background-size:100% 100%,100% 100%,100% 100%,280% 100%;animation:sweep 4s ease-in-out infinite}
-.r-M .fx{background:conic-gradient(from var(--spin) at 50% 50%,#ff3d8144,#3dff9a33,#3dc5ff44,#a43dff44,#ff3d8144);animation:mspin 6s linear infinite;opacity:.8}
-.foil .fx{background:linear-gradient(115deg,transparent 35%,rgba(255,120,200,.4) 46%,rgba(90,220,255,.4) 54%,transparent 65%);background-size:300% 100%;animation:sweep 3.6s ease-in-out infinite}
 @keyframes sweep{from{background-position:140% 0}to{background-position:-60% 0}}
-.tilting .tcg .fx{animation:none!important;background:radial-gradient(circle at var(--mx,50%) var(--my,30%),#fffd,transparent 38%),linear-gradient(115deg,#ff3d8144,#3dc5ff44,#f7c61b44)!important;opacity:.9!important}
 /* carte non possédée : silhouette floue */
 .unk .im img{filter:blur(3.2cqi) brightness(.3) saturate(0);transform:scale(1.2)}
 .unk .im{background:#0008}
@@ -387,7 +381,6 @@ footer{text-align:center;color:var(--mut);font-size:11px;margin:30px 0}
 .rfan .fc{isolation:isolate}
 .recap .rfan{margin-top:46px}
 @media (max-width:599px){.rbar .ob{width:100%;justify-content:center}}
-.rfan .tcg .fx{mix-blend-mode:normal;opacity:.35}
 .rfan .nb{position:absolute;left:50%;top:-11px;transform:translateX(-50%);z-index:6;background:#fff;color:#111;font:800 11px 'Bricolage Grotesque',Inter,sans-serif;border-radius:99px;padding:3px 10px;white-space:nowrap;box-shadow:0 2px 8px #0008}
 .rfan .fc.fbest .nb{top:-11px}.rfan .fc.fbest .bl{top:-38px}
 .rbar{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;width:100%}
@@ -660,7 +653,6 @@ footer{text-align:center;color:var(--mut);font-size:11px;margin:30px 0}
 .rgrid .fc:hover{transform:translateY(-6px)}
 .rfan2 .nb,.rgrid .nb{position:absolute;left:50%;top:-10px;transform:translateX(-50%);z-index:6;background:#fff;color:#111;font:800 11px 'Bricolage Grotesque',Inter,sans-serif;border-radius:99px;padding:3px 10px;white-space:nowrap;box-shadow:0 2px 8px #0008}
 .rfan2 .bl{position:absolute;left:50%;top:-38px;transform:translateX(-50%);white-space:nowrap;background:var(--c,var(--R));color:#fff;font:800 12px 'Bricolage Grotesque',Inter,sans-serif;border-radius:99px;padding:4px 12px;z-index:5;box-shadow:0 0 14px color-mix(in srgb,var(--c,#3b82f6) 70%,transparent)}
-.rfan2 .tcg .fx,.rgrid .tcg .fx{mix-blend-mode:normal;opacity:.35}
 .recap{max-width:min(1200px,100%);max-height:calc(100vh - 20px)}
 /* collection */
 .chd{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:14px;margin:22px 0 14px}
@@ -957,41 +949,6 @@ html.mo .gbn{animation:none}
 @keyframes wturn{to{transform:rotate(1turn)}}
 .who .sim.mono{display:grid;place-items:center;font:800 clamp(24px,3.4vw,38px)/1 'Bricolage Grotesque',Inter,sans-serif;font-style:normal;color:var(--rc);background:radial-gradient(circle at 50% 30%,color-mix(in srgb,var(--rc) 28%,#16141c),#0b0a10)}
 
-/* reflet holographique à l'inclinaison, par rareté (principe Kyara : bandes irisées qui suivent le doigt, or pour L, arc-en-ciel fort pour M) */
-.tilting .tcg .fx{mix-blend-mode:color-dodge;background:radial-gradient(circle at var(--mx,50%) var(--my,30%),#ffffffb0,transparent 34%),repeating-linear-gradient(110deg,#ff3d6e 0%,#ffcf3d 7%,#3dffa0 14%,#3dc8ff 21%,#a65bff 28%,#ff3d6e 35%)!important;background-size:100% 100%,400% 400%!important;background-position:0 0,var(--mx,50%) var(--my,50%)!important;filter:brightness(.6) contrast(1.6) saturate(1.3);opacity:.55!important}
-.tilting .r-L .fx{background:radial-gradient(circle at var(--mx,50%) var(--my,30%),#fff6d6c0,transparent 34%),radial-gradient(circle at 20% 30%,#fff 0,transparent 1.2%),radial-gradient(circle at 75% 65%,#fff 0,transparent 1%),repeating-linear-gradient(115deg,#2a1c02 0%,#b8860b 6%,#ffe08a 10%,#fff6d6 12%,#d9a521 16%,#2a1c02 24%)!important;background-size:100% 100%,60px 60px,48px 48px,400% 400%!important;background-position:0 0,calc(var(--mx,50%)*-.4) calc(var(--my,50%)*-.4),calc(var(--mx,50%)*-.4) calc(var(--my,50%)*-.4),var(--mx,50%) var(--my,50%)!important;filter:brightness(.75) contrast(1.5) saturate(1.2);opacity:.8!important}
-.tilting .r-M .fx{background:radial-gradient(circle at var(--mx,50%) var(--my,30%),#ffffffc0,transparent 30%),repeating-linear-gradient(55deg,transparent 0%,#ffffff59 3%,transparent 6%,transparent 14%),repeating-linear-gradient(125deg,#ff3d3d 0%,#ffcc33 4%,#54f434 8%,#29edff 12%,#775cff 16%,#ff47e0 20%,#ff3d3d 24%)!important;background-size:100% 100%,300% 300%,500% 500%!important;background-position:0 0,calc(100% - var(--mx,50%)) calc(100% - var(--my,50%)),var(--mx,50%) var(--my,50%)!important;filter:brightness(.7) contrast(1.8) saturate(1.6);opacity:.85!important}
-
-/* motif « cosmos » à l'inclinaison (esprit cartes holo : étoiles et éclats qui scintillent et bougent avec le doigt), dessiné en dégradés */
-.tcg .fx::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s}
-.tilting .r-R .fx::after,.tilting .r-E .fx::after,.tilting .r-L .fx::after,.tilting .r-M .fx::after{opacity:.9;mix-blend-mode:color-dodge;
- background:
-  radial-gradient(circle,#fff 0 1px,transparent 1.6px) calc(var(--mx,50%)*-.6) calc(var(--my,50%)*-.6)/23px 29px,
-  radial-gradient(circle,#fff 0 .8px,transparent 1.3px) calc(var(--mx,50%)*.5) calc(var(--my,50%)*.5)/17px 13px,
-  radial-gradient(circle,#fffbe0 0 1.6px,#ffe08a55 2.4px,transparent 3.4px) calc(var(--mx,50%)*-1.1) calc(var(--my,50%)*-1.1)/61px 47px,
-  conic-gradient(from 0deg at 50% 50%,transparent 0 40deg,#ffffff66 45deg,transparent 50deg 130deg,#ffffff55 135deg,transparent 140deg 220deg,#ffffff66 225deg,transparent 230deg 310deg,#ffffff55 315deg,transparent 320deg) calc(var(--mx,50%)*.9) calc(var(--my,50%)*.9)/97px 89px,
-  radial-gradient(ellipse at var(--mx,50%) var(--my,50%),#ff9be7aa,#9bd9ffaa 25%,#c6ff9b88 45%,transparent 70%);
- filter:brightness(1.1) saturate(1.4)}
-.tilting .r-R .fx::after,.tilting .r-E .fx::after{opacity:.55}
-.tilting .tcg .fx{opacity:.32!important}
-.tilting .r-L .fx{opacity:.42!important}
-.tilting .r-M .fx{opacity:.42!important;filter:brightness(.55) contrast(1.8) saturate(1.5)}
-.tilting .r-R .fx::after,.tilting .r-E .fx::after,.tilting .r-L .fx::after,.tilting .r-M .fx::after{opacity:.75}
-/* reflet par rareté : seul le Mythique est arc-en-ciel ; les autres prennent la teinte de leur rareté */
-.tilting .tcg:not(.r-L):not(.r-M) .fx{background:radial-gradient(circle at var(--mx,50%) var(--my,30%),#ffffff8a,transparent 36%)!important;background-size:100% 100%!important;filter:none;mix-blend-mode:screen;opacity:.45!important}
-.tilting .r-R .fx{background:radial-gradient(circle at var(--mx,50%) var(--my,30%),#ffffff90,transparent 34%),repeating-linear-gradient(110deg,transparent 0%,#4d9bff55 6%,#bfe0ff66 9%,transparent 14%)!important;background-size:100% 100%,300% 300%!important;background-position:0 0,var(--mx,50%) var(--my,50%)!important;opacity:.5!important}
-.tilting .r-E .fx{background:radial-gradient(circle at var(--mx,50%) var(--my,30%),#ffffff90,transparent 34%),repeating-linear-gradient(110deg,transparent 0%,#b072ff66 6%,#e6d2ff77 9%,#ff8fe055 11%,transparent 15%)!important;background-size:100% 100%,300% 300%!important;background-position:0 0,var(--mx,50%) var(--my,50%)!important;opacity:.55!important}
-.tilting .r-R .fx::after{opacity:.25}.tilting .r-E .fx::after{opacity:.3}
-/* relief + paillettes légères : lumière du côté du doigt, ombre à l'opposé, grain scintillant fin */
-.tcg .fx::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;mix-blend-mode:overlay}
-.tilting .tcg .fx::before{opacity:1;
- background:
-  radial-gradient(circle at 30% 40%,#fff 0 .6px,transparent 1.1px) calc(var(--mx,50%)*.4) calc(var(--my,50%)*.4)/13px 17px,
-  radial-gradient(circle at 70% 20%,#fff 0 .7px,transparent 1.2px) calc(var(--mx,50%)*-.5) calc(var(--my,50%)*-.5)/29px 23px,
-  radial-gradient(circle at 45% 75%,#fffbe8 0 .9px,transparent 1.5px) calc(var(--mx,50%)*.8) calc(var(--my,50%)*.8)/41px 37px,
-  radial-gradient(farthest-corner at var(--mx,50%) var(--my,50%),#ffffff70,transparent 45%),
-  radial-gradient(farthest-corner at calc(100% - var(--mx,50%)) calc(100% - var(--my,50%)),#00000080,transparent 55%)}
-.tilting .tcg:not(.r-L):not(.r-M):not(.r-E) .fx::before{opacity:.7}
 /* dos de carte (esprit Kyara : fond à motif fin, filet doré à coins en losange, grand médaillon, nom + sous-titre) — identité Casting : pellicule et monogramme C */
 .cb{background:radial-gradient(80% 55% at 50% 42%,color-mix(in srgb,var(--t) 30%,#120e16),#0b0910 80%),repeating-linear-gradient(45deg,#ffffff07 0 1cqi,transparent 1cqi 3cqi),repeating-linear-gradient(-45deg,#ffffff07 0 1cqi,transparent 1cqi 3cqi);background-blend-mode:normal}
 .cb .fr{position:absolute;inset:7cqi;border:.6cqi solid #c9a24acc;border-radius:3cqi;pointer-events:none}
@@ -1005,6 +962,52 @@ html.mo .gbn{animation:none}
 .cb .med b{font:800 26cqi/1 'Bricolage Grotesque',Georgia,serif;color:#3a2506;text-shadow:0 .5cqi 0 #fff5,0 -.4cqi 0 #0004}
 .cb .wm{bottom:19cqi;font-size:7.6cqi;color:#e8c46a;text-shadow:0 .4cqi 1.2cqi #000}
 .cb .ws{position:absolute;left:0;right:0;bottom:13.5cqi;text-align:center;font:700 3.4cqi 'JetBrains Mono',monospace;letter-spacing:.3em;text-indent:.3em;color:#c9a24a99}
+
+/* ===== effets des cartes, d'après le code Kyara (textures maison dans fx/) =====
+   C, U : seulement le reflet de lumière quand on incline.
+   R : + un éclat bleu qui passe en continu.
+   É, L, M (« foil ») : éclat irisé continu + holo texturé à l'inclinaison (É arc-en-ciel, L or pailleté, M arc-en-ciel pailleté + rayures). */
+.r-R .fx{background:linear-gradient(115deg,transparent 40%,#aad2ff29 50%,transparent 60%) 0 0/300% 300%;animation:kshine 5s ease-in-out infinite alternate}
+.r-E .fx,.r-L .fx,.r-M .fx,.foil .fx{background:linear-gradient(115deg,transparent 35%,#ffffff33 46%,#ff78dc29 50%,#78dcff29 54%,transparent 65%) 0 0/300% 300%;animation:kshine 3.6s ease-in-out infinite alternate}
+@keyframes kshine{from{background-position:100% 0}to{background-position:0 100%}}
+.tcg .hl{position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:4;opacity:0;mix-blend-mode:color-dodge;
+ background-image:url(fx/foil.webp),repeating-linear-gradient(110deg,#ff3d6e 0%,#ffcf3d 7%,#3dffa0 14%,#3dc8ff 21%,#a65bff 28%,#ff3d6e 35%);
+ background-size:256px 256px,400% 400%;background-position:calc(var(--mx,50%)*.3) calc(var(--my,50%)*.3),var(--mx,50%) var(--my,50%);
+ background-blend-mode:multiply;filter:brightness(.8) contrast(1.7) saturate(1.3);transition:opacity .3s}
+.r-L .hl{background-image:url(fx/glitter.webp),url(fx/foil.webp),repeating-linear-gradient(115deg,#2a1c02 0%,#b8860b 6%,#ffe08a 10%,#fff6d6 12%,#d9a521 16%,#2a1c02 24%);
+ background-size:160px 160px,256px 256px,400% 400%;background-position:calc(var(--mx,50%)*-.4) calc(var(--my,50%)*-.4),calc(var(--mx,50%)*.3) calc(var(--my,50%)*.3),var(--mx,50%) var(--my,50%);
+ background-blend-mode:screen,multiply;filter:brightness(.88) contrast(1.5) saturate(1.2)}
+.r-M .hl{background-image:url(fx/glitter.webp),url(fx/foil.webp),repeating-linear-gradient(125deg,#ff3d3d 0%,#fc3 4%,#54f434 8%,#29edff 12%,#775cff 16%,#ff47e0 20%,#ff3d3d 24%);
+ background-size:180px 180px,256px 256px,500% 500%;background-position:calc(var(--mx,50%)*-.5) calc(var(--my,50%)*-.5),calc(var(--mx,50%)*.3) calc(var(--my,50%)*.3),var(--mx,50%) var(--my,50%);
+ background-blend-mode:screen,multiply;filter:brightness(.8) contrast(2) saturate(1.6)}
+.r-L .hl::after{content:"";position:absolute;inset:0;border-radius:inherit;mix-blend-mode:overlay;background:linear-gradient(115deg,#ffd76a66,#b8860b44 50%,#ffe9a066)}
+.r-M .hl::after{content:"";position:absolute;inset:0;border-radius:inherit;mix-blend-mode:overlay;background:repeating-linear-gradient(55deg,transparent 0%,#ffffff59 3%,transparent 6% 14%) 0 0/300% 300%;background-position:calc(100% - var(--mx,50%)) calc(100% - var(--my,50%))}
+.tcg .gl{position:absolute;inset:0;border-radius:inherit;pointer-events:none;z-index:5;opacity:0;mix-blend-mode:overlay;background:radial-gradient(farthest-corner circle at var(--mx,50%) var(--my,50%),#ffffffbf 0%,#ffffff2e 28%,#00000059 90%);transition:opacity .3s}
+.tilting .tcg .hl{opacity:.75}
+.tilting .r-L .hl,.tilting .r-M .hl{opacity:.9}
+.tilting .tcg .gl{opacity:.6}
+html.mo .tcg .fx{animation:none}
+/* holo et reflet ne sont dessinés que pendant l'inclinaison (sinon trop lourd quand beaucoup de cartes sont à l'écran) */
+.tcg .hl,.tcg .gl{visibility:hidden;transition:opacity .3s,visibility 0s .3s}
+.tilting .tcg .hl,.tilting .tcg .gl{visibility:visible;transition:opacity .3s,visibility 0s}
+.cw .tcg{transition:transform .25s ease-out}
+.cw.htilt .tcg{transform:perspective(700px) rotateX(var(--hrx,0deg)) rotateY(var(--hry,0deg));transition:transform .08s linear}
+.cw.htilt .tcg .hl{opacity:.75}.cw.htilt .r-L .hl,.cw.htilt .r-M .hl{opacity:.9}.cw.htilt .tcg .gl{opacity:1}
+
+/* dos de la carte dans la fiche (comme Kyara : rareté + numéro, nom, série, 4 cases, tampon) */
+.kb{position:absolute;inset:0;border-radius:6cqi;overflow:hidden;display:flex;flex-direction:column;gap:2.6cqi;padding:7cqi 6cqi;text-align:left;color:#f4f1ec;
+ background:radial-gradient(120% 70% at 50% 0%,color-mix(in srgb,var(--rc) 22%,transparent),transparent 60%),repeating-linear-gradient(45deg,#ffffff06 0 6px,transparent 6px 12px),#14131a;
+ border:2px solid color-mix(in srgb,var(--rc) 60%,transparent)}
+.kb-top{display:flex;justify-content:space-between;font-size:4.2cqi;color:#a9a4b3}
+.kb-r{color:var(--rc);font-weight:800;letter-spacing:.04em}
+.kb h2{margin:1.4cqi 0 0;font:800 8cqi/1.15 'Bricolage Grotesque',Inter,sans-serif;text-wrap:balance}
+.kb-nat{margin:0;font-size:4.8cqi;color:#d8d4de}
+.kb-ser{margin:0;font-size:4.4cqi;color:#a9a4b3}
+.kb dl{display:grid;grid-template-columns:1fr 1fr;gap:2.6cqi;margin:2.6cqi 0 0}
+.kb dl div{border:1px solid #ffffff1a;background:#ffffff0a;border-radius:3.4cqi;padding:2.6cqi 3.4cqi}
+.kb dt{font-size:3.6cqi;letter-spacing:.06em;text-transform:uppercase;color:#a9a4b3}
+.kb dd{margin:.6cqi 0 0;font-size:4.8cqi;font-weight:700}
+.kb-seal{position:absolute;right:5cqi;bottom:4.4cqi;width:12cqi;height:12cqi;display:grid;place-items:center;border-radius:3.4cqi;background:#c8102e;color:#fff;opacity:.85;font:900 6.4cqi 'Bricolage Grotesque',Inter,sans-serif;transform:rotate(-6deg)}
 </style></head><body>
 <div id="app"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
@@ -1092,14 +1095,20 @@ function wcut(el){if(!el.dataset.wh||el.dataset.cut)return;el.dataset.cut=1;
 function preload(cs){const us=[...new Set(cs.filter(c=>c.i).map(imgUrl))];
  return Promise.race([Promise.all(us.map(u=>new Promise(r=>{const im=new Image();im.onload=im.onerror=()=>r();im.src=u}))),new Promise(r=>setTimeout(r,5000))])}
 /* ---------- carte ---------- */
+const FOIL=r=>r=='E'||r=='L'||r=='M';
+document.addEventListener('pointermove',e=>{if(e.pointerType!='mouse'||MO())return;const w=e.target.closest&&e.target.closest('.cw');
+ if(window._hw&&window._hw!==w){const o=window._hw;o.classList.remove('tilting','htilt');o.style.removeProperty('--hrx');o.style.removeProperty('--hry');window._hw=null}
+ if(!w||w.closest('#tw')||!w.querySelector('.tcg:not(.unk) .gl'))return;
+ const r=w.getBoundingClientRect(),a=(e.clientX-r.left)/r.width,o=(e.clientY-r.top)/r.height;w.classList.add('tilting','htilt');window._hw=w;
+ w.style.setProperty('--hry',((a-.5)*24)+'deg');w.style.setProperty('--hrx',((.5-o)*18)+'deg');w.style.setProperty('--mx',a*100+'%');w.style.setProperty('--my',o*100+'%')},{passive:true});
 function card(c,o={}){
- const q=o.q||0,unk=o.unk,fx=c.r=='M'||c.r=='L'||c.r=='R'||c.r=='E'||o.foil;
+ const q=o.q||0,unk=o.unk,fx=c.r=='R'||FOIL(c.r)||o.foil;
  return `<div class="cw ${o.foil?'foil':''}" data-n="${c.n}" ${o.st||''}><div class="tcg r-${c.r} ${unk?'unk':''}">
  <div class="im">${pic(c)}${unk?'<span class="qm">?</span>':''}</div>
  <div class="nm"${c.name.length>12?` style="font-size:${Math.max(4,118/c.name.length).toFixed(2)}cqi"`:''}>${esc(c.name)}</div><span class="rp">${c.r}</span>
  ${unk?'':`<div class="sw">${esc(c.show)}</div>`}
  <div class="bt">${unk?`<span class="no">#${pad(c.n)}</span><span>${RN[c.r]}</span>`:`<span>POW ${c.pow}</span><span>AURA ${c.aura}</span>`}</div>
- ${fx?'<i class="fx"></i>':''}</div>${q>1?`<span class="q">×${q}</span>`:''}${o.lock?'<span class="lk">🔒</span>':''}</div>`}
+ ${fx?'<i class="fx"></i>':''}${FOIL(c.r)&&!unk?'<i class="hl"></i>':''}${unk?'':'<i class="gl"></i>'}</div>${q>1?`<span class="q">×${q}</span>`:''}${o.lock?'<span class="lk">🔒</span>':''}</div>`}
 function cardBack(t){return `<div class="cw"><div class="cb" style="--t:${t}"><i class="co a"></i><i class="co b"></i><i class="co c"></i><i class="co d"></i><i class="fr"></i><i class="pf l"></i><i class="pf r"></i><i class="seal"></i><div class="med"><b>C</b></div><div class="wm">CASTING</div><div class="ws">SÉRIES · PERSOS · CARTES</div></div></div>`}
 async function init(){
  const {data}=await sb.from('config').select('k,v');window.CFG={};(data||[]).forEach(x=>CFG[x.k]=x.v);
@@ -1326,7 +1335,7 @@ function packScreen(kind,genre,q0){
   $('#pf').classList.add('go');untilt();SFX.tear();pw.classList.add('go');navigator.vibrate&&navigator.vibrate(30);
   if(!env){const sh=$('#shd');sh.innerHTML=Array.from({length:46},()=>{const a=-Math.PI*(.05+.9*Math.random()),v=140+Math.random()*380;return `<i style="left:${Math.random()*100}%;--dx:${Math.cos(a)*v|0}px;--dy:${Math.sin(a)*v*.7|0}px;--t:${(.8+Math.random()*.7).toFixed(2)}s;--s:${3+Math.random()*5|0}px;--c:${Math.random()<.5?'#fff':c1}"></i>`}).join('')}
   ['#qr','.pkb','#chg','#hn0','.gar','#gl0'].forEach(q=>{const e=$(q);if(e)e.style.visibility='hidden'});
-  const t0=Date.now(),req=rpc('open_boosters',{kind,genre:env?null:genre,qty:env||sp?1:qty}).then(async r=>{ST=r.state;const cs=r.boosters.flatMap(b=>b.cards.map(x=>CARDS[x.n-1]));await preload(cs);return r});
+  const t0=Date.now(),req=rpc('open_boosters',{kind,genre:env?null:genre,qty:env||sp?1:qty}).then(async r=>{ST=r.state;const cs=r.boosters.flatMap(b=>b.cards.map(x=>CARDS[x.n-1]));preload(cs);return r});
   req.then(r=>setTimeout(()=>{
    const bc=r.boosters.flatMap(b=>b.cards.map(x=>CARDS[x.n-1])).reduce((a,c)=>rankOf(c)>rankOf(a)?c:a),bk=rankOf(bc),b0=r.boosters[0];
    const gc=bk>=2?rcol(bc.r):'#ffffff';pw.style.setProperty('--bc',gc);pw.style.setProperty('--gc',gc);if(bk>=2)d.style.setProperty('--pc1',gc);pw.classList.add('bm');
@@ -1335,12 +1344,12 @@ function packScreen(kind,genre,q0){
    setTimeout(()=>{document.removeEventListener('keydown',kh);reveal(d,r,kind,sp?sp.id:g,env||sp?1:qty)},1100)},Math.max(0,700-(Date.now()-t0))),
    e=>{toast(e.message);close()})};
  let hold=0;const unhold=()=>{clearTimeout(hold);hold=0;pw.classList.remove('charge')};
- pw.onpointerdown=e=>{if(done||auto0)return;sx=e.clientX;sy=e.clientY;moved=0;pw.setPointerCapture(e.pointerId);
+ pw.onpointerdown=e=>{if(done||auto0)return;ac();sx=e.clientX;sy=e.clientY;moved=0;pw.setPointerCapture(e.pointerId);
   if(mode=='seal'){untilt();pw.classList.add('charge');SFX.drag();hold=setTimeout(()=>{unhold();sx=null;go()},620);return}
   if(mode!='tear'){tilt(e);return}const r=pw.getBoundingClientRect();tearing=!env&&(e.clientY-r.top)/r.height<.34;if(tearing){untilt();startCut()}else tilt(e)};
  pw.onpointermove=e=>{if(done||auto0)return;if(sx==null){if(e.pointerType=='mouse')tilt(e);return}moved=Math.max(moved,Math.abs(e.clientX-sx)+Math.abs(e.clientY-sy));
   if(mode=='seal')return;
-  if(tearing){const v=(e.clientX-sx)/(W*.85);if(v>p+.01)SFX.drag();setP(v)}else{tilt(e);if((env||mode=='lid'||mode=='flap')&&sy-e.clientY>40){sx=null;go()}}};
+  if(tearing){const v=(e.clientX-sx)/(W*.85);if(v>p+.01)SFX.drag();setP(v);if(p>=.82){tearing=false;sx=null;pw.classList.remove('drag');go()}}else{tilt(e);if((env||mode=='lid'||mode=='flap')&&sy-e.clientY>40){sx=null;go()}}};
  pw.onpointerup=e=>{if(mode=='seal'){if(hold)unhold();sx=null;return}if(done||auto0||sx==null)return;sx=null;
   if(tearing){tearing=false;if(p>=.55){pw.classList.remove('drag');go()}else if(moved<10){pw.classList.remove('cut');auto()}else snap()}
   else{if(moved<10)auto();if(e.pointerType!='mouse')untilt()}};
@@ -1538,9 +1547,12 @@ function albums(base){
 function bindCards(){$$('.cw[data-n]').forEach(e=>{if(e.closest('.fan')||e.closest('.hfan')||e.closest('.stage')||e.closest('.lpg'))return;e.onclick=()=>detail(+e.dataset.n)})}
 /* ---------- fiche d'une carte : inclinable + dos ---------- */
 function cardOdds(c){const nr=CARDS.filter(x=>x.r==c.r).length;let pr=1-Math.pow(1-ST.odds[c.r]/10000,5);if(c.r=='M')pr=Math.max(pr,1/ST.pity_max);const b=pr/nr;return b>0?Math.round(1/b):0}
-function backFace(c,q){return `<div class="cw"><div class="bkd r-${c.r}"><div class="bt1">CASTING</div><div class="br" style="color:${RC[c.r]}">${RN[c.r]}</div><div class="bn">#${pad(c.n)} / ${CARDS.length}</div>
- ${q?`<div class="bl">${esc(c.show)}</div><div class="bl2">${esc(c.act||'')}</div>`:`<div class="bl">Série ${esc(c.show)}</div><div class="bl2">Perso à découvrir</div>`}
- <div class="bx"><div><b>${q}</b><small>chez toi</small></div><div><b id="own">–</b><small>joueurs l'ont</small></div><div><b>${REC[c.r]}</b><small>🍿 recyclée</small></div></div></div></div>`}
+function backFace(c,q){return `<div class="cw"><div class="kb" style="--rc:${RC[c.r]}">
+ <div class="kb-top"><span class="kb-r">${RN[c.r]}</span><span class="mono">#${pad(c.n)}/${CARDS.length}</span></div>
+ <h2>${esc(c.name)}</h2>${c.act?`<p class="kb-nat">Joué par ${esc(c.act)}</p>`:''}<p class="kb-ser">${esc(c.show)}</p>
+ <dl><div><dt>POW</dt><dd class="mono">${c.pow}</dd></div><div><dt>AURA</dt><dd class="mono">${c.aura}</dd></div>
+ <div><dt>Joueurs qui l'ont</dt><dd class="mono" id="own">–</dd></div><div><dt>Tu l'as depuis</dt><dd id="since">–</dd></div>${q>1?`<div><dt>Exemplaires</dt><dd class="mono">${q}</dd></div>`:''}</dl>
+ <span class="kb-seal" aria-hidden="true">C</span></div></div>`}
 function detail(n){
  const c=CARDS[n-1],q=ST.inv[n]||0;if(!q)return lockedPage(n);
  const d=document.createElement('div');d.className='shade dz';d.style.alignItems='center';d.style.zIndex=50;d.style.setProperty('--rc',RC[c.r]);d.onclick=e=>{if(e.target==d)d.remove()};
@@ -1556,7 +1568,8 @@ function detail(n){
  tw.onpointermove=e=>{if(e.pointerType=='mouse'||e.buttons||mv>=0){mv=Math.max(mv,Math.abs(e.clientX-sx)+Math.abs(e.clientY-sy));fl.classList.add('live');cd.classList.add('tilting');aim(e)}};
  const end=()=>{fl.classList.remove('live');cd.classList.remove('tilting');rx=0;ry=0;apply()};
  tw.onpointerup=()=>{if(mv<8)flip=flip?0:180;end()};tw.onpointerleave=end;tw.onpointercancel=end;
- rpc('card_owners',{card:n}).then(v=>{const e=$('#own');if(e)e.textContent=v}).catch(()=>{});
+ rpc('card_owners',{card:n}).then(v=>{const e=$('#own');if(e&&Number.isFinite(+v))e.textContent=(+v).toLocaleString('fr')}).catch(()=>{});
+ rpc('card_since',{card:n}).then(v=>{const e=$('#since');if(e&&v&&!isNaN(new Date(v)))e.textContent=new Date(v).toLocaleDateString('fr',{day:'numeric',month:'long',year:'numeric'})}).catch(()=>{});
  if($('#rc1'))$('#rc1').onclick=async()=>{try{const x=await rpc('recycle',{n_card:n,k:q-1});ST=x.state;d.remove();toast('+'+x.gain+' 🍿');render()}catch(e){toast(e.message)}}}
 /* ---------- fiche verrouillée (carte pas encore obtenue) ---------- */
 function rarExp(r,minE){const o=ST.odds,sl=minE?SLOTS.daily:SLOTS.norm;let e=0;for(const f of sl){const al=ORD.slice(ORD.indexOf(f));if(!al.includes(r))continue;e+=o[r]/[...al].reduce((a,k)=>a+o[k],0)}return e}
