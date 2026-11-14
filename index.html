@@ -1479,6 +1479,21 @@ html.mo .kglow.on{animation:none}
 .qtip{position:absolute;right:-6px;top:calc(100% + 10px);width:250px;z-index:30;display:none;text-align:left;background:#15141a;border:.8px solid #2e2b36;border-radius:12px;padding:10px 12px;box-shadow:0 18px 40px #0009;color:#c9c5ce;font:500 13px/1.5 'Zen Kaku Gothic New',sans-serif;cursor:default}
 .qtip b{display:block;color:#edeae4;margin-bottom:2px}.qtip code{font:12px 'JetBrains Mono',monospace;color:#ff6a4d}
 .qhelp:hover .qtip,.qhelp:focus .qtip{display:block}
+
+/* ---------- recyclage par rareté (mesuré sur Kyara : .rec-box) ---------- */
+#recp:empty{display:none}
+#recp{margin:-4px 0 14px}
+.recbox{background:var(--panel);border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;gap:10px;max-width:640px;padding:14px}
+.rect{color:#c9c5ce;font-size:13px}
+.recr{display:flex;flex-wrap:wrap;gap:6px}
+.recr button{--c:#fff;display:grid;gap:2px;text-align:left;padding:7px 12px;border-radius:12px;border:1px solid var(--line);background:#0f0e13;color:var(--mut);cursor:pointer;font-family:inherit;transition:border-color .15s,background .15s}
+.recr button b{font:700 13px 'Zen Kaku Gothic New',sans-serif;color:var(--fg);opacity:.6}.recr button small{font-size:11px}
+.recr button.on{border-color:var(--c);background:color-mix(in srgb,var(--c) 14%,#0f0e13);color:var(--c)}.recr button.on b{opacity:1;color:var(--c)}
+.recr button:disabled{opacity:.35;cursor:default}
+.recw{margin:0;padding:8px 10px;border-radius:10px;border:1px solid #ff4d2e;background:color-mix(in srgb,#ff4d2e 12%,#0f0e13);color:var(--fg);font-size:13px;line-height:1.45}
+.reca{display:flex;flex-wrap:wrap;gap:8px}.reca .btn{width:auto;max-width:none;padding:10px 16px;font-size:13px;white-space:nowrap}
+.recdone{align-items:center;text-align:center}.recdone b{font-size:22px;color:#3ddc84}.recdone span{color:#c9c5ce;font-size:14px}
+.tbb.rcy.on{box-shadow:0 0 0 3px #3ddc8455}
 </style></head><body>
 <div id="app"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
@@ -1707,6 +1722,25 @@ function strip(){const q=QS(),gi=goldIn();
  <div class="sc ${gi?'':'hot'}"><b style="color:var(--yel)">${gi||'✦'}</b><small>${gi?'avant le booster doré':'ton prochain booster est doré'}</small></div>
  <div class="sc"><b style="color:${RC.M}">${Math.max(0,ST.pity_max-ST.pity)}</b><small>avant Mythique sûre</small></div></div>`}
 function recVal(){return CARDS.reduce((a,c)=>a+Math.max(0,(ST.inv[c.n]||0)-1)*REC[c.r],0)}
+/* recyclage comme Kyara : on choisit les raretés (Mythique décochée d'office), alerte avant de recycler des Légendaires ou Mythiques */
+let RSEL=['C','U','R','E','L'];
+function recPanel(){const el=$('#recp');if(!el)return;if(el.dataset.on){el.innerHTML='';delete el.dataset.on;$('#rcb')?.classList.remove('on');return}
+ el.dataset.on='1';$('#rcb')?.classList.add('on');let conf=false;
+ const st=()=>{const o={};for(const r of ORD)o[r]={count:0,value:0};for(const c of CARDS){const q=(ST.inv[c.n]||0)-1;if(q>0){o[c.r].count+=q;o[c.r].value+=q*REC[c.r]}}return o};
+ const draw=()=>{const o=st(),sel=RSEL.filter(r=>o[r].count>0),n=sel.reduce((a,r)=>a+o[r].count,0),v=sel.reduce((a,r)=>a+o[r].value,0),m=RSEL.includes('M')?o.M.count:0,l=RSEL.includes('L')?o.L.count:0,warn=m+l>0;
+  el.innerHTML=`<div class="recbox"><span class="rect">Quelles raretés recycler ? Tu gardes toujours 1 exemplaire de chaque carte.</span>
+   <div class="recr" role="group">${['C','U','R','E','L','M'].map(r=>`<button type="button" class="${RSEL.includes(r)?'on':''}" data-rr="${r}" style="--c:${RC[r]}" ${o[r].count?'':'disabled'} aria-pressed="${RSEL.includes(r)}"><b>${RN[r]}</b><small class="mono">${o[r].count.toLocaleString('fr')} · +${o[r].value.toLocaleString('fr')} 🍿</small></button>`).join('')}</div>
+   ${warn?`<p class="recw" role="alert">⚠ Attention : tu vas recycler ${[m?`${m} Mythique${m>1?'s':''}`:'',l?`${l} Légendaire${l>1?'s':''}`:''].filter(Boolean).join(' et ')} en double. Elles seront perdues contre des Popcorns (tu gardes toujours 1 exemplaire de chaque). Pour les garder, clique sur Mythique ou Légendaire pour les décocher.</p>`:''}
+   <div class="reca"><button class="btn g sm" type="button" data-rx>Annuler</button><button class="btn a sm" type="button" data-rgo ${n?'':'disabled'}>${warn&&conf?'Oui, recycler aussi ces cartes':`Recycler ${n.toLocaleString('fr')} doublon${n>1?'s':''} · +${v.toLocaleString('fr')} 🍿`}</button></div></div>`;
+  el.querySelectorAll('[data-rr]').forEach(b=>b.onclick=()=>{const r=b.dataset.rr;conf=false;RSEL=RSEL.includes(r)?RSEL.filter(x=>x!=r):[...RSEL,r];draw()});
+  el.querySelector('[data-rx]').onclick=()=>recPanel();
+  el.querySelector('[data-rgo]').onclick=async e=>{if(warn&&!conf){conf=true;draw();return}e.target.disabled=true;e.target.textContent='Recyclage…';
+   try{const x=await rpc('recycle_rarities',{rars:sel});ST=x.state;
+    el.innerHTML=`<div class="recbox recdone"><b class="mono">+${(x.gain||0).toLocaleString('fr')} 🍿</b><span>${(x.n||n).toLocaleString('fr')} doublon${(x.n||n)>1?'s':''} recyclé${(x.n||n)>1?'s':''}. Popcorns récupérés.</span><button class="btn g sm" type="button" data-rok>Fermer</button></div>`;
+    SFX.rar&&SFX.rar('R');el.querySelector('[data-rok]').onclick=()=>{delete el.dataset.on;coll()};
+    const rb=$('#rcb');if(rb){rb.classList.remove('on');const v2=recVal();rb.innerHTML='♻'+(v2?`<span class="nb3">${v2>999?'999+':'+'+v2}</span>`:'')}if(typeof list=='function')list()}
+   catch(err){toast(/recycle_rarities|function/i.test(err.message)?'Lance 15_recyclage.sql dans Supabase pour recycler par rareté':err.message);draw()}}};
+ draw()}
 async function recycleAll(){try{const x=await rpc('recycle');ST=x.state;toast('+'+x.gain+' 🍿');render()}catch(e){toast(e.message)}}
 /* ---------- paquets : pochette (genres), enveloppe (pack du jour) ---------- */
 function packArt(kind,g){const c=gcol(g),sym=g?GICO[g]||'🎬':'🍿',nm=g?fr(g):'Mix';
@@ -2078,11 +2112,12 @@ function coll(){
    <button class="tbb" id="flt">Filtres${nf?`<span class="nb2">${nf}</span>`:''}</button>
    <button class="tbb rcy" id="rcb" title="Recycler les doublons" aria-label="Recycler les doublons">♻${rv?`<span class="nb3">${rv>999?'999+':'+'+rv}</span>`:''}</button>${seg('tb')}
    <div class="fpop" id="fpop" hidden></div></div>
+  <div id="recp"></div>
   <div class="ccount mono" id="cnt"></div><div id="gr"></div><div class="gm" id="gm"></div>`;
  $('#q').oninput=e=>{F.q=e.target.value;F.n=60;list()};
  $$('[data-r]').forEach(c=>c.onclick=()=>{F.r=c.dataset.r;F.n=60;coll()});
  $$('[data-m]').forEach(b=>b.onclick=()=>{F.mode=b.dataset.m;coll()});
- $('#rcb').onclick=()=>{if(!recVal())return toast('Aucun doublon à recycler');recycleAll()};
+ $('#rcb').onclick=()=>{if(!recVal())return toast('Aucun doublon à recycler');recPanel()};
  $('#flt').onclick=e=>{e.stopPropagation();filterPop()};
  list()}
 function filterPop(){const P=$('#fpop');if(!P.hidden){P.hidden=true;const s=$('.fsh');if(s)s.remove();return}
