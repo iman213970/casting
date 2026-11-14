@@ -956,6 +956,11 @@ html.mo .gbn{animation:none}
 .who.t3 .whalo{filter:blur(44px);opacity:.55;background:conic-gradient(#ff4d2e,#f5c518,#3fbf7f,#4dd6ff,#b072ff,#ff4d9e,#ff4d2e);animation:wturn 18s linear infinite;-webkit-mask:radial-gradient(closest-side,#000 30%,#0000 72%);mask:radial-gradient(closest-side,#000 30%,#0000 72%)}
 @keyframes wturn{to{transform:rotate(1turn)}}
 .who .sim.mono{display:grid;place-items:center;font:800 clamp(24px,3.4vw,38px)/1 'Bricolage Grotesque',Inter,sans-serif;font-style:normal;color:var(--rc);background:radial-gradient(circle at 50% 30%,color-mix(in srgb,var(--rc) 28%,#16141c),#0b0a10)}
+
+/* reflet holographique à l'inclinaison, par rareté (principe Kyara : bandes irisées qui suivent le doigt, or pour L, arc-en-ciel fort pour M) */
+.tilting .tcg .fx{mix-blend-mode:color-dodge;background:radial-gradient(circle at var(--mx,50%) var(--my,30%),#ffffffb0,transparent 34%),repeating-linear-gradient(110deg,#ff3d6e 0%,#ffcf3d 7%,#3dffa0 14%,#3dc8ff 21%,#a65bff 28%,#ff3d6e 35%)!important;background-size:100% 100%,400% 400%!important;background-position:0 0,var(--mx,50%) var(--my,50%)!important;filter:brightness(.6) contrast(1.6) saturate(1.3);opacity:.55!important}
+.tilting .r-L .fx{background:radial-gradient(circle at var(--mx,50%) var(--my,30%),#fff6d6c0,transparent 34%),radial-gradient(circle at 20% 30%,#fff 0,transparent 1.2%),radial-gradient(circle at 75% 65%,#fff 0,transparent 1%),repeating-linear-gradient(115deg,#2a1c02 0%,#b8860b 6%,#ffe08a 10%,#fff6d6 12%,#d9a521 16%,#2a1c02 24%)!important;background-size:100% 100%,60px 60px,48px 48px,400% 400%!important;background-position:0 0,calc(var(--mx,50%)*-.4) calc(var(--my,50%)*-.4),calc(var(--mx,50%)*-.4) calc(var(--my,50%)*-.4),var(--mx,50%) var(--my,50%)!important;filter:brightness(.75) contrast(1.5) saturate(1.2);opacity:.8!important}
+.tilting .r-M .fx{background:radial-gradient(circle at var(--mx,50%) var(--my,30%),#ffffffc0,transparent 30%),repeating-linear-gradient(55deg,transparent 0%,#ffffff59 3%,transparent 6%,transparent 14%),repeating-linear-gradient(125deg,#ff3d3d 0%,#ffcc33 4%,#54f434 8%,#29edff 12%,#775cff 16%,#ff47e0 20%,#ff3d3d 24%)!important;background-size:100% 100%,300% 300%,500% 500%!important;background-position:0 0,calc(100% - var(--mx,50%)) calc(100% - var(--my,50%)),var(--mx,50%) var(--my,50%)!important;filter:brightness(.7) contrast(1.8) saturate(1.6);opacity:.85!important}
 </style></head><body>
 <div id="app"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
@@ -989,28 +994,36 @@ const lsget=k=>{try{return localStorage.getItem(k)}catch(e){return null}},lsset=
 const MO=()=>lsget('mo')=='1';
 /* ---------- sons (synthétisés, aucun fichier) ---------- */
 const SND=()=>lsget('snd')!='0';let AC=null,LDR=0;
-function ac(){if(!SND())return null;if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){return null}}if(AC.state=='suspended')AC.resume();return AC}
-function noise(d,f0,f1,vol,t){const a=ac();if(!a)return;const t0=a.currentTime+(t||0),n=Math.max(1,a.sampleRate*d|0),b=a.createBuffer(1,n,a.sampleRate),x=b.getChannelData(0);for(let i=0;i<n;i++)x[i]=(Math.random()*2-1)*Math.pow(1-i/n,1.5);
- const s=a.createBufferSource();s.buffer=b;const f=a.createBiquadFilter();f.type='bandpass';f.Q.value=.9;f.frequency.setValueAtTime(f0,t0);f.frequency.exponentialRampToValueAtTime(f1,t0+d);const g=a.createGain();g.gain.value=vol;s.connect(f).connect(g).connect(a.destination);s.start(t0)}
-function tone(fr,t,d,vol,type,fr2){const a=ac();if(!a)return;const o=a.createOscillator(),g=a.createGain(),t0=a.currentTime+t;o.type=type||'sine';o.frequency.setValueAtTime(fr,t0);if(fr2)o.frequency.exponentialRampToValueAtTime(fr2,t0+d);
- g.gain.setValueAtTime(0,t0);g.gain.linearRampToValueAtTime(vol,t0+.012);g.gain.exponentialRampToValueAtTime(.0001,t0+d);o.connect(g).connect(a.destination);o.start(t0);o.stop(t0+d+.05)}
-const NOTES=[523.3,659.3,784,1046.5,1318.5,1568];
+let OUT=null,NB=null;
+function ac(){if(!SND())return null;if(!AC){try{AC=new (window.AudioContext||window.webkitAudioContext)()}catch(e){return null}
+  OUT=AC.createGain();OUT.gain.value=.5;OUT.connect(AC.createDynamicsCompressor()).connect(AC.destination);
+  NB=AC.createBuffer(1,AC.sampleRate,AC.sampleRate);const x=NB.getChannelData(0);for(let k=0;k<x.length;k++)x[k]=Math.random()*2-1}
+ if(AC.state=='suspended')AC.resume();return AC}
+/* recettes de sons mesurées sur Kyara : enveloppe 8 ms puis décroissance, bruit filtré qui glisse */
+const aenv=(g,t0,att,vol,d)=>{g.gain.setValueAtTime(1e-4,t0);g.gain.exponentialRampToValueAtTime(vol,t0+att);g.gain.exponentialRampToValueAtTime(1e-4,t0+att+d)};
+function tone(fr,t,d,vol,type,fr2){const a=ac();if(!a)return;const t0=a.currentTime+t,o=a.createOscillator(),g=a.createGain();o.type=type||'sine';o.frequency.setValueAtTime(fr,t0);if(fr2)o.frequency.exponentialRampToValueAtTime(fr2,t0+d);
+ aenv(g,t0,.008,vol,d);o.connect(g).connect(OUT);o.start(t0);o.stop(t0+d+.05)}
+function noise(t,d,vol,f0,f1,q,type){const a=ac();if(!a)return;const t0=a.currentTime+t,s=a.createBufferSource();s.buffer=NB;s.loop=true;
+ const f=a.createBiquadFilter();f.type=type||'bandpass';f.Q.value=q??1.2;f.frequency.setValueAtTime(f0,t0);f.frequency.exponentialRampToValueAtTime(f1,t0+d);
+ const g=a.createGain();aenv(g,t0,Math.min(.03,d/4),vol,d);s.connect(f).connect(g).connect(OUT);s.start(t0,Math.random()*.5);s.stop(t0+d+.05)}
+const bell=(fr,t,vol=.12,d=1.4)=>{tone(fr,t,d,vol);tone(fr*2.01,t,d*.6,vol*.35);tone(fr*3.98,t,d*.3,vol*.15)};
 const SFX={
- drag:()=>{const t=Date.now();if(t-LDR<70)return;LDR=t;noise(.06,2600,1800,.07)},
- tear:()=>{noise(.32,3500,500,.55);noise(.18,1200,300,.3,.05)},
- whoosh:()=>noise(.4,300,2600,.22),
- flip:()=>noise(.09,5200,1400,.28),
- slide:()=>noise(.2,1800,400,.14),
- charge:(k,d)=>{tone(160,0,d,.12,'sawtooth',k>=5?900:600);tone(240,0,d,.06,'triangle',k>=5?1400:900)},
- rar:r=>{const k=ORD.indexOf(r);
-  if(k==0){tone(660,0,.12,.07,'triangle');return}
-  for(let j=0;j<=Math.min(k,5);j++)tone(NOTES[j],j*.07,.35+k*.05,.09+k*.012,k>=4?'triangle':'sine');
-  if(k>=3)for(let j=0;j<6+k*2;j++)tone(2000+Math.random()*2500,.25+j*.045,.18,.025,'sine');
-  if(k>=4){tone(110,0,.9,.22,'sine',55);noise(.6,800,120,.2)}
-  if(k==5){[0,4,7,12].forEach((st,j)=>tone(523.3*Math.pow(2,st/12),.55+j*.09,.9,.08,'triangle'))}},
- tick:r=>tone(NOTES[Math.min(5,ORD.indexOf(r))],0,.12,.06,'triangle'),
- rumble:d=>{tone(62,0,d+.3,.24,'sine',36);noise(d,500,90,.18)},
- riser:d=>{tone(180,0,d,.07,'sawtooth',900);tone(270,0,d,.04,'triangle',1350);noise(d,300,3200,.08)}};
+ drag:()=>{const t=Date.now();if(t-LDR<55)return;LDR=t;noise(0,.06,.08,2500+Math.random()*2500,4000,3)},
+ tear:()=>{noise(0,.35,.35,1200,5200,.8);noise(.05,.5,.15,6000,1500,2,'highpass');tone(90,0,.25,.25,'triangle',45)},
+ whoosh:(t=0)=>noise(t,.32,.18,400,2400,1.5),
+ flip:()=>noise(0,.12,.12,3000,1200,2),
+ slide:(k=0)=>noise(k*.05,.08,.07,2600,1400,2.2),
+ charge:(k,d)=>{tone(220,0,d,.1,'sawtooth',880);noise(0,d,.12,600,7000,1.2)},
+ rar:r=>{switch(r){
+  case 'C':tone(520,0,.18,.08,'triangle');break;
+  case 'U':tone(587,0,.25,.09,'triangle');tone(880,.06,.3,.07,'triangle');break;
+  case 'R':bell(784,0,.12,1.1);bell(1175,.08,.08,1);break;
+  case 'E':[659,830,988,1319].forEach((f,k)=>bell(f,k*.07,.1,1.2));noise(0,.8,.06,5000,9000,1,'highpass');break;
+  case 'L':tone(65,0,1.6,.3,'sine',50);[523,659,784,1047,1319,1568].forEach((f,k)=>bell(f,.05+k*.06,.11,2.2));noise(.1,1.6,.08,4000,10000,1,'highpass');break;
+  case 'M':tone(49,0,2.4,.35,'sine',41);[392,494,587,740,880,1175,1480,1760].forEach((f,k)=>bell(f,.04+k*.05,.1,2.8));[262,330,392].forEach(f=>tone(f,.1,2.6,.06,'sawtooth'));noise(0,2.2,.1,9000,3000,.7,'highpass');break}},
+ tick:()=>tone(1800,0,.04,.06,'square',900),
+ rumble:(d=.8)=>{tone(55,0,d,.28,'sawtooth',38);noise(0,d,.12,120,300,1,'lowpass')},
+ riser:(d=.9)=>{tone(220,0,d,.1,'sawtooth',880);noise(0,d,.12,600,7000,1.2)}};
 document.documentElement.classList.toggle('mo',MO());
 document.addEventListener('visibilitychange',()=>document.documentElement.classList.toggle('hid',document.hidden));
 /* ---------- photos auto-hébergées (img/N.webp), repli sur l'ancienne source ---------- */
@@ -1347,7 +1360,7 @@ function reveal(d,r,kind,g,qty){
    <div class="rv" id="in"></div><div class="pslots ${n>10?'sm':''}" id="ps">${cs.map((c,k)=>`<i class="${k?'':'cur'}"></i>`).join('')}</div><p class="mut" id="hn" style="margin:0">Touche la carte pour la retourner</p>
    <div class="rbtns">${cs.some(c=>rankOf(c)>=3)?'<button class="btn g" id="nxe">Passer à la prochaine Épique ou +</button>':''}<button class="btn g" id="ra">Tout révéler</button></div>${matchMedia('(hover:hover)').matches?'<p class="mut mono kbd">Espace : suivante · maintenir : avance rapide</p>':''}<button class="sndb" id="sdb">${SND()?'🔊':'🔇'}</button>`;
   $('#sdb').onclick=e=>{e.stopPropagation();lsset('snd',SND()?'0':'1');e.target.textContent=SND()?'🔊':'🔇'};
-  pxInit(d);const pss=$$('#ps i'),dks=$$('.dk');cs.forEach((c,k)=>setTimeout(()=>SFX.slide(),k*90));
+  pxInit(d);const pss=$$('#ps i'),dks=$$('.dk');cs.slice(0,8).forEach((c,k)=>SFX.slide(k));
   if((b.golden||b.god)&&!$('.gbn')){const gb=document.createElement('div');gb.className='gbn'+(b.god?' god':'');gb.textContent=b.god?'GOD PACK':'BOOSTER DORÉ';d.append(gb);setTimeout(()=>gb.classList.add('out'),2600);setTimeout(()=>gb.remove(),3200)}
   const bl=b.god?'GOD PACK · ':b.golden?'✦ Booster doré · ':'',ct=()=>{$('#ct').textContent=bl+(multi>1?`${multi} boosters · `:'')+`Carte ${Math.min(i+1,n)}/${n}`};ct();
   const setHal=()=>{const h=$('#hal');if(!h)return;h.style.setProperty('--hc',bestK<0?'#ffffff':rcol(ORD[bestK]));h.style.setProperty('--ho',bestK<0?.15:Math.max(.15,bestK/5))};setHal();
@@ -1372,7 +1385,7 @@ function reveal(d,r,kind,g,qty){
     bestK=Math.max(bestK,k);setHal();d.style.setProperty('--pc1',rcol(c.r));thumb(i,c,e);
     $('#in').innerHTML=`<small style="color:${rcol(c.r)}">${RN[c.r]}</small><b>${esc(c.name)}</b><div class="rl">${esc(c.show)} ${note(c)}</div>`;$('#hn').textContent=i<n-1?'Touche ou glisse pour la suivante':'Touche ou glisse pour continuer'},fd*.55);
    setTimeout(()=>lock=false,fd*.6)};
-  const throwCard=()=>{const e=dks[i];e.classList.add('out');SFX.slide();i++;lock=true;setTimeout(()=>lock=false,220);$('#in').innerHTML='';
+  const throwCard=()=>{const e=dks[i];e.classList.add('out');SFX.whoosh();i++;lock=true;setTimeout(()=>lock=false,220);$('#in').innerHTML='';
    if(i>=n){setTimeout(nextB,380);return}pss[i]&&pss[i].classList.add('cur');lay();ct();$('#hn').textContent='Touche la carte pour la retourner'};
   const tap=async fast=>{if(lock||i>=n)return;const e=dks[i],c=cs[i],k=rankOf(c);
    if(e.classList.contains('fl')){throwCard();return}
