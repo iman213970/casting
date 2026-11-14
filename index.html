@@ -789,9 +789,9 @@ footer{text-align:center;color:var(--mut);font-size:11px;margin:30px 0}
  .lcard{width:271px}
 }
 /* carte agrandie */
-.shade.dz{background:color-mix(in srgb,var(--rc,#000) 14%,#000000eb)!important;animation:fadein .18s both}
+.shade.dz{background:#07070acc!important;backdrop-filter:blur(3px);animation:fadein .18s both}
 .dz .tw{width:min(340px,78vw,52vh)}
-.dz .acts{width:min(340px,78vw)}
+.dz .hint{max-width:min(440px,90vw)}
 .dz .flip.live{transition:transform .12s linear}
 .xr{position:fixed;top:calc(16px + env(safe-area-inset-top));right:16px;width:44px;height:44px;border-radius:50%;background:#ffffff14;border:1px solid #ffffff22;font-size:18px;z-index:2}
 /* missions */
@@ -996,18 +996,18 @@ html.mo .tcg .fx{animation:none}
 
 /* dos de la carte dans la fiche (comme Kyara : rareté + numéro, nom, série, 4 cases, tampon) */
 .kb{position:absolute;inset:0;border-radius:6cqi;overflow:hidden;display:flex;flex-direction:column;gap:2.6cqi;padding:7cqi 6cqi;text-align:left;color:#f4f1ec;
- background:radial-gradient(120% 70% at 50% 0%,color-mix(in srgb,var(--rc) 22%,transparent),transparent 60%),repeating-linear-gradient(45deg,#ffffff06 0 6px,transparent 6px 12px),#14131a;
- border:2px solid color-mix(in srgb,var(--rc) 60%,transparent)}
+ background:radial-gradient(130% 60% at 50% 0%,color-mix(in srgb,var(--rc) 30%,transparent),transparent 62%),repeating-linear-gradient(45deg,#ffffff06 0 6px,transparent 6px 12px),#14131a;
+ border:1.5px solid var(--rc)}
 .kb-top{display:flex;justify-content:space-between;font-size:4.2cqi;color:#a9a4b3}
 .kb-r{color:var(--rc);font-weight:800;letter-spacing:.04em}
-.kb h2{margin:1.4cqi 0 0;font:800 8cqi/1.15 'Bricolage Grotesque',Inter,sans-serif;text-wrap:balance}
+.kb h2{margin:1.4cqi 0 0;font:800 7cqi/1.15 'Bricolage Grotesque',Inter,sans-serif;text-wrap:balance}
 .kb-nat{margin:0;font-size:4.8cqi;color:#d8d4de}
 .kb-ser{margin:0;font-size:4.4cqi;color:#a9a4b3}
 .kb dl{display:grid;grid-template-columns:1fr 1fr;gap:2.6cqi;margin:2.6cqi 0 0}
 .kb dl div{border:1px solid #ffffff1a;background:#ffffff0a;border-radius:3.4cqi;padding:2.6cqi 3.4cqi}
-.kb dt{font-size:3.6cqi;letter-spacing:.06em;text-transform:uppercase;color:#a9a4b3}
-.kb dd{margin:.6cqi 0 0;font-size:4.8cqi;font-weight:700}
-.kb-seal{position:absolute;right:5cqi;bottom:4.4cqi;width:12cqi;height:12cqi;display:grid;place-items:center;border-radius:3.4cqi;background:#c8102e;color:#fff;opacity:.85;font:900 6.4cqi 'Bricolage Grotesque',Inter,sans-serif;transform:rotate(-6deg)}
+.kb dt{font-size:3.3cqi;letter-spacing:.04em;white-space:nowrap;text-transform:uppercase;color:#a9a4b3}
+.kb dd{margin:.6cqi 0 0;font-size:4.4cqi;font-weight:700;white-space:nowrap}.kb dd#since{font-size:4cqi}
+.kb-seal{position:absolute;right:5cqi;bottom:4.4cqi;width:10cqi;height:10cqi;display:grid;place-items:center;border-radius:2.8cqi;background:#c8102e;color:#fff;opacity:.85;font:900 5.4cqi 'Bricolage Grotesque',Inter,sans-serif;transform:rotate(-6deg)}
 
 /* envies */
 .wln{margin:4px 0 12px;font-size:13px;color:#d8d4de}.wln b{color:#ff5c8a}
@@ -1649,9 +1649,9 @@ function detail(n){
  const d=document.createElement('div');d.className='shade dz';d.style.alignItems='center';d.style.zIndex=50;d.style.setProperty('--rc',RC[c.r]);d.onclick=e=>{if(e.target==d)d.remove()};
  if(!window._vw){window._vw=1;rpc('quest_event',{e:'view'}).catch(()=>{})}
  d.innerHTML=`<button class="xr" id="xr" aria-label="Fermer">✕</button><div class="dv"><div class="tw" id="tw"><div class="flip" id="fl"><div class="face">${card(c,{q})}</div><div class="face bk">${backFace(c,q)}</div></div></div>
- <p class="hint">${esc(c.act||'')}${c.act?' · ':''}${c.g.slice(0,3).map(fr).join(', ')}<br>Bouge la souris ou le doigt pour l'incliner · touche la carte pour la retourner</p>
- <div class="acts">${q>1?`<button class="btn y" id="rc1">Recycler ${q-1} doublon${q>2?'s':''} · +${(q-1)*REC[c.r]} 🍿</button>`:''}<button class="btn g" id="wk2">Voir la fiche du perso</button><button class="btn g" id="cl2">Fermer</button></div></div>`;
- document.body.append(d);$('#cl2').onclick=()=>d.remove();$('#xr').onclick=()=>d.remove();
+ <p class="hint">Bouge la souris ou le doigt pour l'incliner · touche la carte pour la retourner</p>
+ </div>`;
+ document.body.append(d);$('#xr').onclick=()=>d.remove();
  const tw=$('#tw'),fl=$('#fl'),cd=tw.querySelector('.cw');let flip=0,sx=0,sy=0,mv=0,rx=0,ry=0;
  const apply=()=>{fl.style.setProperty('--rx',rx+'deg');fl.style.setProperty('--ry',(ry+flip)+'deg')};
  const aim=e=>{if(MO())return;const r=tw.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;rx=-y*24;ry=x*28;cd.style.setProperty('--mx',(x+.5)*100+'%');cd.style.setProperty('--my',(y+.5)*100+'%');apply()};
@@ -1659,10 +1659,10 @@ function detail(n){
  tw.onpointermove=e=>{if(e.pointerType=='mouse'||e.buttons||mv>=0){mv=Math.max(mv,Math.abs(e.clientX-sx)+Math.abs(e.clientY-sy));fl.classList.add('live');cd.classList.add('tilting');aim(e)}};
  const end=()=>{fl.classList.remove('live');cd.classList.remove('tilting');rx=0;ry=0;apply()};
  tw.onpointerup=e=>{if(mv<8&&flip&&e.target.closest('[data-wk]')){end();d.remove();wikiPage(n);return}if(mv<8)flip=flip?0:180;end()};
- $('#wk2').onclick=()=>{d.remove();wikiPage(n)};tw.onpointerleave=end;tw.onpointercancel=end;
+ tw.onpointerleave=end;tw.onpointercancel=end;
  rpc('card_owners',{card:n}).then(v=>{const e=$('#own');if(e&&Number.isFinite(+v))e.textContent=(+v).toLocaleString('fr')}).catch(()=>{});
  rpc('card_since',{card:n}).then(v=>{const e=$('#since');if(e&&v&&!isNaN(new Date(v)))e.textContent=new Date(v).toLocaleDateString('fr',{day:'numeric',month:'long',year:'numeric'})}).catch(()=>{});
- if($('#rc1'))$('#rc1').onclick=async()=>{try{const x=await rpc('recycle',{n_card:n,k:q-1});ST=x.state;d.remove();toast('+'+x.gain+' 🍿');render()}catch(e){toast(e.message)}}}
+}
 
 /* ---------- wiki (mesuré sur kyara.games/wiki et /wiki/<id>) ---------- */
 /* accueil du wiki : titre + compteur, recherche, « fiches débloquées seulement », liste en grille 280 px */
