@@ -1,4 +1,4 @@
--- CASTING boutique : Coffret, Prestige, Mini et Avant-premiere, payes en Popcorns.
+-- CASTING boutique : Avant-premiere, Deep Cuts, Mini, Coffret et Prestige, payes en Popcorns.
 -- A coller en entier dans Supabase > SQL Editor > New query > Run APRES 9_lot1_boosters_missions.sql.
 -- Peut etre lance plusieurs fois sans risque. Les prix deja reglés dans config ne sont pas ecrases.
 --
@@ -8,13 +8,16 @@
 --   Prestige 575   (Kyara Prestige 575) : 5 cartes C C C U R, Legendaires et Mythiques x2,7
 --   Coffret 550    (Kyara Coffret 550) : 20 cartes, 11 C, 5 U, 3 R, 1 E garanties
 --   Mini 100       (Kyara Mini-booster 100) : 3 cartes C U R
+--   Deep Cuts 100  (Kyara Deep Cuts 100) : 5 cartes C C C U R parmi les persos de rang 1 000 et plus (moins connus)
 
-insert into config(k,v) values ('shop_coffret',550),('shop_prestige',575),('shop_mini',100),('shop_avp',750)
+insert into config(k,v) values ('shop_coffret',550),('shop_prestige',575),('shop_mini',100),('shop_avp',750),('shop_deep',100)
   on conflict(k) do nothing;
 
 -- Une carte pour un slot de boutique : rarete au moins minr, Legendaires et Mythiques multipliees par boost,
--- seulement parmi les top premiers numeros si top n'est pas null (les numeros suivent la notoriete).
-create or replace function shop_pick(minr text, top int, boost numeric) returns int language plpgsql volatile set search_path=public as $$
+-- seulement parmi les top premiers numeros si top n'est pas null, seulement apres le numero lo si lo n'est pas null
+-- (les numeros suivent la notoriete).
+drop function if exists shop_pick(text,int,numeric);
+create or replace function shop_pick(minr text, top int, boost numeric, lo int default null) returns int language plpgsql volatile set search_path=public as $$
 declare allowed text := substr('CURELM', position(minr in 'CURELM')); ch text; tot numeric := 0; x numeric; acc numeric := 0; rar text := minr; c int; i int;
 begin
   foreach ch in array string_to_array(allowed,null) loop tot := tot + cfg('p_'||ch) * (case when ch in ('L','M') then boost else 1 end); end loop;
@@ -23,13 +26,13 @@ begin
     acc := acc + cfg('p_'||ch) * (case when ch in ('L','M') then boost else 1 end);
     if x < acc then rar := ch; exit; end if;
   end loop;
-  select n into c from cards where r=rar and (top is null or n<=top) order by random() limit 1;
+  select n into c from cards where r=rar and (top is null or n<=top) and (lo is null or n>lo) order by random() limit 1;
   if c is not null then return c; end if;
   for i in reverse position(rar in 'CURELM')-1 .. position(minr in 'CURELM') loop
-    select n into c from cards where r=substr('CURELM',i,1) and (top is null or n<=top) order by random() limit 1;
+    select n into c from cards where r=substr('CURELM',i,1) and (top is null or n<=top) and (lo is null or n>lo) order by random() limit 1;
     if c is not null then return c; end if;
   end loop;
-  return (select n from cards where top is null or n<=top order by random() limit 1);
+  return (select n from cards where (top is null or n<=top) and (lo is null or n>lo) order by random() limit 1);
 end $$;
 
 -- ---------- etat du joueur (remplace celui de 9_lot1_boosters_missions.sql) : ajoute les prix de la boutique ----------
@@ -46,7 +49,7 @@ begin
     'pity_max',cfg('pity'),'free',p.free_stock,'bonus',p.bonus_stock,'free_max',cfg('free_max'),'free_next',nxt,
     'daily_ready', coalesce(p.last_daily,'1970-01-01') < today_fr(),'daily_theme',daily_theme(),'themes',to_jsonb(themes()),
     'price',cfg('price'),'gprice',cfg('gprice'),'bonus_L',cfg('bonus_L'),'bonus_M',cfg('bonus_M'),
-    'shop',jsonb_build_object('coffret',cfg('shop_coffret'),'prestige',cfg('shop_prestige'),'mini',cfg('shop_mini'),'avp',cfg('shop_avp')),
+    'shop',jsonb_build_object('coffret',cfg('shop_coffret'),'prestige',cfg('shop_prestige'),'mini',cfg('shop_mini'),'avp',cfg('shop_avp'),'deep',cfg('shop_deep')),
     'golden_in',p.golden_in,'golden_every',cfg('golden_every'),
     'quests',jsonb_build_object('claimable',q->'claimable',
        'daily_done',(select count(*) from jsonb_array_elements(q->'quests') x where x->>'kind'='daily' and (x->>'done')::bool),
@@ -69,7 +72,7 @@ begin
   if qty not in (1,5,10) then raise exception 'Quantité invalide'; end if;
   if kind='shop' then
     if qty<>1 then raise exception 'Un seul à la fois en boutique'; end if;
-    if genre is null or genre not in ('coffret','prestige','mini','avp') then raise exception 'Produit inconnu'; end if;
+    if genre is null or genre not in ('coffret','prestige','mini','avp','deep') then raise exception 'Produit inconnu'; end if;
     sp := genre; genre := null;
   end if;
   perform refill(auth.uid());
@@ -110,7 +113,7 @@ begin
     picks := '{}'; pity_hit := sm+1 >= cfg('pity');
     for i in 1..length(slots) loop
       if kind='shop' then
-        picks := picks || shop_pick(substr(slots,i,1), case when sp='avp' then 3000 end, case sp when 'prestige' then 2.7 when 'avp' then 3.5 else 1 end);
+        picks := picks || shop_pick(substr(slots,i,1), case when sp='avp' then 3000 end, case sp when 'prestige' then 2.7 when 'avp' then 3.5 else 1 end, case when sp='deep' then 1000 end);
       else picks := picks || pick_slot(substr(slots,i,1), genre); end if;
     end loop;
     if pity_hit and not exists(select 1 from cards where n=any(picks) and r='M') then
