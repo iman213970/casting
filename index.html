@@ -961,6 +961,37 @@ html.mo .gbn{animation:none}
 .tilting .tcg .fx{mix-blend-mode:color-dodge;background:radial-gradient(circle at var(--mx,50%) var(--my,30%),#ffffffb0,transparent 34%),repeating-linear-gradient(110deg,#ff3d6e 0%,#ffcf3d 7%,#3dffa0 14%,#3dc8ff 21%,#a65bff 28%,#ff3d6e 35%)!important;background-size:100% 100%,400% 400%!important;background-position:0 0,var(--mx,50%) var(--my,50%)!important;filter:brightness(.6) contrast(1.6) saturate(1.3);opacity:.55!important}
 .tilting .r-L .fx{background:radial-gradient(circle at var(--mx,50%) var(--my,30%),#fff6d6c0,transparent 34%),radial-gradient(circle at 20% 30%,#fff 0,transparent 1.2%),radial-gradient(circle at 75% 65%,#fff 0,transparent 1%),repeating-linear-gradient(115deg,#2a1c02 0%,#b8860b 6%,#ffe08a 10%,#fff6d6 12%,#d9a521 16%,#2a1c02 24%)!important;background-size:100% 100%,60px 60px,48px 48px,400% 400%!important;background-position:0 0,calc(var(--mx,50%)*-.4) calc(var(--my,50%)*-.4),calc(var(--mx,50%)*-.4) calc(var(--my,50%)*-.4),var(--mx,50%) var(--my,50%)!important;filter:brightness(.75) contrast(1.5) saturate(1.2);opacity:.8!important}
 .tilting .r-M .fx{background:radial-gradient(circle at var(--mx,50%) var(--my,30%),#ffffffc0,transparent 30%),repeating-linear-gradient(55deg,transparent 0%,#ffffff59 3%,transparent 6%,transparent 14%),repeating-linear-gradient(125deg,#ff3d3d 0%,#ffcc33 4%,#54f434 8%,#29edff 12%,#775cff 16%,#ff47e0 20%,#ff3d3d 24%)!important;background-size:100% 100%,300% 300%,500% 500%!important;background-position:0 0,calc(100% - var(--mx,50%)) calc(100% - var(--my,50%)),var(--mx,50%) var(--my,50%)!important;filter:brightness(.7) contrast(1.8) saturate(1.6);opacity:.85!important}
+
+/* motif « cosmos » à l'inclinaison (esprit cartes holo : étoiles et éclats qui scintillent et bougent avec le doigt), dessiné en dégradés */
+.tcg .fx::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s}
+.tilting .r-R .fx::after,.tilting .r-E .fx::after,.tilting .r-L .fx::after,.tilting .r-M .fx::after{opacity:.9;mix-blend-mode:color-dodge;
+ background:
+  radial-gradient(circle,#fff 0 1px,transparent 1.6px) calc(var(--mx,50%)*-.6) calc(var(--my,50%)*-.6)/23px 29px,
+  radial-gradient(circle,#fff 0 .8px,transparent 1.3px) calc(var(--mx,50%)*.5) calc(var(--my,50%)*.5)/17px 13px,
+  radial-gradient(circle,#fffbe0 0 1.6px,#ffe08a55 2.4px,transparent 3.4px) calc(var(--mx,50%)*-1.1) calc(var(--my,50%)*-1.1)/61px 47px,
+  conic-gradient(from 0deg at 50% 50%,transparent 0 40deg,#ffffff66 45deg,transparent 50deg 130deg,#ffffff55 135deg,transparent 140deg 220deg,#ffffff66 225deg,transparent 230deg 310deg,#ffffff55 315deg,transparent 320deg) calc(var(--mx,50%)*.9) calc(var(--my,50%)*.9)/97px 89px,
+  radial-gradient(ellipse at var(--mx,50%) var(--my,50%),#ff9be7aa,#9bd9ffaa 25%,#c6ff9b88 45%,transparent 70%);
+ filter:brightness(1.1) saturate(1.4)}
+.tilting .r-R .fx::after,.tilting .r-E .fx::after{opacity:.55}
+.tilting .tcg .fx{opacity:.32!important}
+.tilting .r-L .fx{opacity:.42!important}
+.tilting .r-M .fx{opacity:.42!important;filter:brightness(.55) contrast(1.8) saturate(1.5)}
+.tilting .r-R .fx::after,.tilting .r-E .fx::after,.tilting .r-L .fx::after,.tilting .r-M .fx::after{opacity:.75}
+/* reflet par rareté : seul le Mythique est arc-en-ciel ; les autres prennent la teinte de leur rareté */
+.tilting .tcg:not(.r-L):not(.r-M) .fx{background:radial-gradient(circle at var(--mx,50%) var(--my,30%),#ffffff8a,transparent 36%)!important;background-size:100% 100%!important;filter:none;mix-blend-mode:screen;opacity:.45!important}
+.tilting .r-R .fx{background:radial-gradient(circle at var(--mx,50%) var(--my,30%),#ffffff90,transparent 34%),repeating-linear-gradient(110deg,transparent 0%,#4d9bff55 6%,#bfe0ff66 9%,transparent 14%)!important;background-size:100% 100%,300% 300%!important;background-position:0 0,var(--mx,50%) var(--my,50%)!important;opacity:.5!important}
+.tilting .r-E .fx{background:radial-gradient(circle at var(--mx,50%) var(--my,30%),#ffffff90,transparent 34%),repeating-linear-gradient(110deg,transparent 0%,#b072ff66 6%,#e6d2ff77 9%,#ff8fe055 11%,transparent 15%)!important;background-size:100% 100%,300% 300%!important;background-position:0 0,var(--mx,50%) var(--my,50%)!important;opacity:.55!important}
+.tilting .r-R .fx::after{opacity:.25}.tilting .r-E .fx::after{opacity:.3}
+/* relief + paillettes légères : lumière du côté du doigt, ombre à l'opposé, grain scintillant fin */
+.tcg .fx::before{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:0;transition:opacity .3s;mix-blend-mode:overlay}
+.tilting .tcg .fx::before{opacity:1;
+ background:
+  radial-gradient(circle at 30% 40%,#fff 0 .6px,transparent 1.1px) calc(var(--mx,50%)*.4) calc(var(--my,50%)*.4)/13px 17px,
+  radial-gradient(circle at 70% 20%,#fff 0 .7px,transparent 1.2px) calc(var(--mx,50%)*-.5) calc(var(--my,50%)*-.5)/29px 23px,
+  radial-gradient(circle at 45% 75%,#fffbe8 0 .9px,transparent 1.5px) calc(var(--mx,50%)*.8) calc(var(--my,50%)*.8)/41px 37px,
+  radial-gradient(farthest-corner at var(--mx,50%) var(--my,50%),#ffffff70,transparent 45%),
+  radial-gradient(farthest-corner at calc(100% - var(--mx,50%)) calc(100% - var(--my,50%)),#00000080,transparent 55%)}
+.tilting .tcg:not(.r-L):not(.r-M):not(.r-E) .fx::before{opacity:.7}
 </style></head><body>
 <div id="app"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
