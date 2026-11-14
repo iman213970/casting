@@ -992,6 +992,19 @@ html.mo .gbn{animation:none}
   radial-gradient(farthest-corner at var(--mx,50%) var(--my,50%),#ffffff70,transparent 45%),
   radial-gradient(farthest-corner at calc(100% - var(--mx,50%)) calc(100% - var(--my,50%)),#00000080,transparent 55%)}
 .tilting .tcg:not(.r-L):not(.r-M):not(.r-E) .fx::before{opacity:.7}
+/* dos de carte (esprit Kyara : fond à motif fin, filet doré à coins en losange, grand médaillon, nom + sous-titre) — identité Casting : pellicule et monogramme C */
+.cb{background:radial-gradient(80% 55% at 50% 42%,color-mix(in srgb,var(--t) 30%,#120e16),#0b0910 80%),repeating-linear-gradient(45deg,#ffffff07 0 1cqi,transparent 1cqi 3cqi),repeating-linear-gradient(-45deg,#ffffff07 0 1cqi,transparent 1cqi 3cqi);background-blend-mode:normal}
+.cb .fr{position:absolute;inset:7cqi;border:.6cqi solid #c9a24acc;border-radius:3cqi;pointer-events:none}
+.cb .co{width:4.4cqi;height:4.4cqi;background:linear-gradient(135deg,#f5df9a,#a57d2c);box-shadow:0 0 1.6cqi #0008}
+.cb .co.a{left:4.8cqi;top:4.8cqi}.cb .co.b{right:4.8cqi;top:4.8cqi}.cb .co.c{left:4.8cqi;bottom:4.8cqi}.cb .co.d{right:4.8cqi;bottom:4.8cqi}
+.cb .pf{position:absolute;top:14cqi;bottom:34cqi;width:3.4cqi;background:repeating-linear-gradient(180deg,#c9a24a40 0 2.4cqi,transparent 2.4cqi 5.2cqi);border-radius:.6cqi}
+.cb .pf.l{left:9.6cqi}.cb .pf.r{right:9.6cqi}
+.cb .seal{top:44%;width:80cqi;background:repeating-conic-gradient(#c9a24a26 0 2deg,transparent 2deg 9deg)}
+.cb .med{top:44%;width:46cqi;border:none;background:radial-gradient(circle at 35% 28%,#fff3c4,#e2b04a 35%,#9c6a1c 70%,#5a3a0c);box-shadow:0 0 0 1.2cqi #0b0910,0 0 0 1.8cqi #c9a24a,0 0 6cqi #000c,inset 0 -1.6cqi 3cqi #0006,inset 0 1.2cqi 2cqi #fff8}
+.cb .med::before{content:"";position:absolute;inset:4cqi;border-radius:50%;border:.5cqi dotted #5a3a0caa}
+.cb .med b{font:800 26cqi/1 'Bricolage Grotesque',Georgia,serif;color:#3a2506;text-shadow:0 .5cqi 0 #fff5,0 -.4cqi 0 #0004}
+.cb .wm{bottom:19cqi;font-size:7.6cqi;color:#e8c46a;text-shadow:0 .4cqi 1.2cqi #000}
+.cb .ws{position:absolute;left:0;right:0;bottom:13.5cqi;text-align:center;font:700 3.4cqi 'JetBrains Mono',monospace;letter-spacing:.3em;text-indent:.3em;color:#c9a24a99}
 </style></head><body>
 <div id="app"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
@@ -1087,7 +1100,7 @@ function card(c,o={}){
  ${unk?'':`<div class="sw">${esc(c.show)}</div>`}
  <div class="bt">${unk?`<span class="no">#${pad(c.n)}</span><span>${RN[c.r]}</span>`:`<span>POW ${c.pow}</span><span>AURA ${c.aura}</span>`}</div>
  ${fx?'<i class="fx"></i>':''}</div>${q>1?`<span class="q">×${q}</span>`:''}${o.lock?'<span class="lk">🔒</span>':''}</div>`}
-function cardBack(t){return `<div class="cw"><div class="cb" style="--t:${t}"><i class="co a"></i><i class="co b"></i><i class="co c"></i><i class="co d"></i><i class="seal"></i><div class="med">🎬</div><div class="wm">CASTING</div></div></div>`}
+function cardBack(t){return `<div class="cw"><div class="cb" style="--t:${t}"><i class="co a"></i><i class="co b"></i><i class="co c"></i><i class="co d"></i><i class="fr"></i><i class="pf l"></i><i class="pf r"></i><i class="seal"></i><div class="med"><b>C</b></div><div class="wm">CASTING</div><div class="ws">SÉRIES · PERSOS · CARTES</div></div></div>`}
 async function init(){
  const {data}=await sb.from('config').select('k,v');window.CFG={};(data||[]).forEach(x=>CFG[x.k]=x.v);
  CARDS=await (await fetch('cards.json')).json();
