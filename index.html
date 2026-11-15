@@ -1480,20 +1480,33 @@ html.mo .kglow.on{animation:none}
 .qtip b{display:block;color:#edeae4;margin-bottom:2px}.qtip code{font:12px 'JetBrains Mono',monospace;color:#ff6a4d}
 .qhelp:hover .qtip,.qhelp:focus .qtip{display:block}
 
-/* ---------- recyclage par rareté (mesuré sur Kyara : .rec-box) ---------- */
-#recp:empty{display:none}
-#recp{margin:-4px 0 14px}
-.recbox{background:var(--panel);border:1px solid var(--line);border-radius:14px;display:flex;flex-direction:column;gap:10px;max-width:640px;padding:14px}
-.rect{color:#c9c5ce;font-size:13px}
-.recr{display:flex;flex-wrap:wrap;gap:6px}
-.recr button{--c:#fff;display:grid;gap:2px;text-align:left;padding:7px 12px;border-radius:12px;border:1px solid var(--line);background:#0f0e13;color:var(--mut);cursor:pointer;font-family:inherit;transition:border-color .15s,background .15s}
-.recr button b{font:700 13px 'Zen Kaku Gothic New',sans-serif;color:var(--fg);opacity:.6}.recr button small{font-size:11px}
-.recr button.on{border-color:var(--c);background:color-mix(in srgb,var(--c) 14%,#0f0e13);color:var(--c)}.recr button.on b{opacity:1;color:var(--c)}
-.recr button:disabled{opacity:.35;cursor:default}
-.recw{margin:0;padding:8px 10px;border-radius:10px;border:1px solid #ff4d2e;background:color-mix(in srgb,#ff4d2e 12%,#0f0e13);color:var(--fg);font-size:13px;line-height:1.45}
-.reca{display:flex;flex-wrap:wrap;gap:8px}.reca .btn{width:auto;max-width:none;padding:10px 16px;font-size:13px;white-space:nowrap}
-.recdone{align-items:center;text-align:center}.recdone b{font-size:22px;color:#3ddc84}.recdone span{color:#c9c5ce;font-size:14px}
-.tbb.rcy.on{box-shadow:0 0 0 3px #3ddc8455}
+
+/* ---------- recyclage : fenêtre centrée, mesures Kyara (.back/.box/.head/.body/.rec-box) ---------- */
+.rcm-back{position:fixed;inset:0;z-index:70;display:grid;place-items:center;padding:16px;background:#08070bcc;animation:fadein .15s both}
+.rcm-box{width:min(560px,100%);max-height:calc(100dvh - 32px);overflow:auto;background:#15141a;border:.8px solid #2e2b36;border-radius:18px;box-shadow:0 30px 80px #0009}
+.rcm-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:18px 20px 14px 24px;border-bottom:.8px solid #25232c;background:#15141a}
+.rcm-head h2{margin:0;font:700 18px Unbounded,sans-serif;color:#edeae4}
+.rcm-x{width:40px;height:40px;flex:0 0 40px;border-radius:50%;background:#0e0d12;border:.8px solid #2e2b36;color:#edeae4;font-size:20px;line-height:1;cursor:pointer;display:grid;place-items:center;padding:0}
+.rcm-body{padding:20px 24px 24px;display:flex;flex-direction:column;gap:10px}
+.rcm-r{display:flex;flex-wrap:wrap;gap:6px}
+.rcm-c{--c:#b5b1bb;display:grid;gap:2px;justify-items:start;text-align:left;padding:6px 10px;border-radius:10px;border:.8px solid color-mix(in srgb,var(--c) 35%,transparent);background:#121117;color:#8a8590;font:400 14px 'Zen Kaku Gothic New',sans-serif;cursor:pointer}
+.rcm-c b{font:700 13px 'Zen Kaku Gothic New',sans-serif;color:var(--c)}
+.rcm-c small.mono{font:400 11px 'JetBrains Mono',monospace;color:#b7b2bd}
+.rcm-c .rcm-s{font:400 10px 'Zen Kaku Gothic New',sans-serif;text-transform:uppercase;letter-spacing:.6px;color:var(--c)}
+.rcm-c.on{border-color:var(--c);background:color-mix(in srgb,var(--c) 10%,#15141a)}
+.rcm-c:disabled{opacity:.3;cursor:default}
+.rcm-warn{margin:0;padding:8px 10px;border-radius:10px;border:1px solid #ff4d2e;background:color-mix(in srgb,#ff4d2e 12%,#0e0d12);color:#edeae4;font-size:13px;line-height:1.45}
+.rcm-a{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px;margin-top:18px;padding-top:14px}
+.rcm-ghost,.rcm-go{height:44px;padding:0 20px;border-radius:10px;font:700 14px 'Zen Kaku Gothic New',sans-serif;cursor:pointer;white-space:nowrap}
+.rcm-ghost{background:none;border:.8px solid #3a3742;color:#edeae4}.rcm-ghost:hover{border-color:#5a5662}
+.rcm-go{background:#ff4d2e;border:0;color:#0e0d12;font-family:Unbounded,sans-serif}.rcm-go:hover{background:#ff6a4d}.rcm-go:disabled{opacity:.45;cursor:default}
+.rcm-done{display:grid;justify-items:center;gap:12px;text-align:center;padding:8px 0 4px}.rcm-done b{font-size:26px;color:#3fbf7f}.rcm-done span{color:#c9c5ce;font-size:14px}
+@media (max-width:599px){.rcm-back{place-items:end center;padding:0}.rcm-box{border-radius:18px 18px 0 0;max-height:92dvh}.rcm-body{padding:16px 16px calc(20px + env(safe-area-inset-bottom))}.rcm-a{justify-content:stretch}.rcm-a button{flex:1 1 auto}}
+
+/* bouton ♻ mesuré sur Kyara (.rec-m) : 44×44, coins 12 px, pastille verte 18 px */
+.tbb.rcy{width:44px;height:44px;border-radius:12px;background:var(--panel);border:.8px solid #2e2b36;color:var(--fg);font-size:17px;position:relative;padding:0}
+.tbb.rcy:hover{background:var(--panel);border-color:#3a3742}
+.tbb.rcy .nb3{position:absolute;top:-7px;right:-7px;box-sizing:border-box;min-width:18px;height:18px;padding:0 5px;border-radius:9px;display:grid;place-items:center;background:#3fbf7f;color:#0b0a0f;border:0;box-shadow:0 0 0 2px #0b0a0f;font:700 10px 'JetBrains Mono',monospace}
 </style></head><body>
 <div id="app"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
@@ -1724,23 +1737,26 @@ function strip(){const q=QS(),gi=goldIn();
 function recVal(){return CARDS.reduce((a,c)=>a+Math.max(0,(ST.inv[c.n]||0)-1)*REC[c.r],0)}
 /* recyclage comme Kyara : on choisit les raretés (Mythique décochée d'office), alerte avant de recycler des Légendaires ou Mythiques */
 let RSEL=['C','U','R','E','L'];
-function recPanel(){const el=$('#recp');if(!el)return;if(el.dataset.on){el.innerHTML='';delete el.dataset.on;$('#rcb')?.classList.remove('on');return}
- el.dataset.on='1';$('#rcb')?.classList.add('on');let conf=false;
+function recPanel(){$('#recm')?.remove();let conf=false;
  const st=()=>{const o={};for(const r of ORD)o[r]={count:0,value:0};for(const c of CARDS){const q=(ST.inv[c.n]||0)-1;if(q>0){o[c.r].count+=q;o[c.r].value+=q*REC[c.r]}}return o};
- const draw=()=>{const o=st(),sel=RSEL.filter(r=>o[r].count>0),n=sel.reduce((a,r)=>a+o[r].count,0),v=sel.reduce((a,r)=>a+o[r].value,0),m=RSEL.includes('M')?o.M.count:0,l=RSEL.includes('L')?o.L.count:0,warn=m+l>0;
-  el.innerHTML=`<div class="recbox"><span class="rect">Quelles raretés recycler ? Tu gardes toujours 1 exemplaire de chaque carte.</span>
-   <div class="recr" role="group">${['C','U','R','E','L','M'].map(r=>`<button type="button" class="${RSEL.includes(r)?'on':''}" data-rr="${r}" style="--c:${RC[r]}" ${o[r].count?'':'disabled'} aria-pressed="${RSEL.includes(r)}"><b>${RN[r]}</b><small class="mono">${o[r].count.toLocaleString('fr')} · +${o[r].value.toLocaleString('fr')} 🍿</small></button>`).join('')}</div>
-   ${warn?`<p class="recw" role="alert">⚠ Attention : tu vas recycler ${[m?`${m} Mythique${m>1?'s':''}`:'',l?`${l} Légendaire${l>1?'s':''}`:''].filter(Boolean).join(' et ')} en double. Elles seront perdues contre des Popcorns (tu gardes toujours 1 exemplaire de chaque). Pour les garder, clique sur Mythique ou Légendaire pour les décocher.</p>`:''}
-   <div class="reca"><button class="btn g sm" type="button" data-rx>Annuler</button><button class="btn a sm" type="button" data-rgo ${n?'':'disabled'}>${warn&&conf?'Oui, recycler aussi ces cartes':`Recycler ${n.toLocaleString('fr')} doublon${n>1?'s':''} · +${v.toLocaleString('fr')} 🍿`}</button></div></div>`;
-  el.querySelectorAll('[data-rr]').forEach(b=>b.onclick=()=>{const r=b.dataset.rr;conf=false;RSEL=RSEL.includes(r)?RSEL.filter(x=>x!=r):[...RSEL,r];draw()});
-  el.querySelector('[data-rx]').onclick=()=>recPanel();
-  el.querySelector('[data-rgo]').onclick=async e=>{if(warn&&!conf){conf=true;draw();return}e.target.disabled=true;e.target.textContent='Recyclage…';
-   try{const x=await rpc('recycle_rarities',{rars:sel});ST=x.state;
-    el.innerHTML=`<div class="recbox recdone"><b class="mono">+${(x.gain||0).toLocaleString('fr')} 🍿</b><span>${(x.n||n).toLocaleString('fr')} doublon${(x.n||n)>1?'s':''} recyclé${(x.n||n)>1?'s':''}. Popcorns récupérés.</span><button class="btn g sm" type="button" data-rok>Fermer</button></div>`;
-    SFX.rar&&SFX.rar('R');el.querySelector('[data-rok]').onclick=()=>{delete el.dataset.on;coll()};
-    const rb=$('#rcb');if(rb){rb.classList.remove('on');const v2=recVal();rb.innerHTML='♻'+(v2?`<span class="nb3">${v2>999?'999+':'+'+v2}</span>`:'')}if(typeof list=='function')list()}
+ const m=document.createElement('div');m.id='recm';m.className='rcm-back';
+ const close=()=>{document.removeEventListener('keydown',ek);m.remove()},ek=e=>{if(e.key=='Escape')close()};document.addEventListener('keydown',ek);
+ m.onclick=e=>{if(e.target==m)close()};
+ const head=`<div class="rcm-head"><h2>♻ Recycler les doublons</h2><button class="rcm-x" type="button" aria-label="Fermer" data-rx>✕</button></div>`;
+ const draw=()=>{const o=st(),sel=RSEL.filter(r=>o[r].count>0),n=sel.reduce((a,r)=>a+o[r].count,0),v=sel.reduce((a,r)=>a+o[r].value,0),mm=RSEL.includes('M')?o.M.count:0,l=RSEL.includes('L')?o.L.count:0,warn=mm+l>0;
+  m.innerHTML=`<div class="rcm-box" role="dialog" aria-modal="true" aria-label="Recycler les doublons">${head}<div class="rcm-body">
+   <div class="rcm-r" role="group" aria-label="Quelles raretés recycler ? Tu gardes toujours 1 exemplaire de chaque carte.">${['C','U','R','E','L','M'].map(r=>{const on=RSEL.includes(r),c=o[r].count;
+    return `<button type="button" class="rcm-c ${on?'on':''}" data-rr="${r}" style="--c:${RC[r]}" ${c?'':'disabled'} aria-pressed="${on}"><b>${on?'♻':'🔒'} ${RN[r]}</b>${c?`<small class="mono">×${c.toLocaleString('fr')} · +${o[r].value.toLocaleString('fr')} 🍿</small><small class="rcm-s">${on?'Recyclées':'Gardées'}</small>`:'<small class="mono">aucun</small>'}</button>`}).join('')}</div>
+   ${warn?`<p class="rcm-warn" role="alert">⚠ Attention : tu vas recycler ${[mm?`${mm} Mythique${mm>1?'s':''}`:'',l?`${l} Légendaire${l>1?'s':''}`:''].filter(Boolean).join(' et ')} en double. Elles seront perdues contre des Popcorns (tu gardes toujours 1 exemplaire de chaque). Pour les garder, clique sur Mythique ou Légendaire pour les décocher.</p>`:''}
+   <div class="rcm-a"><button class="rcm-ghost" type="button" data-rx>Annuler</button><button class="rcm-go" type="button" data-rgo ${n?'':'disabled'}>${warn&&conf?'Oui, recycler aussi ces cartes':`Recycler ${n.toLocaleString('fr')} doublon${n>1?'s':''} · +${v.toLocaleString('fr')} 🍿`}</button></div></div></div>`;
+  m.querySelectorAll('[data-rx]').forEach(x=>x.onclick=close);
+  m.querySelectorAll('[data-rr]').forEach(x=>x.onclick=()=>{const r=x.dataset.rr;conf=false;RSEL=RSEL.includes(r)?RSEL.filter(y=>y!=r):[...RSEL,r];draw()});
+  m.querySelector('[data-rgo]').onclick=async e=>{if(warn&&!conf){conf=true;draw();return}e.target.disabled=true;e.target.textContent='Recyclage…';
+   try{const x=await rpc('recycle_rarities',{rars:sel});ST=x.state;const k=x.n||n;
+    m.querySelector('.rcm-body').innerHTML=`<div class="rcm-done"><b class="mono">+${(x.gain||0).toLocaleString('fr')} 🍿</b><span>${k.toLocaleString('fr')} doublon${k>1?'s':''} recyclé${k>1?'s':''}. Popcorns récupérés.</span><button class="rcm-ghost" type="button" data-ok>Fermer</button></div>`;
+    SFX.rar&&SFX.rar('R');m.querySelector('[data-ok]').onclick=()=>{close();coll()};m.querySelector('[data-rx]').onclick=()=>{close();coll()};m.onclick=e=>{if(e.target==m){close();coll()}}}
    catch(err){toast(/recycle_rarities|function/i.test(err.message)?'Lance 15_recyclage.sql dans Supabase pour recycler par rareté':err.message);draw()}}};
- draw()}
+ document.body.append(m);draw()}
 async function recycleAll(){try{const x=await rpc('recycle');ST=x.state;toast('+'+x.gain+' 🍿');render()}catch(e){toast(e.message)}}
 /* ---------- paquets : pochette (genres), enveloppe (pack du jour) ---------- */
 function packArt(kind,g){const c=gcol(g),sym=g?GICO[g]||'🎬':'🍿',nm=g?fr(g):'Mix';
@@ -2110,9 +2126,8 @@ function coll(){
   <div class="ctb"><label class="csr"><span aria-hidden="true">⌕</span><input id="q" placeholder="Rechercher un perso ou une série…" value="${esc(F.q)}"><button class="qhelp" type="button" aria-label="Aide de la recherche">i<span class="qtip" role="tooltip"><b>Rechercher</b>Un nom de perso ou de série, même incomplet.<br><code>#123</code> pour une carte par son numéro.</span></button></label>
    <div class="rch"><button class="rall ${!F.r?'on':''}" data-r="">Toutes</button>${[...'CURELM'].map(r=>`<button class="rdot ${F.r==r?'on':''}" data-r="${r}" style="--c:${RC[r]}" title="${RN[r]}">${r}</button>`).join('')}</div>
    <button class="tbb" id="flt">Filtres${nf?`<span class="nb2">${nf}</span>`:''}</button>
-   <button class="tbb rcy" id="rcb" title="Recycler les doublons" aria-label="Recycler les doublons">♻${rv?`<span class="nb3">${rv>999?'999+':'+'+rv}</span>`:''}</button>${seg('tb')}
+   <button class="tbb rcy" id="rcb" title="Recycler les doublons" aria-label="Recycler les doublons">♻${dups?`<span class="nb3">${dups>99?'99+':dups}</span>`:''}</button>${seg('tb')}
    <div class="fpop" id="fpop" hidden></div></div>
-  <div id="recp"></div>
   <div class="ccount mono" id="cnt"></div><div id="gr"></div><div class="gm" id="gm"></div>`;
  $('#q').oninput=e=>{F.q=e.target.value;F.n=60;list()};
  $$('[data-r]').forEach(c=>c.onclick=()=>{F.r=c.dataset.r;F.n=60;coll()});
