@@ -1479,6 +1479,32 @@ html.mo .kglow.on{animation:none}
 .qtip{position:absolute;right:-6px;top:calc(100% + 10px);width:250px;z-index:30;display:none;text-align:left;background:#15141a;border:.8px solid #2e2b36;border-radius:12px;padding:10px 12px;box-shadow:0 18px 40px #0009;color:#c9c5ce;font:500 13px/1.5 'Zen Kaku Gothic New',sans-serif;cursor:default}
 .qtip b{display:block;color:#edeae4;margin-bottom:2px}.qtip code{font:12px 'JetBrains Mono',monospace;color:#ff6a4d}
 .qhelp:hover .qtip,.qhelp:focus .qtip{display:block}
+
+/* ---------- nouveau style de carte (Kyara 2.3, mesuré le 19/11) : image plein cadre, nom et série par-dessus.
+   L'ancien style reste disponible (Compte → Style des cartes) : html.cs-old. Mythique : on garde notre contour arc-en-ciel. ---------- */
+html:not(.cs-old) .r-C{--mt:linear-gradient(135deg,#6f6a78 0%,#c9c6d0 22%,#fff 38%,#c9c6d0 52%,#6f6a78 70%,#c9c6d0 86%,#fff 100%);--sl:linear-gradient(140deg,#fff,#c9c6d0 55%,#6f6a78)}
+html:not(.cs-old) .r-U{--mt:linear-gradient(135deg,#137a49 0%,#3fdc8f 22%,#d9ffec 38%,#3fdc8f 52%,#137a49 70%,#3fdc8f 86%,#d9ffec 100%);--sl:linear-gradient(140deg,#d9ffec,#3fdc8f 55%,#137a49)}
+html:not(.cs-old) .r-R{--mt:linear-gradient(135deg,#1a4fa8 0%,#4da3ff 22%,#e3f1ff 38%,#4da3ff 52%,#1a4fa8 70%,#4da3ff 86%,#e3f1ff 100%);--sl:linear-gradient(140deg,#e3f1ff,#4da3ff 55%,#1a4fa8)}
+html:not(.cs-old) .r-E{--mt:linear-gradient(135deg,#5d23a8 0%,#c07bff 22%,#f6e3ff 38%,#c07bff 52%,#5d23a8 70%,#c07bff 86%,#f6e3ff 100%);--sl:linear-gradient(140deg,#f6e3ff,#c07bff 55%,#5d23a8)}
+html:not(.cs-old) .r-L{--mt:linear-gradient(135deg,#a8740a 0%,#ffcf33 22%,#fff8d6 38%,#ffcf33 52%,#a8740a 70%,#ffcf33 86%,#fff8d6 100%);--sl:linear-gradient(140deg,#fff8d6,#ffcf33 55%,#a8740a)}
+html:not(.cs-old) .r-M{--sl:linear-gradient(140deg,#ffd0c4,#ff4d2e 55%,#a3260f)}
+html:not(.cs-old) .tcg{--f:clamp(3px,2.13cqi,4px);--e:clamp(7px,6.9cqi,13px);--sz:clamp(16px,13.8cqi,26px);--tp:clamp(6px,6.4cqi,12px);border-radius:min(15px,10cqi);box-shadow:0 5.3cqi 13.8cqi #0000008c}
+html:not(.cs-old) .tcg:not(.r-M){background:var(--mt)}
+html:not(.cs-old) .tcg.r-M::before{inset:var(--f);border-radius:min(11px,7.5cqi)}
+html:not(.cs-old) .tcg .im{inset:var(--f);height:auto;border-radius:min(11px,7.5cqi);background-color:#1c1a23}
+html:not(.cs-old) .tcg .im img{object-position:50% 20%}
+html:not(.cs-old) .tcg .im::after{z-index:1;border-radius:inherit;background:linear-gradient(#08060ca6,#0000 20%),linear-gradient(#0000 76%,#08060cb3);box-shadow:inset 0 0 0 1px #ffffff59}
+html:not(.cs-old) .tcg .nm{left:var(--e);right:calc(var(--e) + var(--sz) + 4px);top:calc(var(--tp) + var(--sz) / 2);transform:translateY(-50%);font-weight:800;font-size:clamp(11px,7.64cqi,19px);line-height:1.2;color:#fff;text-shadow:0 1px 3px #0009}
+html:not(.cs-old) .tcg .rp{right:var(--e);top:var(--tp);width:var(--sz);height:var(--sz);max-width:none;max-height:none;background:var(--sl);color:#14101c;font:900 clamp(8px,5.85cqi,11px)/1 Unbounded,sans-serif;box-shadow:0 1px 3px #00000073}
+html:not(.cs-old) .tcg .sw{left:var(--e);right:48cqi;top:auto;bottom:var(--tp);font:700 clamp(8px,5.35cqi,13px)/1.3 'Zen Kaku Gothic New',sans-serif;color:#ffffffe0;text-shadow:0 1px 3px #0009}
+html:not(.cs-old) .tcg .an{left:auto;right:calc(var(--e) - var(--f));bottom:calc(var(--tp) - var(--f));font:clamp(8px,5.85cqi,11px)/1.3 'JetBrains Mono',ui-monospace,monospace;color:#ffffffd9;text-shadow:0 1px 3px #0009}
+html:not(.cs-old) .tcg:not(.unk) .bt{display:none}
+html:not(.cs-old) .tcg.unk .bt{left:var(--e);right:var(--e);bottom:var(--tp);height:auto;padding:0;background:none;font:clamp(8px,5.85cqi,11px)/1.3 'JetBrains Mono',ui-monospace,monospace;text-shadow:0 1px 3px #0009}
+html:not(.cs-old) .hf .tcg{box-shadow:0 0 0 1.6cqi color-mix(in srgb,var(--fr) 70%,transparent),0 12cqi 24cqi #000b}
+/* dos : plus de rayures, juste la lueur de la rareté (Kyara 2.3) */
+html:not(.cs-old) .kb{background:radial-gradient(120% 70% at 30% 0%,color-mix(in srgb,var(--rc) 24%,transparent),transparent 60%),#14131a}
+/* iPhone : pas de zoom quand on touche un champ (Kyara 2.3) */
+@media (max-width:899px){input,textarea,select{font-size:16px!important}}
 </style></head><body>
 <div id="app"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
@@ -1551,6 +1577,7 @@ const SFX={
  rumble:(d=.8)=>{tone(55,0,d,.28,'sawtooth',38);noise(0,d,.12,120,300,1,'lowpass')},
  riser:(d=.9)=>{tone(220,0,d,.1,'sawtooth',880);noise(0,d,.12,600,7000,1.2)}};
 document.documentElement.classList.toggle('mo',MO());
+const OLDC=()=>lsget('cstyle')=='old';document.documentElement.classList.toggle('cs-old',OLDC());
 document.addEventListener('visibilitychange',()=>document.documentElement.classList.toggle('hid',document.hidden));
 /* ---------- photos auto-hébergées (img/N.webp), repli sur l'ancienne source ---------- */
 const P1='https://static.tvmaze.com/uploads/images/original_untouched/',P2='https://image.tmdb.org/t/p/';
@@ -1624,7 +1651,7 @@ function render(){
  const nav=(k,i,l)=>`<button class="${view==k?'on':''}" data-v="${k}"><b>${i}</b>${l}</button>`,nb=freeTot()+(ST.daily_ready?1:0),qc=QS().claimable;
  const dn=(k,l,b)=>`<button class="${view==k||(k=='home'&&view=='boost')?'on':''}" data-v="${k}">${l}${b?`<span class="bdg">${b}</span>`:''}</button>`;
  $('#app').innerHTML=`<div class="top"><div class="wrap"><button class="logo" id="lg" aria-label="Casting, accueil"><span class="lseal" aria-hidden="true">C</span><span class="lword">CASTING</span></button><div class="dnav">${dn('home','Boosters',nb)}${dn('coll','Collection')}${dn('mkt','Marché')}${dn('jouer','Jouer')}${dn('more','Plus')}</div><div class="sp"></div>
- <div class="wal" title="Boosters gratuits et Popcorns"><span class="wf"><b class="mono" id="fs">${ST.free}/${ST.free_max}${bonusN()?`<em>+${bonusN()}</em>`:''}</b><span class="bar"><i style="width:${ST.free/ST.free_max*100}%"></i></span></span><span class="wp mono">🍿 ${ST.popcorns.toLocaleString('fr')}</span></div>
+ <div class="wal" title="Boosters gratuits et Popcorns"><span class="wf"><b class="mono" id="fs">${ST.free}/${ST.free_max}${bonusN()?`<em>+${bonusN()}</em>`:''}</b><span class="bar"><i style="width:${ST.free/ST.free_max*100}%"></i></span></span><span class="wp mono">🍿 ${ST.popcorns>=1e4?Math.floor(ST.popcorns/1e3)+' k':ST.popcorns.toLocaleString('fr')}</span></div>
  <button class="rnd mbtn ${view=='miss'?'on':''}" id="msb" aria-label="Missions">🎯<span class="ml">Missions</span>${qc?`<span class="bdg">${qc}</span>`:''}</button><button class="avatar" id="av">${esc(ST.name[0].toUpperCase())}</button></div></div>
  <div class="wrap" id="v"></div>
  <footer class="sfoot"><div class="wrap"><div class="sf-l"><div class="sf-b"><span class="lseal" aria-hidden="true">C</span><b>CASTING</b></div><p>Jeu de cartes de séries entre nous. Projet fan non officiel.</p><p class="sf-tm">This product uses the TMDB API but is not endorsed or certified by TMDB.</p></div>
@@ -2372,11 +2399,11 @@ function mkt(){$('#v').innerHTML=`<div class="center"><div style="font-size:54px
 function more(){
  $('#v').innerHTML=`<button class="kwlink" id="gwk"><b>Le wiki des persos</b><small>Toutes les fiches, débloquées ou à trouver</small><span>→</span></button><div class="sec"><div class="eyebrow">Compte</div><h2>${esc(ST.name)}</h2></div>
  <div class="tiles"><div class="tile"><b>${ST.boosters}</b><small>boosters ouverts</small></div><div class="tile"><b>${Math.max(0,ST.pity_max-ST.pity)}</b><small>avant Mythique sûre</small></div><div class="tile"><b>${ST.popcorns}</b><small>Popcorns</small></div></div>
- <div class="sec"><div class="eyebrow">Réglages</div></div><button class="btn g" id="mo">Animations : ${MO()?'désactivées':'activées'}</button><br><button class="btn g" id="snd">Son : ${SND()?'activé':'coupé'}</button>
+ <div class="sec"><div class="eyebrow">Réglages</div></div><button class="btn g" id="mo">Animations : ${MO()?'désactivées':'activées'}</button><br><button class="btn g" id="snd">Son : ${SND()?'activé':'coupé'}</button><br><button class="btn g" id="cst">Style des cartes : ${OLDC()?'ancien (cadre)':'nouveau (plein cadre)'}</button><p class="mut" style="margin:6px 0 0;font-size:12px">Change seulement ton affichage.</p>
  <div class="sec"><div class="eyebrow">Règles</div><h2>Comment ça marche</h2></div><div class="ilinks">${[['raretes','Raretés'],['regles','Règles'],['infos','Infos'],['nouv','Nouveautés']].map(([v,l])=>`<button class="btn g" data-iv="${v}">${l}</button>`).join('')}</div>
  <p class="mut">Un booster gratuit se recharge toutes les ${CFG.free_minutes} minutes (jusqu'à ${ST.free_max} en stock). Le pack du jour est offert chaque jour avec une Épique garantie. Chaque booster contient 5 cartes : 3 Communes ou mieux, 1 Peu commune ou mieux et 1 Rare ou mieux (C C C U R). Après ${ST.golden_every||10} boosters, le suivant est doré (C C U R E). Très rarement (1 chance sur 2 000), un booster divin donne 4 Épiques et 1 Mythique. Une Mythique est garantie après ${ST.pity_max} boosters sans Mythique. À chaque Légendaire ou Mythique obtenue, même en double, tu gagnes ${BON.L} ou ${BON.M} 🍿. Les doublons se recyclent en Popcorns : ${Object.entries(REC).map(([r,v])=>RN[r]+' '+v).join(', ')}.</p><br>
  <button class="btn g" id="lo">Se déconnecter</button><footer>Projet fan non officiel. This product uses the TMDB API but is not endorsed or certified by TMDB.</footer>`;
- $('#snd').onclick=()=>{lsset('snd',SND()?'0':'1');if(SND())SFX.rar('E');more()};$('#gwk').onclick=()=>{view='wiki';render();scrollTo(0,0)};$('#mo').onclick=()=>{lsset('mo',MO()?'0':'1');document.documentElement.classList.toggle('mo',MO());more()};
+ $('#cst').onclick=()=>{lsset('cstyle',OLDC()?'new':'old');document.documentElement.classList.toggle('cs-old',OLDC());more()};$('#snd').onclick=()=>{lsset('snd',SND()?'0':'1');if(SND())SFX.rar('E');more()};$('#gwk').onclick=()=>{view='wiki';render();scrollTo(0,0)};$('#mo').onclick=()=>{lsset('mo',MO()?'0':'1');document.documentElement.classList.toggle('mo',MO());more()};
  $('#lo').onclick=async()=>{await sb.auth.signOut();ST=null;render()};$$('#v [data-iv]').forEach(b=>b.onclick=()=>{view=b.dataset.iv;render();scrollTo(0,0)})}
 init();
 </script></body></html>
